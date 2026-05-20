@@ -1,0 +1,6 @@
+torch>=2.0.0
+transformer-lens>=1.14.0
+einops>=0.7.0
+pandas>=2.0.0
+plotly>=5.15.0
+matplotlib>=3.7.0
