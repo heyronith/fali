@@ -17,12 +17,30 @@ EXPECTED_FILES = {
         "results/raw/fali_raw_results.json",
         "results/raw/fali_raw_results.csv",
         "results/raw/ln_frozen_raw_results.json",
-        "results/raw/ln_frozen_raw_results.csv"
+        "results/raw/ln_frozen_raw_results.csv",
+        "results/raw/ablation_controls_raw.json",
+        "results/raw/ablation_controls_raw.csv",
+        "results/raw/fali_decomposition_raw.json",
+        "results/raw/fali_decomposition_raw.csv",
+        "results/raw/qk_decomposition_raw.json",
+        "results/raw/qk_decomposition_raw.csv",
+        "results/raw/output_mediation_raw.json",
+        "results/raw/output_mediation_raw.csv"
     ],
     "summary_results": [
         "results/summary/attention_results.json",
         "results/summary/fali_rigorous_validation.csv",
-        "results/summary/scale_evaluation_results.json"
+        "results/summary/scale_evaluation_results.json",
+        "results/summary/ablation_controls_summary.json",
+        "results/summary/ablation_controls_summary.csv",
+        "results/summary/fali_decomposition_summary.json",
+        "results/summary/fali_decomposition_summary.csv",
+        "results/summary/qk_decomposition_summary.json",
+        "results/summary/qk_decomposition_summary.csv",
+        "results/summary/output_mediation_summary.json",
+        "results/summary/output_mediation_summary.csv",
+        "results/summary/output_mediation_controls.json",
+        "results/summary/output_mediation_controls.csv"
     ],
     "figures": [
         "figures/circuit_disentanglement_plot.png",
@@ -67,6 +85,26 @@ EXPERIMENT_STEPS = [
         "name": "Causal Double Ablation",
         "script": "experiments/causal_validation.py",
         "description": "Execute four-pass protocol verifying causal indispensability of L10H10."
+    },
+    {
+        "name": "Ablation Controls",
+        "script": "experiments/ablation_controls.py",
+        "description": "Run zero vs mean vs resample ablation controls for primary/backup heads."
+    },
+    {
+        "name": "Path-Stable FALI Decomposition",
+        "script": "experiments/fali_decomposition.py",
+        "description": "Conduct target-logit vs background-logit Shapley path-stable decomposition."
+    },
+    {
+        "name": "QK Decomposition",
+        "script": "experiments/qk_decomposition.py",
+        "description": "Decompose attention scores into QK vector scaling vs. directional alignment components."
+    },
+    {
+        "name": "Output Mediation",
+        "script": "experiments/output_mediation.py",
+        "description": "Test downstream causal mediation of L10H10 pattern and z outputs."
     },
     {
         "name": "Generate Analytical Figures",
