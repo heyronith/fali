@@ -36,9 +36,9 @@ def make_ablation_hook(head_idx: int):
     def ablation_hook(z: torch.Tensor, hook) -> torch.Tensor:
         # z shape: [batch, seq_len, n_heads, d_head]
         # In gpt2-small hook_z shape: [200, 16, 12, 64]
-        # Zero-out the target head in-place along the head dimension
-        z[:, :, head_idx, :] = 0.0
-        return z
+        z_cloned = z.clone()
+        z_cloned[:, :, head_idx, :] = 0.0
+        return z_cloned
     return ablation_hook
 
 def compute_logit_difference(logits: torch.Tensor, dataset: IOIDataset) -> torch.Tensor:
@@ -164,11 +164,8 @@ def main():
             sample_hydra_spike = ablated_io_attn - clean_io_attn
             sample_hybrid_spike = hybrid_io_attn - clean_io_attn
             
-            # Handle division by zero for sample-level ratios safely
+            # Handle division by zero for global ratio safely
             eps = 1e-7
-            denominator = sample_hydra_spike.clone()
-            denominator[denominator.abs() < eps] = eps
-            sample_ratio = (sample_hydra_spike - sample_hybrid_spike) / denominator
             
             # Compute statistical aggregates (mean and standard deviation) across 200 samples
             mean_clean = clean_io_attn.mean().item()
@@ -181,8 +178,7 @@ def main():
             mean_hybrid_spike = sample_hybrid_spike.mean().item()
             std_hybrid_spike = sample_hybrid_spike.std().item()
             
-            mean_ratio = sample_ratio.mean().item()
-            std_ratio = sample_ratio.std().item()
+            global_ratio = (mean_hydra_spike - mean_hybrid_spike) / mean_hydra_spike if abs(mean_hydra_spike) > eps else 0.0
             
             # Assert boundaries: counterfactual probabilities must lie between 0.0 and 1.0
             assert (hybrid_row_pattern >= -1e-7).all() and (hybrid_row_pattern <= 1.0 + 1e-7).all(), (
@@ -200,8 +196,7 @@ def main():
                 "std_hydra_spike": std_hydra_spike,
                 "mean_hybrid_spike": mean_hybrid_spike,
                 "std_hybrid_spike": std_hybrid_spike,
-                "mean_ratio": mean_ratio,
-                "std_ratio": std_ratio
+                "global_ratio": global_ratio
             })
             
     print(f"✓ Completed evaluation of all {len(head_results)} heads successfully.")
@@ -218,12 +213,12 @@ def main():
     print("=" * 135)
     
     # Header
-    print(f"| {'Head':<6} | {'Clean Attn':<12} | {'Ablated Attn':<12} | {'Hybrid Attn':<12} | {'Hydra Spike (Mean ± SD)':<25} | {'Hybrid Spike (Mean ± SD)':<25} | {'Artifact Ratio (Mean)':<20} |")
-    print(f"|{'-' * 8}|{'-' * 14}|{'-' * 14}|{'-' * 14}|{'-' * 27}|{'-' * 27}|{'-' * 22}|")
+    print(f"| {'Head':<6} | {'Clean Attn':<12} | {'Ablated Attn':<12} | {'Hybrid Attn':<12} | {'Hydra Spike (Mean ± SD)':<25} | {'Hybrid Spike (Mean ± SD)':<25} | {'Artifact Ratio (Global)':<24} |")
+    print(f"|{'-' * 8}|{'-' * 14}|{'-' * 14}|{'-' * 14}|{'-' * 27}|{'-' * 27}|{'-' * 26}|")
     for r in prominent_heads:
         hydra_str = f"{r['mean_hydra_spike']:+.4f} ± {r['std_hydra_spike']:.4f}"
         hybrid_str = f"{r['mean_hybrid_spike']:+.4f} ± {r['std_hybrid_spike']:.4f}"
-        print(f"| {r['name']:<6} | {r['mean_clean']:<12.4f} | {r['mean_ablated']:<12.4f} | {r['mean_hybrid']:<12.4f} | {hydra_str:<25} | {hybrid_str:<25} | {r['mean_ratio']:<+20.2%} |")
+        print(f"| {r['name']:<6} | {r['mean_clean']:<12.4f} | {r['mean_ablated']:<12.4f} | {r['mean_hybrid']:<12.4f} | {hydra_str:<25} | {hybrid_str:<25} | {r['global_ratio']:<+24.2%} |")
     print("=" * 135)
     
     # Export results to JSON in the workspace for downstream visualization or Task 5 validation
@@ -238,10 +233,13 @@ def main():
     # 7. Generate a beautiful, publication-ready scatter plot using matplotlib
     print("\nGenerating publication-ready scatter plot visualization...")
     
-    x_spikes = [r["mean_hydra_spike"] for r in head_results]
-    y_spikes = [r["mean_hybrid_spike"] for r in head_results]
-    layers = [r["layer"] for r in head_results]
-    names = [r["name"] for r in head_results]
+    # Geometric filtering: only plot heads in Layer 9, 10, and 11
+    filtered_results = [r for r in head_results if r["layer"] in [9, 10, 11]]
+    
+    x_spikes = [r["mean_hydra_spike"] for r in filtered_results]
+    y_spikes = [r["mean_hybrid_spike"] for r in filtered_results]
+    layers = [r["layer"] for r in filtered_results]
+    names = [r["name"] for r in filtered_results]
     
     plt.figure(figsize=(11, 9), dpi=300)
     
@@ -275,7 +273,7 @@ def main():
     # Label axes
     plt.xlabel("Standard Hydra Spike (Ablated - Clean Attention Probability to IO)", fontsize=11, fontweight="semibold", labelpad=10)
     plt.ylabel("Active Hybrid Spike (Hybrid - Clean Attention Probability to IO)", fontsize=11, fontweight="semibold", labelpad=10)
-    plt.title("Backup Attention Head Disentanglement Under Primary Ablation\n(Causal Softmax Denominator Shift vs. Active Algorithmic Routing)", fontsize=12, fontweight="bold", pad=15)
+    plt.title("Downstream Attention Circuit Disentanglement under Primary Ablation\n(Causal Softmax Denominator Shift vs. Active Algorithmic Routing)", fontsize=12, fontweight="bold", pad=15)
     
     # Add layer colorbar
     cbar = plt.colorbar(scatter, ticks=np.arange(12))
@@ -316,6 +314,62 @@ def main():
     except Exception as e:
         print(f"⚠ Failed to save matplotlib scatter plot: {e}")
         
+    # 8. Generate the Causal Shift Scatter Plot
+    print("\nGenerating Causal Shift Scatter Plot...")
+    
+    plt.figure(figsize=(10, 8), dpi=300)
+    plt.grid(True, linestyle="--", alpha=0.6, zorder=1)
+    
+    x_clean = [r["mean_clean"] for r in filtered_results]
+    y_ablated = [r["mean_ablated"] for r in filtered_results]
+    names_filtered = [r["name"] for r in filtered_results]
+    
+    # Plot background heads in gray
+    plt.scatter(
+        x_clean, y_ablated,
+        c="lightgray", alpha=0.8, edgecolors="gray", s=60, zorder=2, label="Background Heads"
+    )
+    
+    # Highlight specific heads
+    primary_heads = ["L9H9", "L10H0"]
+    backup_heads = ["L10H10", "L10H2", "L10H6", "L10H3"]
+    
+    for i, name in enumerate(names_filtered):
+        if name in primary_heads:
+            plt.scatter(x_clean[i], y_ablated[i], c="red", marker="*", s=250, edgecolors="darkred", zorder=4, label="Primary Heads" if name == "L9H9" else "")
+            plt.annotate(name, (x_clean[i], y_ablated[i]), xytext=(5, 5), textcoords="offset points", fontsize=9, fontweight="bold", color="darkred")
+        elif name in backup_heads:
+            plt.scatter(x_clean[i], y_ablated[i], c="limegreen", marker="^", s=150, edgecolors="darkgreen", zorder=4, label="Backup Heads" if name == "L10H10" else "")
+            plt.annotate(name, (x_clean[i], y_ablated[i]), xytext=(5, 5), textcoords="offset points", fontsize=9, fontweight="bold", color="darkgreen")
+            # Draw trajectory vector from (clean, clean) to (clean, ablated)
+            plt.arrow(
+                x_clean[i], x_clean[i], 
+                0, y_ablated[i] - x_clean[i],
+                color="green", alpha=0.5, width=0.001, head_width=0.008, head_length=0.008,
+                length_includes_head=True, zorder=3
+            )
+            
+    # Draw y=x line
+    min_causal = min(min(x_clean), min(y_ablated), 0.0) - 0.02
+    max_causal = max(max(x_clean), max(y_ablated), 0.3) + 0.05
+    plt.plot([min_causal, max_causal], [min_causal, max_causal], color="black", linestyle="--", linewidth=1.5, zorder=2, label="y = x (No Change)")
+    
+    plt.xlim(min_causal, max_causal)
+    plt.ylim(min_causal, max_causal)
+    
+    plt.xlabel("Clean Attention Probability to IO", fontsize=11, fontweight="semibold")
+    plt.ylabel("Ablated Attention Probability to IO", fontsize=11, fontweight="semibold")
+    plt.title("Causal Shift Trajectory (Clean vs Ablated Attention)\nVisualizing the Hydra Effect in Backup Heads", fontsize=12, fontweight="bold", pad=15)
+    plt.legend(loc="upper left")
+    
+    plot_shift_filename = "causal_shift_plot.png"
+    try:
+        plt.tight_layout()
+        plt.savefig(plot_shift_filename, dpi=300)
+        print(f"✓ Causal shift visualization saved successfully as '{plot_shift_filename}'")
+    except Exception as e:
+        print(f"⚠ Failed to save causal shift plot: {e}")
+        
     print("\n" + "=" * 135)
     print("SCIENTIFIC CONCLUSIONS & INSIGHTS:")
     print("=" * 135)
@@ -328,7 +382,6 @@ def main():
     print("3. Hydra self-repair targeting:")
     print("   - Head L10H10 lies ABOVE the y=x diagonal, confirming its true self-repair response is stronger than standard")
     print("     ablation measurements indicate. This establishes L10H10 as a highly active algorithmic self-repair head!")
-    print("   - Head L11H10 lies below/near the baseline, indicating that its response is primarily negative routing compensation.")
     print("\nScale evaluation completed successfully!")
     print("==========================================================================")
 

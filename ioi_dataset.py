@@ -49,6 +49,10 @@ class IOIDataset:
         self.num_samples = num_samples
         self.template_style = template_style
         
+        # Dataset defense validation
+        for name in self.NAMES:
+            assert len(self.tokenizer.encode(" " + name)) == 1, f"Name '{name}' is multi-token!"
+        
         # Set seed for reproducibility
         random.seed(seed)
         torch.manual_seed(seed)

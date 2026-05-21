@@ -10,8 +10,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -24,8 +23,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -38,8 +36,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -52,8 +49,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -66,8 +62,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -80,8 +75,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -94,8 +88,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -108,8 +101,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -122,8 +114,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -136,8 +127,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -150,8 +140,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 0,
@@ -164,8 +153,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -178,8 +166,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -192,8 +179,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -206,8 +192,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -220,8 +205,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -234,8 +218,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -248,8 +231,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -262,8 +244,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -276,8 +257,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -290,8 +270,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -304,8 +283,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -318,8 +296,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 1,
@@ -332,8 +309,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -346,8 +322,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -360,8 +335,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -374,8 +348,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -388,8 +361,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -402,8 +374,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -416,8 +387,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -430,8 +400,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -444,8 +413,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -458,8 +426,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -472,8 +439,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -486,8 +452,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 2,
@@ -500,8 +465,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -514,8 +478,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -528,8 +491,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -542,8 +504,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -556,8 +517,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -570,8 +530,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -584,8 +543,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -598,8 +556,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -612,8 +569,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -626,8 +582,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -640,8 +595,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -654,8 +608,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 3,
@@ -668,8 +621,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -682,8 +634,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -696,8 +647,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -710,8 +660,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -724,8 +673,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -738,8 +686,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -752,8 +699,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -766,8 +712,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -780,8 +725,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -794,8 +738,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -808,8 +751,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -822,8 +764,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 4,
@@ -836,8 +777,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -850,8 +790,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -864,8 +803,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -878,8 +816,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -892,8 +829,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -906,8 +842,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -920,8 +855,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -934,8 +868,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -948,8 +881,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -962,8 +894,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -976,8 +907,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -990,8 +920,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 5,
@@ -1004,8 +933,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1018,8 +946,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1032,8 +959,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1046,8 +972,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1060,8 +985,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1074,8 +998,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1088,8 +1011,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1102,8 +1024,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1116,8 +1037,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1130,8 +1050,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1144,8 +1063,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1158,8 +1076,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 6,
@@ -1172,8 +1089,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1186,8 +1102,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1200,8 +1115,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1214,8 +1128,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1228,8 +1141,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1242,8 +1154,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1256,8 +1167,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1270,8 +1180,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1284,8 +1193,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1298,8 +1206,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1312,8 +1219,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1326,8 +1232,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 7,
@@ -1340,8 +1245,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1354,8 +1258,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1368,8 +1271,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1382,8 +1284,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1396,8 +1297,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1410,8 +1310,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1424,8 +1323,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1438,8 +1336,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1452,8 +1349,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1466,8 +1362,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1480,8 +1375,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1494,8 +1388,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 8,
@@ -1508,8 +1401,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1522,8 +1414,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1536,8 +1427,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1550,8 +1440,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1564,8 +1453,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1578,8 +1466,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1592,8 +1479,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1606,8 +1492,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1620,8 +1505,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1634,8 +1518,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1648,8 +1531,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1662,8 +1544,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 9,
@@ -1676,8 +1557,7 @@
         "std_hydra_spike": 0.0,
         "mean_hybrid_spike": 0.0,
         "std_hybrid_spike": 0.0,
-        "mean_ratio": 0.0,
-        "std_ratio": 0.0
+        "global_ratio": 0.0
     },
     {
         "layer": 10,
@@ -1690,8 +1570,7 @@
         "std_hydra_spike": 0.06830686330795288,
         "mean_hybrid_spike": 0.21988189220428467,
         "std_hybrid_spike": 0.06455977261066437,
-        "mean_ratio": -0.3132091462612152,
-        "std_ratio": 0.4530533254146576
+        "global_ratio": -0.21541829232854526
     },
     {
         "layer": 10,
@@ -1704,8 +1583,7 @@
         "std_hydra_spike": 0.06823098659515381,
         "mean_hybrid_spike": 0.15902356803417206,
         "std_hybrid_spike": 0.06188280135393143,
-        "mean_ratio": 0.06353743374347687,
-        "std_ratio": 0.5376513004302979
+        "global_ratio": 0.03849111117758292
     },
     {
         "layer": 10,
@@ -1718,8 +1596,7 @@
         "std_hydra_spike": 0.0432223342359066,
         "mean_hybrid_spike": 0.19554321467876434,
         "std_hybrid_spike": 0.05395729839801788,
-        "mean_ratio": -0.3451838791370392,
-        "std_ratio": 0.3156316876411438
+        "global_ratio": -0.31318516588281936
     },
     {
         "layer": 10,
@@ -1732,8 +1609,7 @@
         "std_hydra_spike": 0.05842956528067589,
         "mean_hybrid_spike": 0.1360979527235031,
         "std_hybrid_spike": 0.06452881544828415,
-        "mean_ratio": -0.5414010286331177,
-        "std_ratio": 0.5754051208496094
+        "global_ratio": -0.36408192605214434
     },
     {
         "layer": 10,
@@ -1746,8 +1622,7 @@
         "std_hydra_spike": 0.01812402345240116,
         "mean_hybrid_spike": 0.016237584874033928,
         "std_hybrid_spike": 0.019565405324101448,
-        "mean_ratio": 2.1184723377227783,
-        "std_ratio": 22.954792022705078
+        "global_ratio": -1.746336643722737
     },
     {
         "layer": 10,
@@ -1760,8 +1635,7 @@
         "std_hydra_spike": 0.0007788136717863381,
         "mean_hybrid_spike": -0.0012378518003970385,
         "std_hybrid_spike": 0.0007528775022365153,
-        "mean_ratio": 0.14339163899421692,
-        "std_ratio": 0.08027587085962296
+        "global_ratio": 0.11989521909821314
     },
     {
         "layer": 10,
@@ -1774,8 +1648,7 @@
         "std_hydra_spike": 0.06232225149869919,
         "mean_hybrid_spike": 0.1499841809272766,
         "std_hybrid_spike": 0.0649094507098198,
-        "mean_ratio": -0.18682900071144104,
-        "std_ratio": 0.2929937243461609
+        "global_ratio": -0.13560410498952993
     },
     {
         "layer": 10,
@@ -1788,8 +1661,7 @@
         "std_hydra_spike": 0.07608646154403687,
         "mean_hybrid_spike": -0.2134212851524353,
         "std_hybrid_spike": 0.07899273186922073,
-        "mean_ratio": -0.15987227857112885,
-        "std_ratio": 1.6942123174667358
+        "global_ratio": 0.041849597696124355
     },
     {
         "layer": 10,
@@ -1802,8 +1674,7 @@
         "std_hydra_spike": 0.006767735350877047,
         "mean_hybrid_spike": 0.008904806338250637,
         "std_hybrid_spike": 0.006847423035651445,
-        "mean_ratio": -0.4993021786212921,
-        "std_ratio": 10.85440731048584
+        "global_ratio": -0.14674473572087995
     },
     {
         "layer": 10,
@@ -1816,8 +1687,7 @@
         "std_hydra_spike": 0.011722758412361145,
         "mean_hybrid_spike": -0.018053380772471428,
         "std_hybrid_spike": 0.015143044292926788,
-        "mean_ratio": -5.841165542602539,
-        "std_ratio": 94.94129180908203
+        "global_ratio": -0.196523338404473
     },
     {
         "layer": 10,
@@ -1830,8 +1700,7 @@
         "std_hydra_spike": 0.06440771371126175,
         "mean_hybrid_spike": 0.22292327880859375,
         "std_hybrid_spike": 0.06506730616092682,
-        "mean_ratio": -0.21247905492782593,
-        "std_ratio": 0.17498329281806946
+        "global_ratio": -0.17755078459159646
     },
     {
         "layer": 10,
@@ -1844,8 +1713,7 @@
         "std_hydra_spike": 0.02402573823928833,
         "mean_hybrid_spike": 0.053320180624723434,
         "std_hybrid_spike": 0.0334102138876915,
-        "mean_ratio": -1.673008680343628,
-        "std_ratio": 10.50090503692627
+        "global_ratio": -1.2649391467874969
     },
     {
         "layer": 11,
@@ -1858,8 +1726,7 @@
         "std_hydra_spike": 0.01777656376361847,
         "mean_hybrid_spike": 0.009956707246601582,
         "std_hybrid_spike": 0.011977406218647957,
-        "mean_ratio": 0.5460180640220642,
-        "std_ratio": 3.1531214714050293
+        "global_ratio": 0.49840361763468355
     },
     {
         "layer": 11,
@@ -1872,8 +1739,7 @@
         "std_hydra_spike": 0.02207057736814022,
         "mean_hybrid_spike": 0.04170560836791992,
         "std_hybrid_spike": 0.026985764503479004,
-        "mean_ratio": -0.07380399852991104,
-        "std_ratio": 5.0169267654418945
+        "global_ratio": -0.27698008802114843
     },
     {
         "layer": 11,
@@ -1886,8 +1752,7 @@
         "std_hydra_spike": 0.04827679321169853,
         "mean_hybrid_spike": 0.09960290789604187,
         "std_hybrid_spike": 0.04467111453413963,
-        "mean_ratio": -0.10628073662519455,
-        "std_ratio": 0.3329399526119232
+        "global_ratio": -0.03934578280328042
     },
     {
         "layer": 11,
@@ -1900,8 +1765,7 @@
         "std_hydra_spike": 0.0018114561680704355,
         "mean_hybrid_spike": 0.00400328217074275,
         "std_hybrid_spike": 0.003522856393828988,
-        "mean_ratio": 0.48715686798095703,
-        "std_ratio": 27.992294311523438
+        "global_ratio": 11.006239217330602
     },
     {
         "layer": 11,
@@ -1914,8 +1778,7 @@
         "std_hydra_spike": 0.0076144044287502766,
         "mean_hybrid_spike": 0.007559531833976507,
         "std_hybrid_spike": 0.00791719276458025,
-        "mean_ratio": -0.6996176242828369,
-        "std_ratio": 7.829573154449463
+        "global_ratio": -0.26631678694123495
     },
     {
         "layer": 11,
@@ -1928,8 +1791,7 @@
         "std_hydra_spike": 0.009386344812810421,
         "mean_hybrid_spike": 0.0020163157023489475,
         "std_hybrid_spike": 0.008244308643043041,
-        "mean_ratio": -0.027444420382380486,
-        "std_ratio": 5.270353317260742
+        "global_ratio": 0.4900792260518576
     },
     {
         "layer": 11,
@@ -1942,8 +1804,7 @@
         "std_hydra_spike": 0.023352839052677155,
         "mean_hybrid_spike": 0.050343308597803116,
         "std_hybrid_spike": 0.023847069591283798,
-        "mean_ratio": 0.01870204135775566,
-        "std_ratio": 0.16349457204341888
+        "global_ratio": 0.022620304074155693
     },
     {
         "layer": 11,
@@ -1956,8 +1817,7 @@
         "std_hydra_spike": 0.00807387288659811,
         "mean_hybrid_spike": 0.001148116309195757,
         "std_hybrid_spike": 0.008953280746936798,
-        "mean_ratio": -1.6002905368804932,
-        "std_ratio": 22.16398811340332
+        "global_ratio": 0.784842782476417
     },
     {
         "layer": 11,
@@ -1970,8 +1830,7 @@
         "std_hydra_spike": 0.0026243822649121284,
         "mean_hybrid_spike": 0.020457258448004723,
         "std_hybrid_spike": 0.012156514450907707,
-        "mean_ratio": -2.9291906356811523,
-        "std_ratio": 36.69711685180664
+        "global_ratio": -8.04230511986888
     },
     {
         "layer": 11,
@@ -1984,8 +1843,7 @@
         "std_hydra_spike": 0.030948208644986153,
         "mean_hybrid_spike": 0.04187837615609169,
         "std_hybrid_spike": 0.024729276075959206,
-        "mean_ratio": 0.25587448477745056,
-        "std_ratio": 0.17130047082901
+        "global_ratio": 0.24977227839395955
     },
     {
         "layer": 11,
@@ -1998,8 +1856,7 @@
         "std_hydra_spike": 0.07872553169727325,
         "mean_hybrid_spike": -0.10955493152141571,
         "std_hybrid_spike": 0.07406678795814514,
-        "mean_ratio": -0.4028576612472534,
-        "std_ratio": 5.879687786102295
+        "global_ratio": -0.2670328519844708
     },
     {
         "layer": 11,
@@ -2012,7 +1869,6 @@
         "std_hydra_spike": 0.006067419424653053,
         "mean_hybrid_spike": 0.013165670447051525,
         "std_hybrid_spike": 0.009675045497715473,
-        "mean_ratio": -0.6846840381622314,
-        "std_ratio": 1.0948286056518555
+        "global_ratio": -0.5654979471883557
     }
 ]
