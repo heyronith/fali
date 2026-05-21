@@ -14,15 +14,19 @@ Scientific Context:
   making the IO token's relative share larger when normalized via softmax)?
 - The Intervention: By pinning all background token pre-softmax attention logits to their clean 
   baseline values while allowing only the dynamic ablated IO logit to flow through, we can compute 
-  a counterfactual attention probability. If the counterfactual attention remains baseline-like, 
-  the Hydra spike is an active routing change. If it is ablated-like, it is a softmax artifact.
+  a counterfactual attention probability. If only the IO logit changes and attention rises (becomes ablated-like), 
+  that supports IO-targeted active logit routing. If the hybrid attention stays near clean (baseline-like) while 
+  fully ablated rises, that supports background/denominator effects (a softmax normalization artifact).
 """
 
 import torch
 import sys
+import os
 import json
 from typing import List, Dict
 from transformer_lens import HookedTransformer
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from ioi_dataset import IOIDataset
 
 def get_head_attention_to_io(cache, layer: int, head: int, dataset: IOIDataset) -> torch.Tensor:
@@ -254,9 +258,9 @@ def main():
         mean_hybrid = hybrid_attn.mean().item()
         
         results[name] = {
-            "clean": mean_clean,
-            "ablated": mean_ablated,
-            "hybrid": mean_hybrid,
+            "clean_attn": mean_clean,
+            "standard_zero_ablation": mean_ablated,
+            "fali_target_only_hybrid": mean_hybrid,
             "hydra_spike": mean_ablated - mean_clean,
             "hybrid_spike": mean_hybrid - mean_clean,
             "artifact_ratio": (mean_ablated - mean_hybrid) / (mean_ablated - mean_clean) if abs(mean_ablated - mean_clean) > 1e-7 else 0.0
@@ -264,16 +268,17 @@ def main():
         
         # Save raw values to export dictionary
         json_export[name] = {
-            "clean": clean_attn.tolist(),
-            "ablated": ablated_attn.tolist(),
-            "hybrid": hybrid_attn.tolist()
+            "clean_attn": clean_attn.tolist(),
+            "standard_zero_ablation": ablated_attn.tolist(),
+            "fali_target_only_hybrid": hybrid_attn.tolist()
         }
         
     print("✓ All tensor shapes are structurally valid and execute without conflicts.")
     print("✓ All hybrid attention values lie strictly bounded between 0.0 and 1.0.")
     
     # Export results to JSON
-    json_path = "attention_results.json"
+    json_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../results/summary/attention_results.json"))
+    os.makedirs(os.path.dirname(json_path), exist_ok=True)
     try:
         with open(json_path, "w") as f:
             json.dump(json_export, f, indent=4)
@@ -295,7 +300,7 @@ def main():
     print(f"| {'Head':<8} | {'Clean Baseline':<16} | {'Standard Ablation':<18} | {'Hybrid Intervention':<20} | {'Hydra Spike (Δ)':<16} | {'Hybrid Spike (Δ)':<17} |")
     print(f"|{'-' * 10}|{'-' * 18}|{'-' * 20}|{'-' * 22}|{'-' * 18}|{'-' * 19}|")
     for name, r in results.items():
-        print(f"| {name:<8} | {r['clean']:<16.6f} | {r['ablated']:<18.6f} | {r['hybrid']:<20.6f} | {r['hydra_spike']:<16.6f} | {r['hybrid_spike']:<17.6f} |")
+        print(f"| {name:<8} | {r['clean_attn']:<16.6f} | {r['standard_zero_ablation']:<18.6f} | {r['fali_target_only_hybrid']:<20.6f} | {r['hydra_spike']:<16.6f} | {r['hybrid_spike']:<17.6f} |")
     print("=" * 115)
     
     print("\nScientific Breakdown and Isolation Analysis:")

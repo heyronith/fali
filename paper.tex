@@ -108,7 +108,7 @@ routing toward the target. We apply this method to GPT-2 Small
 (IOI) prompts \citep{wang2022interpretability}, evaluating all 144 attention
 heads across 12 layers.
 
-Our principal finding is that while passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (attention probability shift of $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), we provide direct, geometric evidence via magnitude-independent cosine similarity tracking ($p = 2.32 \times 10^{-109}$) that 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold. Furthermore, sequential isolation experiments officially retire the ``intra-layer parallel communication'' hypothesis, demonstrating that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$), rather than its co-located Layer 10 partner ($L10H0$). These results qualify the role of LayerNorm volume surges in mechanistic interpretability, while establishing self-repair as a functionally active, geometrically robust transformer circuit capability.
+Our principal finding is that while passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (attention probability shift of $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), we provide direct, geometric evidence via magnitude-independent cosine similarity tracking ($p = 2.32 \times 10^{-109}$) that 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold. Furthermore, sequential isolation experiments strongly challenge the ``intra-layer parallel communication'' hypothesis, demonstrating that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$), rather than its co-located Layer 10 partner ($L10H0$). These results qualify the role of LayerNorm volume surges in mechanistic interpretability, while establishing self-repair as a functionally active, geometrically robust transformer circuit capability.
 
 \end{abstract}
 
@@ -186,7 +186,7 @@ In this paper, we make the following contributions:
     200-sample IOI cohort, providing a model-wide map of the active vs. passive
     composition of every head's Hydra response.
   \item We prove that while passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (reducing L10H10's attention delta from $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold, supported by magnitude-independent cosine similarity tracking ($p \approx 0$).
-  \item We leverage sequential isolation experiments to officially retire the ``intra-layer parallel communication'' hypothesis, showing that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$) rather than its co-located Layer 10 partner ($L10H0$).
+  \item We leverage sequential isolation experiments to strongly challenge the ``intra-layer parallel communication'' hypothesis, showing that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$) rather than its co-located Layer 10 partner ($L10H0$).
 \end{itemize}
 
 % ===================================================================
@@ -474,9 +474,9 @@ A highly consistent and mathematically precise pattern emerges across Layer 10. 
 
 Specifically, for L10H10, the clean attention probability of $0.3779$ spikes to $0.5672$ in the standard ablated run ($\Delta_\text{Hydra} = +0.1893$). When we freeze Layer 10's LayerNorm scale factor to its clean baseline values to eliminate the background denominator inflation, the attention probability still rises to $0.5212$ ($\Delta_\text{Active} = +0.1433$). The difference between the raw and scale-frozen deltas is $+0.0460$, representing the portion due to the passive volume surge. A paired t-test comparing the Raw vs.\ LN-Frozen attention deltas yields an extremely high t-statistic of $40.0655$ ($p = 3.25 \times 10^{-97}$) with a 95\% confidence interval of $(0.04378, 0.04831)$, confirming that both active routing and passive scaling are statistically robust and highly significant components of the observed attention shift.
 
-Furthermore, we track the physical alignment of L10H10's Query and Key vectors in the activation manifold. Clean cosine similarity of $0.2744$ increases to $0.3307$ in the ablated run. A paired t-test of this increase yields a t-statistic of $46.8020$ ($p = 2.32 \times 10^{-109}$) with a 95\% confidence interval of $(0.05390, 0.05865)$. Since cosine similarity is magnitude-independent, this spatial contraction cannot be explained by softmax renormalization or LayerNorm scaling, serving as definitive geometric proof of active vector realignment.
+Furthermore, we track the physical alignment of L10H10's Query and Key vectors in the activation manifold. Clean cosine similarity of $0.2744$ increases to $0.3307$ in the ablated run. A paired t-test of this increase yields a t-statistic of $46.8020$ ($p = 2.32 \times 10^{-109}$) with a 95\% confidence interval of $(0.05390, 0.05865)$. Since cosine similarity is magnitude-independent, this spatial contraction cannot be explained by softmax renormalization or LayerNorm scaling, serving as direct geometric evidence of active vector realignment.
 
-Across the other prominent attention heads in Layer 10 (L10H0, L10H2, L10H6, L10H3), active routing consistently accounts for 73.2\% to 82.2\% (mean $\approx 77.2\%$) of the observed Hydra spike, while the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$). These findings systematically qualify LayerNorm volume surges as an important, non-negligible confound in mechanistic interpretability, while verifying that the bulk of the compensatory Hydra Effect represents a genuine, active algorithmic response to circuit failure.
+Across the prominent backup heads in Layer 10 (L10H2, L10H6, L10H3), active routing consistently accounts for 73.2\% to 82.2\% (mean $\approx 77.2\%$) of the observed Hydra spike, while the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$). These findings systematically qualify LayerNorm volume surges as an important, non-negligible confound in mechanistic interpretability, while verifying that the bulk of the compensatory Hydra Effect represents a genuine, active algorithmic response to circuit failure.
 
 Figure~\ref{fig:cossim_shift} visualizes the cosine similarity shift ($\Delta_\text{CosSim} = \text{CosSim}_\text{Abl} - \text{CosSim}_\text{Clean}$) across all 12 heads in Layer 10. Nine of twelve heads exhibit positive shifts (green), indicating active geometric realignment of their Query and Key vectors toward the $IO$ token after primary-head ablation. L10H10 (highlighted, $\Delta = +0.0563$) ranks among the strongest responders. Three heads (L10H5, L10H7, L10H9) exhibit negative shifts (red), indicating representational degradation rather than compensation. Crucially, because cosine similarity is invariant to vector magnitude, these shifts cannot be attributed to LayerNorm scaling and constitute direct geometric evidence of active attention manifold restructuring.
 
@@ -539,7 +539,7 @@ Figure~\ref{fig:disentanglement} presents the FALI disentanglement scatter plot 
     Intervention active spike (y-axis). Points above the $y=x$ dashed
     diagonal represent heads where standard ablation metrics
     \emph{underestimate} the true active algorithmic routing contribution.
-    The Layer 10 backup ensemble (L10H10, L10H0, L10H2, L10H3, L10H6)
+    The Layer 10 backup ensemble (L10H10, L10H2, L10H3, L10H6) along with the primary ablated head L10H0
     consistently plots above the diagonal, indicating systematic underestimation
     of approximately 13.6--36.4\% across the ensemble. L11H10 plots below
     the diagonal, indicating that its decrease in attention is partially
@@ -575,7 +575,7 @@ leverage available to Layer 11 heads. This explains why Layer 11 heads, with the
 exception of L11H2 and L11H9 (which show moderate Hydra responses), exhibit
 weaker active compensation signals than their Layer 10 counterparts.
 
-\subsection{Retiring the Intra-Layer Parallel Communication Hypothesis}
+\subsection{Deconstructing the Intra-Layer Parallel Communication Hypothesis}
 \label{subsec:isolation}
 
 A major hypothesis in transformer self-repair literature posits that backup heads within a layer compensate directly in parallel for ablated primary heads in the same layer—the \emph{intra-layer parallel communication} hypothesis. Under this view, L10H10's mobilization would be a direct response to the ablation of its co-located Layer 10 partner, L10H0. 
@@ -587,7 +587,7 @@ To causally evaluate this hypothesis, we deconstructed the co-ablation protocol 
   \item \textbf{Condition $\gamma$ (Co-ablation of both):} L10H10's attention to $IO$ spikes to $0.5672$ ($\Delta = +0.1893$).
 \end{itemize}
 
-These results officially retire the intra-layer parallel communication hypothesis. The backup head L10H10 is entirely insensitive to the ablation of its intra-layer partner L10H0. Instead, L10H10's self-repair mobilization is triggered \emph{exclusively} by the ablation of the upstream Layer 9 primary head, L9H9. This demonstrates that self-repair is not a parallel, flat intra-layer phenomenon but rather a structured, sequential, cross-layer compensatory pathway. When L9H9 fails to write the primary name mover signal to the residual stream, the downstream Layer 10 heads actively detect this representational deficit and mobilize to perform the necessary computation.
+These results strongly challenge the intra-layer parallel communication hypothesis. The backup head L10H10 is entirely insensitive to the ablation of its intra-layer partner L10H0. Instead, L10H10's self-repair mobilization is triggered \emph{exclusively} by the ablation of the upstream Layer 9 primary head, L9H9. This demonstrates that self-repair is not a parallel, flat intra-layer phenomenon but rather a structured, sequential, cross-layer compensatory pathway. When L9H9 fails to write the primary name mover signal to the residual stream, the downstream Layer 10 heads actively detect this representational deficit and mobilize to perform the necessary computation.
 
 Figure~\ref{fig:isolation} visualizes L10H10's attention probability to $IO$ across all five experimental conditions. Condition $\beta$ (L10H0-only ablation) produces identically zero change from clean baseline, while Condition $\alpha$ (L9H9-only ablation) reproduces the full co-ablation spike ($+0.1893$). The LN-Frozen counterfactual bar (purple) shows the reduced delta ($+0.1433$) after eliminating passive scale-drop amplification, representing the purely active component of the self-repair response.
 
@@ -600,7 +600,7 @@ Figure~\ref{fig:isolation} visualizes L10H10's attention probability to $IO$ acr
     conditions ($N=200$). Condition $\alpha$ (L9H9-only ablation)
     reproduces the full Hydra spike ($\Delta = +0.1893$), while
     Condition $\beta$ (L10H0-only ablation) produces zero change
-    ($\Delta = 0.0000$), definitively retiring the intra-layer
+    ($\Delta = 0.0000$), strongly challenging the intra-layer
     parallel communication hypothesis. The LN-Frozen counterfactual
     (purple) isolates the active component ($\Delta = +0.1433$,
     75.7\% of the raw spike) from passive scale-drop amplification.
@@ -675,13 +675,13 @@ We have presented the \textbf{Frozen Attention Logit Intervention (FALI)}, a
 novel mechanistic intervention that surgically decomposes the Hydra Effect into
 its active (algorithmic routing) and passive (softmax denominator shift)
 components. Applied to GPT-2 Small on the IOI benchmark with a cohort of 200
-samples across all 144 attention heads, our method yields three definitive
+samples across all 144 attention heads, our method yields three principal
 findings:
 
 \begin{enumerate}
   \item \textbf{Active self-repair is the dominant mechanism in the Layer 10 backup ensemble.} While passive scale-drop amplification accounts for a non-negligible 24.3\% of L10H10's attention shift (reducing its delta from $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), the bulk ($75.7\%$) represents active, genuine self-repair driven by physical vector realignment inside the attention manifold, as confirmed by highly significant QK cosine similarity tracking ($p = 2.32 \times 10^{-109}$).
 
-  \item \textbf{Standard ablation metrics systematically overestimate active backup compensation due to passive scaling.} Across the five prominent backup heads in Layer 10 (L10H10, L10H0, L10H2, L10H3, L10H6), the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$) of the observed attention spikes. This establishes the LayerNorm volume surge as a first-order, non-negligible confound in standard interpretability analyses that must be controlled for.
+  \item \textbf{Standard ablation metrics systematically overestimate active backup compensation due to passive scaling.} Across the four prominent backup heads in Layer 10 (L10H10, L10H2, L10H3, L10H6), the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$) of the observed attention spikes. This establishes the LayerNorm volume surge as a first-order, non-negligible confound in standard interpretability analyses that must be controlled for.
 
   \item \textbf{Self-repair is a causally necessary, architecturally robust
     mechanism.} Four-pass causal validation confirms that L10H10's compensation

@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from transformer_lens import HookedTransformer
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from ioi_dataset import IOIDataset
 
 def make_ablation_hook(head_idx: int):
@@ -70,6 +71,11 @@ def main():
     print("==========================================================================")
     print("PHASE 5: OFFLINE SCALE & VISUALIZATION SUITE (200 SAMPLES, 144 HEADS)")
     print("==========================================================================")
+    
+    # Ensure directories exist
+    os.makedirs("results/raw", exist_ok=True)
+    os.makedirs("results/summary", exist_ok=True)
+    os.makedirs("figures", exist_ok=True)
     
     # 1. Load gpt2-small with center_writing_weights=True
     print("Loading gpt2-small with center_writing_weights=True...")
@@ -125,6 +131,7 @@ def main():
     io_idx = dataset.IO.to(device) # Shape: [batch] (length 200)
     
     head_results = []
+    raw_results = {}
     
     for l in range(12):
         # Retrieve layer-level cached scores and patterns
@@ -185,13 +192,14 @@ def main():
                 f"Assertion Failed: Out of bounds probability in head L{l}H{h}"
             )
             
+            head_name = f"L{l}H{h}"
             head_results.append({
                 "layer": l,
                 "head": h,
-                "name": f"L{l}H{h}",
-                "mean_clean": mean_clean,
-                "mean_ablated": mean_ablated,
-                "mean_hybrid": mean_hybrid,
+                "name": head_name,
+                "clean_attn": mean_clean,
+                "standard_zero_ablation": mean_ablated,
+                "fali_target_only_hybrid": mean_hybrid,
                 "mean_hydra_spike": mean_hydra_spike,
                 "std_hydra_spike": std_hydra_spike,
                 "mean_hybrid_spike": mean_hybrid_spike,
@@ -199,9 +207,40 @@ def main():
                 "global_ratio": global_ratio
             })
             
+            raw_results[head_name] = {
+                "clean_attn": clean_io_attn.cpu().tolist(),
+                "standard_zero_ablation": ablated_io_attn.cpu().tolist(),
+                "fali_target_only_hybrid": hybrid_io_attn.cpu().tolist()
+            }
+            
     print(f"✓ Completed evaluation of all {len(head_results)} heads successfully.")
     print("✓ All offline counterfactual attention probabilities verified in range [0.0, 1.0].")
     
+    # Save raw per-example data to results/raw/fali_raw_results.json and results/raw/fali_raw_results.csv
+    try:
+        with open("results/raw/fali_raw_results.json", "w") as f:
+            json.dump(raw_results, f, indent=4)
+        print("✓ Saved raw per-example data to results/raw/fali_raw_results.json")
+    except Exception as e:
+        print(f"⚠ Failed to save raw JSON: {e}")
+        
+    try:
+        raw_rows = []
+        for h_name, data in raw_results.items():
+            for idx in range(200):
+                raw_rows.append({
+                    "head": h_name,
+                    "example_idx": idx,
+                    "clean_attn": data["clean_attn"][idx],
+                    "standard_zero_ablation": data["standard_zero_ablation"][idx],
+                    "fali_target_only_hybrid": data["fali_target_only_hybrid"][idx]
+                })
+        pd.DataFrame(raw_rows).to_csv("results/raw/fali_raw_results.csv", index=False)
+        print("✓ Saved raw per-example data to results/raw/fali_raw_results.csv")
+    except Exception as e:
+        print(f"⚠ Failed to save raw CSV: {e}")
+
+            
     # 6. Sort and filter heads with a Standard Hydra Spike with absolute amplitude > 0.05
     # Let's filter by Standard Hydra Spike > 0.05
     prominent_heads = [r for r in head_results if abs(r["mean_hydra_spike"]) > 0.05]
@@ -218,11 +257,11 @@ def main():
     for r in prominent_heads:
         hydra_str = f"{r['mean_hydra_spike']:+.4f} ± {r['std_hydra_spike']:.4f}"
         hybrid_str = f"{r['mean_hybrid_spike']:+.4f} ± {r['std_hybrid_spike']:.4f}"
-        print(f"| {r['name']:<6} | {r['mean_clean']:<12.4f} | {r['mean_ablated']:<12.4f} | {r['mean_hybrid']:<12.4f} | {hydra_str:<25} | {hybrid_str:<25} | {r['global_ratio']:<+24.2%} |")
+        print(f"| {r['name']:<6} | {r['clean_attn']:<12.4f} | {r['standard_zero_ablation']:<12.4f} | {r['fali_target_only_hybrid']:<12.4f} | {hydra_str:<25} | {hybrid_str:<25} | {r['global_ratio']:<+24.2%} |")
     print("=" * 135)
     
     # Export results to JSON in the workspace for downstream visualization or Task 5 validation
-    json_path = "scale_evaluation_results.json"
+    json_path = "results/summary/scale_evaluation_results.json"
     try:
         with open(json_path, "w") as f:
             json.dump(head_results, f, indent=4)
@@ -306,7 +345,7 @@ def main():
     plt.legend(loc="upper left", frameon=True, facecolor="white", edgecolor="lightgray")
     
     # Save the figure
-    plot_filename = "circuit_disentanglement_plot.png"
+    plot_filename = "figures/circuit_disentanglement_plot.png"
     try:
         plt.tight_layout()
         plt.savefig(plot_filename, dpi=300)
@@ -320,8 +359,8 @@ def main():
     plt.figure(figsize=(10, 8), dpi=300)
     plt.grid(True, linestyle="--", alpha=0.6, zorder=1)
     
-    x_clean = [r["mean_clean"] for r in filtered_results]
-    y_ablated = [r["mean_ablated"] for r in filtered_results]
+    x_clean = [r["clean_attn"] for r in filtered_results]
+    y_ablated = [r["standard_zero_ablation"] for r in filtered_results]
     names_filtered = [r["name"] for r in filtered_results]
     
     # Plot background heads in gray
@@ -362,7 +401,7 @@ def main():
     plt.title("Causal Shift Trajectory (Clean vs Ablated Attention)\nVisualizing the Hydra Effect in Backup Heads", fontsize=12, fontweight="bold", pad=15)
     plt.legend(loc="upper left")
     
-    plot_shift_filename = "causal_shift_plot.png"
+    plot_shift_filename = "figures/causal_shift_plot.png"
     try:
         plt.tight_layout()
         plt.savefig(plot_shift_filename, dpi=300)

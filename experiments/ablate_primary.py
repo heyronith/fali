@@ -1,6 +1,9 @@
 import torch
 import sys
+import os
 from transformer_lens import HookedTransformer
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from ioi_dataset import IOIDataset
 
 def get_head_attention_to_io(cache, layer: int, head: int, dataset: IOIDataset) -> torch.Tensor:

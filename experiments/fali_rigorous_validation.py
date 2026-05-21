@@ -18,6 +18,8 @@ import numpy as np
 import pandas as pd
 from scipy import stats
 from transformer_lens import HookedTransformer
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from ioi_dataset import IOIDataset
 
 def compute_logit_difference(logits: torch.Tensor, dataset: IOIDataset) -> torch.Tensor:
@@ -237,11 +239,19 @@ def main():
     print(f"    95% CI          = ({ci_cossim[0]:.5f}, {ci_cossim[1]:.5f})")
 
     # Let's save a cleanly formatted CSV summary tracking
-    # [Head, Clean_Attn, Abl_Attn, LN_Frozen_Attn, Clean_CosSim, Abl_CosSim, P_Value]
+    # [Head, clean_attn, standard_zero_ablation, ln_scale_frozen, Clean_CosSim, Abl_CosSim, P_Value]
     # We will generate this CSV row for the primary head studied L10H10, as well as general heads of interest in Layer 10.
     
     # We will compute these values for all Layer 10 heads to provide a complete validation suite!
     layer_10_rows = []
+    raw_ln_results = {
+        "logit_differences": {
+            "clean_attn": clean_logit_diffs.cpu().tolist(),
+            "standard_zero_ablation": ablated_logit_diffs.cpu().tolist(),
+            "ln_scale_frozen": ln_frozen_logit_diffs.cpu().tolist()
+        },
+        "heads": {}
+    }
     
     # Calculate for all Layer 10 heads
     print("\nGenerating metrics for all Layer 10 heads to output CSV...")
@@ -268,23 +278,64 @@ def main():
         
         layer_10_rows.append({
             "Head": f"L10H{h}",
-            "Clean_Attn": h_clean_attn.mean().item(),
-            "Abl_Attn": h_abl_attn.mean().item(),
-            "LN_Frozen_Attn": h_ln_frozen_attn.mean().item(),
+            "clean_attn": h_clean_attn.mean().item(),
+            "standard_zero_ablation": h_abl_attn.mean().item(),
+            "ln_scale_frozen": h_ln_frozen_attn.mean().item(),
             "Clean_CosSim": h_clean_cossim.mean().item(),
             "Abl_CosSim": h_abl_cossim.mean().item(),
             "P_Value": h_res.pvalue
         })
         
+        raw_ln_results["heads"][f"L10H{h}"] = {
+            "clean_attn": h_clean_attn.cpu().tolist(),
+            "standard_zero_ablation": h_abl_attn.cpu().tolist(),
+            "ln_scale_frozen": h_ln_frozen_attn.cpu().tolist()
+        }
+        
     df = pd.DataFrame(layer_10_rows)
-    csv_path = "fali_rigorous_validation.csv"
+    
+    # Ensure directories exist
+    os.makedirs("results/raw", exist_ok=True)
+    os.makedirs("results/summary", exist_ok=True)
+    
+    csv_path = "results/summary/fali_rigorous_validation.csv"
     df.to_csv(csv_path, index=False)
     print(f"✓ Cleanly formatted CSV summary study saved to: {csv_path}")
     print("\nCSV Data:\n", df.to_string(index=False))
+    
+    # Save raw per-example data to results/raw/ln_frozen_raw_results.json and results/raw/ln_frozen_raw_results.csv
+    try:
+        with open("results/raw/ln_frozen_raw_results.json", "w") as f:
+            json.dump(raw_ln_results, f, indent=4)
+        print("✓ Saved raw per-example data to results/raw/ln_frozen_raw_results.json")
+    except Exception as e:
+        print(f"⚠ Failed to save raw JSON: {e}")
+        
+    try:
+        raw_ln_rows = []
+        for h in range(12):
+            head_name = f"L10H{h}"
+            h_data = raw_ln_results["heads"][head_name]
+            for idx in range(200):
+                raw_ln_rows.append({
+                    "head": head_name,
+                    "example_idx": idx,
+                    "clean_logit_diff": raw_ln_results["logit_differences"]["clean_attn"][idx],
+                    "standard_zero_ablation_logit_diff": raw_ln_results["logit_differences"]["standard_zero_ablation"][idx],
+                    "ln_scale_frozen_logit_diff": raw_ln_results["logit_differences"]["ln_scale_frozen"][idx],
+                    "clean_attn": h_data["clean_attn"][idx],
+                    "standard_zero_ablation": h_data["standard_zero_ablation"][idx],
+                    "ln_scale_frozen": h_data["ln_scale_frozen"][idx]
+                })
+        pd.DataFrame(raw_ln_rows).to_csv("results/raw/ln_frozen_raw_results.csv", index=False)
+        print("✓ Saved raw per-example data to results/raw/ln_frozen_raw_results.csv")
+    except Exception as e:
+        print(f"⚠ Failed to save raw CSV: {e}")
 
     print("\n==========================================================================")
     print("FALI RIGOROUS CAUSAL VALIDATION COMPLETE.")
     print("==========================================================================")
 
 if __name__ == "__main__":
+    import json
     main()

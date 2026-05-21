@@ -2,7 +2,7 @@
 generate_new_figures.py
 
 Generates two publication-quality figures for the FALI paper:
-  1. Sequential Isolation Bar Chart (Conditions α, β, γ) — retires the
+  1. Sequential Isolation Bar Chart (Conditions α, β, γ) — challenges the
      intra-layer parallel communication hypothesis.
   2. QK Cosine Similarity Shift Lollipop Chart — geometric evidence of
      active vector realignment across all Layer 10 heads.
@@ -113,9 +113,11 @@ def generate_isolation_bar_chart():
     )
 
     fig.tight_layout()
-    fig.savefig("isolation_bar_chart.png")
+    import os
+    os.makedirs("figures", exist_ok=True)
+    fig.savefig("figures/isolation_bar_chart.png")
     plt.close(fig)
-    print("✓ Saved: isolation_bar_chart.png")
+    print("✓ Saved: figures/isolation_bar_chart.png")
 
 
 # ======================================================================
@@ -129,7 +131,7 @@ def generate_cossim_shift_chart():
     """
 
     # Load the CSV data
-    df = pd.read_csv("fali_rigorous_validation.csv")
+    df = pd.read_csv("results/summary/fali_rigorous_validation.csv")
     df["Delta_CosSim"] = df["Abl_CosSim"] - df["Clean_CosSim"]
     df = df.sort_values("Delta_CosSim", ascending=True).reset_index(drop=True)
 
@@ -203,9 +205,9 @@ def generate_cossim_shift_chart():
                       edgecolor="#cccccc", alpha=0.9))
 
     fig.tight_layout()
-    fig.savefig("cossim_shift_lollipop.png")
+    fig.savefig("figures/cossim_shift_lollipop.png")
     plt.close(fig)
-    print("✓ Saved: cossim_shift_lollipop.png")
+    print("✓ Saved: figures/cossim_shift_lollipop.png")
 
 
 # ======================================================================
