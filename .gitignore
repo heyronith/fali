@@ -5,3 +5,6 @@ __pycache__/
 Hydra.pdf
 IOI.pdf
 .agents/
+logs/
+caches/
+.pytest_cache/

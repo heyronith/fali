@@ -94,22 +94,34 @@ of softmax renormalization: removing primary-head contributions collapses signal
 variance in the residual stream, which causes LayerNorm to amplify background
 token logits uniformly, thereby inflating the denominator's complement and
 raising every token's relative attention share, including the target's.
-Disentangling this passive denominator effect from genuine, active algorithmic
-routing has remained methodologically elusive under standard causal tracing.
+Disentangling this passive denominator effect from target-directed pre-softmax logit
+changes has remained methodologically elusive under standard causal tracing.
 
 We introduce the \textbf{Frozen Attention Logit Intervention}, a surgical
 counterfactual technique that isolates the dynamic, ablation-induced pre-softmax
 logit of a single target token while simultaneously freezing all non-target
 pre-softmax logits to their clean-run baseline values. This construction
 eliminates the confound of background denominator inflation, yielding a
-counterfactual attention probability that reflects \emph{only} active logit
-routing toward the target. We apply this method to GPT-2 Small
-\citep{radford2019language} on a cohort of 200 Indirect Object Identification
-(IOI) prompts \citep{wang2022interpretability}, evaluating all 144 attention
-heads across 12 layers.
+counterfactual attention probability that reflects target-logit attention contributions.
+We apply this method to GPT-2 Small \citep{radford2019language} on a cohort of
+200 Indirect Object Identification (IOI) prompts \citep{wang2022interpretability},
+evaluating all 144 attention heads across 12 layers.
 
-Our principal finding is that while passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (attention probability shift of $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), we provide direct, geometric evidence via magnitude-independent cosine similarity tracking ($p = 2.32 \times 10^{-109}$) that 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold. Furthermore, sequential isolation experiments strongly challenge the ``intra-layer parallel communication'' hypothesis, demonstrating that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$), rather than its co-located Layer 10 partner ($L10H0$). These results qualify the role of LayerNorm volume surges in mechanistic interpretability, while establishing self-repair as a functionally active, geometrically robust transformer circuit capability.
-
+Our principal finding is that in GPT-2 Small on a 200-example mixed-template
+IOI cohort, ablating L9H9 and L10H0 induces a robust L10H10 increase in IO-directed
+attention. This effect survives zero, mean, and resample ablation controls.
+Path-stable FALI/Shapley decomposition shows that the attention increase is
+dominated by the IO-target attention-logit contribution, while background-logit
+changes oppose the spike on average. QK decomposition suggests the IO-target score
+increase is primarily query-driven and largely cosine-alignment-driven.
+Output mediation shows that the L10H10 attention-pattern change causally contributes
+to IO-S logit recovery under this intervention, explaining about 43.6\% of
+L10H10’s zero-ablation degradation by aggregate ratio of means. We keep this
+evidence separate from physical scale-freezing diagnostics, which show that passive
+scale-drop amplification accounts for 24.3\% of the canonical Hydra Effect
+(reducing L10H10's attention delta from $+0.1893$ to $+0.1433$). Together, these
+results qualify the role of LayerNorm surges while supporting the presence of
+target-directed compensatory pathways under upstream failures.
 \end{abstract}
 
 \textbf{Keywords:} mechanistic interpretability, Hydra Effect, self-repair,
@@ -144,7 +156,7 @@ output accordingly. However, the mechanistic origin of this spike is ambiguous.
 Two competing explanations coexist:
 
 \begin{enumerate}
-  \item \textbf{Active Algorithmic Routing (AAR):} The backup heads genuinely
+  \item \textbf{Active Algorithmic Routing (AAR):} The backup heads actively
     increase their computation of the target-token relevance signal, producing
     higher attention weights through an active change in their query-key
     interactions.
@@ -161,7 +173,7 @@ Two competing explanations coexist:
 Distinguishing AAR from PSDS is critical for accurate circuit analysis.
 If the Hydra spike is predominantly a softmax artifact, then interpretability
 conclusions drawn from standard ablation experiments overestimate the functional
-role of backup heads. Conversely, if the spike reflects genuine AAR, then
+role of backup heads. Conversely, if the spike reflects target-directed AAR, then
 standard metrics systematically undervalue the backup heads by attributing part
 of their computed signal to a passive denominatorial re-weighting.
 
@@ -179,13 +191,18 @@ In this paper, we make the following contributions:
 
 \begin{itemize}
   \item We introduce the \textbf{Frozen Attention Logit Intervention (FALI)}, a
-    novel counterfactual technique that surgically isolates active query-key
-    routing from passive softmax renormalization, operating at the pre-softmax
+    novel counterfactual technique that surgically decomposes attention probability shifts into
+    target-logit and background-logit contributions, operating at the pre-softmax
     logit level of individual attention heads.
   \item We apply FALI to all 144 attention heads in GPT-2 Small on a
-    200-sample IOI cohort, providing a model-wide map of the active vs. passive
-    composition of every head's Hydra response.
-  \item We prove that while passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (reducing L10H10's attention delta from $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold, supported by magnitude-independent cosine similarity tracking ($p \approx 0$).
+    200-sample IOI cohort, providing a model-wide map of the target-logit and background-logit
+    contributions of every head's Hydra response.
+  \item We show that the attention increase is dominated by the IO-target attention-logit
+    contribution, while background-logit changes oppose the spike on average. QK decomposition
+    shows this score increase is primarily query-driven and largely cosine-driven, and output
+    mediation shows the attention pattern changes explain about 43.6\% of the zero-ablation degradation.
+    Separately, we qualify that physical scale-freezing (LayerNorm-frozen) diagnostics show passive scale-drop
+    amplification accounts for 24.3\% of the observed attention probability shift ($+0.1893 \to +0.1433$).
   \item We leverage sequential isolation experiments to strongly challenge the ``intra-layer parallel communication'' hypothesis, showing that L10H10's self-repair mobilization is triggered exclusively by upstream Layer 9 ablation ($L9H9$) rather than its co-located Layer 10 partner ($L10H0$).
 \end{itemize}
 
@@ -323,33 +340,30 @@ The counterfactual attention probability is then:
   A_\text{hyb}[IO] = \frac{e^{s_\text{abl}[IO]}}{\displaystyle e^{s_\text{abl}[IO]} + \sum_{t \neq IO} e^{s_\text{clean}[t]}},
   \label{eq:hybridattn}
 \end{equation}
-which is simply $\text{softmax}(\mathbf{s}_\text{hyb})[IO]$.
-
-\paragraph{Interpretation.} FALI partitions the total observed Hydra spike
-$\Delta_\text{Hydra} = A_\text{abl}[IO] - A_\text{clean}[IO]$ into two
-components:
+which is simply $\text{softmax}(\mathbf{s}_\text{hyb})[IO]$.\paragraph{Interpretation.} FALI partitions the total observed attention probability shift
+$\Delta_\text{Total} = A_\text{abl}[IO] - A_\text{clean}[IO]$ into target-logit and background-logit contributions. Under a path-stable, path-independent Shapley decomposition, we define:
 \begin{align}
-  \Delta_\text{Active} &= A_\text{hyb}[IO] - A_\text{clean}[IO] \quad \text{(Active Algorithmic Routing)}, \label{eq:active} \\
-  \Delta_\text{Passive} &= A_\text{abl}[IO] - A_\text{hyb}[IO] \quad \text{(Passive Softmax Shift)}.
-  \label{eq:passive}
+  \Delta_\text{Target-Logit} &= \frac{1}{2} \left[ \left( A_\text{hyb}[IO] - A_\text{clean}[IO] \right) + \left( A_\text{abl}[IO] - A_\text{hyb2}[IO] \right) \right], \label{eq:target_logit_contrib} \\
+  \Delta_\text{Background-Logit} &= \frac{1}{2} \left[ \left( A_\text{abl}[IO] - A_\text{hyb}[IO] \right) + \left( A_\text{hyb2}[IO] - A_\text{clean}[IO] \right) \right],
+  \label{eq:background_logit_contrib}
 \end{align}
-Note that $\Delta_\text{Hydra} = \Delta_\text{Active} + \Delta_\text{Passive}$ by construction. Under the logit-level FALI approximation, standard metrics appeared to underestimate the active routing due to asymmetric logit scaling. However, when we implement a physically exact counterfactual by freezing Layer 10's LayerNorm scale factor ($S_\text{clean}$) during the forward pass, we qualify this dynamic: passive scale-drop amplification (PSDA) accounts for $+0.0460$ (24.3\%) of L10H10's observed $+0.1893$ attention spike. This means that standard softmax-level ablation metrics overestimate the active routing component by 24.3\% due to passive amplification, though the bulk ($75.7\%$) is verified to be genuine active algorithmic routing (AAR).
+where $\mathbf{s}_\text{hyb2}[t] = s_\text{clean}[IO]$ if $t = IO$, and $s_\text{abl}[t]$ otherwise. Note that $\Delta_\text{Total} = \Delta_\text{Target-Logit} + \Delta_\text{Background-Logit}$ by construction. Under this logit-level pre-softmax FALI decomposition, the target-logit contribution is $+0.2222$, which is larger than the total observed attention probability shift of $+0.1893$ because competing background-logit shifts oppose the spike on average. This indicates that standard attention probability metrics underestimate the target-logit pre-softmax contribution due to background logit suppression.
 
-We define the \textbf{Global Passive Ratio} as:
+We define the \textbf{Global Passive Ratio} under physical LayerNorm scale-freezing as:
 \begin{equation}
-  \rho = \frac{\Delta_\text{Passive}}{\Delta_\text{Hydra}} = 1 - \frac{\Delta_\text{Active}}{\Delta_\text{Hydra}}.
+  \rho = \frac{\Delta_\text{Passive}}{\Delta_\text{Total}} = 1 - \frac{\Delta_\text{scale-frozen}}{\Delta_\text{Total}}.
   \label{eq:ratio}
 \end{equation}
-A value of $\rho > 0$ indicates that the passive LayerNorm scale-drop surge inflates the standard metric, and we report this precisely qualified ratio across all active backup components.
+Specifically, as a separate scale-freezing control, we implement a physically exact counterfactual by freezing Layer 10's LayerNorm scale factor ($S_\text{clean}$) during the forward pass. Under this physical scale diagnostic, passive scale-drop amplification (PSDA) accounts for $+0.0460$ (24.3\%) of L10H10's observed $+0.1893$ attention spike, reducing it to $+0.1433$. This means that standard softmax-level ablation metrics overestimate the active routing component by 24.3\% due to passive LayerNorm volume surges, though the bulk ($75.7\%$) is verified to remain robust under exact scale-frozen conditions. A value of $\rho > 0$ indicates that the passive LayerNorm scale-drop surge inflates the standard metric, and we report this precisely qualified ratio across all active backup components.
 
 \paragraph{Mechanistic Rationale for Suppression.} When L9H9 and L10H0 are
 ablated, their high-variance output no longer feeds into the Layer 10 residual
 stream. LayerNorm at the input to Layer 10's attention sublayer consequently
-scales up \emph{all} residual stream features. For an active backup head like
+scales up \emph{all} residual stream features. For a responsive backup head like
 L10H10, this means the background token key vectors are also amplified,
 increasing background token logits. The FALI holds these background logit
 increases fixed, revealing that the backup head's IO-directed logit increased
-\emph{more} than the background average, meaning the head engaged in genuine
+\emph{more} than the background average, meaning the head engaged in
 discriminative amplification of the IO signal, not merely rode a global tide.
 
 \subsection{Scale Evaluation Protocol}
@@ -470,15 +484,15 @@ Table~\ref{tab:prominent_heads} presents the multi-metric results for all Layer 
   }
 \end{table}
 
-A highly consistent and mathematically precise pattern emerges across Layer 10. While passive scale-drop amplification accounts for a non-negligible 24.3\% of the canonical Hydra Effect (attention probability shift of $+0.1893 \to +0.1433$ under the scale-frozen counterfactual for the primary backup head L10H10), we provide direct, geometric evidence via magnitude-independent cosine similarity tracking ($p = 2.32 \times 10^{-109}$) that 75.7\% of the compensation is driven by genuine, active vector realignment within the attention manifold. 
+A highly consistent and mathematically precise pattern emerges across Layer 10. While physical scale-freezing diagnostics show that passive scale-drop amplification accounts for 24.3\% of the canonical Hydra Effect (attention probability shift of $+0.1893 \to +0.1433$ under the scale-frozen counterfactual for the primary backup head L10H10), we provide direct, geometric evidence via magnitude-independent cosine similarity tracking ($p = 2.32 \times 10^{-109}$) that the compensation is supported by vector realignment within the attention manifold.
 
-Specifically, for L10H10, the clean attention probability of $0.3779$ spikes to $0.5672$ in the standard ablated run ($\Delta_\text{Hydra} = +0.1893$). When we freeze Layer 10's LayerNorm scale factor to its clean baseline values to eliminate the background denominator inflation, the attention probability still rises to $0.5212$ ($\Delta_\text{Active} = +0.1433$). The difference between the raw and scale-frozen deltas is $+0.0460$, representing the portion due to the passive volume surge. A paired t-test comparing the Raw vs.\ LN-Frozen attention deltas yields an extremely high t-statistic of $40.0655$ ($p = 3.25 \times 10^{-97}$) with a 95\% confidence interval of $(0.04378, 0.04831)$, confirming that both active routing and passive scaling are statistically robust and highly significant components of the observed attention shift.
+Specifically, for L10H10, the clean attention probability of $0.3779$ spikes to $0.5672$ in the standard ablated run ($\Delta_\text{Total} = +0.1893$). When we freeze Layer 10's LayerNorm scale factor to its clean baseline values to eliminate the physical volume surge, the attention probability still rises to $0.5212$ ($\Delta_\text{scale-frozen} = +0.1433$). The difference between the raw and scale-frozen deltas is $+0.0460$, representing the portion due to the passive volume surge. A paired t-test comparing the Raw vs.\ LN-Frozen attention deltas yields an extremely high t-statistic of $40.0655$ ($p = 3.25 \times 10^{-97}$) with a 95\% confidence interval of $(0.04378, 0.04831)$, confirming that both scale-frozen routing and passive scaling are statistically robust and highly significant components of the observed attention shift.
 
-Furthermore, we track the physical alignment of L10H10's Query and Key vectors in the activation manifold. Clean cosine similarity of $0.2744$ increases to $0.3307$ in the ablated run. A paired t-test of this increase yields a t-statistic of $46.8020$ ($p = 2.32 \times 10^{-109}$) with a 95\% confidence interval of $(0.05390, 0.05865)$. Since cosine similarity is magnitude-independent, this spatial contraction cannot be explained by softmax renormalization or LayerNorm scaling, serving as direct geometric evidence of active vector realignment.
+Furthermore, we track the physical alignment of L10H10's Query and Key vectors in the activation manifold. Clean cosine similarity of $0.2744$ increases to $0.3307$ in the ablated run. A paired t-test of this increase yields a t-statistic of $46.8020$ ($p = 2.32 \times 10^{-109}$) with a 95\% confidence interval of $(0.05390, 0.05865)$. Since cosine similarity is magnitude-independent, this spatial contraction cannot be explained by softmax renormalization or LayerNorm scaling, serving as direct geometric evidence of QK vector realignment.
 
-Across the prominent backup heads in Layer 10 (L10H2, L10H6, L10H3), active routing consistently accounts for 73.2\% to 82.2\% (mean $\approx 77.2\%$) of the observed Hydra spike, while the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$). These findings systematically qualify LayerNorm volume surges as an important, non-negligible confound in mechanistic interpretability, while verifying that the bulk of the compensatory Hydra Effect represents a genuine, active algorithmic response to circuit failure.
+Across the prominent backup heads in Layer 10 (L10H2, L10H6, L10H3), physical scale-freezing shows that the scale-frozen component remains robust, while the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$) of the observed Hydra spike. These findings systematically qualify LayerNorm volume surges as an important, non-negligible confound in physical scale, while verifying that the bulk of the compensatory Hydra Effect represents a query-driven algorithmic response to circuit failure.
 
-Figure~\ref{fig:cossim_shift} visualizes the cosine similarity shift ($\Delta_\text{CosSim} = \text{CosSim}_\text{Abl} - \text{CosSim}_\text{Clean}$) across all 12 heads in Layer 10. Nine of twelve heads exhibit positive shifts (green), indicating active geometric realignment of their Query and Key vectors toward the $IO$ token after primary-head ablation. L10H10 (highlighted, $\Delta = +0.0563$) ranks among the strongest responders. Three heads (L10H5, L10H7, L10H9) exhibit negative shifts (red), indicating representational degradation rather than compensation. Crucially, because cosine similarity is invariant to vector magnitude, these shifts cannot be attributed to LayerNorm scaling and constitute direct geometric evidence of active attention manifold restructuring.
+Figure~\ref{fig:cossim_shift} visualizes the cosine similarity shift ($\Delta_\text{CosSim} = \text{CosSim}_\text{Abl} - \text{CosSim}_\text{Clean}$) across all 12 heads in Layer 10. Nine of twelve heads exhibit positive shifts (green), indicating geometric realignment of their Query and Key vectors toward the $IO$ token after primary-head ablation. L10H10 (highlighted, $\Delta = +0.0563$) ranks among the strongest responders. Three heads (L10H5, L10H7, L10H9) exhibit negative shifts (red), indicating representational degradation rather than compensation. Crucially, because cosine similarity is invariant to vector magnitude, these shifts cannot be attributed to LayerNorm scaling and constitute direct geometric evidence of attention manifold restructuring.
 
 \begin{figure}[!htbp]
   \centering
@@ -488,7 +502,7 @@ Figure~\ref{fig:cossim_shift} visualizes the cosine similarity shift ($\Delta_\t
     Each lollipop represents one attention head in Layer 10, plotting
     the change in Query-Key cosine similarity ($\Delta_\text{CosSim}$)
     between the clean and ablated forward passes. Positive shifts (green)
-    indicate active geometric realignment toward the $IO$ token;
+    indicate geometric realignment toward the $IO$ token;
     negative shifts (red) indicate representational degradation.
     L10H10 (orange diamond, highlighted band) is the primary backup head.
     Since cosine similarity is magnitude-independent, these shifts are
@@ -527,7 +541,7 @@ which is unaffected by the downstream zeroing of its \texttt{hook\_z} output.
   \label{fig:causal_shift}
 \end{figure}
 
-Figure~\ref{fig:disentanglement} presents the FALI disentanglement scatter plot for Layer 9--11 heads, plotting the standard Hydra spike (x-axis) against the FALI-corrected active spike (y-axis). Points above the $y=x$ diagonal represent heads where standard metrics underestimate the true active routing; points below indicate overestimation. Crucially, the Layer 10 backup ensemble lies slightly below the diagonal under our exact scale-frozen counterfactual analysis, qualifying that standard ablation metrics overestimate their active routing component by a non-negligible 24.3\% due to passive scale-drop amplification, while still confirming that the overwhelming majority of their response (75.7\%) is genuinely active.
+Figure~\ref{fig:disentanglement} presents the FALI disentanglement scatter plot for Layer 9--11 heads, plotting the standard attention spike (x-axis) against the FALI target-logit Shapley contribution (y-axis). Points above the $y=x$ diagonal represent heads where standard metrics underestimate the target-logit pre-softmax contribution; points below indicate overestimation. Crucially, the Layer 10 backup ensemble (L10H10, L10H2, L10H3, L10H6) along with the primary ablated head L10H0 consistently plots above the diagonal, indicating that standard metrics underestimate the target-logit pre-softmax contribution due to competing background shifts. In contrast, under the physically exact scale-frozen forward-pass counterfactual (a separate scale diagnostic), the scale-frozen routing component plots below the diagonal (indicating standard metrics overestimate that component by 24.3\% due to passive LayerNorm scale-drop surges, though the bulk remains robust under exact scale-frozen conditions).
 
 \begin{figure}[!htbp]
   \centering
@@ -535,18 +549,44 @@ Figure~\ref{fig:disentanglement} presents the FALI disentanglement scatter plot 
   \caption{%
     \textbf{FALI Circuit Disentanglement Plot.}
     Each point represents one attention head (Layer 9--11), plotting the
-    standard Hydra spike (x-axis) against the Frozen Attention Logit
-    Intervention active spike (y-axis). Points above the $y=x$ dashed
+    standard attention spike (x-axis) against the Frozen Attention Logit
+    Intervention target-logit contribution (y-axis). Points above the $y=x$ dashed
     diagonal represent heads where standard ablation metrics
-    \emph{underestimate} the true active algorithmic routing contribution.
+    \emph{underestimate} the true target-logit pre-softmax contribution.
     The Layer 10 backup ensemble (L10H10, L10H2, L10H3, L10H6) along with the primary ablated head L10H0
     consistently plots above the diagonal, indicating systematic underestimation
-    of approximately 13.6--36.4\% across the ensemble. L11H10 plots below
-    the diagonal, indicating that its decrease in attention is partially
-    masked by background softmax denominator inflation.
+    of approximately 13.6--36.4\% across the ensemble due to competing background-logit changes. 
+    L11H10 plots below the diagonal, indicating that its decrease in attention is partially
+    masked by background softmax denominator shifts.
   }
   \label{fig:disentanglement}
 \end{figure}
+
+\subsection{Ablation Control Analysis}
+To verify that the observed attention spike and downstream compensation of the backup head L10H10 are physical routing effects rather than artifacts of a specific zero-ablation protocol, we compare the L10H10 response under zero, position-wise mean, and resampling ablation controls. Under zero ablation, the primary mover heads L9H9 and L10H0 are nullified, producing an L10H10 attention spike to the target token $IO$ of $+0.1893$ and an additional logit drop (causal degradation) of $0.2281$ when L10H10 is also ablated. Under position-wise mean ablation (where ablated activations are replaced by clean-run positional averages), the attention spike remains highly robust at $+0.1616$, and the causal degradation is $0.2048$. Under resampling ablation (where activations are resampled from a random cohort sample using a fixed derangement), the attention spike is $+0.1224$ and the causal degradation is $0.2435$. Across all three control paradigms, the attention spike is positive in $91.5\%$ to $100\%$ of cases, confirming that the self-repair signal is robust and survives under physically exact, manifold-respecting counterfactual conditions.
+
+\subsection{Path-Stable Attention Decomposition}
+To understand whether L10H10's $+0.1893$ attention probability spike is driven by active target-directed routing or background token shifts, we perform a path-stable, path-independent Shapley decomposition of the softmax probability delta. Under FALI, we isolate the pre-softmax attention logit matrix row. The total spike is $+0.1893$. Our Shapley decomposition shows that the target-logit pre-softmax score shift contributes $+0.2222$, accounting for $117.4\%$ of the total shift, while the background-logits shift contributes $-0.0328$, representing a negative fraction of $-17.4\%$. In $96.0\%$ of the IOI cohort samples, the background-logit contribution actively opposes the total spike, indicating that the head's backup routing is highly targeted and actively suppresses competing background tokens rather than passively inflating their denominator share. Furthermore, the path-stability is extremely high, with an absolute target-background path disagreement of just $0.00153$ (a relative disagreement of $0.69\%$).
+
+\subsection{Query-Key Geometry and Norm Decomposition}
+To analyze what drives the target-logit score increase ($+0.9632$ score delta), we decompose the query and key vectors of L10H10 at the query position (\texttt{end}) and target key position ($IO$) into norm and directional/cosine alignment components. 
+The total pre-softmax score delta is $+0.9632$. Applying Shapley decomposition to the high-dimensional QK representations reveals that:
+\begin{itemize}
+  \item \textbf{Query Vector Rotation}: The query vector shift yields a Query Shapley contribution of $+0.9770$, explaining $101.4\%$ of the score delta.
+  \item \textbf{Key Vector Shift}: The key vector shift yields a Key Shapley contribution of $-0.0137$, representing a slight opposing effect ($-1.4\%$).
+  \item \textbf{Directional/Cosine Alignment}: The change in directional cosine similarity yields a Cosine Shapley contribution of $+0.7418$, explaining $77.0\%$ of the score delta.
+  \item \textbf{Norm Scaling}: The change in query-key norm product yields a Norm Shapley contribution of $+0.2214$, accounting for $23.0\%$ of the delta.
+\end{itemize}
+These results serve as direct, magnitude-independent geometric evidence that the self-repair is primarily query-driven and largely cosine-alignment-driven, reflecting a physical contraction in the representation space.
+
+\subsection{Output-Level Causal Mediation}
+Lastly, we evaluate whether L10H10's ablated-run activations causally mediate downstream $IO - S$ logit difference recovery. Clean baseline logit difference is $+2.9732$, primary ablation reduces it to $+2.1055$ (a degradation of $0.8677$), and double ablation (Pass C) further degrades performance to $+1.8775$ (a causal degradation of $0.2281$).
+We run two targeted counterfactual path-patching interventions:
+\begin{itemize}
+  \item \textbf{Attention-Pattern Necessity}: Patching the clean attention pattern of L10H10 into the ablated model yields an aggregate pattern necessity effect of $0.0994$, causally explaining $43.6\%$ of the zero-ablation degradation.
+  \item \textbf{$z$-Vector Output Necessity}: Patching the clean $z$-vector output of L10H10 into the ablated model yields an aggregate $z$ necessity effect of $0.1002$, causally explaining $44.0\%$ of the degradation.
+\end{itemize}
+In contrast, control heads such as L10H5, which do not show self-repair attention spikes, exhibit zero pattern or $z$-vector necessity, confirming the functional specificity of L10H10 in the compensatory circuit.
 
 % ===================================================================
 \section{Discussion}
@@ -556,7 +596,7 @@ Figure~\ref{fig:disentanglement} presents the FALI disentanglement scatter plot 
 \subsection{Why Layer 10? Semantic Subspace Saturation and Positional Readout}
 \label{subsec:layer10}
 
-The concentration of active self-repair behavior in Layer 10 is not
+The concentration of self-repair behavior in Layer 10 is not
 coincidental. In GPT-2 Small's IOI circuit, Layer 10 sits at a critical
 juncture: it is the layer immediately following Layer 9, which houses the
 dominant primary head (L9H9). By the time computation reaches Layer 10, the
@@ -573,7 +613,7 @@ the representational distinctions between $IO$ and $S$ are already partially
 collapsed by the nonlinear MLP transformations, reducing the informational
 leverage available to Layer 11 heads. This explains why Layer 11 heads, with the
 exception of L11H2 and L11H9 (which show moderate Hydra responses), exhibit
-weaker active compensation signals than their Layer 10 counterparts.
+weaker compensatory signals than their Layer 10 counterparts.
 
 \subsection{Deconstructing the Intra-Layer Parallel Communication Hypothesis}
 \label{subsec:isolation}
@@ -589,7 +629,7 @@ To causally evaluate this hypothesis, we deconstructed the co-ablation protocol 
 
 These results strongly challenge the intra-layer parallel communication hypothesis. The backup head L10H10 is entirely insensitive to the ablation of its intra-layer partner L10H0. Instead, L10H10's self-repair mobilization is triggered \emph{exclusively} by the ablation of the upstream Layer 9 primary head, L9H9. This demonstrates that self-repair is not a parallel, flat intra-layer phenomenon but rather a structured, sequential, cross-layer compensatory pathway. When L9H9 fails to write the primary name mover signal to the residual stream, the downstream Layer 10 heads actively detect this representational deficit and mobilize to perform the necessary computation.
 
-Figure~\ref{fig:isolation} visualizes L10H10's attention probability to $IO$ across all five experimental conditions. Condition $\beta$ (L10H0-only ablation) produces identically zero change from clean baseline, while Condition $\alpha$ (L9H9-only ablation) reproduces the full co-ablation spike ($+0.1893$). The LN-Frozen counterfactual bar (purple) shows the reduced delta ($+0.1433$) after eliminating passive scale-drop amplification, representing the purely active component of the self-repair response.
+Figure~\ref{fig:isolation} visualizes L10H10's attention probability to $IO$ across all five experimental conditions. Condition $\beta$ (L10H0-only ablation) produces identically zero change from clean baseline, while Condition $\alpha$ (L9H9-only ablation) reproduces the full co-ablation spike ($+0.1893$). The LN-Frozen counterfactual bar (purple) shows the reduced delta ($+0.1433$) after eliminating passive scale-drop amplification, representing the scale-frozen component of the self-repair response.
 
 \begin{figure}[!htbp]
   \centering
@@ -631,13 +671,13 @@ attention probability even without any active change in the $IO$-directed logit.
 
 This confound is particularly dangerous for the \emph{attribution} of functional
 roles in circuit analysis. If L10H10's Hydra spike were entirely a softmax
-artifact ($\rho \approx 1$), then the head would not be causally necessary for
+artifact ($\rho \approx 1$), then the head would not causally contribute to
 recovery, and its ablation would not further degrade model performance. Our
-four-pass causal validation refutes this scenario conclusively: Pass C
+four-pass causal validation qualifies this response: Pass C
 demonstrates that removing L10H10 after primary ablation causes an additional
 10.83\% degradation in logit difference ($2.1055 \to 1.8775$), confirming that
-the head's contribution is genuinely causal and not merely an epiphenomenal
-redistribution of normalization mass.
+the head's contribution is causal under the tested intervention and not merely an
+epiphenomenal redistribution of normalization mass.
 
 \subsection{Implications for Circuit Analysis Methodology}
 
@@ -646,18 +686,18 @@ mechanistic interpretability community:
 
 \paragraph{1. Logit-level intervention is necessary for head-level attribution.}
 Attention pattern analysis at the post-softmax level (e.g., observing changes
-in $A^{l,h}[\text{end}, IO]$) is insufficient to distinguish active from passive
-contributions. Rigorous causal claims about backup head function require
-pre-softmax intervention, as provided by FALI.
+in $A^{l,h}[\text{end}, IO]$) is insufficient to distinguish target-logit from
+background-logit pre-softmax contributions. Rigorous causal claims about backup
+head function require pre-softmax intervention, as provided by FALI.
 
-\paragraph{2. LayerNorm must be treated as an active confound.}
+\paragraph{2. LayerNorm must be treated as a first-order confound.}
 The LayerNorm-mediated volume surge is not a second-order effect but a first-order
 mechanism that modifies the absolute magnitude of all downstream attention logits.
 Interpretability analyses that do not control for LayerNorm interactions
 may systematically misattribute the sources of attention pattern changes.
 
 \paragraph{3. LayerNorm scale drop represents a non-negligible confound.}
-Across the prominent Layer 10 backup ensemble, standard ablation metrics overestimate the active routing component by 17.8\% to 26.8\% (mean $\approx 22.8\%$) due to the passive scale-drop amplification confound. However, the fact that over 75\% of the observed attention shift remains robust under exact scale-frozen counterfactual conditions, coupled with highly significant Query-Key spatial contraction, confirms that transformer circuits maintain genuine, active redundant pathways that mobilize upon upstream component failure.
+Across the prominent Layer 10 backup ensemble, standard ablation metrics overestimate the scale-frozen routing component by 17.8\% to 26.8\% (mean $\approx 22.8\%$) due to the passive scale-drop amplification confound. However, the fact that a robust scale-frozen routing component remains under exact scale-frozen counterfactual conditions, coupled with highly significant Query-Key spatial contraction, supports the presence of intervention-specific compensatory pathways in this model and task.
 
 \paragraph{4. Standard causal tracing may misidentify ``important'' heads.}
 If passive softmax artifacts can inflate the apparent Hydra response of
@@ -667,47 +707,79 @@ surge is more pronounced. FALI or analogous logit-level decomposition should be
 applied as a validity check in circuit identification studies.
 
 % ===================================================================
+\section{Limitations}
+\label{sec:limitations}
+
+While our multi-method causal and geometric analysis provides robust evidence for backup self-repair under the tested primary-ablation intervention, several structural limitations bound the scope and generalizability of our findings:
+
+\begin{enumerate}
+  \item \textbf{Single Model Architecture:} All experiments are conducted exclusively on a single 12-layer transformer model: \texttt{gpt2-small}. The extent to which these active compensatory circuits scale or reorganize in larger model families (e.g., Pythia, Gemma, LLaMA) remains to be empirically verified.
+  \item \textbf{Single Task and Dataset Cohort:} Our circuit analysis is restricted to the name-copying circuit of the Indirect Object Identification (IOI) task family, evaluated on an $N=200$ mixed-template cohort. Testing on other sequence benchmarks (e.g., factual recall, modular arithmetic, translation) is required to generalize the circuit dynamics.
+  \item \textbf{Targeted Primary Ablation:} Our interventions focus specifically on the ablation of the primary name mover heads \texttt{L9H9} and \texttt{L10H0}. While zero, position-wise mean, and resampling ablation controls confirm that the self-repair signal is not a zero-ablation-specific anomaly, these controls do not mathematically establish a general backup mechanism across arbitrary component failures.
+  \item \textbf{Intervention Specificity:} Our causal claims are mathematically and physically tied to the specific hook-patching configurations implemented. While we verify that the ablated-run activations of \texttt{L10H10} explain $44.0\%$ of downstream logit recovery, the remaining $56.0\%$ of the degradation is likely mediated by other backup heads (e.g., in Layer 11), which were not concurrently isolated.
+  \item \textbf{Absence of Direct V/OV Path Patching:} While we thoroughly analyze the Query-Key attention pattern mediation, direct path patching of the Value ($V$) or Output-Value ($OV$) computational path represents future work, leaving the semantic content of the written signals partially uncharacterized.
+\end{enumerate}
+
+Table~\ref{tab:claims_evidence} presents a summary of our primary research claims, their key causal evidence, empirical strength, and structural limitations.
+
+\begin{table}[!htbp]
+  \centering
+  \caption{Claims, Causal Evidence, and Strength Matrix}
+  \label{tab:claims_evidence}
+  \small
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{lp{6cm}ll}
+    \toprule
+    \textbf{Claim} & \textbf{Key Causal Evidence} & \textbf{Strength} & \textbf{Limitation} \\
+    \midrule
+    \textbf{Robust Attention Spike} & L10H10 attention spike is robust across zero ($+0.1893$), mean ($+0.1616$), and resample ($+0.1224$) ablations ($91.5\%$--$100\%$ positive). & Extremely Strong & $N=200$ cohort size. \\
+    \textbf{Target-Logit Dominance} & Shapley shows target pre-softmax shift is $+0.2222$ ($117.4\%$ fraction); background opposes shift in $96.0\%$ of samples ($-17.4\%$ fraction). & Extremely Strong & Alignment-dependent. \\
+    \textbf{Query-Driven Alignment} & QK delta ($+0.9632$) is driven by query rotation ($+0.9770$ / $101.4\%$) and directional cosine similarity contraction ($+0.7418$ / $77.0\%$). & Very Strong & Invariant to value path. \\
+    \textbf{Causal Downstream Rescue} & Double ablation causes $0.2281$ logit drop. L10H10 pattern/z necessity explain $43.6\%$ / $44.0\%$ of the degradation; L10H2, L10H3, and L10H6 are additional contributing Layer 10 heads; L10H5 is a low-effect control; L10H7 is anti-backup/suppressor-like under this intervention. & Strong & No direct V/OV path patching. \\
+    \textbf{Cross-Layer Trigger} & Upstream L9H9 ablation alone triggers full L10H10 spike ($+0.1893$); intra-layer L10H0 ablation produces zero shift ($0.0000$). & Extremely Strong & Task-specific pathway. \\
+    \bottomrule
+  \end{tabular}%
+  }
+\end{table}
+
+% ===================================================================
 \section{Conclusion}
 \label{sec:conclusion}
 % ===================================================================
 
 We have presented the \textbf{Frozen Attention Logit Intervention (FALI)}, a
 novel mechanistic intervention that surgically decomposes the Hydra Effect into
-its active (algorithmic routing) and passive (softmax denominator shift)
-components. Applied to GPT-2 Small on the IOI benchmark with a cohort of 200
-samples across all 144 attention heads, our method yields three principal
-findings:
+its target-logit and background-logit pre-softmax attention contributions. Applied
+to GPT-2 Small on the IOI benchmark with a cohort of 200 samples across all 144
+attention heads, our method yields several principal findings that outline a structured result chain:
 
 \begin{enumerate}
-  \item \textbf{Active self-repair is the dominant mechanism in the Layer 10 backup ensemble.} While passive scale-drop amplification accounts for a non-negligible 24.3\% of L10H10's attention shift (reducing its delta from $+0.1893 \to +0.1433$ under the scale-frozen counterfactual), the bulk ($75.7\%$) represents active, genuine self-repair driven by physical vector realignment inside the attention manifold, as confirmed by highly significant QK cosine similarity tracking ($p = 2.32 \times 10^{-109}$).
+  \item \textbf{Ablation controls verify the robustness of the backup response.} Zero, position-wise mean, and resampling ablation controls confirm that L10H10's attention probability spike is not a zero-ablation-specific anomaly but survives under physically exact, manifold-respecting counterfactual conditions.
 
-  \item \textbf{Standard ablation metrics systematically overestimate active backup compensation due to passive scaling.} Across the four prominent backup heads in Layer 10 (L10H10, L10H2, L10H3, L10H6), the passive volume surge accounts for 17.8\% to 26.8\% (mean $\approx 22.8\%$) of the observed attention spikes. This establishes the LayerNorm volume surge as a first-order, non-negligible confound in standard interpretability analyses that must be controlled for.
+  \item \textbf{Target-logit attention contributions dominate in the Layer 10 backup ensemble.} Shapley decomposition reveals that L10H10's $+0.1893$ attention spike is dominated by the IO-target attention-logit contribution ($+0.2222$), while background-logit changes actively oppose the spike in $96.0\%$ of samples ($-17.4\%$ fraction).
 
-  \item \textbf{Self-repair is a causally necessary, architecturally robust
-    mechanism.} Four-pass causal validation confirms that L10H10's compensation
-    is not illusory: its ablation after primary-head failure causes an additional
-    10.83\% degradation in model performance ($\Delta_\text{logit}: 2.1055 \to 1.8775$),
-    confirming its functional indispensability in the recovery circuit. The head's
-    isolation ablation (Pass D, $-7.98\%$ from clean baseline) confirms its role
-    as a context-sensitive backup rather than a primary processor.
+  \item \textbf{Query-driven and cosine-alignment-driven mechanisms shape the representation geometry.} Cosine similarity tracking ($p = 2.32 \times 10^{-109}$) and QK decomposition show that this pre-softmax score increase is primarily query-driven and largely cosine-alignment-driven, reflecting targeted spatial realignment in the attention manifold.
+
+  \item \textbf{L10H10 causally contributes to recovery under the tested primary-ablation intervention.} Four-pass causal validation shows that L10H10's attention-pattern change causally contributes to downstream $IO - S$ logit recovery under the tested primary-ablation intervention, explaining about $43.6\%$ of the zero-ablation degradation under pattern necessity. The head's isolation ablation (Pass D, $-7.98\%$ from clean baseline) confirms its role as a context-sensitive backup rather than a primary processor.
 \end{enumerate}
 
-Together, these results support a paradigm shift in how transformer
-self-repair should be conceptualized: backup components are not passive
-probabilistic beneficiaries of normalization artifacts but active, algorithmically-
-engaged functional repair mechanisms whose true computational contribution has
-been systematically obscured by the non-local coupling introduced by the softmax
-denominator. The FALI framework provides a principled, generalizable methodology
-for correcting this bias, and we recommend its adoption as a standard validity
-check in mechanistic interpretability circuit analysis.
+Separately, our physical scale-freezing diagnostics separate denominator scaling from logit routing: a forward-pass scale-frozen counterfactual establishes that passive scale-drop amplification accounts for 24.3\% of L10H10's observed attention spike, reducing it to $+0.1433$. This confirms that physical scale volume surges systematically inflate standard metrics across the Layer 10 backup ensemble by 17.8\% to 26.8\% (mean $\approx 22.8\%$), showing that LayerNorm surges represent important, non-negligible scale confounds that should be controlled for as a separate diagnostic.
+
+Together, these results support a refined perspective in how transformer
+self-repair should be conceptualized: the tested backup heads include target-directed
+attention-logit changes that cannot be explained by softmax normalization alone,
+whose true computational contribution has been systematically
+obscured by the non-local coupling introduced by the softmax denominator. The
+FALI framework provides a principled, generalizable methodology for correcting
+this bias, and we recommend its adoption as a standard validity check in
+mechanistic interpretability circuit analysis.
 
 Future work should extend FALI to: (1) other tasks and model architectures
 (e.g., Pythia, Gemma, LLaMA) to assess the generality of active self-repair;
-(2) mean-ablation and resampling-ablation conditions to test whether PSDS effects
-are reduced when ablations remain closer to the data manifold \citep{chan2022causal};
-(3) gradient-based attribution methods (e.g., attribution patching
-\citep{nanda2023attribution}) to provide a computationally efficient approximation
-of FALI at scale.
+(2) direct Value (V) and Output-Value (OV) path patching to characterize the
+semantic content of the written backup signals; (3) gradient-based attribution
+methods (e.g., attribution patching \citep{nanda2023attribution}) to provide a
+computationally efficient approximation of FALI at scale.
 
 % ===================================================================
 \section*{Acknowledgments}
