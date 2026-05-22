@@ -1,4 +1,4 @@
-# Active Self-Repair in Transformer Attention Circuits: Disentangling Algorithmic Routing from Softmax Artifacts
+# When Attention Repairs Itself: A Mechanistic Study of Backup Heads in GPT-2
 
 This repository contains the complete, reproducible research pipeline for reverse-engineering downstream "backup" self-repair behavior (the **Hydra Effect**) in transformer attention circuits under the ablation of primary name movers. 
 
@@ -86,7 +86,7 @@ The pipeline generates and populates the following directory structure:
   - `fali_rigorous_validation.csv`
   - `scale_evaluation_results.json`
 - **`figures/`**: Diagnostic visualizations.
-  - `cossim_shift_lollipop.png`: QK cosine similarity shifts across Layer 10 heads showing magnitude-independent spatial contraction.
+  - `cossim_shift_lollipop.png`: QK cosine similarity shifts across Layer 10 heads showing magnitude-independent directional realignment.
   - `causal_shift_plot.png`: Trajectory plots of clean vs. ablated attention probabilities for Layers 9--11.
   - `circuit_disentanglement_plot.png`: Scatter plot mapping standard attention spikes against FALI target-logit Shapley contributions, showing that they plot above the diagonal.
   - `isolation_bar_chart.png`: Trigger isolation bar chart comparing sequential upstream and intra-layer ablations.
@@ -110,7 +110,7 @@ Attention probability shifts are dominated by target-logit pre-softmax score cha
 The target-logit score increase ($+0.9632$ score delta) is query-driven and alignment-driven:
 - **Query Shapley Contribution**: $+0.9770$ (**$101.4\%$** of the score delta), reflecting query vector rotation.
 - **Key Shapley Contribution**: $-0.0137$ (**$-1.4\%$** of the delta).
-- **Directional Cosine Shapley**: $+0.7418$ (**$77.0\%$** of the delta), indicating spatial Q-K cosine contraction.
+- **Directional Cosine Shapley**: $+0.7418$ (**$77.0\%$** of the delta), indicating directional realignment in QK space.
 - **Norm Shapley**: $+0.2214$ (**$23.0\%$** of the delta).
 
 ### 4. Output-Level Causal Mediation
@@ -143,9 +143,9 @@ In GPT-2 Small on a 200-example mixed-template IOI cohort, ablating L9H9 and L10
 
 | Claim | Key Causal Evidence | Empirical Strength | Structural Limitation |
 | :--- | :--- | :--- | :--- |
-| **Robust Downstream Attention Spike** | `L10H10` attention spike is robust across zero (`+0.1893`), mean (`+0.1616`), and resample (`+0.1224`) ablation paradigms, occurring in $91.5\%$--$100\%$ of cohort samples. | **Extremely Strong** | Evaluated on $N=200$ mixed-templates in GPT-2 Small only. |
-| **Target-Logit Dominance** | Shapley shows target pre-softmax shift is $+0.2222$ ($117.4\%$ fraction) while background opposes the spike ($-17.4\%$ fraction, opposing in $96.0\%$ of samples). Absolute path disagreement is extremely low ($0.69\%$). | **Extremely Strong** (Pre-softmax mathematical bound) | Dependent on correct token alignment in the query/key projection. |
-| **Query-Driven Alignment Realignment** | QK score delta ($+0.9632$) is driven by query Shapley ($+0.9770$ / $101.4\%$ fraction) and directional Q-K cosine alignment contraction ($+0.7418$ / $77.0\%$ fraction). | **Very Strong** (Magnitude-independent cosine shift) | Focused on `IO` key position and `end` query position. |
+| **Robust Downstream Attention Spike** | `L10H10` attention spike is robust across zero (`+0.1893`), mean (`+0.1616`), and resample (`+0.1224`) ablation paradigms, occurring in $91.5\%$--$100\%$ of cohort samples. | **Strong but intervention-specific** | Evaluated on $N=200$ mixed-templates in GPT-2 Small only. |
+| **Target-Logit Dominance** | Shapley shows target pre-softmax shift is $+0.2222$ ($117.4\%$ fraction) while background opposes the spike ($-17.4\%$ fraction, opposing in $96.0\%$ of samples). Absolute path disagreement is extremely low ($0.69\%$). | **Strong in this setting** (Pre-softmax mathematical bound) | Dependent on correct token alignment in the query/key projection. |
+| **Query-Driven Alignment Realignment** | QK score delta ($+0.9632$) is driven by query Shapley ($+0.9770$ / $101.4\%$ fraction) and directional Q-K cosine alignment realignment ($+0.7418$ / $77.0\%$ fraction). | **Strong in this setting** (Magnitude-independent cosine shift) | Focused on `IO` key position and `end` query position. |
 | **Causal Downstream Rescue** | Double ablation causes $0.2281$ logit drop. L10H10 pattern/z necessity explain $43.6\%$ / $44.0\%$ of the degradation; L10H2, L10H3, and L10H6 are additional contributing Layer 10 heads; L10H5 is a low-effect control; L10H7 is anti-backup/suppressor-like under this intervention. | **Strong** (Causally verified via multi-pass hook patching) | Value/OV direct path patching was not performed; remaining degradation (~56%) is mediated by other backup heads. |
-| **Cross-Layer Sequential Trigger** | Upstream L9H9 ablation alone reproduces the full L10H10 spike ($+0.1893$), while intra-layer partner L10H0 ablation produces zero change ($0.0000$), showing that L10H10’s attention-pattern shift is triggered by upstream L9H9 ablation, not by same-layer L10H0 z-ablation. Because same-layer attention heads compute in parallel, the absence of a same-layer L10H0 z-ablation effect is partly architecturally expected. | **Extremely Strong** (Surgical double/single causal isolation) | Specific to the sequential hierarchy of Layer 9 and Layer 10. |
+| **Cross-Layer Sequential Trigger** | Upstream L9H9 ablation alone reproduces the full L10H10 spike ($+0.1893$), while intra-layer partner L10H0 ablation produces zero change ($0.0000$), showing that L10H10’s attention-pattern shift is triggered by upstream L9H9 ablation, not by same-layer L10H0 z-ablation. Because same-layer attention heads compute in parallel, the absence of a same-layer L10H0 z-ablation effect is partly architecturally expected. | **Strong but intervention-specific** (Surgical double/single causal isolation) | Specific to the sequential hierarchy of Layer 9 and Layer 10. |
 
