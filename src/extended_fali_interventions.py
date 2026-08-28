@@ -25,14 +25,14 @@ CellTable = Dict[FactorState, float]
 
 @dataclass(frozen=True)
 class ScorePartition:
-    """Boolean masks over [query, key] for T / R / O players."""
+    """Boolean masks over [batch, query, key] for T / R / O players."""
 
-    valid_mask: torch.Tensor  # [Q, K]
-    target_mask: torch.Tensor  # [Q, K]
-    competing_mask: torch.Tensor  # [Q, K]
-    other_query_mask: torch.Tensor  # [Q, K]
-    final_query: int
-    target_key: int
+    valid_mask: torch.Tensor  # [B, Q, K]
+    target_mask: torch.Tensor  # [B, Q, K]
+    competing_mask: torch.Tensor  # [B, Q, K]
+    other_query_mask: torch.Tensor  # [B, Q, K]
+    final_query: torch.Tensor  # [B]
+    target_key: torch.Tensor  # [B]
 
 
 def build_causal_valid_mask(seq_len: int, device: torch.device | None = None) -> torch.Tensor:
@@ -42,12 +42,76 @@ def build_causal_valid_mask(seq_len: int, device: torch.device | None = None) ->
     return k_idx <= q_idx
 
 
-def build_padding_valid_mask(seq_len: int, valid_len: int, device: torch.device | None = None) -> torch.Tensor:
-    """Valid tokens are positions < valid_len."""
-    if not (0 <= valid_len <= seq_len):
-        raise ValueError(f"valid_len {valid_len} out of range for seq_len {seq_len}")
-    pos = torch.arange(seq_len, device=device)
-    return pos.unsqueeze(1) < valid_len
+def build_batched_score_partition(
+    seq_len: int,
+    final_queries: torch.Tensor,
+    target_keys: torch.Tensor,
+    *,
+    valid_lengths: torch.Tensor | None = None,
+    device: torch.device | None = None,
+) -> ScorePartition:
+    """
+    Build structural T/R/O masks for a batch of examples.
+
+    For example b, valid[b,q,k] iff q < valid_length[b] AND k <= q.
+    Default valid_length[b] = final_queries[b] + 1.
+    """
+    final_queries = final_queries.to(device=device, dtype=torch.long).reshape(-1)
+    target_keys = target_keys.to(device=device, dtype=torch.long).reshape(-1)
+    batch = final_queries.numel()
+    if target_keys.numel() != batch:
+        raise ValueError("final_queries and target_keys must have the same batch size")
+    if batch == 0:
+        raise ValueError("batch size must be positive")
+
+    if valid_lengths is None:
+        valid_lengths = final_queries + 1
+    else:
+        valid_lengths = valid_lengths.to(device=device, dtype=torch.long).reshape(-1)
+        if valid_lengths.numel() != batch:
+            raise ValueError("valid_lengths batch size mismatch")
+
+    causal = build_causal_valid_mask(seq_len, device=device)  # [Q,K]
+    q_idx = torch.arange(seq_len, device=device)
+    valid_mask = torch.zeros(batch, seq_len, seq_len, dtype=torch.bool, device=device)
+    target_mask = torch.zeros(batch, seq_len, seq_len, dtype=torch.bool, device=device)
+    competing_mask = torch.zeros(batch, seq_len, seq_len, dtype=torch.bool, device=device)
+    other_query_mask = torch.zeros(batch, seq_len, seq_len, dtype=torch.bool, device=device)
+
+    for b in range(batch):
+        fq = int(final_queries[b].item())
+        tk = int(target_keys[b].item())
+        vl = int(valid_lengths[b].item())
+        if not (0 <= fq < seq_len and 0 <= tk < seq_len):
+            raise ValueError(f"example {b}: final_query/target_key out of range for seq_len={seq_len}")
+        if not (0 < vl <= seq_len):
+            raise ValueError(f"example {b}: valid_length {vl} out of range")
+
+        valid = causal & (q_idx.unsqueeze(1) < vl)
+        if not bool(valid[fq, tk].item()):
+            raise ValueError(f"example {b}: target coordinate is not structurally valid")
+
+        valid_mask[b] = valid
+        target_mask[b, fq, tk] = True
+
+        final_row = valid[fq].clone()
+        competing = torch.zeros(seq_len, seq_len, dtype=torch.bool, device=device)
+        competing[fq] = final_row
+        competing[fq, tk] = False
+        competing_mask[b] = competing
+
+        other = valid.clone()
+        other[fq, :] = False
+        other_query_mask[b] = other
+
+    return ScorePartition(
+        valid_mask=valid_mask,
+        target_mask=target_mask,
+        competing_mask=competing_mask,
+        other_query_mask=other_query_mask,
+        final_query=final_queries,
+        target_key=target_keys,
+    )
 
 
 def build_score_partition_masks(
@@ -58,46 +122,37 @@ def build_score_partition_masks(
     valid_len: int | None = None,
     device: torch.device | None = None,
 ) -> ScorePartition:
-    """
-    Build structural T/R/O masks for one candidate head score tensor.
+    """Single-example convenience wrapper around build_batched_score_partition."""
+    fq = torch.tensor([final_query], device=device, dtype=torch.long)
+    tk = torch.tensor([target_key], device=device, dtype=torch.long)
+    vl = None if valid_len is None else torch.tensor([valid_len], device=device, dtype=torch.long)
+    return build_batched_score_partition(seq_len, fq, tk, valid_lengths=vl, device=device)
 
-    T: (final_query, target_key)
-    R: other valid keys in final_query row
-    O: valid keys in all other query rows
-    """
-    if not (0 <= final_query < seq_len and 0 <= target_key < seq_len):
-        raise ValueError(f"final_query/target_key out of range for seq_len={seq_len}")
-    causal = build_causal_valid_mask(seq_len, device=device)
-    if valid_len is None:
-        valid = causal.clone()
-    else:
-        valid = causal & build_padding_valid_mask(seq_len, valid_len, device=device)
 
-    target_mask = torch.zeros(seq_len, seq_len, dtype=torch.bool, device=device)
-    target_mask[final_query, target_key] = True
-    if not bool(valid[final_query, target_key].item()):
-        raise ValueError("target coordinate is not structurally valid")
-
-    final_row = valid[final_query].clone()
-    competing_mask = torch.zeros(seq_len, seq_len, dtype=torch.bool, device=device)
-    competing_mask[final_query] = final_row
-    competing_mask[final_query, target_key] = False
-
-    other_query_mask = valid.clone()
-    other_query_mask[final_query, :] = False
-
-    return ScorePartition(
-        valid_mask=valid,
-        target_mask=target_mask,
-        competing_mask=competing_mask,
-        other_query_mask=other_query_mask,
-        final_query=final_query,
-        target_key=target_key,
-    )
+def partition_diagnostics(partition: ScorePartition) -> Dict[str, List[int]]:
+    """Per-example partition coverage, overlap, and target counts."""
+    batch = partition.valid_mask.shape[0]
+    coverage_error: List[int] = []
+    overlap_count: List[int] = []
+    target_count: List[int] = []
+    for b in range(batch):
+        t = partition.target_mask[b]
+        r = partition.competing_mask[b]
+        o = partition.other_query_mask[b]
+        v = partition.valid_mask[b]
+        union = t | r | o
+        coverage_error.append(int((union ^ v).sum().item()))
+        overlap_count.append(int((t & r).sum().item() + (t & o).sum().item() + (r & o).sum().item()))
+        target_count.append(int(t.sum().item()))
+    return {
+        "coverage_error_per_example": coverage_error,
+        "overlap_count_per_example": overlap_count,
+        "target_count_per_example": target_count,
+    }
 
 
 def validate_score_partition(partition: ScorePartition) -> None:
-    """Require T,R,O partition valid_mask exactly; target structurally valid."""
+    """Require T,R,O partition valid_mask exactly per example; one T coordinate each."""
     t = partition.target_mask
     r = partition.competing_mask
     o = partition.other_query_mask
@@ -109,8 +164,15 @@ def validate_score_partition(partition: ScorePartition) -> None:
     union = t | r | o
     if not torch.equal(union, v):
         raise ValueError("T ∪ R ∪ O != valid_score_mask")
-    if not bool(v[partition.final_query, partition.target_key].item()):
-        raise ValueError("target coordinate not in valid mask")
+
+    batch = v.shape[0]
+    for b in range(batch):
+        fq = int(partition.final_query[b].item())
+        tk = int(partition.target_key[b].item())
+        if not bool(v[b, fq, tk].item()):
+            raise ValueError(f"example {b}: target coordinate not in valid mask")
+        if int(t[b].sum().item()) != 1:
+            raise ValueError(f"example {b}: T must have exactly one coordinate")
 
 
 def build_hybrid_scores(
@@ -131,13 +193,19 @@ def build_hybrid_scores(
         raise ValueError("scores_a and scores_b shape mismatch")
     if scores_a.ndim != 3:
         raise ValueError(f"expected scores [B,Q,K], got {scores_a.shape}")
+    if scores_a.shape[0] != partition.valid_mask.shape[0]:
+        raise ValueError("scores batch size must match partition batch size")
     t_on, r_on, o_on, _, _ = state
     out = scores_a.clone()
-    for bit, mask in ((t_on, partition.target_mask), (r_on, partition.competing_mask), (o_on, partition.other_query_mask)):
+    for bit, mask in (
+        (t_on, partition.target_mask),
+        (r_on, partition.competing_mask),
+        (o_on, partition.other_query_mask),
+    ):
         src = scores_b if bit else scores_a
-        out = torch.where(mask.unsqueeze(0), src, out)
+        out = torch.where(mask, src, out)
     invalid = ~partition.valid_mask
-    out = out.masked_fill(invalid.unsqueeze(0), mask_fill)
+    out = out.masked_fill(invalid, mask_fill)
     return out
 
 
@@ -151,14 +219,18 @@ def masked_softmax(
     Softmax over keys per query on valid coordinates only.
 
     scores: [batch, query, key]
-    valid_mask: [query, key]
+    valid_mask: [batch, query, key] or [query, key] (broadcast over batch)
     """
     if scores.ndim != 3:
         raise ValueError(f"expected scores [B,Q,K], got {scores.shape}")
+    if valid_mask.ndim == 2:
+        valid_mask = valid_mask.unsqueeze(0).expand(scores.shape[0], -1, -1)
+    if valid_mask.shape != scores.shape:
+        raise ValueError("valid_mask must be [B,Q,K] or [Q,K] matching scores")
     invalid = ~valid_mask
-    masked = scores.masked_fill(invalid.unsqueeze(0), mask_fill)
+    masked = scores.masked_fill(invalid, mask_fill)
     probs = torch.softmax(masked, dim=-1)
-    probs = probs.masked_fill(invalid.unsqueeze(0), 0.0)
+    probs = probs.masked_fill(invalid, 0.0)
     return probs
 
 
@@ -224,6 +296,7 @@ def quotient_h_values_from_cell_table(table: CellTable) -> Dict[str, float]:
 
     SCORE=1 means T=R=O=1; P player corresponds to SCORE block.
     """
+
     def pick(score: int, v: int, c: int) -> float:
         state: FactorState = (score, score, score, v, c)
         return table[state]

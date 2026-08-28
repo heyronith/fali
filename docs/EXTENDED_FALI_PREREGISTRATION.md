@@ -150,3 +150,30 @@ thresholds post hoc, do not proceed to GPT-2.
 - `tests/test_extended_fali_interventions.py`
 - `tests/test_extended_fali_synthetic_transformer.py`
 
+---
+
+## EF-1R — Batch-safe partitions + independent endpoint validation (frozen before implementation)
+
+EF-1R was required by research-lead code review because EF-1 used a batch-shared
+target partition and endpoint checks were not fully independent. No
+pretrained-model experiment had begun.
+
+### Changes (implementation repair, not new science)
+
+| Item | Requirement |
+|------|-------------|
+| Partition masks | `[B,Q,K]` per example; `build_batched_score_partition(...)` |
+| Validity | `valid[b,q,k]` iff `q < valid_length[b]` AND `k <= q` |
+| Level B targets | Per-example `target_key[b]` from argmax final-row pattern mass |
+| Independent endpoints | Four direct passes (A/B × present/zero); compare to U(00000)/U(11111) |
+| Endpoint activation | All-A/all-B hybrid z matches cached present-run z (≤ 2e−6) |
+| Injection scope | Non-candidate heads unchanged at hook_z (≤ 1e−7) |
+| Live leak | Separate V, Q, Q+V perturbations (≤ 1e−6 each) |
+| Level A batch test | 3 examples with distinct final_query/target_key/valid_length |
+
+Thresholds unchanged from EF-1 Level A/B tables above.
+
+### Failure policy
+
+Same as EF-1: any primary criterion fails → STOP; do not patch thresholds post hoc.
+

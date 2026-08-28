@@ -1,5 +1,6 @@
 {
-  "generated_at_utc": "2026-08-28T19:27:36.261721+00:00",
+  "generated_at_utc": "2026-08-28T19:35:37.064768+00:00",
+  "ef1r_note": "EF-1R was required by research-lead code review because EF-1 used a batch-shared target partition and endpoint checks were not fully independent. No pretrained-model experiment had begun.",
   "seeds": {
     "ef1_seed": 4242
   },
@@ -71,6 +72,10 @@
     },
     "endpoint_reconstruction_max": 0.0,
     "quotient_bridge_max": 1.1102230246251565e-16,
+    "batched_partition_reconstruction": {
+      "all_a_max": 0.0,
+      "all_b_max": 0.0
+    },
     "checks": [
       {
         "criterion": "level_a_single_channel",
@@ -151,6 +156,14 @@
         "criterion": "level_a_quotient_bridge",
         "pass": true,
         "detail": 1.1102230246251565e-16
+      },
+      {
+        "criterion": "level_a_batched_partition",
+        "pass": true,
+        "detail": {
+          "all_a_max": 0.0,
+          "all_b_max": 0.0
+        }
       }
     ]
   },
@@ -172,13 +185,62 @@
       "z_b": 0.0,
       "masked_prob_max": 0.0
     },
-    "endpoints": {
+    "batch_partition": {
+      "target_keys": [
+        4,
+        3,
+        4
+      ],
+      "final_queries": [
+        5,
+        5,
+        5
+      ],
+      "valid_lengths": [
+        6,
+        6,
+        6
+      ],
+      "coverage_error_per_example": [
+        0,
+        0,
+        0
+      ],
+      "overlap_count_per_example": [
+        0,
+        0,
+        0
+      ],
+      "target_count_per_example": [
+        1,
+        1,
+        1
+      ]
+    },
+    "independent_endpoints": {
+      "intact_direct": 0.4550457000732422,
+      "conditional_direct": -0.08568350225687027,
+      "conditional_gain_direct": -0.5407292023301125,
+      "U00000": 0.4550457000732422,
+      "U11111": -0.08568350225687027,
       "u00000_vs_intact": 0.0,
       "u11111_vs_conditional": 0.0,
       "gain_vs_delta_u": 0.0
     },
-    "no_live_leak": 0.0,
-    "quotient_bridge_max": 1.734723475976807e-18,
+    "endpoint_activation": {
+      "all_a_z_error": 0.0,
+      "all_b_z_error": 0.0
+    },
+    "injection_scope": {
+      "candidate_z_error": 0.0,
+      "noncandidate_z_error": 0.0
+    },
+    "live_leak": {
+      "v_leak_error": 0.0,
+      "q_leak_error": 0.0,
+      "qv_leak_error": 0.0
+    },
+    "quotient_bridge_max": 0.0,
     "checks": [
       {
         "criterion": "level_b_score_pattern_z",
@@ -192,23 +254,84 @@
         }
       },
       {
-        "criterion": "level_b_endpoints",
+        "criterion": "level_b_batch_partition",
         "pass": true,
         "detail": {
+          "target_keys": [
+            4,
+            3,
+            4
+          ],
+          "final_queries": [
+            5,
+            5,
+            5
+          ],
+          "valid_lengths": [
+            6,
+            6,
+            6
+          ],
+          "coverage_error_per_example": [
+            0,
+            0,
+            0
+          ],
+          "overlap_count_per_example": [
+            0,
+            0,
+            0
+          ],
+          "target_count_per_example": [
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      {
+        "criterion": "level_b_independent_endpoints",
+        "pass": true,
+        "detail": {
+          "intact_direct": 0.4550457000732422,
+          "conditional_direct": -0.08568350225687027,
+          "conditional_gain_direct": -0.5407292023301125,
+          "U00000": 0.4550457000732422,
+          "U11111": -0.08568350225687027,
           "u00000_vs_intact": 0.0,
           "u11111_vs_conditional": 0.0,
           "gain_vs_delta_u": 0.0
         }
       },
       {
-        "criterion": "level_b_no_live_leak",
+        "criterion": "level_b_endpoint_activation",
         "pass": true,
-        "detail": 0.0
+        "detail": {
+          "all_a_z_error": 0.0,
+          "all_b_z_error": 0.0
+        }
+      },
+      {
+        "criterion": "level_b_injection_scope",
+        "pass": true,
+        "detail": {
+          "candidate_z_error": 0.0,
+          "noncandidate_z_error": 0.0
+        }
+      },
+      {
+        "criterion": "level_b_live_leak",
+        "pass": true,
+        "detail": {
+          "v_leak_error": 0.0,
+          "q_leak_error": 0.0,
+          "qv_leak_error": 0.0
+        }
       },
       {
         "criterion": "level_b_quotient_bridge",
         "pass": true,
-        "detail": 1.734723475976807e-18
+        "detail": 0.0
       }
     ]
   },

@@ -12,16 +12,20 @@ REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
 from extended_fali_interventions import (  # noqa: E402
+    build_batched_score_partition,
     build_causal_valid_mask,
     build_hybrid_scores,
     build_score_partition_masks,
     enumerate_extended_fali_cells,
     masked_softmax,
+    partition_diagnostics,
     reconstruct_z_from_scores_values,
     validate_score_partition,
 )
 from extended_fali_synthetic import (  # noqa: E402
     LEVEL_A_CASES,
+    batched_hybrid_reconstruction_errors,
+    build_level_a_batched_partition_system,
     build_level_a_tc_interaction,
     single_channel_owen_check,
 )
@@ -30,7 +34,24 @@ from extended_fali_synthetic import (  # noqa: E402
 def test_partition_disjoint_coverage():
     part = build_score_partition_masks(6, final_query=5, target_key=3, valid_len=6)
     validate_score_partition(part)
-    assert part.valid_mask.sum() == part.target_mask.sum() + part.competing_mask.sum() + part.other_query_mask.sum()
+    diag = partition_diagnostics(part)
+    assert diag["coverage_error_per_example"] == [0]
+    assert diag["overlap_count_per_example"] == [0]
+    assert diag["target_count_per_example"] == [1]
+
+
+def test_batched_partition_three_examples():
+    part = build_batched_score_partition(
+        6,
+        torch.tensor([3, 5, 4]),
+        torch.tensor([1, 4, 0]),
+        valid_lengths=torch.tensor([4, 6, 5]),
+    )
+    validate_score_partition(part)
+    diag = partition_diagnostics(part)
+    assert all(e == 0 for e in diag["coverage_error_per_example"])
+    assert all(e == 0 for e in diag["overlap_count_per_example"])
+    assert diag["target_count_per_example"] == [1, 1, 1]
 
 
 def test_variable_length_padding():
@@ -39,7 +60,7 @@ def test_variable_length_padding():
     invalid = ~part.valid_mask
     scores = torch.randn(1, 8, 8)
     probs = masked_softmax(scores, part.valid_mask)
-    assert float(probs.masked_select(invalid.unsqueeze(0)).max()) <= 1e-8
+    assert float(probs.masked_select(invalid).max()) <= 1e-8
 
 
 def test_thirty_two_cells():
@@ -78,10 +99,10 @@ def test_hybrid_reconstruction_all_a_all_b():
     hs_a = build_hybrid_scores(sa, sb, part, (0, 0, 0, 0, 0))
     hs_b = build_hybrid_scores(sa, sb, part, (1, 1, 1, 0, 0))
     valid = part.valid_mask
-    sa_m = sa.masked_fill(~valid.unsqueeze(0), float("-inf"))
-    sb_m = sb.masked_fill(~valid.unsqueeze(0), float("-inf"))
-    diff_a = (hs_a - sa_m).masked_fill(~valid.unsqueeze(0), 0.0)
-    diff_b = (hs_b - sb_m).masked_fill(~valid.unsqueeze(0), 0.0)
+    sa_m = sa.masked_fill(~valid, float("-inf"))
+    sb_m = sb.masked_fill(~valid, float("-inf"))
+    diff_a = (hs_a - sa_m).masked_fill(~valid, 0.0)
+    diff_b = (hs_b - sb_m).masked_fill(~valid, 0.0)
     assert float(diff_a.abs().max()) < 1e-12
     assert float(diff_b.abs().max()) < 1e-12
     pa = masked_softmax(hs_a, valid)
@@ -89,6 +110,17 @@ def test_hybrid_reconstruction_all_a_all_b():
     za = reconstruct_z_from_scores_values(pa, va)
     zb = reconstruct_z_from_scores_values(pb, vb)
     assert float((za - reconstruct_z_from_scores_values(masked_softmax(sa_m, valid), va)).abs().max()) < 1e-12
+
+
+def test_level_a_batched_partition_reconstruction():
+    system = build_level_a_batched_partition_system()
+    validate_score_partition(system.partition)
+    diag = partition_diagnostics(system.partition)
+    assert all(e == 0 for e in diag["coverage_error_per_example"])
+    assert all(e == 0 for e in diag["overlap_count_per_example"])
+    recon = batched_hybrid_reconstruction_errors(system)
+    assert recon["all_a_max"] < 1e-12
+    assert recon["all_b_max"] < 1e-12
 
 
 def test_causal_valid_mask_shape():
