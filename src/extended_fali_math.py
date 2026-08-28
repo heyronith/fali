@@ -1,10 +1,13 @@
 """
 Extended / Causal FALI — pure game-theoretic mathematics.
 
-No TransformerLens dependency. Implements exact Shapley and hierarchical Owen
-values for the frozen five-player coalition structure:
+No TransformerLens dependency. Implements exact Shapley and standard Owen values
+for the frozen five-player coalition structure (partition):
 
     Pi = { SCORE = {T, R, O}, VALUE = {V}, CONTEXT = {C} }
+
+Block membership is frozen; block order is not. Standard Owen averages over all
+admissible permutations (contiguous blocks, arbitrary block order).
 
 Players are binary intervention factors (0 = A state, 1 = B state). A
 characteristic function v(S) gives the utility U when exactly players in S
@@ -23,7 +26,7 @@ Player = str
 Coalition = FrozenSet[Player]
 CharFn = Callable[[Coalition], float]
 
-# Frozen Extended FALI player set and coalition hierarchy (prospective, not data-driven).
+# Frozen Extended FALI player set and coalition partition (prospective, not data-driven).
 EXTENDED_FALI_PLAYERS: Tuple[Player, ...] = ("T", "R", "O", "V", "C")
 EXTENDED_FALI_GROUPS: Tuple[Tuple[Player, ...], ...] = (
     ("T", "R", "O"),
@@ -32,6 +35,7 @@ EXTENDED_FALI_GROUPS: Tuple[Tuple[Player, ...], ...] = (
 )
 EXTENDED_FALI_META: Tuple[Player, ...] = ("SCORE", "VALUE", "CONTEXT")
 N_EXTENDED_FALI_CELLS: int = 2 ** len(EXTENDED_FALI_PLAYERS)  # 32
+N_EXTENDED_FALI_ADMISSIBLE_PERMUTATIONS: int = math.factorial(3) * math.factorial(3)  # 36
 
 _PLAYER_TO_META: Dict[Player, Player] = {
     "T": "SCORE",
@@ -170,12 +174,25 @@ def shapley_value(
     return phi
 
 
-def _hierarchical_permutations(
+def admissible_owen_permutations(
     groups: Sequence[Sequence[Player]],
-) -> Iterable[Tuple[Player, ...]]:
-    group_perms = [itertools.permutations(g) for g in groups]
-    for combo in itertools.product(*group_perms):
-        yield tuple(player for grp in combo for player in grp)
+) -> Tuple[Tuple[Player, ...], ...]:
+    """
+    All Owen-admissible player permutations.
+
+    Every ordering of coalition blocks × every ordering within each block, with
+    each block contiguous.
+    """
+    norm_groups = tuple(tuple(g) for g in groups)
+    if not norm_groups:
+        return tuple()
+    block_indices = tuple(range(len(norm_groups)))
+    perms: List[Tuple[Player, ...]] = []
+    for block_order in itertools.permutations(block_indices):
+        within_lists = [itertools.permutations(norm_groups[i]) for i in block_order]
+        for within in itertools.product(*within_lists):
+            perms.append(tuple(player for block in within for player in block))
+    return tuple(perms)
 
 
 def owen_value_permutation(
@@ -184,14 +201,14 @@ def owen_value_permutation(
     char_fn: CharFn,
 ) -> Dict[Player, float]:
     """
-    Hierarchical Owen value via brute-force enumeration of valid permutations.
+    Standard Owen value via brute-force admissible permutation enumeration.
 
-    Permutations respect group order (earlier groups fully precede later groups)
-    and allow arbitrary order within each group.
+    Independent reference implementation: averages sequential marginal
+    contributions over all block orders and within-block player orders.
     """
     p = _validate_players(players)
-    norm_groups = _validate_groups(p, groups)
-    perms = list(_hierarchical_permutations(norm_groups))
+    _validate_groups(p, groups)
+    perms = admissible_owen_permutations(groups)
     if not perms:
         raise ValueError("empty groups produce no permutations")
     phi = {name: 0.0 for name in p}
@@ -211,30 +228,50 @@ def owen_value_subset(
     char_fn: CharFn,
 ) -> Dict[Player, float]:
     """
-    Hierarchical Owen value via closed-form subset weights.
+    Standard Owen value via closed-form subset weights (independent of permutations).
 
-    For player i in group G_k, all players from earlier groups are always in
-    the predecessor coalition; within G_k, predecessors range over subsets of
-    G_k \\ {i} with standard factorial weights.
+    For player i in block G_k, sum over subsets R of other meta-blocks and
+    subsets T of G_k \\ {i} with Shapley weights at meta and inner levels.
     """
     p = _validate_players(players)
     norm_groups = _validate_groups(p, groups)
+    m = len(norm_groups)
     phi = {name: 0.0 for name in p}
+
     for k, group in enumerate(norm_groups):
-        earlier = frozenset(player for g in norm_groups[:k] for player in g)
         gk = tuple(group)
         gk_size = len(gk)
+        other_block_indices = [j for j in range(m) if j != k]
         for player in gk:
-            others = [x for x in gk if x != player]
-            m = len(others)
+            others_in_block = [x for x in gk if x != player]
             acc = 0.0
-            for r in range(m + 1):
-                for subset in itertools.combinations(others, r):
-                    tset = frozenset(subset)
-                    weight = _factorial(len(tset)) * _factorial(m - len(tset))
-                    before = earlier | tset
-                    acc += weight * (char_fn(before | {player}) - char_fn(before))
-            phi[player] = acc / float(_factorial(gk_size))
+            for r_size in range(len(other_block_indices) + 1):
+                for block_subset in itertools.combinations(other_block_indices, r_size):
+                    players_from_blocks = frozenset(
+                        member
+                        for bi in block_subset
+                        for member in norm_groups[bi]
+                    )
+                    weight_meta = (
+                        _factorial(len(block_subset))
+                        * _factorial(m - len(block_subset) - 1)
+                        / _factorial(m)
+                    )
+                    for t_size in range(len(others_in_block) + 1):
+                        for inner_subset in itertools.combinations(others_in_block, t_size):
+                            tset = frozenset(inner_subset)
+                            weight_inner = (
+                                _factorial(len(tset))
+                                * _factorial(gk_size - len(tset) - 1)
+                                / _factorial(gk_size)
+                            )
+                            pred = players_from_blocks | tset
+                            acc += (
+                                weight_meta
+                                * weight_inner
+                                * (char_fn(pred | {player}) - char_fn(pred))
+                            )
+            phi[player] = acc
     return phi
 
 
@@ -245,6 +282,7 @@ def owen_value(
     *,
     method: str = "subset",
 ) -> Dict[Player, float]:
+    """Standard Owen value for a coalition partition."""
     if method == "subset":
         return owen_value_subset(players, groups, char_fn)
     if method == "permutation":
@@ -258,10 +296,9 @@ def quotient_game(
     char_fn: CharFn,
 ) -> Tuple[Tuple[Player, ...], CharFn]:
     """
-    Collapse players into meta-players (one per group) for the quotient game.
+    Collapse players into meta-players (one per block) for the quotient game.
 
-    Returns (meta_player_names, v_quotient) where v_quotient(S) evaluates the
-    original game with every member of each selected group at state 1.
+    q(K) = v(union of all members of meta-blocks in K).
     """
     p = _validate_players(players)
     norm_groups = _validate_groups(p, groups)
@@ -281,16 +318,15 @@ def quotient_game(
     return meta_names, v_q
 
 
-def quotient_shapley_fixed_order(
+def _legacy_quotient_shapley_fixed_order_debug(
     players: Sequence[Player],
     groups: Sequence[Sequence[Player]],
     char_fn: CharFn,
 ) -> Dict[Player, float]:
     """
-    Meta-level attributions under the frozen group order (not full 3! Shapley).
+    Superseded EF-0 helper: sequential marginals with frozen block order.
 
-    With hierarchy G1 ≺ G2 ≺ G3, the SCORE meta-player receives
-    v(G1) − v(∅), VALUE receives v(G1∪G2) − v(G1), etc.
+    NOT standard Owen. Debug/legacy only — do not use in primary claims.
     """
     _, v_q = quotient_game(players, groups, char_fn)
     norm_groups = _validate_groups(_validate_players(players), groups)
@@ -304,21 +340,13 @@ def quotient_shapley_fixed_order(
 
 
 def extended_fali_quotient_shapley(char_fn: CharFn) -> Dict[Player, float]:
-    """Named meta labels for the frozen Extended FALI quotient attributions."""
-    internal = quotient_shapley_fixed_order(
-        EXTENDED_FALI_PLAYERS,
-        EXTENDED_FALI_GROUPS,
-        char_fn,
-    )
-    return {
-        "SCORE": internal["G0"],
-        "VALUE": internal["G1"],
-        "CONTEXT": internal["G2"],
-    }
+    """Ordinary Shapley values of SCORE, VALUE, CONTEXT in the quotient game."""
+    meta, v_q = extended_fali_quotient_game(char_fn)
+    return shapley_value(meta, v_q)
 
 
 def extended_fali_quotient_game(char_fn: CharFn) -> Tuple[Tuple[Player, ...], CharFn]:
-    """Quotient game for the frozen Extended FALI hierarchy with named meta labels."""
+    """Quotient game for Extended FALI with named meta labels."""
     meta_internal, v_q = quotient_game(
         EXTENDED_FALI_PLAYERS,
         EXTENDED_FALI_GROUPS,
@@ -368,17 +396,14 @@ def verify_quotient_consistency(
     atol: float = 1e-12,
 ) -> Dict[str, float]:
     """
-    Return absolute residuals for hierarchical Owen vs quotient Shapley blocks.
+    Return absolute residuals for standard Owen vs ordinary quotient Shapley blocks.
 
-    Keys:
-      - score_block
-      - value_player
-      - context_player
+    Requires phi_T+phi_R+phi_O = Shapley_q(SCORE), etc.
     """
     p = _validate_players(players)
     norm_groups = _validate_groups(p, groups)
     meta_players, v_q = quotient_game(p, norm_groups, char_fn)
-    q_phi = quotient_shapley_fixed_order(p, norm_groups, char_fn)
+    q_phi = shapley_value(meta_players, v_q)
 
     score_players = norm_groups[0]
     score_sum = sum(float(owen_phi[x]) for x in score_players)
@@ -401,6 +426,48 @@ def compare_owen_implementations(
     subset = owen_value_subset(players, groups, char_fn)
     perm = owen_value_permutation(players, groups, char_fn)
     return {p: abs(subset[p] - perm[p]) for p in players}
+
+
+def owen_block_order_invariance_max(
+    players: Sequence[Player],
+    groups: Sequence[Sequence[Player]],
+    char_fn: CharFn,
+) -> float:
+    """Max absolute attribution change under reordering the groups list in Python."""
+    p = _validate_players(players)
+    _validate_groups(p, groups)
+    reference = owen_value_subset(p, groups, char_fn)
+    max_disc = 0.0
+    for perm in itertools.permutations(groups):
+        alt = owen_value_subset(p, perm, char_fn)
+        for name in p:
+            max_disc = max(max_disc, abs(reference[name] - alt[name]))
+    return max_disc
+
+
+def owen_within_block_order_invariance_max(
+    players: Sequence[Player],
+    groups: Sequence[Sequence[Player]],
+    char_fn: CharFn,
+) -> float:
+    """Max absolute attribution change under permuting player order within blocks."""
+    p = _validate_players(players)
+    _validate_groups(p, groups)
+    reference = owen_value_subset(p, groups, char_fn)
+    max_disc = 0.0
+    permuted_groups = []
+    for group in groups:
+        g = tuple(group)
+        perms = list(itertools.permutations(g))
+        if len(perms) <= 1:
+            permuted_groups.append([g])
+        else:
+            permuted_groups.append([tuple(x) for x in perms[1:]])
+    for combo in itertools.product(*permuted_groups):
+        alt = owen_value_subset(p, combo, char_fn)
+        for name in p:
+            max_disc = max(max_disc, abs(reference[name] - alt[name]))
+    return max_disc
 
 
 def constant_char_fn(players: Sequence[Player], value: float) -> CharFn:
@@ -448,6 +515,21 @@ def interaction_char_fn(
         return val if req.issubset(coalition) else 0.0
 
     return v
+
+
+def block_interaction_char_fn(
+    players: Sequence[Player],
+    groups: Sequence[Sequence[Player]],
+    active_block_indices: Tuple[int, ...],
+    value: float = 1.0,
+) -> CharFn:
+    """v(S)=value iff S contains every player from each listed block."""
+    p = _validate_players(players)
+    norm_groups = _validate_groups(p, groups)
+    required = frozenset(
+        player for idx in active_block_indices for player in norm_groups[idx]
+    )
+    return interaction_char_fn(p, required, value)
 
 
 def random_char_fn(

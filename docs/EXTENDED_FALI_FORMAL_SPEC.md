@@ -1,8 +1,12 @@
-# Extended / Causal FALI — Formal Specification (EF-0)
+# Extended / Causal FALI — Formal Specification (EF-0 / EF-0R)
 
 Mathematical specification only. No empirical model claims. No novelty claims.
 
 Branch: `extended-fali/formalization` (from `pre-extended-fali-audited`).
+
+**EF-0R correction:** commit EF-0 (`233941f`) used a superseded fixed block-order
+formulation. The canonical definition now uses the **standard Owen value** (36
+admissible permutations for Extended FALI). See preregistration for audit trail.
 
 ---
 
@@ -126,40 +130,42 @@ so that attributions sum to **Δ_U = v(N) − v(∅)**.
 
 ---
 
-## 9. Coalition structure (frozen)
+## 9. Coalition structure / partition (frozen)
 
 \[
 \Pi = \{\;\text{SCORE}=\{T,R,O\},\; \text{VALUE}=\{V\},\; \text{CONTEXT}=\{C\}\;\}
 \]
 
-Order is fixed: **SCORE ≺ VALUE ≺ CONTEXT**. This hierarchy is prospective and must
-not be rearranged based on empirical results.
+**Membership** in SCORE / VALUE / CONTEXT is prospectively frozen. **Block order is not
+frozen.** The standard Owen value averages over all permutations of coalition blocks
+and all permutations within each block (contiguous blocks only).
+
+For Extended FALI: **3! × 3! × 1! × 1! = 36** admissible permutations.
 
 ---
 
-## 10. Exact Owen formula (hierarchical, fixed order)
+## 10. Exact standard Owen formula
 
-Permutations are uniform over:
+**Admissible permutations:** every ordering of the three coalition blocks × every
+ordering of players within SCORE (VALUE and CONTEXT are singletons). Total **36**.
 
-- any order within SCORE (3!),
-- then V,
-- then C.
+For each admissible permutation, compute ordinary sequential marginal contributions;
+the Owen value is the uniform average.
 
-For player *i* in group *G_k*, all players from earlier groups are always in the
-predecessor coalition; within *G_k*, predecessors range over subsets of *G_k \ {i}*
-with factorial weights. Two independent implementations are required:
+Two **independent** implementations:
 
-- **A.** subset-weight enumeration (`owen_value_subset`);
-- **B.** brute-force hierarchical permutation enumeration (`owen_value_permutation`).
+- **A.** subset-weight enumeration (`owen_value_subset`) with meta-block and
+  within-block Shapley weights;
+- **B.** brute-force admissible permutation enumeration (`owen_value_permutation`).
 
-See `src/extended_fali_math.py`.
+See `src/extended_fali_math.py`. A superseded EF-0 fixed-order helper remains as
+`_legacy_quotient_shapley_fixed_order_debug` for audit comparison only.
 
 ---
 
 ## 11. Global efficiency theorem
 
-**Proposition (efficiency).** For any v and fixed-order hierarchical Owen attributions
-φ_i:
+**Proposition (efficiency).** For any v and standard Owen attributions φ_i:
 
 \[
 \phi_T + \phi_R + \phi_O + \phi_V + \phi_C = v(N) - v(\emptyset) = \Delta_U.
@@ -174,35 +180,27 @@ Verified synthetically at tolerance 1e−12 (`verify_efficiency`).
 
 ## 12. Quotient / group consistency theorem
 
-Define the **quotient game** on meta-players {SCORE, VALUE, CONTEXT} by activating
-all members of a selected group. Because meta-order is frozen (not all 3! meta
-permutations), use **fixed-order meta marginals**:
+Define the **quotient game** on meta-players {SCORE, VALUE, CONTEXT}:
 
 \[
-\Phi_{\text{SCORE}} = v(\{T,R,O\}) - v(\emptyset)
-\]
-\[
-\Phi_{\text{VALUE}} = v(\{T,R,O,V\}) - v(\{T,R,O\})
-\]
-\[
-\Phi_{\text{CONTEXT}} = v(N) - v(\{T,R,O,V\})
+q(K) = v\big(\cup\ \text{members of blocks in } K\big)
 \]
 
-**Proposition (group consistency).** Under fixed-order hierarchical Owen:
+Let **Shapley_q** denote ordinary 3-player Shapley on this quotient game.
+
+**Proposition (group consistency).** Standard Owen values satisfy:
 
 \[
-\phi_T+\phi_R+\phi_O = \Phi_{\text{SCORE}},\quad
-\phi_V = \Phi_{\text{VALUE}},\quad
-\phi_C = \Phi_{\text{CONTEXT}}.
+\phi_T+\phi_R+\phi_O = \text{Shapley}_q(\text{SCORE}),\quad
+\phi_V = \text{Shapley}_q(\text{VALUE}),\quad
+\phi_C = \text{Shapley}_q(\text{CONTEXT}).
 \]
 
-*Proof sketch.* Players in SCORE are processed before VALUE/C in every admissible
-permutation; their Owen marginals telescope to v(TRO)−v(∅). Single-player groups
-V and C have unique predecessor sets. ∎
+*Proof sketch.* Owen's union consistency: the sum of payoffs to members of a coalition
+block equals that block's payoff in the quotient game under standard Owen. ∎
 
-**Note:** This differs from full 3-player **Shapley** on the quotient game, which
-averages over all meta permutations. The frozen hierarchy uses fixed-order meta
-marginals (`quotient_shapley_fixed_order`).
+Verified synthetically at tolerance 1e−12 (`verify_quotient_consistency` with ordinary
+quotient Shapley via `extended_fali_quotient_shapley`).
 
 ---
 
@@ -215,17 +213,18 @@ When the entire SCORE block switches together:
 
 provided cached patterns equal masked_softmax(cached scores) (future numerical check).
 
-The 3-group quotient game {SCORE, V, C} then matches the Phase-3 factorial over
-(P, V, C) at matched endpoints. **Expected future numerical correspondence** (not
-assumed here):
+The quotient game {SCORE, V, C} is exactly the full-block SCORE/V/C intervention
+game. Its **ordinary Shapley decomposition** is the intended bridge to Phase-3
+P×V×C at matched endpoints (future numerical check, not assumed here):
 
 \[
-\Phi_{\text{SCORE}} \approx \phi_{\text{pattern}},\quad
-\phi_V \approx \phi_{\text{value}},\quad
-\phi_C \approx \phi_{\text{context}}
+\text{Shapley}_q(\text{SCORE}) \approx \phi_{\text{pattern}},\quad
+\text{Shapley}_q(\text{VALUE}) \approx \phi_{\text{value}},\quad
+\text{Shapley}_q(\text{CONTEXT}) \approx \phi_{\text{context}}
 \]
 
-within predefined FP32 tolerances after model implementation.
+Equivalently, Owen block sums Φ_SCORE = φ_T+φ_R+φ_O should match historical
+φ_pattern under the bridge identities above.
 
 ---
 
@@ -243,8 +242,9 @@ and changes the primary utility to causal usefulness Δ_U.
 
 ## 15. What φ_T, φ_R, φ_O, φ_V, φ_C **do** mean
 
-Hierarchical Owen allocations of **Δ_U** to each intervention factor, respecting
-frozen SCORE ≺ VALUE ≺ CONTEXT precedence, including interaction effects (§19).
+Standard Owen allocations of **Δ_U** to each intervention factor under partition Π,
+averaging over all block orders and within-block player orders, including interaction
+effects (§19).
 
 ---
 
@@ -276,9 +276,17 @@ alone (see `docs/CURRENT_DEFINITIONS.md`).
 
 ## 19. Interaction interpretation
 
-Owen values allocate cooperative interactions among players. A positive φ_T may reflect
-T main effects, interactions with R/O inside SCORE, or cross-group interactions (e.g.
-T×C) depending on join order. No separate interaction taxonomy is defined in EF-0.
+Owen values allocate cooperative interactions among players; they are **not** pure
+direct effects. Examples under standard Owen (verified synthetically):
+
+| Interaction | φ_T | φ_R | φ_O | φ_V | φ_C |
+|-------------|-----|-----|-----|-----|-----|
+| T×R | 0.5 | 0.5 | 0 | 0 | 0 |
+| T×C | 0.5 | 0 | 0 | 0 | 0.5 |
+| T×R×C | 0.25 | 0.25 | 0 | 0 | 0.5 |
+
+Cross-block interactions (SCORE×VALUE, SCORE×CONTEXT, VALUE×CONTEXT) split credit
+across participating blocks without privileging a fixed block order.
 
 ---
 
@@ -288,7 +296,7 @@ T×C) depending on join order. No separate interaction taxonomy is defined in EF
 
 - Owen subset vs permutation max discrepancy < 1e−12 on random games;
 - efficiency residual < 1e−12;
-- fixed-order quotient residuals < 1e−12;
+- quotient Shapley block residuals (M2) < 1e−12;
 - original-FALI special-case algebra matches `fali_shapley`.
 
 **Future model (not EF-0):**

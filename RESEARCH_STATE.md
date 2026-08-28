@@ -94,7 +94,8 @@ With endpoint notation above: H000 ↔ comparison involving **A_h** vs **D_h**; 
 **Extended / Causal FALI** — hierarchical five-player Owen attribution of candidate-head
 causal usefulness Δ_U over score blocks (T,R,O), value (V), and context (C).
 
-**EF-0 status:** Formal spec + pure game mathematics in `src/extended_fali_math.py`;
+**EF-0 / EF-0R status:** Standard Owen game mathematics in `src/extended_fali_math.py`
+(36 admissible permutations; EF-0R corrected superseded fixed-order EF-0 formulation);
 synthetic algebra tests pass. See `docs/EXTENDED_FALI_FORMAL_SPEC.md` and
 `docs/EXTENDED_FALI_PREREGISTRATION.md`.
 
