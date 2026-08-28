@@ -265,3 +265,41 @@ results/extended_fali/ef4_canonical/aggregate/
 ```
 
 Raw cells on `audit/extended-fali-ef4-raw` (private).
+
+---
+
+## F. EF-5 — Ablation robustness: zero vs matched-mean vs matched-resample (frozen before execution)
+
+**Purpose:** Test whether EF-4-confirmed fine-score assignments (L10H2/L10H10 phi_T > 0,
+phi_R < 0) remain stable under distribution-matched primary-circuit damage.
+
+**Scope:**
+- Canonical N=900 per seed; seeds = 42, 1, 8, 22
+- Four-head panel: L9H7, L9H0, L10H2, L10H10
+- **New GPU work:** matched_mean and matched_resample only
+- ZERO attributions frozen from EF-4 (no zero 32-cell rerun)
+
+**Preregistration:** `docs/EF5_ABLATION_ROBUSTNESS_PLAN.md`
+
+### Frozen robustness channels (R1–R4)
+
+Same four directional assignments as EF-4 H1–H4. No phi_O hypothesis.
+
+### Informative-damage criterion
+
+Alternative scheme informative iff hierarchical CI of damage_drop > 0, 4/4 seed means > 0,
+and mean ≥ 25% of zero mean. UNINFORMATIVE schemes not interpreted as reversals.
+
+### EF5 ablation gate
+
+**PASS** iff matched_mean and matched_resample both ROBUST (informative + all four
+ROBUST_SAME). Only PASS authorizes cross-setting/model generalization without
+research-lead review.
+
+### Deliverables
+
+```
+results/extended_fali/ef5_ablation_robustness/
+```
+
+Raw cells on `audit/extended-fali-ef5-raw` (private).
