@@ -41,7 +41,7 @@ Commit SHAs refer to this repository unless noted.
 | **Seeds** | 42, 1, 8, 22 |
 | **Model** | GPT-2 Small |
 | **Hardware / precision** | Modal L4, FP32 |
-| **Primary intervention** | Corrected primary L9H6+L9H9+L10H0 vs historical B_old |
+| **Primary intervention** | Corrected primary L9H6+L9H9+L10H0 vs historical **B_old = L9H9+L10H0** |
 | **Candidate heads** | 12 |
 | **Main outputs** | `results/revision_phase1/full/seed_{seed}/`, `results/revision_phase1/full/aggregate/` |
 | **Validation** | PASS all seeds; historical Phase-1 raw untouched checks |

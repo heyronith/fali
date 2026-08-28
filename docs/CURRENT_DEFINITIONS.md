@@ -11,23 +11,36 @@ Terminology frozen for Phases 1–4. **Extended FALI is not defined here.**
 | **A** | Intact context | Full model with primary name-movers **not** ablated |
 | **B** | Primary-damaged context | Primary knockout active: **L9H6 + L9H9 + L10H0** zero-ablated |
 
-Historical note: earlier work used B_old = L9H6+L9H9 only; revision Phases 1+ use the corrected primary above.
+Historical note: earlier work used **B_old = L9H9 + L10H0** only; revision Phases 1+ use the corrected primary above.
 
 ---
 
-## Endpoint effects (per candidate head *h*)
+## Endpoint IO−S values (per candidate head *h*)
 
 Let IO−S = logit(IO) − logit(S) at the query/end position.
 
-| Quantity | Definition |
-|----------|------------|
-| **intact_effect** | Effect of zeroing candidate *h* in context **A**: compares IO−S with vs without *h* ablated under intact primary context |
-| **conditional_effect** | Effect of zeroing *h* in context **B**: compares IO−S with vs without *h* ablated under primary-damaged context |
-| **conditional_gain** | `conditional_effect − intact_effect` |
+| Symbol | Definition |
+|--------|------------|
+| **A_h** | Clean/intact IO−S with candidate *h* **present** (not zeroed) |
+| **D_h** | Intact IO−S with candidate *h* **zeroed** |
+| **B_h** | Primary-damaged IO−S with candidate *h* **present** |
+| **C_h** | Primary-damaged IO−S with candidate *h* **zeroed** |
 
-Equivalent endpoint notation used in factorial cells:
-- H000 ↔ intact baseline for decomposition
-- H111 ↔ conditional endpoint
+When A/B appear without head subscripts in prose, they refer to the **intact** and **primary-damaged model contexts** respectively (not the endpoint values A_h / B_h).
+
+---
+
+## Derived endpoint effects
+
+| Quantity | Exact definition |
+|----------|------------------|
+| **intact_effect** | **A_h − D_h** |
+| **conditional_effect** | **B_h − C_h** |
+| **conditional_gain** | **conditional_effect − intact_effect** |
+
+Equivalent factorial cell notation:
+- H000 ↔ intact baseline for decomposition (involving A_h vs D_h)
+- H111 ↔ conditional endpoint (involving B_h vs C_h)
 - gain identity: `(H111 − H000) = conditional_gain`
 
 ---
@@ -57,15 +70,23 @@ Plus main effects and interactions (`interaction_PV`, `interaction_PC`, `interac
 
 ---
 
-## Original FALI (descriptive)
+## FALI terminology (historical + revision)
 
-**FALI** = Functional Attention Logit Attribution (descriptive, not causal by default).
+### Original manuscript: Frozen Attention Logit Intervention
 
-Decomposes a change in the candidate head’s **target attention probability** into:
-- **Target-score** contribution
+**FALI** = **Frozen Attention Logit Intervention** — a surgical pre-softmax counterfactual that swaps target vs nontarget attention logits while holding competing logits fixed (see `archive/manuscripts/tmlr_rejected_main.tex`).
+
+Do **not** expand FALI as “Functional Attention Logit Attribution.”
+
+### Later path-stable FALI analysis (Phase 2, descriptive)
+
+A separate **descriptive** procedure decomposes a change in the candidate head’s **target attention probability** into:
+- **Target-score** contribution (two-player Shapley over attention-score rows)
 - **Aggregate competing-score** contribution
 
-Uses Shapley attribution over attention-score rows (target vs competing tokens). Valid as a descriptive decomposition of attention-score changes; **not** validated as a general cross-head predictor of functional recruitment (Phase 2 PIVOT).
+This path-stable decomposition is valid as a descriptive attribution of attention-score changes. It is **not** validated as a general cross-head predictor of functional recruitment (Phase 2 **PIVOT**).
+
+**Extended / Causal FALI** is a candidate future framework only and is not defined here.
 
 ---
 

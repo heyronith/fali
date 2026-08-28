@@ -1,15 +1,17 @@
 # Research State — Pre-Extended-FALI Baseline
 
-Factual snapshot as of repository tag `pre-extended-fali-baseline`.  
+Factual snapshot as of repository tag `pre-extended-fali-audited` (successor audit to unchanged `pre-extended-fali-baseline`).  
 No new experiments; no Extended FALI implementation yet.
 
 ---
 
 ## A. Original FALI
 
-**Research question:** Can changes in a backup attention head’s target-token probability be decomposed into target-score vs aggregate competing-score contributions (FALI), and does that decomposition predict functional backup recruitment?
+**Research question:** Can changes in a backup attention head’s target-token probability be decomposed into target-score vs aggregate competing-score contributions (path-stable FALI analysis), and does that decomposition predict functional backup recruitment?
 
-**Method:** Target-score vs competing-score Shapley attribution of a target attention-probability change (descriptive decomposition on attention scores).
+**Historical intervention name:** **FALI** = **Frozen Attention Logit Intervention** (pre-softmax target-vs-nontarget counterfactual in the original manuscript).
+
+**Later descriptive analysis:** Two-player Shapley decomposition of target attention probability into target-score vs aggregate competing-score contributions on attention scores.
 
 **Status:**
 - Mathematically valid as a **descriptive** decomposition of attention-score changes.
@@ -19,11 +21,21 @@ No new experiments; no Extended FALI implementation yet.
 
 ## B. Phase-1 — Corrected primary knockout & functional metrics
 
-**Primary correction:** Canonical primary knockout = **L9H6 + L9H9 + L10H0** (replacing historical B_old = L9H6+L9H9 only).
+**Primary correction:** Canonical primary knockout = **L9H6 + L9H9 + L10H0** (replacing historical **B_old = L9H9 + L10H0**).
 
-**Core metrics (per candidate head *h*):**
-- `intact_effect` = IO−S under intact context with *h* zeroed (vs clean baseline)
-- `conditional_effect` = IO−S under primary-damaged context with *h* zeroed
+**Endpoint notation (per candidate head *h*; IO−S = logit(IO) − logit(S) at end position):**
+
+| Symbol | Meaning |
+|--------|---------|
+| **A_h** | Clean/intact IO−S with candidate *h* present |
+| **D_h** | Intact IO−S with candidate *h* zeroed |
+| **B_h** | Primary-damaged IO−S with candidate *h* present |
+| **C_h** | Primary-damaged IO−S with candidate *h* zeroed |
+
+**Derived effects:**
+
+- `intact_effect` = **A_h − D_h**
+- `conditional_effect` = **B_h − C_h**
 - `conditional_gain` = `conditional_effect − intact_effect`
 
 **Outcome:** Four-seed full runs (N=200/seed); corrected classification of 12 Phase-1 candidates; functional taxonomy documented under `results/revision_phase1/full/aggregate_corrected/`.
@@ -46,7 +58,9 @@ No new experiments; no Extended FALI implementation yet.
 
 **Intervention:** Full `hook_z` at all query positions for candidate head.
 
-**Exact identities (validated):** H000 = intact_effect; H111 = conditional_effect; gain identity; 3-factor Shapley sum; interaction reconstruction; L9H0/L9H7 same-layer P/V invariants.
+**Exact identities (validated):** H000 = intact baseline for decomposition; H111 = conditional endpoint; gain identity; 3-factor Shapley sum; interaction reconstruction; L9H0/L9H7 same-layer P/V invariants.
+
+With endpoint notation above: H000 ↔ comparison involving **A_h** vs **D_h**; H111 ↔ comparison involving **B_h** vs **C_h**; `(H111 − H000) = conditional_gain`.
 
 **Important heads (full N=200 × 4 seeds, 2-template IOI):**
 - **L9H7:** φ_P ≈ 0, φ_V ≈ 0, φ_C > 0 (context recruitment)
