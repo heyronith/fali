@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-28T18:28:33.788622+00:00",
+    "generated_at_utc": "2026-08-28T18:50:40.291363+00:00",
     "large_raw_threshold_bytes": 2097152,
     "n_indexed_large_raw_files": 50,
-    "n_manifest_files": 467
+    "n_manifest_files": 470
   },
   "files": [
     {
@@ -23,11 +23,11 @@
       ],
       "size_bytes": 210919,
       "sha256": "ea713b03b89ae94d9f1aad24c115513a350ab6700edf9b059b4e9cdb5e44a072",
-      "generating_script": null,
+      "generating_script": "experiments/ablation_controls.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/ablation_controls.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -36,11 +36,11 @@
       "schema": null,
       "size_bytes": 712718,
       "sha256": "734fce2c747bc7a6c0a3db88c93866e67490d36b295794de886e5b1d06995d0a",
-      "generating_script": null,
+      "generating_script": "experiments/ablation_controls.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/ablation_controls.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -66,11 +66,11 @@
       ],
       "size_bytes": 3464423,
       "sha256": "b600d06eed00484d694d13b20ef2260720c51607247540b422981b815f7d88cc",
-      "generating_script": null,
+      "generating_script": "experiments/fali_decomposition.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_decomposition.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -79,11 +79,11 @@
       "schema": null,
       "size_bytes": 17230553,
       "sha256": "f89046208eb3fb704c7b22c77d434dfb048c23c5b40c815bdd78c7643c4d85e2",
-      "generating_script": null,
+      "generating_script": "experiments/fali_decomposition.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_decomposition.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -98,11 +98,11 @@
       ],
       "size_bytes": 2067890,
       "sha256": "23bcfc301382b82abeb44ce069c12f528328cc92f1f201f8f9b9764e8d89d7bd",
-      "generating_script": null,
+      "generating_script": "experiments/hybrid_intervention.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/hybrid_intervention.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -111,11 +111,11 @@
       "schema": null,
       "size_bytes": 2959273,
       "sha256": "eacec48c3bb17527f82f84dd8b5264141edb11e62190c7130ea77d9a57520312",
-      "generating_script": null,
+      "generating_script": "experiments/hybrid_intervention.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/hybrid_intervention.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -133,11 +133,11 @@
       ],
       "size_bytes": 299522,
       "sha256": "363014ca28a8b5cd81922cd29fffbb28de90f56aaaac2311c48a6ea839af31d3",
-      "generating_script": null,
+      "generating_script": "experiments/fali_rigorous_validation.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_rigorous_validation.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -146,11 +146,11 @@
       "schema": null,
       "size_bytes": 285890,
       "sha256": "8666164625a67d3064f964272891d506388d83b4b17e49e46c4ab95f775341d3",
-      "generating_script": null,
+      "generating_script": "experiments/fali_rigorous_validation.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_rigorous_validation.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -175,11 +175,11 @@
       ],
       "size_bytes": 387570,
       "sha256": "4d57a22095a3715455370a38c53ef5a17525f8e6b4d87c7b00ae374bee4397b3",
-      "generating_script": null,
+      "generating_script": "experiments/output_mediation.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/output_mediation.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -188,11 +188,11 @@
       "schema": null,
       "size_bytes": 1161413,
       "sha256": "2cfa518a1423ae50e6265db2289099831e83e03c8596ed48721732883e60c20b",
-      "generating_script": null,
+      "generating_script": "experiments/output_mediation.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/output_mediation.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -226,11 +226,11 @@
       ],
       "size_bytes": 7772432,
       "sha256": "bd3ad09062ac7bb1758483c57d1589560bb2822a8814a0268b15d707d13600b7",
-      "generating_script": null,
+      "generating_script": "experiments/qk_decomposition.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/qk_decomposition.py; exact run config not recorded in repo."
     },
     {
       "experiment": "original_fali",
@@ -239,11 +239,11 @@
       "schema": null,
       "size_bytes": 26348091,
       "sha256": "c27b7883c32cdfc67e2e08d7e9f3e570810a6fa5c73b50fe679564bc64a44564",
-      "generating_script": null,
+      "generating_script": "experiments/qk_decomposition.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "git_tracked": true,
+      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/qk_decomposition.py; exact run config not recorded in repo."
     },
     {
       "experiment": "revision_phase2",
@@ -318,7 +318,7 @@
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Indexed raw output; likely produced by experiments/revision_phase2_fali_causal.py; config_path unknown."
     },
     {
       "experiment": "revision_phase2",
@@ -351,12 +351,12 @@
       "size_bytes": 722736,
       "sha256": "676ea57a8068c464db847cf26627f59af3e47a9244ac4b4afbf7431f718d309c",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -403,12 +403,12 @@
       "size_bytes": 1340693,
       "sha256": "dd54aec83575dc507f867345bd868019d01922d3d4fff687b0ad445ea30ba53d",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -441,12 +441,12 @@
       "size_bytes": 722736,
       "sha256": "676ea57a8068c464db847cf26627f59af3e47a9244ac4b4afbf7431f718d309c",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -509,12 +509,12 @@
       "size_bytes": 2003501,
       "sha256": "4b84ffe617fd38488f6c3133fbe876b93ab21bf16b6547932a24db878b91951c",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -547,12 +547,12 @@
       "size_bytes": 722736,
       "sha256": "676ea57a8068c464db847cf26627f59af3e47a9244ac4b4afbf7431f718d309c",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -574,12 +574,12 @@
       "size_bytes": 319809,
       "sha256": "931f4d315c9f4a1c6459899ec7ffea00a7e29b5f9ffe3a85b55ea56b4801db05",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -626,12 +626,12 @@
       "size_bytes": 1340693,
       "sha256": "dd54aec83575dc507f867345bd868019d01922d3d4fff687b0ad445ea30ba53d",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -664,12 +664,12 @@
       "size_bytes": 725982,
       "sha256": "c3be1ee30918bd30dce7786e63c973ed1ba81cacaf50a418ba6338da03c4bcca",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -716,12 +716,12 @@
       "size_bytes": 1343783,
       "sha256": "82d8b8467964bad0f23b4b4f0e2a201458a60e57ab149ef5a673c7ce4ef76611",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -754,12 +754,12 @@
       "size_bytes": 725982,
       "sha256": "c3be1ee30918bd30dce7786e63c973ed1ba81cacaf50a418ba6338da03c4bcca",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -822,12 +822,12 @@
       "size_bytes": 2007437,
       "sha256": "3a8fe332b8d94db9d68a7a1bf123d6345a9f799a6cc8a6ecfcb77e88fb0b7bc2",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -860,12 +860,12 @@
       "size_bytes": 725982,
       "sha256": "c3be1ee30918bd30dce7786e63c973ed1ba81cacaf50a418ba6338da03c4bcca",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -887,12 +887,12 @@
       "size_bytes": 322194,
       "sha256": "3079b321b0b9a201f2b7ebd6b2c0c0b198333931e8e0221c3136b70603fd4a38",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -939,12 +939,12 @@
       "size_bytes": 1343783,
       "sha256": "82d8b8467964bad0f23b4b4f0e2a201458a60e57ab149ef5a673c7ce4ef76611",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -977,12 +977,12 @@
       "size_bytes": 724895,
       "sha256": "e268795105d7b7f325b677c4fd8a177014c086f317acc60305446b56b66f5eb8",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1029,12 +1029,12 @@
       "size_bytes": 1343385,
       "sha256": "bf83f1bb79da7d12cb1b285970cc4840bafb2a4f93e597f4a88343b8995f1891",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1067,12 +1067,12 @@
       "size_bytes": 724895,
       "sha256": "e268795105d7b7f325b677c4fd8a177014c086f317acc60305446b56b66f5eb8",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1135,12 +1135,12 @@
       "size_bytes": 2005952,
       "sha256": "e18173cefd5a983fcf08c29d5092352df7875d569c8d7888e64b6b2614ac53fd",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1173,12 +1173,12 @@
       "size_bytes": 724895,
       "sha256": "e268795105d7b7f325b677c4fd8a177014c086f317acc60305446b56b66f5eb8",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1200,12 +1200,12 @@
       "size_bytes": 322256,
       "sha256": "6947aad60e6726ac20551dc0c8c9cf7b777e563dd9e067fc4d516e83a79c6123",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1252,12 +1252,12 @@
       "size_bytes": 1343385,
       "sha256": "bf83f1bb79da7d12cb1b285970cc4840bafb2a4f93e597f4a88343b8995f1891",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1290,12 +1290,12 @@
       "size_bytes": 722765,
       "sha256": "36df978c8129887b40b468e1f3a256ec627e65f7d2ef6aad2e0fa9c9e74cb3b6",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1342,12 +1342,12 @@
       "size_bytes": 1341046,
       "sha256": "a35afc3beeb668701d4e0fd3aecc608df56c09cab30d8d5a6001f09ed07b4446",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1380,12 +1380,12 @@
       "size_bytes": 722765,
       "sha256": "36df978c8129887b40b468e1f3a256ec627e65f7d2ef6aad2e0fa9c9e74cb3b6",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1448,12 +1448,12 @@
       "size_bytes": 2003883,
       "sha256": "4cf7723e12d24ec869859693231953e1a14a009a4f69eac4db2c43230a56db2d",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1486,12 +1486,12 @@
       "size_bytes": 722765,
       "sha256": "36df978c8129887b40b468e1f3a256ec627e65f7d2ef6aad2e0fa9c9e74cb3b6",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1513,12 +1513,12 @@
       "size_bytes": 319829,
       "sha256": "cc0d0cda16abca525d4efc5f09dd9b0b387b44fc291aa4696e7f6b710bd6940a",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase2",
@@ -1565,12 +1565,12 @@
       "size_bytes": 1341046,
       "sha256": "a35afc3beeb668701d4e0fd3aecc608df56c09cab30d8d5a6001f09ed07b4446",
       "generating_script": "experiments/revision_phase2_fali_causal.py",
-      "config_path": null,
+      "config_path": "results/revision_phase2/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase2_fali_causal.py using results/revision_phase2/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase3c",
@@ -1635,7 +1635,7 @@
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Indexed raw output; likely produced by experiments/revision_phase3c_factorial.py; config_path unknown."
     },
     {
       "experiment": "revision_phase3c",
@@ -1692,12 +1692,12 @@
       "size_bytes": 1606713,
       "sha256": "8ea9d24a96786ef2450e5adff7d799399b082cf16858c871c1688ffa272e9069",
       "generating_script": "experiments/revision_phase3c_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase3c/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase3c_factorial.py using results/revision_phase3c/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase3c",
@@ -1754,12 +1754,12 @@
       "size_bytes": 1609195,
       "sha256": "6ede7b816d94aa7951338bbc13df6dfc2b868c98fab3859dcf897c2c2cb16309",
       "generating_script": "experiments/revision_phase3c_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase3c/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase3c_factorial.py using results/revision_phase3c/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase3c",
@@ -1816,12 +1816,12 @@
       "size_bytes": 1610080,
       "sha256": "dd9c69a203fad74fafa4f81b9ce1f3491745095d0d4f3eaf8a05b31e32ef715f",
       "generating_script": "experiments/revision_phase3c_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase3c/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase3c_factorial.py using results/revision_phase3c/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase3c",
@@ -1878,12 +1878,12 @@
       "size_bytes": 1606269,
       "sha256": "05749d49cdf1937827c1f6302267d06d63828ccfd1c19fd2b9416a15406f7b87",
       "generating_script": "experiments/revision_phase3c_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase3c/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase3c_factorial.py using results/revision_phase3c/full/seed_8/run_config.json."
     },
     {
       "experiment": "revision_phase4",
@@ -1937,12 +1937,12 @@
       "size_bytes": 6435146,
       "sha256": "a236951bd1c9d7fed5e5b620b6cbb1722ec1f43ebb29ed5f87250596a66041bc",
       "generating_script": "experiments/revision_phase4_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase4/full/seed_1/run_config.json",
       "seeds": [
         1
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase4_factorial.py using results/revision_phase4/full/seed_1/run_config.json."
     },
     {
       "experiment": "revision_phase4",
@@ -1996,12 +1996,12 @@
       "size_bytes": 6443854,
       "sha256": "b243ba241259fc2f7fecd4d0d300009191651cda8bf9f2a81f16e6764ba56feb",
       "generating_script": "experiments/revision_phase4_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase4/full/seed_22/run_config.json",
       "seeds": [
         22
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase4_factorial.py using results/revision_phase4/full/seed_22/run_config.json."
     },
     {
       "experiment": "revision_phase4",
@@ -2055,12 +2055,12 @@
       "size_bytes": 6445467,
       "sha256": "d0f8a65e9f43dae83463c54b980a3d2a2c6f9cdefa0d6b2800cf8be85fd17d04",
       "generating_script": "experiments/revision_phase4_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase4/full/seed_42/run_config.json",
       "seeds": [
         42
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase4_factorial.py using results/revision_phase4/full/seed_42/run_config.json."
     },
     {
       "experiment": "revision_phase4",
@@ -2114,12 +2114,12 @@
       "size_bytes": 6435252,
       "sha256": "e9f566b39191499fd8e6ee5d6ee6f57e015a1b33f5b9c8f59e0f2dba6c05115d",
       "generating_script": "experiments/revision_phase4_factorial.py",
-      "config_path": null,
+      "config_path": "results/revision_phase4/full/seed_8/run_config.json",
       "seeds": [
         8
       ],
       "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate via generating_script + run_config.json."
+      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/revision_phase4_factorial.py using results/revision_phase4/full/seed_8/run_config.json."
     }
   ]
 }
