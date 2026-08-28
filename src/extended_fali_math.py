@@ -186,6 +186,14 @@ def admissible_owen_permutations(
     norm_groups = tuple(tuple(g) for g in groups)
     if not norm_groups:
         return tuple()
+    for g in norm_groups:
+        if not g:
+            raise ValueError("groups must be non-empty")
+        if len(g) != len(set(g)):
+            raise ValueError(f"duplicate player within group: {g}")
+    flat = [p for g in norm_groups for p in g]
+    if len(flat) != len(set(flat)):
+        raise ValueError("player appears in multiple blocks")
     block_indices = tuple(range(len(norm_groups)))
     perms: List[Tuple[Player, ...]] = []
     for block_order in itertools.permutations(block_indices):
@@ -387,6 +395,30 @@ def verify_efficiency(
     return abs(total - (grand - empty))
 
 
+def verify_owen_quotient_shapley_consistency(
+    players: Sequence[Player],
+    groups: Sequence[Sequence[Player]],
+    char_fn: CharFn,
+    owen_phi: Mapping[Player, float],
+) -> Dict[str, float]:
+    """
+    Return absolute residuals: sum of Owen attributions per block vs ordinary
+    quotient Shapley for that block.
+
+    Works for arbitrary coalition partitions (not only singleton tail blocks).
+    """
+    p = _validate_players(players)
+    norm_groups = _validate_groups(p, groups)
+    meta_players, v_q = quotient_game(p, norm_groups, char_fn)
+    q_phi = shapley_value(meta_players, v_q)
+    residuals: Dict[str, float] = {}
+    for idx, group in enumerate(norm_groups):
+        block_sum = sum(float(owen_phi[name]) for name in group)
+        meta = meta_players[idx]
+        residuals[f"block_{idx}_{meta}"] = abs(block_sum - q_phi[meta])
+    return residuals
+
+
 def verify_quotient_consistency(
     players: Sequence[Player],
     groups: Sequence[Sequence[Player]],
@@ -395,26 +427,15 @@ def verify_quotient_consistency(
     *,
     atol: float = 1e-12,
 ) -> Dict[str, float]:
-    """
-    Return absolute residuals for standard Owen vs ordinary quotient Shapley blocks.
-
-    Requires phi_T+phi_R+phi_O = Shapley_q(SCORE), etc.
-    """
-    p = _validate_players(players)
-    norm_groups = _validate_groups(p, groups)
-    meta_players, v_q = quotient_game(p, norm_groups, char_fn)
-    q_phi = shapley_value(meta_players, v_q)
-
-    score_players = norm_groups[0]
-    score_sum = sum(float(owen_phi[x]) for x in score_players)
-    value_player = norm_groups[1][0]
-    context_player = norm_groups[2][0]
-
-    return {
-        "score_block": abs(score_sum - q_phi[meta_players[0]]),
-        "value_player": abs(float(owen_phi[value_player]) - q_phi[meta_players[1]]),
-        "context_player": abs(float(owen_phi[context_player]) - q_phi[meta_players[2]]),
-    }
+    """Backward-compatible alias exposing SCORE/VALUE/CONTEXT keys for Extended FALI."""
+    residuals = verify_owen_quotient_shapley_consistency(players, groups, char_fn, owen_phi)
+    if len(residuals) == 3 and "block_0_G0" in residuals:
+        return {
+            "score_block": residuals["block_0_G0"],
+            "value_player": residuals["block_1_G1"],
+            "context_player": residuals["block_2_G2"],
+        }
+    return residuals
 
 
 def compare_owen_implementations(

@@ -52,6 +52,13 @@ def test_admissible_permutation_count_and_uniqueness():
     assert N_EXTENDED_FALI_ADMISSIBLE_PERMUTATIONS == 36
 
 
+def test_admissible_permutations_rejects_invalid_groups():
+    with pytest.raises(ValueError):
+        admissible_owen_permutations([("T", "R"), ("O", "T")])
+    with pytest.raises(ValueError):
+        admissible_owen_permutations([()])
+
+
 def test_constant_game_zero_attribution():
     char_fn = constant_char_fn(PLAYERS, 1.0)
     phi, perm = _owen(char_fn)
