@@ -7,6 +7,7 @@ Used by EF-2 smoke validation only; not scientific inference code.
 from __future__ import annotations
 
 import hashlib
+from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 import pandas as pd
@@ -189,8 +190,10 @@ def owen_diagnostics(table: CellTable) -> Dict[str, float]:
         EXTENDED_FALI_PLAYERS, EXTENDED_FALI_GROUPS, char_fn, owen
     )
     phi_score = owen["T"] + owen["R"] + owen["O"]
-    q = extended_fali_quotient_shapley(char_fn)
-    max_block = max(block_res.values()) if block_res else 0.0
+    score_res = float(block_res.get("block_0_G0", 0.0))
+    value_res = float(block_res.get("block_1_G1", 0.0))
+    context_res = float(block_res.get("block_2_G2", 0.0))
+    max_block = max(score_res, value_res, context_res)
     return {
         "owen_residual": residual,
         "phi_T": owen["T"],
@@ -199,12 +202,58 @@ def owen_diagnostics(table: CellTable) -> Dict[str, float]:
         "phi_V": owen["V"],
         "phi_C": owen["C"],
         "Phi_SCORE": phi_score,
-        "quotient_score_residual": max_block,
-        "quotient_value_residual": max_block,
-        "quotient_context_residual": max_block,
+        "quotient_score_residual": score_res,
+        "quotient_value_residual": value_res,
+        "quotient_context_residual": context_res,
         "quotient_block_max": max_block,
         "Delta_U": delta_u,
     }
+
+
+def file_sha256(path: Path) -> Optional[str]:
+    if not path.exists():
+        return None
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def snapshot_paths(repo: Path, relative_paths: Sequence[str]) -> Dict[str, Dict]:
+    snap: Dict[str, Dict] = {}
+    for rel in relative_paths:
+        p = repo / rel
+        st = p.stat() if p.exists() else None
+        snap[rel] = {"sha256": file_sha256(p), "size": st.st_size if st else None}
+    return snap
+
+
+def verify_historical_hash_integrity(
+    before: Dict[str, Dict],
+    after: Dict[str, Dict],
+    required_paths: Sequence[str],
+) -> Tuple[bool, Dict[str, str]]:
+    """
+    Verify required historical files exist and are unchanged.
+
+    Missing files => NOT_AVAILABLE and validation failure.
+    Never treat sha256=null before/after as integrity evidence.
+    """
+    checks: Dict[str, str] = {}
+    ok = True
+    for rel in required_paths:
+        b_hash = before.get(rel, {}).get("sha256")
+        a_hash = after.get(rel, {}).get("sha256")
+        if b_hash is None or a_hash is None:
+            checks[rel] = "NOT_AVAILABLE"
+            ok = False
+        elif b_hash != a_hash:
+            checks[rel] = "CHANGED"
+            ok = False
+        else:
+            checks[rel] = "UNCHANGED"
+    return ok, checks
 
 
 def historical_quotient_cells(table: CellTable) -> Dict[str, float]:
