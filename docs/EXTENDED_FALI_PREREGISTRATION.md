@@ -98,3 +98,55 @@ Implementation: `tests/test_extended_fali_math.py`.
 ## Status
 
 EF-0R: standard Owen mathematics + synthetic tests. **No model-level validation yet.**
+
+---
+
+## EF-1 — Synthetic ground-truth + tiny random transformer (frozen before implementation)
+
+EF-1 validates the score → pattern → value → z → causal-utility pipeline against
+standard Owen mathematics **before** GPT-2 / IOI / Modal. Not scientific evidence.
+
+### Level A — Hand-constructed tensor micro-system (float64)
+
+| Criterion | Threshold |
+|-----------|-----------|
+| T/R/O partition disjointness & coverage | exact; masked coords excluded |
+| Masked attention probability | ≤ 1e−8 on invalid coords |
+| Variable valid seq lengths / padding | included in partition tests |
+| Five single-channel cases (T,R,O,V,C) | intended factor = Δ_U; others < 1e−12 |
+| T×C pipeline interaction | φ_T = φ_C = Δ_U/2; others < 1e−12 |
+| Endpoint reconstruction (all-A / all-B) | max error < 1e−12 |
+| Δ_U = U(11111)−U(00000) vs direct conditional_gain | max error < 1e−12 |
+| Quotient bridge vs `three_factor_shapley` | max error < 1e−12 |
+
+### Level B — Tiny random HookedTransformer (CPU, FP32, no download)
+
+Architecture (fixed): `n_layers=2`, `n_heads=2`, `d_model=32`, `d_head=16`,
+`d_mlp=64`, `n_ctx=8`, `d_vocab=48`, seed **4242**.
+
+| Criterion | Threshold |
+|-----------|-----------|
+| Score → pattern vs cached hook_pattern (A/B) | max error ≤ **2e−6** |
+| z = P @ V vs cached hook_z (A/B) | max error ≤ **2e−6** |
+| Endpoint U(00000) vs intact_effect | ≤ **1e−5** |
+| Endpoint U(11111) vs conditional_effect | ≤ **1e−5** |
+| U(11111)−U(00000) vs conditional_gain | ≤ **1e−5** |
+| No-live-candidate-leak (one hybrid cell) | ≤ **1e−6** |
+| Quotient bridge vs `three_factor_shapley` | max error ≤ **1e−5** |
+
+PRIMARY = layer 0 head 0; CANDIDATE = layer 1 head 0. Metric = final-position logit
+difference between two fixed vocabulary indices. No IOI semantics.
+
+### Failure policy
+
+If **any** preregistered primary criterion fails: STOP, report cause, do not patch
+thresholds post hoc, do not proceed to GPT-2.
+
+### Deliverables
+
+- `src/extended_fali_interventions.py`
+- `experiments/extended_fali_ef1_synthetic.py`
+- `results/extended_fali/ef1_synthetic/validation_report.json`
+- `tests/test_extended_fali_interventions.py`
+- `tests/test_extended_fali_synthetic_transformer.py`
+
