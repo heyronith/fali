@@ -1,0 +1,17 @@
+{
+  "phase": "EF-4",
+  "num_samples": 900,
+  "seed": 22,
+  "model": "gpt2-small",
+  "dtype": "float32",
+  "dataset_kind": "canonical",
+  "head_names": [
+    "L9H7",
+    "L9H0",
+    "L10H2",
+    "L10H10"
+  ],
+  "preregistration_sha": "2661459f047f65fabc418993d00e3bb06cc0b3b6",
+  "duration_sec": 146.0994746685028,
+  "timestamp_utc": "2026-08-28T21:33:29.846862+00:00"
+}

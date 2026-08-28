@@ -412,7 +412,8 @@ def run_analysis(repo_root: Path, aggregate_dir: Path, *, preregistration_sha: s
 
     for head in EF4_HEADS:
         sub = df[df["head_name"] == head]
-        for metric in list(DESCRIPTIVE_METRICS) + ("phi_T", "phi_R"):
+        metrics = list(DESCRIPTIVE_METRICS) + ["phi_T", "phi_R"]
+        for metric in metrics:
             if metric not in sub.columns:
                 continue
             values = sub[metric].values

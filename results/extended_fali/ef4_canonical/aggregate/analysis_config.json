@@ -1,0 +1,21 @@
+{
+  "phase": "EF-4",
+  "preregistration_sha": "2661459f047f65fabc418993d00e3bb06cc0b3b6",
+  "seeds": [
+    42,
+    1,
+    8,
+    22
+  ],
+  "heads": [
+    "L9H7",
+    "L9H0",
+    "L10H2",
+    "L10H10"
+  ],
+  "n_per_seed": 900,
+  "n_bootstrap": 10000,
+  "point_estimate": "observed_canonical_balanced_mean",
+  "bootstrap": "hierarchical_template_cluster_bootstrap_means (Phase-4C corrected)",
+  "strict_nonoverlap": "exclude template_id=0 entirely (28 strata, 14 clusters)"
+}

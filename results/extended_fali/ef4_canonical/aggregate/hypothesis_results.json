@@ -1,0 +1,154 @@
+{
+  "architectural": {
+    "L9H7": {
+      "max_abs_phi_T": 0.0,
+      "max_abs_phi_R": 0.0,
+      "max_abs_phi_O": 0.0,
+      "max_abs_phi_V": 0.0,
+      "max_context_residual": 1.1102230246251565e-16,
+      "architectural_pass": true
+    },
+    "L9H0": {
+      "max_abs_phi_T": 0.0,
+      "max_abs_phi_R": 0.0,
+      "max_abs_phi_O": 0.0,
+      "max_abs_phi_V": 0.0,
+      "max_context_residual": 1.1102230246251565e-16,
+      "architectural_pass": true
+    }
+  },
+  "hypotheses": {
+    "H1_L10H2_phi_T_positive": {
+      "hypothesis_id": "H1_L10H2_phi_T_positive",
+      "head": "L10H2",
+      "metric": "phi_T",
+      "direction": "positive",
+      "exact_mean": 0.7828059418444279,
+      "ci_low": 0.7217917667529833,
+      "ci_high": 0.8394803037720697,
+      "seed_means": {
+        "42": 0.7918369034926094,
+        "1": 0.7842798294991623,
+        "8": 0.7830244778998103,
+        "22": 0.7720825564861297
+      },
+      "n_strata_correct": 30,
+      "n_strata_total": 30,
+      "BROAD_CONFIRMED": true,
+      "STRONG": true,
+      "strict_nonoverlap_mean": 0.7764930116199942,
+      "strict_nonoverlap_ci_low": 0.7133285061394173,
+      "strict_nonoverlap_ci_high": 0.836204301539375,
+      "strict_nonoverlap_seed_means": {
+        "42": 0.7794252152953828,
+        "1": 0.7825733746643418,
+        "8": 0.7826316262679124,
+        "22": 0.7613418302523397
+      },
+      "STRICT_NONOVERLAP_PASS": true,
+      "magnitude_threshold": null,
+      "magnitude_ratio": null,
+      "magnitude_pass": null,
+      "FINAL_CONFIRMED": true
+    },
+    "H2_L10H2_phi_R_negative": {
+      "hypothesis_id": "H2_L10H2_phi_R_negative",
+      "head": "L10H2",
+      "metric": "phi_R",
+      "direction": "negative",
+      "exact_mean": -0.3414187702646962,
+      "ci_low": -0.371764329318463,
+      "ci_high": -0.31035792004307844,
+      "seed_means": {
+        "42": -0.34416417386796744,
+        "1": -0.3414989280111996,
+        "8": -0.33968802908320483,
+        "22": -0.340323950096413
+      },
+      "n_strata_correct": 30,
+      "n_strata_total": 30,
+      "BROAD_CONFIRMED": true,
+      "STRONG": true,
+      "strict_nonoverlap_mean": -0.3373615804015013,
+      "strict_nonoverlap_ci_low": -0.3692891078865126,
+      "strict_nonoverlap_ci_high": -0.3058122373254053,
+      "strict_nonoverlap_seed_means": {
+        "42": -0.3383779340320164,
+        "1": -0.3384240794434118,
+        "8": -0.33752566976522,
+        "22": -0.335118638365357
+      },
+      "STRICT_NONOVERLAP_PASS": true,
+      "magnitude_threshold": 0.044525150881873234,
+      "magnitude_ratio": 0.766799805284191,
+      "magnitude_pass": true,
+      "FINAL_CONFIRMED": true
+    },
+    "H3_L10H10_phi_T_positive": {
+      "hypothesis_id": "H3_L10H10_phi_T_positive",
+      "head": "L10H10",
+      "metric": "phi_T",
+      "direction": "positive",
+      "exact_mean": 0.32852382434739014,
+      "ci_low": 0.29984732401545766,
+      "ci_high": 0.3552304516181717,
+      "seed_means": {
+        "42": 0.33516190677513313,
+        "1": 0.32298215655632967,
+        "8": 0.3360340919023679,
+        "22": 0.31991714215572975
+      },
+      "n_strata_correct": 30,
+      "n_strata_total": 30,
+      "BROAD_CONFIRMED": true,
+      "STRONG": true,
+      "strict_nonoverlap_mean": 0.32502189754020594,
+      "strict_nonoverlap_ci_low": 0.29433023807676456,
+      "strict_nonoverlap_ci_high": 0.35306106375747176,
+      "strict_nonoverlap_seed_means": {
+        "42": 0.33150432483544423,
+        "1": 0.3160018613256474,
+        "8": 0.33278890230037544,
+        "22": 0.3197925016993568
+      },
+      "STRICT_NONOVERLAP_PASS": true,
+      "magnitude_threshold": null,
+      "magnitude_ratio": null,
+      "magnitude_pass": null,
+      "FINAL_CONFIRMED": true
+    },
+    "H4_L10H10_phi_R_negative": {
+      "hypothesis_id": "H4_L10H10_phi_R_negative",
+      "head": "L10H10",
+      "metric": "phi_R",
+      "direction": "negative",
+      "exact_mean": -0.12590736987414178,
+      "ci_low": -0.13828493342925732,
+      "ci_high": -0.1132729796281567,
+      "seed_means": {
+        "42": -0.12626598606874911,
+        "1": -0.12235768113607239,
+        "8": -0.1278726419107413,
+        "22": -0.12713317038100438
+      },
+      "n_strata_correct": 30,
+      "n_strata_total": 30,
+      "BROAD_CONFIRMED": true,
+      "STRONG": true,
+      "strict_nonoverlap_mean": -0.1232252459204386,
+      "strict_nonoverlap_ci_low": -0.13552759695581337,
+      "strict_nonoverlap_ci_high": -0.1111455388322827,
+      "strict_nonoverlap_seed_means": {
+        "42": -0.12235756946934592,
+        "1": -0.11857442204599024,
+        "8": -0.12501869554872863,
+        "22": -0.12695029661768956
+      },
+      "STRICT_NONOVERLAP_PASS": true,
+      "magnitude_threshold": 0.02062508994340896,
+      "magnitude_ratio": 0.6104573130086022,
+      "magnitude_pass": true,
+      "FINAL_CONFIRMED": true
+    }
+  }
+}
