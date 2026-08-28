@@ -1,0 +1,9 @@
+example_idx,low_level_template_id,pattern_type,template_stratum,prompt,S,IO,S1_position,S2_position,IO_position,end_position,place,object,seed
+0,0,BABA,T00_BABA,"Then, Gregory and Daniel went to the school. Gregory gave a basketball to",Gregory,Daniel,3,11,5,15,school,basketball,42
+1,0,BABA,T00_BABA,"Then, Daniel and Kristen went to the garden. Daniel gave a ring to",Daniel,Kristen,3,11,5,15,garden,ring,42
+2,0,BABA,T00_BABA,"Then, Allison and Tiffany went to the house. Allison gave a necklace to",Allison,Tiffany,3,11,5,15,house,necklace,42
+3,0,BABA,T00_BABA,"Then, Erica and Michelle went to the house. Erica gave a basketball to",Erica,Michelle,3,11,5,15,house,basketball,42
+4,0,BABA,T00_BABA,"Then, Crystal and Timothy went to the station. Crystal gave a drink to",Crystal,Timothy,3,11,5,15,station,drink,42
+5,0,BABA,T00_BABA,"Then, Rachel and Erin went to the hospital. Rachel gave a basketball to",Rachel,Erin,3,11,5,15,hospital,basketball,42
+6,0,BABA,T00_BABA,"Then, Danielle and Stephanie went to the hospital. Danielle gave a snack to",Danielle,Stephanie,3,11,5,15,hospital,snack,42
+7,0,BABA,T00_BABA,"Then, Kristen and Joshua went to the restaurant. Kristen gave a necklace to",Kristen,Joshua,3,11,5,15,restaurant,necklace,42

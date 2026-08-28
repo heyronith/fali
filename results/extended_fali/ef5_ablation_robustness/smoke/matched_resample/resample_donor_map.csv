@@ -1,0 +1,9 @@
+recipient_example_idx,donor_example_idx,template_stratum,end_position,recipient_S,recipient_IO,donor_S,donor_IO
+0,2,T00_BABA,15,Gregory,Daniel,Allison,Tiffany
+1,7,T00_BABA,15,Daniel,Kristen,Kristen,Joshua
+2,7,T00_BABA,15,Allison,Tiffany,Kristen,Joshua
+3,1,T00_BABA,15,Erica,Michelle,Daniel,Kristen
+4,6,T00_BABA,15,Crystal,Timothy,Danielle,Stephanie
+5,7,T00_BABA,15,Rachel,Erin,Kristen,Joshua
+6,5,T00_BABA,15,Danielle,Stephanie,Rachel,Erin
+7,2,T00_BABA,15,Kristen,Joshua,Allison,Tiffany

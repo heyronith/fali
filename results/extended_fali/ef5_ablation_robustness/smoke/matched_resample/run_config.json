@@ -1,0 +1,17 @@
+{
+  "phase": "EF-5-smoke",
+  "damage_scheme": "matched_resample",
+  "num_samples": 8,
+  "seed": 42,
+  "model": "gpt2-small",
+  "dtype": "float32",
+  "head_names": [
+    "L9H7",
+    "L9H0",
+    "L10H2",
+    "L10H10"
+  ],
+  "preregistration_sha": "835b031db76b47022c74e796ab9e5d6f8d16f40b",
+  "duration_sec": 25.874473810195923,
+  "timestamp_utc": "2026-08-28T22:06:09.993793+00:00"
+}

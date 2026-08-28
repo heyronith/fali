@@ -1,0 +1,7 @@
+{
+  "overall_pass": true,
+  "schemes": {
+    "matched_mean": true,
+    "matched_resample": true
+  }
+}

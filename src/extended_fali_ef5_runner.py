@@ -137,8 +137,14 @@ def compute_damage_drop(
     return clean_ios - damaged_ios
 
 
-def _dataset_view(end: torch.Tensor, io: torch.Tensor, batch_size: int):
-    """Minimal dataset view for IO-S computation on a token subset."""
+def _dataset_view(
+    end: torch.Tensor,
+    io: torch.Tensor,
+    tokens: torch.Tensor,
+    io_token_ids: torch.Tensor,
+    s_token_ids: torch.Tensor,
+):
+    """Minimal dataset view for IO-S computation and partition on a token subset."""
 
     class View:
         pass
@@ -146,7 +152,10 @@ def _dataset_view(end: torch.Tensor, io: torch.Tensor, batch_size: int):
     v = View()
     v.end = end
     v.IO = io
-    v.batch_size = batch_size
+    v.io_token_ids = io_token_ids
+    v.s_token_ids = s_token_ids
+    v.batch_size = tokens.shape[0]
+    v.clean_tokens = tokens
     return v
 
 
@@ -188,15 +197,19 @@ def run_ef5_seed(cfg: EF5RunConfig, repo_root: Path) -> Dict:
             meta["example_idx"] = list(range(len(meta)))
             dataset_end = dataset.end[idx].to(cfg.device)
             dataset_io = dataset.IO[idx].to(cfg.device)
+            io_tok = dataset.io_token_ids[idx].to(cfg.device)
+            s_tok = dataset.s_token_ids[idx].to(cfg.device)
         else:
             idx = list(range(dataset.batch_size))
             tokens = tokens_full
             meta = meta_full
             dataset_end = dataset.end.to(cfg.device)
             dataset_io = dataset.IO.to(cfg.device)
+            io_tok = dataset.io_token_ids.to(cfg.device)
+            s_tok = dataset.s_token_ids.to(cfg.device)
 
         batch_size = len(idx)
-        ds_view = _dataset_view(dataset_end, dataset_io, batch_size)
+        ds_view = _dataset_view(dataset_end, dataset_io, tokens, io_tok, s_tok)
         meta.to_csv(cfg.out_dir / "dataset_metadata.csv", index=False)
         ref_meta = pd.read_csv(cfg.reference_meta)
         if cfg.example_indices is None:
@@ -303,9 +316,9 @@ def run_ef5_seed(cfg: EF5RunConfig, repo_root: Path) -> Dict:
                 pass  # post-end check below
 
             hooks_a0 = build_factorial_fwd_hooks((layer, head), context_B=False, z_head=None, zero_candidate=True)
-            hooks_b0 = build_factorial_fwd_hooks((layer, head), context_B=True, z_head=None, zero_candidate=True)
+            hooks_b0 = build_factorial_fwd_hooks((layer, head), context_B=False, z_head=None, zero_candidate=True)
             hooks_ap = build_factorial_fwd_hooks((layer, head), context_B=False, z_head=None, zero_candidate=False)
-            hooks_bp = build_factorial_fwd_hooks((layer, head), context_B=True, z_head=None, zero_candidate=False)
+            hooks_bp = build_factorial_fwd_hooks((layer, head), context_B=False, z_head=None, zero_candidate=False)
 
             def combine(primary, factorial):
                 return list(primary) + list(factorial)
@@ -325,7 +338,7 @@ def run_ef5_seed(cfg: EF5RunConfig, repo_root: Path) -> Dict:
                     scores_a, scores_b, v_a, v_b, partition, state
                 )
                 hooks_inj = build_factorial_fwd_hooks(
-                    (layer, head), context_B=bool(state[4]), z_head=z_hybrid, zero_candidate=False
+                    (layer, head), context_B=False, z_head=z_hybrid, zero_candidate=False
                 )
                 ctx_primary = damage_hooks if state[4] else []
                 metric_inj = ios_with(model, tokens, ds_view, combine(ctx_primary, hooks_inj))
