@@ -31,16 +31,19 @@ Full tracked list available via `git ls-files`.
 - `submission_tmlr/math_commands.tex` — gitignored submission/private copy; archived under archive/manuscripts/
 - `submission_tmlr/references.bib` — gitignored submission/private copy; archived under archive/manuscripts/
 
-## Untracked relevant files (pending commit in this audit)
+## Untracked relevant files (resolved at `pre-extended-fali-audited`)
 
-- `CODEBASE_INVENTORY.md` — review locally; commit if intended for baseline
-- `archive/manuscripts/README.md` — new archive copies — commit in docs baseline fix
-- `archive/manuscripts/tmlr_rejected_main.tex` — new archive copies — commit in docs baseline fix
-- `archive/manuscripts/tmlr_rejected_math_commands.tex` — new archive copies — commit in docs baseline fix
-- `archive/manuscripts/tmlr_rejected_references.bib` — new archive copies — commit in docs baseline fix
-- `docs/LEGACY_README_PRE_REVISION.md` — new audit tooling/docs — commit in baseline fix
-- `tests/test_build_results_manifests.py` — new audit tooling/docs — commit in baseline fix
-- `tools/capture_baseline_environment.py` — new audit tooling/docs — commit in baseline fix
+The following were committed in the baseline audit repair (HEAD `2c03998`) and are
+**no longer untracked**:
+
+- `CODEBASE_INVENTORY.md`
+- `archive/manuscripts/*`
+- `docs/LEGACY_README_PRE_REVISION.md`
+- `tests/test_build_results_manifests.py`
+- `tools/capture_baseline_environment.py`
+
+Remaining local-only scientific-adjacent paths are listed under **Ignored** above
+(e.g. `submission_tmlr/` originals, `private_camera_ready/`).
 
 ## Disposition summary
 

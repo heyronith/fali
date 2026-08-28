@@ -1,7 +1,10 @@
 # Research State — Pre-Extended-FALI Baseline
 
-Factual snapshot as of repository tag `pre-extended-fali-audited` (successor audit to unchanged `pre-extended-fali-baseline`).  
-No new experiments; no Extended FALI implementation yet.
+Factual snapshot as of repository tag `pre-extended-fali-audited` (successor audit to unchanged `pre-extended-fali-baseline`).
+
+**EF-0 update:** Extended FALI mathematical specification implemented and synthetically algebra-tested; no model-level validation yet.
+
+No GPT-2 / Modal empirical runs for Extended FALI.
 
 ---
 
@@ -86,11 +89,17 @@ With endpoint notation above: H000 ↔ comparison involving **A_h** vs **D_h**; 
 
 ---
 
-## F. Current research direction (not yet implemented)
+## F. Current research direction (EF-0 formalization)
 
-**Candidate direction:** Extended / Causal FALI — explain changes in a candidate attention head's causal usefulness through structured interventions over attention-score computation, value content, and surrounding-network context, with a nested target-versus-competitor decomposition inside the attention-score channel.
+**Extended / Causal FALI** — hierarchical five-player Owen attribution of candidate-head
+causal usefulness Δ_U over score blocks (T,R,O), value (V), and context (C).
 
-**This is a candidate direction only.** No formal definition, proof, or implementation in this baseline.
+**EF-0 status:** Formal spec + pure game mathematics in `src/extended_fali_math.py`;
+synthetic algebra tests pass. See `docs/EXTENDED_FALI_FORMAL_SPEC.md` and
+`docs/EXTENDED_FALI_PREREGISTRATION.md`.
+
+**Not yet done:** TransformerLens implementation, synthetic transformer ground-truth,
+GPT-2 IOI runs, empirical head hypotheses.
 
 ---
 
