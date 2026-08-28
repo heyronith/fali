@@ -340,6 +340,53 @@ def align_dataset_to_reference(
     return "PASS", lines
 
 
+def align_canonical_dataset_to_reference(
+    meta: pd.DataFrame,
+    reference_csv: pd.DataFrame,
+    *,
+    token_tensor: Optional[torch.Tensor] = None,
+) -> Tuple[str, List[str]]:
+    """Compare canonical StandardIOI metadata to frozen Phase-4 reference."""
+    cols = [
+        "example_idx",
+        "low_level_template_id",
+        "pattern_type",
+        "template_stratum",
+        "prompt",
+        "S",
+        "IO",
+        "S1_position",
+        "S2_position",
+        "IO_position",
+        "end_position",
+        "place",
+        "object",
+    ]
+    ref = reference_csv.head(len(meta)).reset_index(drop=True)
+    gen = meta.reset_index(drop=True)
+    mismatches: List[str] = []
+    for c in cols:
+        if c not in gen.columns or c not in ref.columns:
+            mismatches.append(f"missing column {c}")
+            continue
+        for i in range(len(gen)):
+            a = str(gen.loc[i, c])
+            b = str(ref.loc[i, c])
+            if a != b:
+                mismatches.append(f"row {i} col {c}: generated={a!r} ref={b!r}")
+    lines = [f"Compared {len(gen)} canonical examples against Phase-4 reference."]
+    if mismatches:
+        lines.extend(mismatches[:20])
+        if len(mismatches) > 20:
+            lines.append(f"... and {len(mismatches) - 20} more")
+        return "FAIL", lines
+    lines.append("PASS: all metadata columns match.")
+    if token_tensor is not None:
+        h = hashlib.sha256(token_tensor.detach().cpu().numpy().tobytes()).hexdigest()
+        lines.append(f"token_tensor_sha256={h}")
+    return "PASS", lines
+
+
 def run_injection_scope_check(
     model,
     tokens: torch.Tensor,

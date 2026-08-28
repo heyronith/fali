@@ -35,6 +35,7 @@ from extended_fali_gpt2 import (
     SCORE_PATTERN_TOL,
     Z_RECON_TOL,
     align_dataset_to_reference,
+    align_canonical_dataset_to_reference,
     build_ioi_partition,
     cache_names_filter,
     compare_historical_cells,
@@ -57,11 +58,10 @@ from extended_fali_gpt2 import (
 )
 from extended_fali_interventions import CellTable, enumerate_extended_fali_cells, masked_softmax, score_pattern_z_pipeline
 from revision_config import PRIMARY_NAME_MOVERS, all_phase1_candidates, head_name_from_pair, role_for_head
-from revision_dataset import build_dataset_metadata, make_validated_ioi_dataset
+from revision_standard_ioi import StandardIOIDataset
 from revision_factorial import build_factorial_fwd_hooks
 from revision_interventions import build_zero_ablation_hooks
 
-N_HEADS = 12
 N_CELLS = 32
 
 
@@ -77,6 +77,10 @@ class RunConfig:
     device: str
     run_smoke_extras: bool = False
     compress_cells: bool = False
+    dataset_kind: str = "mixed"  # "mixed" | "canonical"
+    num_per_stratum: int = 30
+    head_names: Optional[Sequence[str]] = None
+    preregistration_sha: Optional[str] = None
 
 
 def resolve_device(requested: Optional[str]) -> str:
@@ -128,32 +132,62 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
         )
         model.eval()
 
-        dataset = make_validated_ioi_dataset(
-            model, num_samples=cfg.num_samples, seed=cfg.seed, template_style="mixed"
-        )
-        tokens = dataset.clean_tokens.to(cfg.device)
-        meta = build_dataset_metadata(dataset)
-        meta.to_csv(cfg.out_dir / "dataset_metadata.csv", index=False)
+        if cfg.dataset_kind == "canonical":
+            dataset = StandardIOIDataset(
+                model, num_per_stratum=cfg.num_per_stratum, seed=cfg.seed
+            )
+            if cfg.num_samples != dataset.num_samples:
+                raise AssertionError(
+                    f"canonical N={cfg.num_samples} != dataset.num_samples={dataset.num_samples}"
+                )
+            tokens = dataset.clean_tokens.to(cfg.device)
+            meta = dataset.metadata_df.copy()
+            meta.to_csv(cfg.out_dir / "dataset_metadata.csv", index=False)
+            ref_meta = pd.read_csv(cfg.reference_meta)
+            align_status, align_lines = align_canonical_dataset_to_reference(
+                meta, ref_meta, token_tensor=dataset.clean_tokens
+            )
+        else:
+            from revision_dataset import build_dataset_metadata, make_validated_ioi_dataset
 
-        ref_meta = pd.read_csv(cfg.reference_meta)
-        align_status, align_lines = align_dataset_to_reference(
-            meta, ref_meta, token_tensor=dataset.clean_tokens
-        )
+            dataset = make_validated_ioi_dataset(
+                model, num_samples=cfg.num_samples, seed=cfg.seed, template_style="mixed"
+            )
+            tokens = dataset.clean_tokens.to(cfg.device)
+            meta = build_dataset_metadata(dataset)
+            meta.to_csv(cfg.out_dir / "dataset_metadata.csv", index=False)
+            ref_meta = pd.read_csv(cfg.reference_meta)
+            align_status, align_lines = align_dataset_to_reference(
+                meta, ref_meta, token_tensor=dataset.clean_tokens
+            )
         (cfg.out_dir / "dataset_alignment_report.md").write_text(
             f"# Dataset alignment ({cfg.phase} seed {cfg.seed})\n\n" + "\n".join(align_lines) + "\n"
         )
         if align_status != "PASS":
             raise AssertionError("Dataset alignment FAILED")
 
-        n_a = int((meta["template_id"] == "A").sum())
-        n_b = int((meta["template_id"] == "B").sum())
-        if cfg.num_samples == 200 and (n_a != 100 or n_b != 100):
-            raise AssertionError(f"Expected 100/100 A/B, got {n_a}/{n_b}")
+        if cfg.dataset_kind == "mixed":
+            n_a = int((meta["template_id"] == "A").sum())
+            n_b = int((meta["template_id"] == "B").sum())
+            if cfg.num_samples == 200 and (n_a != 100 or n_b != 100):
+                raise AssertionError(f"Expected 100/100 A/B, got {n_a}/{n_b}")
+        elif cfg.dataset_kind == "canonical":
+            n_strata = meta.groupby(["low_level_template_id", "pattern_type"]).size()
+            if not (n_strata == cfg.num_per_stratum).all():
+                raise AssertionError(f"Unbalanced canonical strata: {n_strata.to_dict()}")
 
         partition = build_ioi_partition(dataset, cfg.device)
         part_diag = partition_diagnostics(partition)
 
         candidates = all_phase1_candidates()
+        if cfg.head_names is not None:
+            allowed = set(cfg.head_names)
+            candidates = [
+                (l, h) for l, h in candidates if head_name_from_pair((l, h)) in allowed
+            ]
+            if len(candidates) != len(cfg.head_names):
+                raise AssertionError(f"Head filter mismatch: got {[head_name_from_pair(c) for c in candidates]}")
+        n_heads = len(candidates)
         layers = sorted({l for l, _ in candidates} | {l for l, _ in PRIMARY_NAME_MOVERS})
         names_filter = cache_names_filter(layers)
         primary_hooks = build_zero_ablation_hooks(PRIMARY_NAME_MOVERS)
@@ -322,34 +356,37 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
                     {"example_idx": i, "head_name": hname, **{f"err_{k}": v for k, v in {**h_errs, **phi_errs}.items()}}
                 )
 
-                tmpl = meta.iloc[i]["template_id"]
-                attr_rows.append(
-                    {
-                        "seed": cfg.seed,
-                        "example_idx": i,
-                        "template_id": tmpl,
-                        "head_name": hname,
-                        "layer": layer,
-                        "head": head,
-                        "head_role": role,
-                        "intact_effect": intact_i,
-                        "conditional_effect": cond_i,
-                        "conditional_gain": gain_i,
-                        "U00000": u0,
-                        "U11111": u1,
-                        "phi_T": diag["phi_T"],
-                        "phi_R": diag["phi_R"],
-                        "phi_O": diag["phi_O"],
-                        "phi_V": diag["phi_V"],
-                        "phi_C": diag["phi_C"],
-                        "Phi_SCORE": diag["Phi_SCORE"],
-                        "owen_residual": diag["owen_residual"],
-                        "clean_target_attn": clean_attn,
-                        "damaged_target_attn": damaged_attn,
-                        "delta_target_attn": damaged_attn - clean_attn,
-                        **desc,
-                    }
-                )
+                attr_row = {
+                    "seed": cfg.seed,
+                    "example_idx": i,
+                    "head_name": hname,
+                    "layer": layer,
+                    "head": head,
+                    "head_role": role,
+                    "intact_effect": intact_i,
+                    "conditional_effect": cond_i,
+                    "conditional_gain": gain_i,
+                    "U00000": u0,
+                    "U11111": u1,
+                    "phi_T": diag["phi_T"],
+                    "phi_R": diag["phi_R"],
+                    "phi_O": diag["phi_O"],
+                    "phi_V": diag["phi_V"],
+                    "phi_C": diag["phi_C"],
+                    "Phi_SCORE": diag["Phi_SCORE"],
+                    "owen_residual": diag["owen_residual"],
+                    "clean_target_attn": clean_attn,
+                    "damaged_target_attn": damaged_attn,
+                    "delta_target_attn": damaged_attn - clean_attn,
+                    **desc,
+                }
+                if "template_id" in meta.columns:
+                    attr_row["template_id"] = meta.iloc[i]["template_id"]
+                if "low_level_template_id" in meta.columns:
+                    attr_row["low_level_template_id"] = int(meta.iloc[i]["low_level_template_id"])
+                    attr_row["pattern_type"] = meta.iloc[i]["pattern_type"]
+                    attr_row["template_stratum"] = meta.iloc[i]["template_stratum"]
+                attr_rows.append(attr_row)
 
         post_snap = snapshot_paths(repo_root, cfg.required_hash_paths)
         hash_ok, hash_checks = verify_historical_hash_integrity(pre_snap, post_snap, cfg.required_hash_paths)
@@ -358,8 +395,8 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
         pd.DataFrame(attr_rows).to_csv(cfg.out_dir / "attribution_raw.csv", index=False)
         pd.DataFrame(bridge_rows).to_csv(cfg.out_dir / "historical_bridge_comparison.csv", index=False)
 
-        expected_cells = N_HEADS * cfg.num_samples * N_CELLS
-        expected_attr = N_HEADS * cfg.num_samples
+        expected_cells = n_heads * cfg.num_samples * N_CELLS
+        expected_attr = n_heads * cfg.num_samples
 
         checks = {
             "dataset_alignment": True,
@@ -429,6 +466,9 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
             "seed": cfg.seed,
             "model": "gpt2-small",
             "dtype": "float32",
+            "dataset_kind": cfg.dataset_kind,
+            "head_names": list(cfg.head_names) if cfg.head_names else None,
+            "preregistration_sha": cfg.preregistration_sha,
             "duration_sec": time.time() - t0,
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         }
