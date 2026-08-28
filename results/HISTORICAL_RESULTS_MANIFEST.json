@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-28T19:42:52.404443+00:00",
+    "generated_at_utc": "2026-08-28T20:22:06.035654+00:00",
     "large_raw_threshold_bytes": 2097152,
-    "n_indexed_large_raw_files": 50,
-    "n_manifest_files": 471
+    "n_indexed_large_raw_files": 55,
+    "n_manifest_files": 523
   },
   "files": [
     {
@@ -25,6 +25,266 @@
       "relative_path": "results/extended_fali/ef1_synthetic/validation_report.json",
       "size_bytes": 8146,
       "sha256": "73b81986c995c3c5dbbc85fd0707a68076587aca3c2bc6330bbbaf4e598f798f"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/attribution_raw.csv",
+      "size_bytes": 28943,
+      "sha256": "573adef22a338533bdcbe734a28afc340fe35c234b074175a791f45e014641b7"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/cell_raw.csv",
+      "size_bytes": 254954,
+      "sha256": "73f03285992d48e8048eba26446e537418a19dd2b05aa705bc536beb6554117d"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/dataset_alignment_report.md",
+      "size_bytes": 186,
+      "sha256": "4ab83c42fa54f44397252ca868416090ebe9888ab5c06e065e54f9086e1ec52c"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/dataset_metadata.csv",
+      "size_bytes": 766,
+      "sha256": "333224134c93cdc54372f8a260d0e67a8e3ed8fd58031e45fb954ca6d763b007"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/environment.json",
+      "size_bytes": 355,
+      "sha256": "fe4e5efb740ed90f5c1784170ba856465fb91dd008c61bfe782600d2d0716b55"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/head_summary.csv",
+      "size_bytes": 764,
+      "sha256": "90f60d55ec23274cba7989adb6a63c63c85f73007ca7aca26324e1b17c634060"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/historical_bridge_comparison.csv",
+      "size_bytes": 16642,
+      "sha256": "92f2fff64488a0880548f44fda1a5fc7e7aa3b0557c090ce70b7f1c1acd0fae3"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/run_config.json",
+      "size_bytes": 657,
+      "sha256": "13b0639eb871e717f130d5e60720fa0ef463a9089d238bf8fa6f08a32d43cf6b"
+    },
+    {
+      "relative_path": "results/extended_fali/ef2_gpt2_smoke/validation_report.json",
+      "size_bytes": 3696,
+      "sha256": "b8d9f39fa2d21072d31914142f7ded9a54146d2c6ccee083549ab58b8faad79a"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/analysis_config.json",
+      "size_bytes": 203,
+      "sha256": "afca2f8308389bd1c0c7105720ecbad05091881b3bd17f67e00ba0967a6653bf"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv",
+      "size_bytes": 3282400,
+      "sha256": "196cc288451fcd7e427dc35cd8cf0e2f108b3b721906a873760fec276dbe192a"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/bootstrap_ci.csv",
+      "size_bytes": 19867,
+      "sha256": "03ffe50c825b299b441ece22b5a216e220a797ed562a885f27bc664049500d71"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/descriptive_vs_causal_correlations.csv",
+      "size_bytes": 1091,
+      "sha256": "1227a8209c8d56bdf2613b4854387c485ef1bc3ed5f1eee41fc4a19170e00558"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/exploratory_ro_discovery.json",
+      "size_bytes": 1901,
+      "sha256": "f305f19f353d19af89f85a304a0b73907abf5eb8ae61b25d1bfce7e3a33e862f"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/head_means.csv",
+      "size_bytes": 19738,
+      "sha256": "d2a41336dab408c9130677a5691cfc0d39eb9799c64538a686a2338e1e5f6ddd"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/hypothesis_results.json",
+      "size_bytes": 4321,
+      "sha256": "54f07e5a05b3d07ed6940922af7921ff8c208da9ba4e3b84b517a55c2b599dc5"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/l10h2_vs_l10h10.csv",
+      "size_bytes": 5257,
+      "sha256": "8b99df354da3158679a3ff3997a69422b8745dbd70b5a1082f597278a1a721c9"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/scientific_summary.md",
+      "size_bytes": 972,
+      "sha256": "924e9640d74d44e804d4416e6081f8d0820d6cdfcfcabe1ab829a834a7d6b0d0"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/seed_means.csv",
+      "size_bytes": 8820,
+      "sha256": "c10c23efe653b16194bb7b2f9e2f6711b4843cce17d08c760c6261c7db6d8a57"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/validation_summary.json",
+      "size_bytes": 1936,
+      "sha256": "76bb874274715c5903aead92ed3c3866faa7db9ca7f4ad06ad17e18cf8d30525"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/attribution_raw.csv",
+      "size_bytes": 857492,
+      "sha256": "e0afe5859bfc6937c2f9f1aef095adf70122dbee96f55b1268bc5ea4c66432d2"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/cell_raw.csv.gz",
+      "size_bytes": 1510121,
+      "sha256": "358a8badfdd4ae5af41b81b450bb1a4e6a143c11891233aa8e993b9b1304f7b0"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/dataset_alignment_report.md",
+      "size_bytes": 195,
+      "sha256": "f7603aca29431a5986447399a2b5ba20fffd4a937fef66c47878e979f499dc47"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/dataset_metadata.csv",
+      "size_bytes": 17403,
+      "sha256": "b0a2b1aaf606da4419627ec513303eed55faed200d4f9e20d3c6733810553fbd"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/historical_bridge_comparison.csv",
+      "size_bytes": 427545,
+      "sha256": "fff62ac56d7f5cad26495d7adb79afb7f649b15252b427c3fc85aa93c9bd6213"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/run_config.json",
+      "size_bytes": 196,
+      "sha256": "c2692eba8397a4dcc5fac999a3f45f0c9c4b78b74a6c7aa50e6a7a8233b294b9"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_1/validation_report.json",
+      "size_bytes": 13084,
+      "sha256": "1d0db34936eb88214372e348a7e3c53e404dc96a10f1011bb702cf54126cc58e"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/attribution_raw.csv",
+      "size_bytes": 859986,
+      "sha256": "d5600c2d15de86a090c06a864284c164a989babf4994192d30df277c02b269f0"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/cell_raw.csv.gz",
+      "size_bytes": 1517673,
+      "sha256": "b3872fdc6b840189d6dddb4138ef7bf075cec0d11dbdf3ca7ab53966b89e417e"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/dataset_alignment_report.md",
+      "size_bytes": 196,
+      "sha256": "7fc5b0f88131ed6105efa611f92184f3cecaeb5ae8281525f9c1e6c26d564f05"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/dataset_metadata.csv",
+      "size_bytes": 17441,
+      "sha256": "1cb64f34c441a2d13c3c0ac5b842b22268a4f0b7b5445847c3f5423e07393aa8"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/historical_bridge_comparison.csv",
+      "size_bytes": 424813,
+      "sha256": "2b1dddfd075d9c5ab04f936f48fc9761b3acf9fb299f9ea470d98f880f5ab1f2"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/run_config.json",
+      "size_bytes": 196,
+      "sha256": "723ba565ec551e8f55c2ed4c71999652c6b6c161523049bc334259e0113a992d"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_22/validation_report.json",
+      "size_bytes": 13088,
+      "sha256": "980ab4cba82a725e3d97c377f9e6de9d9ac4981e9e1ba1893deed593bb11d121"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/attribution_raw.csv",
+      "size_bytes": 860508,
+      "sha256": "a07bb5fa9d9111bcd2fb5caaabe22898a40e0eb904b12104b6fa02763cfecd56"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/cell_raw.csv.gz",
+      "size_bytes": 1517768,
+      "sha256": "1a3b4f7de32fd4639e96414acb3d330bb162a79c217313a5b3a52c6042673a84"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/dataset_alignment_report.md",
+      "size_bytes": 196,
+      "sha256": "a7b26835256b4b3d4378c2f1de795cc4c9329ff9a807213937d71bd3d53103b1"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/dataset_metadata.csv",
+      "size_bytes": 17386,
+      "sha256": "21a40ce3522d05b7afc7f3bac852b000865bc68b439831240e90c84385c648f0"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/historical_bridge_comparison.csv",
+      "size_bytes": 424475,
+      "sha256": "d0bc1332fb39f05813ee2c35e418c0e4e1fc047ed8c6550f25b81bcfd92e41cc"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/run_config.json",
+      "size_bytes": 197,
+      "sha256": "00924908eb106ef2d698bbb40a06ecf92f511f64814e89db167e284adf1d1624"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_42/validation_report.json",
+      "size_bytes": 13088,
+      "sha256": "34e39566c338b2e5842e07869e487fb1c08ae29efda8340729250cde6c01c946"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/attribution_raw.csv",
+      "size_bytes": 857464,
+      "sha256": "e901bf5709436055bc2cb1088d994a94395fb133310a116b1f624e35ef18f0b0"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/cell_raw.csv.gz",
+      "size_bytes": 1511957,
+      "sha256": "1ff89255596be0564678ab8c00407064b8c5669f74b7d1f655888835554e8061"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/dataset_alignment_report.md",
+      "size_bytes": 195,
+      "sha256": "b56ed077e27290458dd671b48bd76b4149ac99d913ad908cb566ad95e3f7922a"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/dataset_metadata.csv",
+      "size_bytes": 17423,
+      "sha256": "51c4a56381a85f4b4ea1ca1d39aee62c907fb076a9a9df9b70e245f9d72990be"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/historical_bridge_comparison.csv",
+      "size_bytes": 425604,
+      "sha256": "32289f5cb78c48ed314ae6c0277168510f6e0eff7417bb2851491d4705d72821"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/run_config.json",
+      "size_bytes": 196,
+      "sha256": "b8d153ab7b39ce78fcf58bcb82a3e346f1448245e3c7652203b6f8bff76cb585"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/seed_8/validation_report.json",
+      "size_bytes": 13086,
+      "sha256": "a7048dbaf7b83a2e39746f94d95a8541e8c2ec236788cc40932775f2dbd42ab3"
     },
     {
       "relative_path": "results/raw/ablation_controls_raw.csv",

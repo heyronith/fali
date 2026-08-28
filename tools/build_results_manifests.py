@@ -38,6 +38,8 @@ LARGE_RAW_GLOBS = [
     "revision_phase3c/full/seed_*/factorial_raw.csv",
     "revision_phase3c/full/aggregate/factorial_merged_raw.csv",
     "revision_phase4/full/seed_*/factorial_raw.csv",
+    "extended_fali/ef3_two_template/seed_*/cell_raw.csv.gz",
+    "extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv",
 ]
 
 REVISION_SCRIPT_MAP = {
@@ -45,6 +47,7 @@ REVISION_SCRIPT_MAP = {
     "revision_phase2": "experiments/revision_phase2_fali_causal.py",
     "revision_phase3c": "experiments/revision_phase3c_factorial.py",
     "revision_phase4": "experiments/revision_phase4_factorial.py",
+    "extended_fali_ef3": "experiments/extended_fali_ef3_full.py",
 }
 
 # Original-FALI raw filename stem -> generating script (exact where known).
@@ -102,6 +105,8 @@ def git_tracked(rel_from_repo: str) -> bool:
 def infer_experiment(rel: str) -> str:
     if rel.startswith("raw/"):
         return "original_fali"
+    if "extended_fali/ef3_two_template" in rel:
+        return "extended_fali_ef3"
     for key in REVISION_SCRIPT_MAP:
         if key in rel:
             return key
@@ -118,6 +123,10 @@ def infer_revision_config(rel: str) -> Optional[str]:
     for phase in ("revision_phase1", "revision_phase2", "revision_phase3c", "revision_phase4"):
         if phase in rel:
             return f"results/{phase}/full/seed_{seed}/run_config.json"
+    if "extended_fali/ef3_two_template/seed_" in rel:
+        return f"results/extended_fali/ef3_two_template/seed_{seed}/run_config.json"
+    if rel == "extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv":
+        return "results/extended_fali/ef3_two_template/aggregate/analysis_config.json"
     return None
 
 

@@ -77,6 +77,7 @@ def build_validation_summary(repo: Path, aggregate_dir: Path) -> dict:
 
 def main() -> int:
     aggregate_dir = _REPO / "results/extended_fali/ef3_two_template/aggregate"
+    aggregate_dir.mkdir(parents=True, exist_ok=True)
     val = build_validation_summary(_REPO, aggregate_dir)
     results = run_analysis(_REPO, aggregate_dir)
     print(json.dumps({"validation": val, "go_stop": results["go_stop"]}, indent=2))

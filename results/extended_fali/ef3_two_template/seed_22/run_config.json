@@ -1,0 +1,9 @@
+{
+  "phase": "EF-3",
+  "num_samples": 200,
+  "seed": 22,
+  "model": "gpt2-small",
+  "dtype": "float32",
+  "duration_sec": 75.5167145729065,
+  "timestamp_utc": "2026-08-28T20:12:56.646083+00:00"
+}
