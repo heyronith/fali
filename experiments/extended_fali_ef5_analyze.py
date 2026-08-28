@@ -62,7 +62,8 @@ def main() -> int:
     val = build_validation_summary(_REPO, aggregate_dir)
     results = run_analysis(_REPO, aggregate_dir, preregistration_sha=PREREGISTRATION_SHA)
     val["historical_integrity"] = results["integrity"]
-    val["zero_reference_informative"] = results["damage_strength"][0]["INFORMATIVE"]
+    val["zero_reference_informative"] = not results["reference_perturbation_stop"]
+    val["reference_perturbation_stop"] = results["reference_perturbation_stop"]
     aggregate_dir.mkdir(parents=True, exist_ok=True)
     (aggregate_dir / "validation_summary.json").write_text(json.dumps(val, indent=2) + "\n")
     print(json.dumps({"validation": val, "gate": results["gate"]}, indent=2))

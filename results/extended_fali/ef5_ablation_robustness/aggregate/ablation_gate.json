@@ -1,0 +1,9 @@
+{
+  "EF5_ABLATION_GATE": "FAIL",
+  "matched_mean_status": "ROBUST",
+  "matched_resample_status": "ROBUST",
+  "informative_reversed_channel": false,
+  "dual_channel_fail_both_schemes": false,
+  "reference_perturbation_stop": true,
+  "stop_reason": "Zero damage_drop hierarchical CI not entirely > 0; reference perturbation assumption failed per preregistration."
+}

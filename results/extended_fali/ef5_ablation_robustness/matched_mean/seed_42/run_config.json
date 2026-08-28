@@ -1,0 +1,17 @@
+{
+  "phase": "EF-5",
+  "damage_scheme": "matched_mean",
+  "num_samples": 900,
+  "seed": 42,
+  "model": "gpt2-small",
+  "dtype": "float32",
+  "head_names": [
+    "L9H7",
+    "L9H0",
+    "L10H2",
+    "L10H10"
+  ],
+  "preregistration_sha": "835b031db76b47022c74e796ab9e5d6f8d16f40b",
+  "duration_sec": 285.12447810173035,
+  "timestamp_utc": "2026-08-28T22:12:46.976673+00:00"
+}

@@ -1,0 +1,56 @@
+{
+  "overall_pass": true,
+  "per_scheme_seed": {
+    "matched_mean": {
+      "42": true,
+      "1": true,
+      "8": true,
+      "22": true
+    },
+    "matched_resample": {
+      "42": true,
+      "1": true,
+      "8": true,
+      "22": true
+    }
+  },
+  "max_score_pattern_error": 0.0,
+  "max_z_reconstruction_error": 0.0,
+  "max_endpoint_error": 0.0,
+  "max_owen_residual": 6.661338147750939e-16,
+  "max_quotient_consistency_error": 6.661338147750939e-16,
+  "expected_total_cell_rows": 921600,
+  "expected_total_attribution_rows": 28800,
+  "observed_total_cell_rows": 921600,
+  "observed_total_attribution_rows": 28800,
+  "preregistration_sha": "835b031db76b47022c74e796ab9e5d6f8d16f40b",
+  "historical_integrity": {
+    "integrity_pass": true,
+    "checks": {
+      "results/revision_phase4/full/seed_42/factorial_raw.csv": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/seed_42/attribution_raw.csv": "UNCHANGED",
+      "results/revision_phase4/full/seed_1/factorial_raw.csv": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/seed_1/attribution_raw.csv": "UNCHANGED",
+      "results/revision_phase4/full/seed_8/factorial_raw.csv": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/seed_8/attribution_raw.csv": "UNCHANGED",
+      "results/revision_phase4/full/seed_22/factorial_raw.csv": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/seed_22/attribution_raw.csv": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json": "UNCHANGED",
+      "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json": "UNCHANGED"
+    },
+    "paths": [
+      "results/revision_phase4/full/seed_42/factorial_raw.csv",
+      "results/extended_fali/ef4_canonical/seed_42/attribution_raw.csv",
+      "results/revision_phase4/full/seed_1/factorial_raw.csv",
+      "results/extended_fali/ef4_canonical/seed_1/attribution_raw.csv",
+      "results/revision_phase4/full/seed_8/factorial_raw.csv",
+      "results/extended_fali/ef4_canonical/seed_8/attribution_raw.csv",
+      "results/revision_phase4/full/seed_22/factorial_raw.csv",
+      "results/extended_fali/ef4_canonical/seed_22/attribution_raw.csv",
+      "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json",
+      "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json"
+    ]
+  },
+  "zero_reference_informative": false,
+  "reference_perturbation_stop": true
+}

@@ -338,24 +338,19 @@ def effect_size_comparison(
     zero_df: pd.DataFrame,
     mean_df: pd.DataFrame,
     resample_df: pd.DataFrame,
+    damage_df: pd.DataFrame,
 ) -> pd.DataFrame:
     rows = []
-    metrics = list(DESCRIPTIVE_METRICS) + ["phi_T", "phi_R", "damage_drop"]
+    metrics = list(DESCRIPTIVE_METRICS) + ["phi_T", "phi_R"]
     for head in TARGET_HEADS:
         for metric in metrics:
             row = {"head_name": head, "metric": metric}
             for label, df in (("zero", zero_df), ("matched_mean", mean_df), ("matched_resample", resample_df)):
-                sub = df[df["head_name"] == head] if metric != "damage_drop" else df[df["damage_scheme"] == label]
-                if metric == "damage_drop":
-                    vals = sub["damage_drop"].values
-                    seeds = sub["seed"].values
-                    tid = sub["low_level_template_id"].values
-                    pat = sub["pattern_type"].values
-                else:
-                    vals = sub[metric].values
-                    seeds = sub["seed"].values
-                    tid = sub["low_level_template_id"].values
-                    pat = sub["pattern_type"].values
+                sub = df[df["head_name"] == head]
+                vals = sub[metric].values
+                seeds = sub["seed"].values
+                tid = sub["low_level_template_id"].values
+                pat = sub["pattern_type"].values
                 m = observed_canonical_balanced_mean(vals, seeds, tid, pat)
                 row[f"{label}_mean"] = m
             z = row.get("zero_mean", 0.0)
@@ -366,6 +361,18 @@ def effect_size_comparison(
                 else:
                     row[f"{alt}_over_zero_ratio"] = None
             rows.append(row)
+
+    row = {"head_name": "PRIMARY", "metric": "damage_drop"}
+    for label in ("zero", "matched_mean", "matched_resample"):
+        sub = damage_df[damage_df["damage_scheme"] == label]
+        vals = sub["damage_drop"].values
+        seeds = sub["seed"].values
+        tid = sub["low_level_template_id"].values
+        pat = sub["pattern_type"].values
+        row[f"{label}_mean"] = observed_canonical_balanced_mean(vals, seeds, tid, pat)
+    row["matched_mean_over_zero_ratio"] = None
+    row["matched_resample_over_zero_ratio"] = None
+    rows.append(row)
     return pd.DataFrame(rows)
 
 
@@ -396,11 +403,11 @@ def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -
     damage_df.to_csv(aggregate_dir / "damage_strength.csv", index=False)
 
     zero_strength = evaluate_damage_strength(damage_df, "zero")
-    if not zero_strength["INFORMATIVE"]:
-        raise RuntimeError("Zero damage_drop reference failed informative criterion — STOP")
+    zero_reference_informative = bool(zero_strength["INFORMATIVE"])
+    reference_perturbation_stop = not zero_reference_informative
 
     damage_rows = [zero_strength]
-    informative_by_scheme = {"zero": True}
+    informative_by_scheme = {"zero": zero_reference_informative}
     for scheme in ALT_SCHEMES:
         st = evaluate_damage_strength(damage_df, scheme)
         st = apply_informative_fraction(st, zero_strength["exact_mean"])
@@ -422,6 +429,15 @@ def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -
         all_channels[scheme] = ch_results
 
     gate = ef5_ablation_gate(scheme_statuses, channel_by_scheme, informative_by_scheme)
+    if reference_perturbation_stop:
+        gate["EF5_ABLATION_GATE"] = "FAIL"
+        gate["reference_perturbation_stop"] = True
+        gate["stop_reason"] = (
+            "Zero damage_drop hierarchical CI not entirely > 0; "
+            "reference perturbation assumption failed per preregistration."
+        )
+    else:
+        gate["reference_perturbation_stop"] = False
 
     # exact means / bootstrap for all schemes on target heads
     exact_rows = []
@@ -488,7 +504,7 @@ def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -
             )
     pd.DataFrame(strict_rows).to_csv(aggregate_dir / "strict_nonoverlap28_results.csv", index=False)
 
-    effect_df = effect_size_comparison(zero_df, mean_df, resample_df)
+    effect_df = effect_size_comparison(zero_df, mean_df, resample_df, damage_df)
     effect_df.to_csv(aggregate_dir / "effect_size_comparison.csv", index=False)
 
     arch_mean = eval_architectural_controls(mean_df)
@@ -507,6 +523,11 @@ def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -
             loo = leave_one_template_out(df, ch["head"], ch["metric"], ch["direction"])
             loo["damage_scheme"] = scheme
             loo_parts.append(loo)
+
+    if loo_parts:
+        pd.concat(loo_parts, ignore_index=True).to_csv(
+            aggregate_dir / "leave_one_template_out.csv", index=False
+        )
 
     (aggregate_dir / "channel_robustness.json").write_text(
         json.dumps({"by_scheme": all_channels, "damage_strength": damage_rows}, indent=2) + "\n"
@@ -544,4 +565,5 @@ def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -
         "architectural": {"matched_mean": arch_mean, "matched_resample": arch_resample},
         "heterogeneity": hetero,
         "integrity": integrity,
+        "reference_perturbation_stop": reference_perturbation_stop,
     }
