@@ -57,3 +57,5 @@ results/revision_phase3c/full/aggregate/factorial_merged_raw.csv
 results/revision_phase4/full/seed_*/factorial_raw.csv
 results/extended_fali/ef3_two_template/seed_*/cell_raw.csv.gz
 results/extended_fali/ef4_canonical/seed_*/cell_raw.csv.gz
+results/extended_fali/ef5_ablation_robustness/matched_mean/seed_*/cell_raw.csv.gz
+results/extended_fali/ef5_ablation_robustness/matched_resample/seed_*/cell_raw.csv.gz
