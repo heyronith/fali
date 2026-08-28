@@ -116,3 +116,84 @@ results/extended_fali/ef2_gpt2_smoke/
 ```
 
 Historical Phase 1–4 files must remain unchanged.
+
+---
+
+## D. EF-3 — Two-template full scientific analysis (frozen before execution)
+
+**Purpose:** First scientific Extended-FALI experiment. Decompose fine-grained score
+mechanisms (T/R/O/V/C) under the preregistered two-template mixed distribution.
+
+**Scope:**
+- N = 200 per seed; seeds = 42, 1, 8, 22 (800 prompts total)
+- template_style = `"mixed"` (100 A + 100 B per seed)
+- All 12 Phase-1 candidates
+- Per-example Owen attribution before aggregation
+
+**Preregistration statements (frozen before EF-3 execution):**
+- No EF-2 N=8 attribution values were used to modify hypotheses.
+- H1–H4 remain exactly those frozen before EF-2 (see below).
+- Canonical-template data remain untouched confirmation data.
+
+**EF-3 is:**
+- Confirmatory for H1–H3 (components as preregistered)
+- Exploratory for R/O unless discovery rule passes
+- Discovery-only for any NEW mechanism promoted to EF-4
+
+### Primary estimand
+
+Balanced mean over 4 seeds × 2 templates × 100 prompts per head.
+
+Seeds are **prompt-generation cohorts**, not model replicas.
+
+### Primary bootstrap
+
+10,000 deterministic SHA256-seeded draws. Within each draw, resample 100 prompts
+with replacement inside each seed×template cell; equal A/B within seed; equal
+across four seeds.
+
+### Confirmatory hypotheses (unchanged from pre-EF-2 freeze)
+
+**H1 — L9H7 (L9H0 control):** |φ_T|,|φ_R|,|φ_O|,|φ_V| ≤ 1e−6; φ_C = conditional_gain
+within 1e−6 per example (800 prompts).
+
+**H2 — L10H2:** conditional_gain > 0, Phi_SCORE > 0, φ_T > 0. Support requires 95%
+bootstrap CI entirely in direction AND all 4 seed means in direction. φ_R, φ_O exploratory.
+
+**H3 — L10H10:** Phi_SCORE > 0, φ_C < 0, conditional_gain < 0, φ_T > 0. Same support rule.
+φ_R, φ_O exploratory.
+
+**H4 — Descriptive contrast:** L10H2 vs L10H10 side-by-side (attention + causal channels).
+Not a separate null test.
+
+### R/O discovery rule (L10H2, L10H10 only)
+
+Promote to EF-4 candidate only if ALL: CI excludes zero; 4/4 seed means same sign;
+|mean channel| ≥ 10% × |mean Phi_SCORE|.
+
+### GO/STOP to canonical confirmation
+
+GO only if: (A) all implementation validation passes; (B) L9H7 architectural case holds;
+(C) ≥1 stable T/R/O channel on L10H2 or L10H10 passes discovery rule.
+
+Otherwise STOP before canonical templates.
+
+### Implementation validation (every seed)
+
+Same thresholds as EF-2: score→pattern ≤2e−6; z ≤1e−5; endpoints ≤1e−4; Owen ≤1e−8;
+quotient ≤1e−8; L9 score/V ≤1e−6; historical bridge ≤1e−4.
+
+### Failure policy
+
+Any seed validation failure → STOP scientific interpretation.
+
+No threshold changes post hoc. No alternate seeds.
+
+### Deliverables
+
+```
+results/extended_fali/ef3_two_template/seed_<seed>/
+results/extended_fali/ef3_two_template/aggregate/
+```
+
+Raw cell files indexed on branch `audit/extended-fali-ef3-raw` (private).
