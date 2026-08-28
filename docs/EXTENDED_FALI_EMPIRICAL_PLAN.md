@@ -197,3 +197,71 @@ results/extended_fali/ef3_two_template/aggregate/
 ```
 
 Raw cell files indexed on branch `audit/extended-fali-ef3-raw` (private).
+
+---
+
+## E. EF-4 — Canonical-template fine-score confirmation (frozen before execution)
+
+**Purpose:** Confirm EF-3-discovered fine-grained score mechanisms (`phi_T`, `phi_R`)
+on the independent canonical 30-template IOI distribution.
+
+**Scope:**
+- N = 900 per seed (30 prompts × 30 strata); seeds = 42, 1, 8, 22
+- `StandardIOIDataset` aligned to Phase-4 historical cohorts
+- **Four-head panel only:** L9H7, L9H0, L10H2, L10H10
+- 32 Extended-FALI cells per head × example
+
+**Preregistration statements (frozen before EF-4 execution):**
+- No canonical fine-channel values were used to modify hypotheses.
+- Four primary hypotheses EF4-H1–H4 frozen (see `docs/EF4_CANONICAL_CONFIRMATION_PLAN.md`).
+- Coarse P/V/C/conditional_gain on these prompts are **not** held-out replication.
+
+**EF-4 confirms:** fine-grained T/R/O attributions only.
+
+### Frozen confirmatory hypotheses
+
+| ID | Head | Channel | Direction |
+|----|------|---------|-----------|
+| EF4-H1 | L10H2 | phi_T | > 0 |
+| EF4-H2 | L10H2 | phi_R | < 0 |
+| EF4-H3 | L10H10 | phi_T | > 0 |
+| EF4-H4 | L10H10 | phi_R | < 0 |
+
+No directional phi_O hypothesis.
+
+### Primary estimand
+
+`observed_canonical_balanced_mean`: equal weight over 30 strata per seed, then equal
+across four seeds. **Not** bootstrap-replicate mean (EF-3R correction).
+
+### Primary bootstrap
+
+Corrected Phase-4C hierarchical template-cluster bootstrap (10,000 draws, shared
+template clusters across seeds, independent within-cell resampling per seed).
+
+### Support criteria
+
+**BROAD_CONFIRMED:** hierarchical 95% CI in direction AND 4/4 seed means AND ≥20/30
+stratum means.
+
+**STRICT_NONOVERLAP_PASS:** T0-excluded (14-cluster) CI + 4 seed means in direction.
+
+**FINAL_CONFIRMED:** BROAD_CONFIRMED AND STRICT_NONOVERLAP_PASS; for phi_R also
+|mean| ≥ 10% × |mean Phi_SCORE|.
+
+### Fine-score gate
+
+**PASS** if both L10H2 and L10H10 satisfy phi_T > 0 AND phi_R < 0 (FINAL_CONFIRMED).
+
+### GO from EF-3
+
+EF-3 GO decision satisfied; EF-4 proceeds per preregistered plan.
+
+### Deliverables
+
+```
+results/extended_fali/ef4_canonical/seed_<seed>/
+results/extended_fali/ef4_canonical/aggregate/
+```
+
+Raw cells on `audit/extended-fali-ef4-raw` (private).
