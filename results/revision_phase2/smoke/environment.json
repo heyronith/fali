@@ -1,0 +1,64 @@
+{
+  "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+  "device": "cuda",
+  "cuda_available": true,
+  "cuda_device_name": "NVIDIA L4",
+  "torch": "2.6.0+cu124",
+  "transformer_lens": "3.2.1",
+  "transformers": "4.57.6",
+  "numpy": "2.2.2",
+  "pandas": "3.0.5",
+  "protected_snapshot_pre": {
+    "results/summary/attention_results.json": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    },
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    }
+  },
+  "protected_snapshot_post": {
+    "results/summary/attention_results.json": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    },
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null,
+      "mtime": null
+    }
+  },
+  "checks": {
+    "no_nan_inf": true,
+    "fali_residual_ok": true,
+    "causal_residual_ok": true,
+    "softmax_margin_ok": true,
+    "all_12_descriptive": true,
+    "all_6_causal": true,
+    "l9h7_score_invariant": true,
+    "l9h7_fali_near_zero": true,
+    "l9h7_delta_attn_near_zero": true,
+    "cuda_ok": true,
+    "historical_untouched": true
+  },
+  "max_fali_residual": 5.551115123125783e-17,
+  "max_causal_residual": 0.0,
+  "max_softmax_margin_err": 9.515898163892089e-08,
+  "l9h7_score_row_max_abs_diff": 0.0,
+  "elapsed_sec": 15.31083631515503
+}

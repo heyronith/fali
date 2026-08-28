@@ -1,0 +1,145 @@
+✓ Initialized. View run at 
+https://modal.com/apps/ronithworks/main/ap-eppIbiEvBlpA0nYEPS1vhm
+✓ Created objects.
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/modal_phase1.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/experiments/revision_phase1_conditional_gain.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/src
+└── 🔨 Created function run_phase1_remote.
+Launching Modal GPU=L4 full-all seeds=[42, 1, 8, 22]
+Waiting for seed=42 ...
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase1_conditional_gain.py --num-samples 200 --seed 42 --device cuda --require-cuda --output-dir /root/project/results/revision_phase1/full/seed_42 --n-bootstrap 10000
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase1_conditional_gain.py --num-samples 200 --seed 1 --device cuda --require-cuda --output-dir /root/project/results/revision_phase1/full/seed_1 --n-bootstrap 10000
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase1_conditional_gain.py --num-samples 200 --seed 8 --device cuda --require-cuda --output-dir /root/project/results/revision_phase1/full/seed_8 --n-bootstrap 10000
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase1_conditional_gain.py --num-samples 200 --seed 22 --device cuda --require-cuda --output-dir /root/project/results/revision_phase1/full/seed_22 --n-bootstrap 10000
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/root/project/results/revision_phase1/full/seed_42
+num_samples=200 seed=42 smoke=False
+device=cuda n_bootstrap=10000
+Loading gpt2-small (FP32, no mixed precision)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Model loaded.
+model_param_device=cuda:0 token_device=cuda:0
+Dataset validated: N=200, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 13.77s. Outputs in /root/project/results/revision_phase1/full/seed_42
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/root/project/results/revision_phase1/full/seed_8
+num_samples=200 seed=8 smoke=False
+device=cuda n_bootstrap=10000
+Loading gpt2-small (FP32, no mixed precision)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Model loaded.
+model_param_device=cuda:0 token_device=cuda:0
+Dataset validated: N=200, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 13.63s. Outputs in /root/project/results/revision_phase1/full/seed_8
+Downloaded seed=42 -> /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase1/full/seed_42 (274515 bytes)
+Waiting for seed=1 ...
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/root/project/results/revision_phase1/full/seed_1
+num_samples=200 seed=1 smoke=False
+device=cuda n_bootstrap=10000
+Loading gpt2-small (FP32, no mixed precision)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Model loaded.
+model_param_device=cuda:0 token_device=cuda:0
+Dataset validated: N=200, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 22.16s. Outputs in /root/project/results/revision_phase1/full/seed_1
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/root/project/results/revision_phase1/full/seed_22
+num_samples=200 seed=22 smoke=False
+device=cuda n_bootstrap=10000
+Loading gpt2-small (FP32, no mixed precision)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Model loaded.
+model_param_device=cuda:0 token_device=cuda:0
+Dataset validated: N=200, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 13.91s. Outputs in /root/project/results/revision_phase1/full/seed_22
+Downloaded seed=1 -> /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase1/full/seed_1 (274402 bytes)
+Waiting for seed=8 ...
+Downloaded seed=8 -> /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase1/full/seed_8 (274380 bytes)
+Waiting for seed=22 ...
+Downloaded seed=22 -> /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase1/full/seed_22 (275137 bytes)
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/ronithworks/main/ap-eppIbiEvBlpA0nYEPS1vhm

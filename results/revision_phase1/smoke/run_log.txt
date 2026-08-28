@@ -1,0 +1,27 @@
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/results/revision_phase1/smoke
+num_samples=8 seed=42 smoke=True
+device=cpu n_bootstrap=200
+Loading gpt2-small...
+Model loaded.
+Dataset validated: N=8, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 8.93s. Outputs in /Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/results/revision_phase1/smoke

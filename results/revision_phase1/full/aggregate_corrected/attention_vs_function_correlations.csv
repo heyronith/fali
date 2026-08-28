@@ -1,0 +1,7 @@
+subset,n,x,y,gain_pearson_r,gain_pearson_p,gain_spearman_r,gain_spearman_p,effect_pearson_r,effect_pearson_p,effect_spearman_r,effect_spearman_p
+all_12,12,attention_spike,conditional_gain,-0.752052306965404,0.004782112815682133,-0.21716320518488735,0.49778490192726343,,,,
+all_12,12,attention_spike,conditional_effect,,,,,0.38431345336552336,0.21741210160450813,0.416813248661316,0.1776753737252057
+canonical_backups,8,attention_spike,conditional_gain,0.07571225024988501,0.8585811087321908,-0.09581010095306072,0.8214524032504529,,,,
+canonical_backups,8,attention_spike,conditional_effect,,,,,0.18200247209616133,0.6662064929520262,0.17964393928698885,0.6703442772469387
+positive_conditional_effect_only,6,attention_spike,conditional_gain,-0.10207407281339866,0.8474206515999088,-0.2571428571428572,0.6227871720116618,,,,
+positive_conditional_effect_only,6,attention_spike,conditional_effect,,,,,-0.652613038004306,0.16005562201806095,-0.48571428571428577,0.3287230320699709

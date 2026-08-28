@@ -1,0 +1,140 @@
+{
+  "num_samples": 8,
+  "seed": 42,
+  "output_dir": "/root/project/results/revision_phase1/modal_smoke_seed42",
+  "device": "cuda",
+  "smoke": true,
+  "n_bootstrap": 200,
+  "template_style": "mixed",
+  "model": "gpt2-small",
+  "center_writing_weights": true,
+  "PRIMARY_NAME_MOVERS": [
+    [
+      9,
+      6
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      10,
+      0
+    ]
+  ],
+  "HISTORICAL_PRIMARY_NAME_MOVERS": [
+    [
+      9,
+      9
+    ],
+    [
+      10,
+      0
+    ]
+  ],
+  "BACKUP_NAME_MOVERS": [
+    [
+      9,
+      0
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      6
+    ],
+    [
+      10,
+      10
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      9
+    ]
+  ],
+  "NEGATIVE_NAME_MOVERS": [
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      10
+    ]
+  ],
+  "EXTRA_CONTROLS": [
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      5
+    ]
+  ],
+  "candidates": [
+    [
+      9,
+      0
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      10,
+      2
+    ],
+    [
+      10,
+      6
+    ],
+    [
+      10,
+      10
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      10
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      10,
+      5
+    ]
+  ],
+  "require_cuda": true
+}

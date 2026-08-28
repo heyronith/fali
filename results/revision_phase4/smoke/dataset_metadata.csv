@@ -1,0 +1,61 @@
+example_idx,low_level_template_id,pattern_type,template_stratum,prompt,S,IO,S1_position,S2_position,IO_position,end_position,place,object,seed
+0,0,BABA,T00_BABA,"Then, Gregory and Daniel went to the school. Gregory gave a basketball to",Gregory,Daniel,3,11,5,15,school,basketball,42
+1,0,BABA,T00_BABA,"Then, Daniel and Kristen went to the garden. Daniel gave a ring to",Daniel,Kristen,3,11,5,15,garden,ring,42
+2,0,ABBA,T00_ABBA,"Then, Tiffany and Allison went to the house. Allison gave a necklace to",Allison,Tiffany,5,11,3,15,house,necklace,42
+3,0,ABBA,T00_ABBA,"Then, Michelle and Erica went to the house. Erica gave a basketball to",Erica,Michelle,5,11,3,15,house,basketball,42
+4,1,BABA,T01_BABA,"Then, Crystal and Timothy had a lot of fun at the station. Crystal gave a drink to",Crystal,Timothy,3,15,5,19,station,drink,42
+5,1,BABA,T01_BABA,"Then, Rachel and Erin had a lot of fun at the hospital. Rachel gave a basketball to",Rachel,Erin,3,15,5,19,hospital,basketball,42
+6,1,ABBA,T01_ABBA,"Then, Stephanie and Danielle had a lot of fun at the hospital. Danielle gave a snack to",Danielle,Stephanie,5,15,3,19,hospital,snack,42
+7,1,ABBA,T01_ABBA,"Then, Joshua and Kristen had a lot of fun at the restaurant. Kristen gave a necklace to",Kristen,Joshua,5,15,3,19,restaurant,necklace,42
+8,2,BABA,T02_BABA,"Then, Andrea and Brandon were working at the restaurant. Andrea decided to give a ring to",Andrea,Brandon,3,12,5,18,restaurant,ring,42
+9,2,BABA,T02_BABA,"Then, Danielle and Cody were working at the office. Danielle decided to give a drink to",Danielle,Cody,3,12,5,18,office,drink,42
+10,2,ABBA,T02_ABBA,"Then, Sarah and Katherine were working at the school. Katherine decided to give a basketball to",Katherine,Sarah,5,12,3,18,school,basketball,42
+11,2,ABBA,T02_ABBA,"Then, Mark and Ashley were working at the office. Ashley decided to give a necklace to",Ashley,Mark,5,12,3,18,office,necklace,42
+12,3,BABA,T03_BABA,"Then, Shannon and Scott were thinking about going to the station. Shannon wanted to give a basketball to",Shannon,Scott,3,14,5,20,station,basketball,42
+13,3,BABA,T03_BABA,"Then, Megan and Lindsay were thinking about going to the store. Megan wanted to give a basketball to",Megan,Lindsay,3,14,5,20,store,basketball,42
+14,3,ABBA,T03_ABBA,"Then, Justin and Erica were thinking about going to the garden. Erica wanted to give a necklace to",Erica,Justin,5,14,3,20,garden,necklace,42
+15,3,ABBA,T03_ABBA,"Then, Melissa and Kimberly were thinking about going to the hospital. Kimberly wanted to give a necklace to",Kimberly,Melissa,5,14,3,20,hospital,necklace,42
+16,4,BABA,T04_BABA,"Then, Courtney and Brittany had a long argument, and afterwards Courtney said to",Courtney,Brittany,3,13,5,15,house,necklace,42
+17,4,BABA,T04_BABA,"Then, Sara and David had a long argument, and afterwards Sara said to",Sara,David,3,13,5,15,house,drink,42
+18,4,ABBA,T04_ABBA,"Then, Amber and Travis had a long argument, and afterwards Travis said to",Travis,Amber,5,13,3,15,school,snack,42
+19,4,ABBA,T04_ABBA,"Then, Eric and Brian had a long argument, and afterwards Brian said to",Brian,Eric,5,13,3,15,office,kiss,42
+20,5,BABA,T05_BABA,"After Sarah and Kenneth went to the store, Sarah gave a drink to",Sarah,Kenneth,2,10,4,14,store,drink,42
+21,5,BABA,T05_BABA,"After Samuel and Erica went to the school, Samuel gave a necklace to",Samuel,Erica,2,10,4,14,school,necklace,42
+22,5,ABBA,T05_ABBA,"After Heather and Erica went to the school, Erica gave a computer to",Erica,Heather,4,10,2,14,school,computer,42
+23,5,ABBA,T05_ABBA,"After Matthew and Emily went to the garden, Emily gave a ring to",Emily,Matthew,4,10,2,14,garden,ring,42
+24,6,BABA,T06_BABA,"When Samantha and Brittany got a drink at the school, Samantha decided to give it to",Samantha,Brittany,2,12,4,17,school,drink,42
+25,6,BABA,T06_BABA,"When Amanda and Emily got a necklace at the hospital, Amanda decided to give it to",Amanda,Emily,2,12,4,17,hospital,necklace,42
+26,6,ABBA,T06_ABBA,"When Mark and Emily got a drink at the hospital, Emily decided to give it to",Emily,Mark,4,12,2,17,hospital,drink,42
+27,6,ABBA,T06_ABBA,"When Jacob and Elizabeth got a basketball at the restaurant, Elizabeth decided to give it to",Elizabeth,Jacob,4,12,2,17,restaurant,basketball,42
+28,7,BABA,T07_BABA,"When Allison and Jonathan got a snack at the school, Allison decided to give the snack to",Allison,Jonathan,2,12,4,18,school,snack,42
+29,7,BABA,T07_BABA,"When Lindsey and Matthew got a ring at the house, Lindsey decided to give the ring to",Lindsey,Matthew,2,12,4,18,house,ring,42
+30,7,ABBA,T07_ABBA,"When Lindsey and Heather got a basketball at the restaurant, Heather decided to give the basketball to",Heather,Lindsey,4,12,2,18,restaurant,basketball,42
+31,7,ABBA,T07_ABBA,"When Jamie and John got a drink at the hospital, John decided to give the drink to",John,Jamie,4,12,2,18,hospital,drink,42
+32,8,BABA,T08_BABA,"While Bradley and Kelly were working at the school, Bradley gave a basketball to",Bradley,Kelly,2,11,4,15,school,basketball,42
+33,8,BABA,T08_BABA,"While Travis and Megan were working at the restaurant, Travis gave a ring to",Travis,Megan,2,11,4,15,restaurant,ring,42
+34,8,ABBA,T08_ABBA,"While James and Daniel were working at the office, Daniel gave a necklace to",Daniel,James,4,11,2,15,office,necklace,42
+35,8,ABBA,T08_ABBA,"While Paul and Richard were working at the station, Richard gave a computer to",Richard,Paul,4,11,2,15,station,computer,42
+36,9,BABA,T09_BABA,"While Vanessa and Ryan were commuting to the office, Vanessa gave a basketball to",Vanessa,Ryan,2,11,4,15,office,basketball,42
+37,9,BABA,T09_BABA,"While Brittany and Brandon were commuting to the garden, Brittany gave a bone to",Brittany,Brandon,2,11,4,15,garden,bone,42
+38,9,ABBA,T09_ABBA,"While Nathan and Sean were commuting to the restaurant, Sean gave a snack to",Sean,Nathan,4,11,2,15,restaurant,snack,42
+39,9,ABBA,T09_ABBA,"While Kevin and Daniel were commuting to the restaurant, Daniel gave a snack to",Daniel,Kevin,4,11,2,15,restaurant,snack,42
+40,10,BABA,T10_BABA,"After the lunch, Thomas and Lindsay went to the office. Thomas gave a basketball to",Thomas,Lindsay,5,13,7,17,office,basketball,42
+41,10,BABA,T10_BABA,"After the lunch, Andrea and Anthony went to the restaurant. Andrea gave a drink to",Andrea,Anthony,5,13,7,17,restaurant,drink,42
+42,10,ABBA,T10_ABBA,"After the lunch, Nicholas and Paul went to the school. Paul gave a necklace to",Paul,Nicholas,7,13,5,17,school,necklace,42
+43,10,ABBA,T10_ABBA,"After the lunch, Amanda and Anthony went to the school. Anthony gave a snack to",Anthony,Amanda,7,13,5,17,school,snack,42
+44,11,BABA,T11_BABA,"Afterwards, Richard and John went to the garden. Richard gave a necklace to",Richard,John,4,12,6,16,garden,necklace,42
+45,11,BABA,T11_BABA,"Afterwards, Lisa and Elizabeth went to the hospital. Lisa gave a kiss to",Lisa,Elizabeth,4,12,6,16,hospital,kiss,42
+46,11,ABBA,T11_ABBA,"Afterwards, Kristen and Richard went to the house. Richard gave a basketball to",Richard,Kristen,6,12,4,16,house,basketball,42
+47,11,ABBA,T11_ABBA,"Afterwards, Kelly and Paul went to the restaurant. Paul gave a necklace to",Paul,Kelly,6,12,4,16,restaurant,necklace,42
+48,12,BABA,T12_BABA,"Then, Joseph and Charles had a long argument. Afterwards Joseph said to",Joseph,Charles,3,12,5,14,office,necklace,42
+49,12,BABA,T12_BABA,"Then, Daniel and Katherine had a long argument. Afterwards Daniel said to",Daniel,Katherine,3,12,5,14,house,ring,42
+50,12,ABBA,T12_ABBA,"Then, Amy and Jason had a long argument. Afterwards Jason said to",Jason,Amy,5,12,3,14,restaurant,necklace,42
+51,12,ABBA,T12_ABBA,"Then, Nathan and Andrew had a long argument. Afterwards Andrew said to",Andrew,Nathan,5,12,3,14,garden,computer,42
+52,13,BABA,T13_BABA,The station Erica and Brandon went to had a snack. Erica gave it to,Erica,Brandon,3,12,5,15,station,snack,42
+53,13,BABA,T13_BABA,The hospital Aaron and Danielle went to had a computer. Aaron gave it to,Aaron,Danielle,3,12,5,15,hospital,computer,42
+54,13,ABBA,T13_ABBA,The station Jessica and Eric went to had a basketball. Eric gave it to,Eric,Jessica,5,12,3,15,station,basketball,42
+55,13,ABBA,T13_ABBA,The store Jeffrey and Kimberly went to had a ring. Kimberly gave it to,Kimberly,Jeffrey,5,12,3,15,store,ring,42
+56,14,BABA,T14_BABA,Friends Amy and Heather found a basketball at the school. Amy gave it to,Amy,Heather,2,12,4,15,school,basketball,42
+57,14,BABA,T14_BABA,Friends Ryan and Vanessa found a basketball at the hospital. Ryan gave it to,Ryan,Vanessa,2,12,4,15,hospital,basketball,42
+58,14,ABBA,T14_ABBA,Friends Travis and Anthony found a computer at the restaurant. Anthony gave it to,Anthony,Travis,4,12,2,15,restaurant,computer,42
+59,14,ABBA,T14_ABBA,Friends Kristen and Tiffany found a ring at the restaurant. Tiffany gave it to,Tiffany,Kristen,4,12,2,15,restaurant,ring,42

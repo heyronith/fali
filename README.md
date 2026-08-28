@@ -1,8 +1,8 @@
-# When Attention Repairs Itself: A Mechanistic Study of Backup Heads in GPT-2
+# Active Self-Repair in Transformer Attention Circuits: Disentangling Algorithmic Routing from Softmax Artifacts
 
 This repository contains the complete, reproducible research pipeline for reverse-engineering downstream "backup" self-repair behavior (the **Hydra Effect**) in transformer attention circuits under the ablation of primary name movers. 
 
-Our pipeline rigorously evaluates the causal, geometric, and sequential triggers of self-repair in **GPT-2 Small**, establishing that the compensation is a physically real, causally contributing, query-driven algorithmic response rather than a passive normalization artifact or specific to the zero-ablation protocol.
+Our pipeline rigorously evaluates the causal, geometric, and sequential triggers of self-repair in **GPT-2 Small**, establishing that the compensation is a physically real, causally contributing, query-driven algorithmic response rather than a passive normalization artifact or zero-ablation-specific anomaly.
 
 ---
 
@@ -54,13 +54,13 @@ The master runner (`run_all_experiments.py`) executes the following 12 steps seq
 2. **Cache Clean Baselines** (`experiments/cache_baseline.py`): Performs a clean forward pass caching all activations to establish baseline attention and logit difference scores.
 3. **Ablate Primary Mover Heads** (`experiments/ablate_primary.py`): Zero-ablates `L9H9` and `L10H0` at their output `hook_z` vector, establishing basic causal degradation baselines.
 4. **FALI Hybrid Intervention** (`experiments/hybrid_intervention.py`): Performs the target-logit counterfactual intervention at the sub-softmax level to mathematically separate target-directed active logit shifts from global softmax shifts.
-5. **LayerNorm-Frozen Validation** (`experiments/fali_rigorous_validation.py`): Implements LayerNorm-scale freezing in the forward pass to causally measure the contribution of the LayerNorm volume surge.
+5. **LayerNorm-Frozen Validation** (`experiments/fali_rigorous_validation.py`): Implements physical LayerNorm scale-freezing in the forward pass to causally measure the contribution of the LayerNorm volume surge.
 6. **Model-Wide Scale Evaluation** (`experiments/scale_evaluation.py`): Systematically runs FALI across all 144 attention heads in GPT-2 Small to generate a model-wide target-logit vs. background-logit compensation map.
 7. **Causal Double Ablation** (`experiments/causal_validation.py`): Implements a four-pass causal protocol (Pass A: Clean, Pass B: Primary Ablated, Pass C: Double Ablated including `L10H10`, Pass D: `L10H10` Only ablated) to isolate `L10H10`'s compensatory contribution.
 8. **Ablation Controls** (`experiments/ablation_controls.py`): Compares the robustness of the self-repair attention spike and logit degradation under zero ablation, position-wise mean ablation, and resample ablation using a fixed derangement.
 9. **Path-Stable FALI Decomposition** (`experiments/fali_decomposition.py`): Computes target-logit and background-logit Shapley-style decomposition of attention probability shifts to establish path-independent contributions.
 10. **QK Decomposition** (`experiments/qk_decomposition.py`): Projects attention scores into Query norm, Key norm, and directional/cosine alignment components using high-dimensional representation geometry.
-11. **Output Mediation** (`experiments/output_mediation.py`): Measures the downstream causal contribution of the ablated-run `L10H10` attention pattern vs. the ablated-run `L10H10` $z$-vector output in recovering the final $IO - S$ logit difference.
+11. **Output Mediation** (`experiments/output_mediation.py`): Measures the downstream causal necessity of the ablated-run `L10H10` attention pattern vs. the ablated-run `L10H10` $z$-vector output in recovering the final $IO - S$ logit difference.
 12. **Generate Analytical Figures** (`experiments/generate_new_figures.py`): Renders publication-ready lollipop charts, trajectory plots, disentanglement scatter plots, and trigger isolation bar charts.
 
 ---
@@ -86,7 +86,7 @@ The pipeline generates and populates the following directory structure:
   - `fali_rigorous_validation.csv`
   - `scale_evaluation_results.json`
 - **`figures/`**: Diagnostic visualizations.
-  - `cossim_shift_lollipop.png`: QK cosine similarity shifts across Layer 10 heads showing magnitude-independent directional realignment.
+  - `cossim_shift_lollipop.png`: QK cosine similarity shifts across Layer 10 heads showing magnitude-independent spatial contraction.
   - `causal_shift_plot.png`: Trajectory plots of clean vs. ablated attention probabilities for Layers 9--11.
   - `circuit_disentanglement_plot.png`: Scatter plot mapping standard attention spikes against FALI target-logit Shapley contributions, showing that they plot above the diagonal.
   - `isolation_bar_chart.png`: Trigger isolation bar chart comparing sequential upstream and intra-layer ablations.
@@ -96,21 +96,21 @@ The pipeline generates and populates the following directory structure:
 ## 🔍 Robust Causal Evidence Summary
 
 ### 1. Ablation Controls
-The downstream compensation of the primary backup head `L10H10` is robust and survives beyond zero ablation. Under zero, mean, and resample ablations, the attention spike to $IO$ remains positive in $91.5\%$--$100\%$ of cases, and the causal degradation ($IO - S$ logit drop when `L10H10` is additionally ablated) remains stable.
+The downstream compensation of the primary backup head `L10H10` is highly robust and survives beyond zero ablation. Under zero, mean, and resample ablations, the attention spike to $IO$ remains positive in $91.5\%$--$100\%$ of cases, and the causal degradation ($IO - S$ logit drop when `L10H10` is additionally ablated) remains extremely stable.
 - **Attention Spike ($\Delta_\text{Attn}$)**: $+0.1893$ (Zero), $+0.1616$ (Mean), $+0.1224$ (Resample).
 - **Causal Logit Degradation**: $0.2281$ (Zero), $0.2048$ (Mean), $0.2435$ (Resample).
 
 ### 2. Path-Stable FALI / Shapley Decomposition
 Attention probability shifts are dominated by target-logit pre-softmax score changes rather than background denominator inflation. The path-independent Shapley decomposition of L10H10's $+0.1893$ attention spike shows:
 - **Target-Logit Shapley Contribution**: $+0.2222$ (explaining **$117.4\%$** of the total shift).
-- **Background-Logit Shapley Contribution**: $-0.0328$ (**$-17.4\%$** fraction). The background logits actually oppose the attention spike on average in $96.0\%$ of samples, indicating that background-logit changes oppose the IO attention increase on average.
-- **Decomposition Path Stability**: High path-independence. The absolute target-background disagreement between target-first and background-first paths is just $0.00153$ ($0.69\%$ relative to the Shapley effect).
+- **Background-Logit Shapley Contribution**: $-0.0328$ (**$-17.4\%$** fraction). The background-logit changes oppose the IO attention increase on average in $96.0\%$ of samples.
+- **Decomposition Path Stability**: Extremely high path-independence. The absolute target-background disagreement between target-first and background-first paths is just $0.00153$ ($0.69\%$ relative to the Shapley effect).
 
 ### 3. QK Vector & Geometry Decomposition
 The target-logit score increase ($+0.9632$ score delta) is query-driven and alignment-driven:
 - **Query Shapley Contribution**: $+0.9770$ (**$101.4\%$** of the score delta), reflecting query vector rotation.
 - **Key Shapley Contribution**: $-0.0137$ (**$-1.4\%$** of the delta).
-- **Directional Cosine Shapley**: $+0.7418$ (**$77.0\%$** of the delta), indicating directional realignment in QK space.
+- **Directional Cosine Shapley**: $+0.7418$ (**$77.0\%$** of the delta), indicating spatial Q-K cosine contraction.
 - **Norm Shapley**: $+0.2214$ (**$23.0\%$** of the delta).
 
 ### 4. Output-Level Causal Mediation
@@ -143,9 +143,9 @@ In GPT-2 Small on a 200-example mixed-template IOI cohort, ablating L9H9 and L10
 
 | Claim | Key Causal Evidence | Empirical Strength | Structural Limitation |
 | :--- | :--- | :--- | :--- |
-| **Robust Downstream Attention Spike** | `L10H10` attention spike is robust across zero (`+0.1893`), mean (`+0.1616`), and resample (`+0.1224`) ablation paradigms, occurring in $91.5\%$--$100\%$ of cohort samples. | **Strong but intervention-specific** | Evaluated on $N=200$ mixed-templates in GPT-2 Small only. |
-| **Target-Logit Dominance** | Shapley shows target pre-softmax shift is $+0.2222$ ($117.4\%$ fraction) while background opposes the spike ($-17.4\%$ fraction, opposing in $96.0\%$ of samples). Absolute path disagreement is low ($0.69\%$). | **Strong in this setting** (Pre-softmax mathematical bound) | Dependent on correct token alignment in the query/key projection. |
-| **Query-Driven Alignment Realignment** | QK score delta ($+0.9632$) is driven by query Shapley ($+0.9770$ / $101.4\%$ fraction) and directional Q-K cosine alignment realignment ($+0.7418$ / $77.0\%$ fraction). | **Strong in this setting** (Magnitude-independent cosine shift) | Focused on `IO` key position and `end` query position. |
+| **Robust Downstream Attention Spike** | `L10H10` attention spike is robust across zero (`+0.1893`), mean (`+0.1616`), and resample (`+0.1224`) ablation paradigms, occurring in $91.5\%$--$100\%$ of cohort samples. | **Extremely Strong** | Evaluated on $N=200$ mixed-templates in GPT-2 Small only. |
+| **Target-Logit Dominance** | Shapley shows target pre-softmax shift is $+0.2222$ ($117.4\%$ fraction) while background opposes the spike ($-17.4\%$ fraction, opposing in $96.0\%$ of samples). Absolute path disagreement is extremely low ($0.69\%$). | **Extremely Strong** (Pre-softmax mathematical bound) | Dependent on correct token alignment in the query/key projection. |
+| **Query-Driven Alignment Realignment** | QK score delta ($+0.9632$) is driven by query Shapley ($+0.9770$ / $101.4\%$ fraction) and directional Q-K cosine alignment contraction ($+0.7418$ / $77.0\%$ fraction). | **Very Strong** (Magnitude-independent cosine shift) | Focused on `IO` key position and `end` query position. |
 | **Causal Downstream Rescue** | Double ablation causes $0.2281$ logit drop. L10H10 pattern/z necessity explain $43.6\%$ / $44.0\%$ of the degradation; L10H2, L10H3, and L10H6 are additional contributing Layer 10 heads; L10H5 is a low-effect control; L10H7 is anti-backup/suppressor-like under this intervention. | **Strong** (Causally verified via multi-pass hook patching) | Value/OV direct path patching was not performed; remaining degradation (~56%) is mediated by other backup heads. |
-| **Cross-Layer Sequential Trigger** | Upstream L9H9 ablation alone reproduces the full L10H10 spike ($+0.1893$), while intra-layer partner L10H0 ablation produces zero change ($0.0000$), showing that L10H10’s attention-pattern shift is triggered by upstream L9H9 ablation, not by same-layer L10H0 z-ablation. Because same-layer attention heads compute in parallel, the absence of a same-layer L10H0 z-ablation effect is partly architecturally expected. | **Strong but intervention-specific** (Surgical double/single causal isolation) | Specific to the sequential hierarchy of Layer 9 and Layer 10. |
+| **Cross-Layer Sequential Trigger** | Upstream L9H9 ablation alone reproduces the full L10H10 spike ($+0.1893$), while intra-layer partner L10H0 ablation produces zero change ($0.0000$), challenging parallel communication models. | **Extremely Strong** (Surgical double/single causal isolation) | Specific to the sequential hierarchy of Layer 9 and Layer 10. |
 

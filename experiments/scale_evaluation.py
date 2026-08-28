@@ -8,8 +8,8 @@ It runs two cached forward passes (Clean Baseline and Primary Name Mover Ablatio
 performs a vectorized offline hybrid computation for ALL 144 attention heads in the model
 to disentangle active algorithmic routing from passive softmax normalization artifacts.
 
-We then generate a publication-quality scatter plot of the Standard Hydra Spike vs. the 
-Active Hybrid Spike, color-coded by layer, saved as `circuit_disentanglement_plot.png`.
+We then generate a publication-quality scatter plot of the Standard Attention Spike vs. the
+FALI target-logit contribution, color-coded by layer, saved as `circuit_disentanglement_plot.png`.
 """
 
 import torch
@@ -310,9 +310,9 @@ def main():
     plt.ylim(min_val, max_val)
     
     # Label axes
-    plt.xlabel("Standard Hydra Spike (Ablated - Clean Attention Probability to IO)", fontsize=11, fontweight="semibold", labelpad=10)
-    plt.ylabel("Active Hybrid Spike (Hybrid - Clean Attention Probability to IO)", fontsize=11, fontweight="semibold", labelpad=10)
-    plt.title("Downstream Attention Circuit Disentanglement under Primary Ablation\n(Causal Softmax Denominator Shift vs. Active Algorithmic Routing)", fontsize=12, fontweight="bold", pad=15)
+    plt.xlabel("Standard Attention Spike (Ablated - Clean Attention Probability to IO)", fontsize=11, fontweight="semibold", labelpad=10)
+    plt.ylabel("FALI Target-Logit Contribution", fontsize=11, fontweight="semibold", labelpad=10)
+    plt.title("FALI Target-Logit Decomposition Under Primary Ablation", fontsize=12, fontweight="bold", pad=15)
     
     # Add layer colorbar
     cbar = plt.colorbar(scatter, ticks=np.arange(12))

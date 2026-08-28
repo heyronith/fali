@@ -1,0 +1,14 @@
+level,head_name,x,y,pearson_r,pearson_p,spearman_r,spearman_p
+across_candidates,ALL,mean_corrected_attention_spike,mean_conditional_gain,-0.63838328650071,0.025479146191028243,0.04553422044199251,0.8882523316528931
+within_candidate,L9H0,corrected_attention_spike,conditional_gain,,,,
+within_candidate,L9H7,corrected_attention_spike,conditional_gain,,,,
+within_candidate,L10H1,corrected_attention_spike,conditional_gain,-0.5615952557677723,0.14746198308874023,-0.3571428571428572,0.38512064355625614
+within_candidate,L10H2,corrected_attention_spike,conditional_gain,0.2787621614559029,0.5037673806875484,0.4047619047619048,0.3198886412288163
+within_candidate,L10H6,corrected_attention_spike,conditional_gain,-0.20228659636429405,0.6309325391598103,-0.4047619047619048,0.3198886412288163
+within_candidate,L10H10,corrected_attention_spike,conditional_gain,0.1829567201397205,0.6645344516557453,0.19047619047619052,0.6514014957024814
+within_candidate,L11H2,corrected_attention_spike,conditional_gain,0.8343010777635804,0.010007021871145558,0.8333333333333335,0.010175540123456752
+within_candidate,L11H9,corrected_attention_spike,conditional_gain,-0.016819559529271166,0.9684692731437512,-0.07142857142857144,0.8665262706759088
+within_candidate,L10H7,corrected_attention_spike,conditional_gain,-0.8110435879929393,0.014566554529061146,-0.880952380952381,0.0038503204637324005
+within_candidate,L11H10,corrected_attention_spike,conditional_gain,-0.8728080663291007,0.004665967088835568,-0.8095238095238096,0.014902667686230072
+within_candidate,L10H3,corrected_attention_spike,conditional_gain,-0.27173210377345086,0.5150270470098971,-0.14285714285714288,0.735764859879812
+within_candidate,L10H5,corrected_attention_spike,conditional_gain,-0.2617732885710161,0.5311367311465905,-0.07142857142857144,0.8665262706759088

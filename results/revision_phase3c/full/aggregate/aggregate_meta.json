@@ -1,0 +1,21 @@
+{
+  "n_rows": 9600,
+  "verdict": "PARTIAL",
+  "notes": [
+    "H1 L9H7 context recruitment: True",
+    "H2 L10H2 pattern-mediated +gain: True",
+    "H3 L10H10 cancellation: True",
+    "H4 L10H7 adaptive-but-suppressive: True (cond_effect<0=True)",
+    "Template A/B major-head sign reversals: 1",
+    "contrasts passed: 4/4; template_ok=False"
+  ],
+  "value_importance": {
+    "mean_abs_phi_pattern": 0.20487741377618582,
+    "mean_abs_phi_value": 0.003505083902014615,
+    "mean_abs_phi_context": 0.07544692809383073,
+    "value_over_pattern": 0.01710820064257387,
+    "value_over_context": 0.04645760921711038
+  },
+  "n_bootstrap": 10000,
+  "template_major_reversals": 3
+}

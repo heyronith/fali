@@ -1,10 +1,57 @@
+# Python / tooling
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# OS / editor
 .DS_Store
-Hydra.pdf
-IOI.pdf
+*.swp
+*~
 .agents/
+
+# Local caches / logs
 logs/
 caches/
-.pytest_cache/
+HF_HOME/
+.huggingface/
+
+# PDFs not needed in repo (available separately)
+Hydra.pdf
+IOI.pdf
+
+# Review-package archives (local copies preserved; not versioned)
+*_review_package.zip
+phase*_review_package.zip
+fali_review_package.zip
+submission_tmlr.zip
+
+# Review staging / duplicate build trees (local only)
+*_review_package_build/
+*_review_build/
+*_review_staging/
+review_package/
+private_camera_ready/
+submission_tmlr/
+tmlr-style-file-main/
+
+# Review diff patches (duplicates git history)
+git_diff_*.patch
+
+# Large per-example raw outputs — indexed in results/RAW_DATA_INDEX.json
+results/raw/*.csv
+results/raw/*.json
+results/revision_phase2/full/aggregate/phase1_phase2_merged_raw.csv
+results/revision_phase2/full/seed_*/phase2_combined_raw.csv
+results/revision_phase2/full/seed_*/fali_raw.csv
+results/revision_phase2/full/seed_*/score_baseline_raw.csv
+results/revision_phase2/full/seed_*/causal_score_hybrid_raw.csv
+results/revision_phase2/full/seed_*/pattern_patch_raw.csv
+results/revision_phase2/full/seed_*/qk_patch_raw.csv
+results/revision_phase2/full/seed_*/qk_score_decomposition_raw.csv
+results/revision_phase3c/full/seed_*/factorial_raw.csv
+results/revision_phase3c/full/aggregate/factorial_merged_raw.csv
+results/revision_phase4/full/seed_*/factorial_raw.csv

@@ -1,0 +1,88 @@
+{
+  "phase": "4A",
+  "num_samples": 900,
+  "num_per_stratum": 30,
+  "n_strata": 30,
+  "n_low_level_templates": 15,
+  "seed": 8,
+  "device": "cuda",
+  "dtype": "float32",
+  "smoke": false,
+  "experiment_name": "canonical-template / public-implementation lexical distribution",
+  "lexical_inventory": {
+    "source": "public Easy-Transformer implementation",
+    "n_names": 99,
+    "n_places": 8,
+    "n_objects": 8,
+    "paper_text_describes": "100 names and 20 total common place/object words",
+    "templates": "15 low-level BABA match paper Appendix E"
+  },
+  "primary_name_movers": [
+    "L9H6",
+    "L9H9",
+    "L10H0"
+  ],
+  "heads": [
+    "L9H0",
+    "L9H7",
+    "L10H1",
+    "L10H2",
+    "L10H6",
+    "L10H10",
+    "L11H2",
+    "L11H9",
+    "L10H7",
+    "L11H10",
+    "L10H3",
+    "L10H5"
+  ],
+  "factors": [
+    "P=pattern",
+    "V=value",
+    "C=context"
+  ],
+  "intervention": "full hook_z all query positions (Phase-3D machinery)",
+  "frozen_hypotheses": {
+    "H1_L9H7": {
+      "head": "L9H7",
+      "primary": true,
+      "predict": "phi_P \u2248 0; phi_V \u2248 0; phi_C > 0"
+    },
+    "H2_L10H2": {
+      "head": "L10H2",
+      "primary": true,
+      "predict": "conditional_gain > 0; phi_P > 0; context potentially negative"
+    },
+    "H3_L10H10": {
+      "head": "L10H10",
+      "primary": true,
+      "predict": "phi_P > 0; phi_C < 0; cancellation / negative gain"
+    },
+    "H4_L10H7": {
+      "head": "L10H7",
+      "primary": true,
+      "predict": "phi_P large positive; conditional_effect < 0"
+    },
+    "secondary_L10H1": {
+      "head": "L10H1",
+      "primary": false,
+      "predict": "suggestive context-led recruitment"
+    }
+  },
+  "future_full_n_per_seed": 900,
+  "future_seeds": [
+    42,
+    1,
+    8,
+    22
+  ],
+  "future_bootstrap_draws": 10000,
+  "bootstrap_procedures": [
+    "within_template_stratified (30 strata)",
+    "template_cluster (15 templates; BABA+ABBA paired)"
+  ],
+  "canonical_source_commit": "e168301aa05154a14d52e5b6f98b6518200f5b1f",
+  "output_dir": "/root/project/results/revision_phase4/full/seed_8",
+  "timestamp_utc": "2026-08-14T16:58:30.293489+00:00",
+  "science_interpretation": "FORBIDDEN for N=60 smoke"
+}

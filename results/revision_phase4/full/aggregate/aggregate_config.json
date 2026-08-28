@@ -1,0 +1,14 @@
+{
+  "experiment": "canonical-template / public-implementation lexical distribution",
+  "n_per_seed": 900,
+  "seeds": [
+    42,
+    1,
+    8,
+    22
+  ],
+  "n_bootstrap": 10000,
+  "verdict": "BROAD-TEMPLATE PARTIAL",
+  "exact_overlap_excluded": "T00_BABA",
+  "arch_tol": 0.0001
+}

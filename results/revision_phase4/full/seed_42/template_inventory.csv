@@ -1,0 +1,31 @@
+low_level_template_id,pattern_type,template_stratum,template_string
+0,BABA,T00_BABA,"Then, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+0,ABBA,T00_ABBA,"Then, [A] and [B] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+1,BABA,T01_BABA,"Then, [B] and [A] had a lot of fun at the [PLACE]. [B] gave a [OBJECT] to [A]"
+1,ABBA,T01_ABBA,"Then, [A] and [B] had a lot of fun at the [PLACE]. [B] gave a [OBJECT] to [A]"
+2,BABA,T02_BABA,"Then, [B] and [A] were working at the [PLACE]. [B] decided to give a [OBJECT] to [A]"
+2,ABBA,T02_ABBA,"Then, [A] and [B] were working at the [PLACE]. [B] decided to give a [OBJECT] to [A]"
+3,BABA,T03_BABA,"Then, [B] and [A] were thinking about going to the [PLACE]. [B] wanted to give a [OBJECT] to [A]"
+3,ABBA,T03_ABBA,"Then, [A] and [B] were thinking about going to the [PLACE]. [B] wanted to give a [OBJECT] to [A]"
+4,BABA,T04_BABA,"Then, [B] and [A] had a long argument, and afterwards [B] said to [A]"
+4,ABBA,T04_ABBA,"Then, [A] and [B] had a long argument, and afterwards [B] said to [A]"
+5,BABA,T05_BABA,"After [B] and [A] went to the [PLACE], [B] gave a [OBJECT] to [A]"
+5,ABBA,T05_ABBA,"After [A] and [B] went to the [PLACE], [B] gave a [OBJECT] to [A]"
+6,BABA,T06_BABA,"When [B] and [A] got a [OBJECT] at the [PLACE], [B] decided to give it to [A]"
+6,ABBA,T06_ABBA,"When [A] and [B] got a [OBJECT] at the [PLACE], [B] decided to give it to [A]"
+7,BABA,T07_BABA,"When [B] and [A] got a [OBJECT] at the [PLACE], [B] decided to give the [OBJECT] to [A]"
+7,ABBA,T07_ABBA,"When [A] and [B] got a [OBJECT] at the [PLACE], [B] decided to give the [OBJECT] to [A]"
+8,BABA,T08_BABA,"While [B] and [A] were working at the [PLACE], [B] gave a [OBJECT] to [A]"
+8,ABBA,T08_ABBA,"While [A] and [B] were working at the [PLACE], [B] gave a [OBJECT] to [A]"
+9,BABA,T09_BABA,"While [B] and [A] were commuting to the [PLACE], [B] gave a [OBJECT] to [A]"
+9,ABBA,T09_ABBA,"While [A] and [B] were commuting to the [PLACE], [B] gave a [OBJECT] to [A]"
+10,BABA,T10_BABA,"After the lunch, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+10,ABBA,T10_ABBA,"After the lunch, [A] and [B] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+11,BABA,T11_BABA,"Afterwards, [B] and [A] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+11,ABBA,T11_ABBA,"Afterwards, [A] and [B] went to the [PLACE]. [B] gave a [OBJECT] to [A]"
+12,BABA,T12_BABA,"Then, [B] and [A] had a long argument. Afterwards [B] said to [A]"
+12,ABBA,T12_ABBA,"Then, [A] and [B] had a long argument. Afterwards [B] said to [A]"
+13,BABA,T13_BABA,The [PLACE] [B] and [A] went to had a [OBJECT]. [B] gave it to [A]
+13,ABBA,T13_ABBA,The [PLACE] [A] and [B] went to had a [OBJECT]. [B] gave it to [A]
+14,BABA,T14_BABA,Friends [B] and [A] found a [OBJECT] at the [PLACE]. [B] gave it to [A]
+14,ABBA,T14_ABBA,Friends [A] and [B] found a [OBJECT] at the [PLACE]. [B] gave it to [A]

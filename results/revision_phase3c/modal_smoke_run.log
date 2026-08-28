@@ -1,0 +1,56 @@
+✓ Initialized. View run at 
+https://modal.com/apps/ronithworks/main/ap-Ob6Tz1OgPc7gwzrWxTtJeH
+✓ Created objects.
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/modal_phase3c.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/results/revision_phase2/full/seed_42/phase2_combined_raw.csv
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/results/revision_phase1/smoke/dataset_metadata.csv
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/experiments/revision_phase3c_factorial.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/src
+└── 🔨 Created function run_phase3c_smoke_remote.
+Launching Modal GPU=L4 Phase3C smoke N=8 seed=42
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase3c_factorial.py --num-samples 8 --seed 42 --device cuda --require-cuda --smoke --output-dir /root/project/results/revision_phase3c/smoke --phase1-meta /root/project/results/revision_phase1/smoke/dataset_metadata.csv
+Loading gpt2-small on cuda FP32...
+Loaded pretrained model gpt2-small into HookedTransformer
+Aligned to /root/project/results/revision_phase1/smoke/dataset_metadata.csv
+Cache A (clean)...
+Cache B (primary knockout)...
+Factorial L9H0...
+Factorial L9H7...
+Factorial L10H1...
+Factorial L10H2...
+Factorial L10H6...
+Factorial L10H10...
+Factorial L11H2...
+Factorial L11H9...
+Factorial L10H7...
+Factorial L11H10...
+Factorial L10H3...
+Factorial L10H5...
+ACCEPTANCE PASSED
+Done in 8.4s -> /root/project/results/revision_phase3c/smoke
+Downloaded -> /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase3c/smoke (23846 bytes)
+ - L10H10_smoke_report.md
+ - L10H2_smoke_report.md
+ - L10H7_smoke_report.md
+ - L9H7_smoke_report.md
+ - dataset_alignment_report.md
+ - dataset_metadata.csv
+ - endpoint_identity_report.md
+ - environment.json
+ - factorial_raw.csv
+ - factorial_summary.csv
+ - phase2_merge_summary.csv
+ - run_config.json
+ - run_log.txt
+ - same_layer_report.md
+ - shapley_validation_report.md
+ - validation_report.md
+ - z_reconstruction_report.md
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/ronithworks/main/ap-Ob6Tz1OgPc7gwzrWxTtJeH

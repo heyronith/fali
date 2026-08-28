@@ -1,0 +1,43 @@
+{
+  "phase": "3C",
+  "num_samples": 200,
+  "seed": 8,
+  "device": "cuda",
+  "dtype": "float32",
+  "smoke": false,
+  "primary_name_movers": [
+    "L9H6",
+    "L9H9",
+    "L10H0"
+  ],
+  "heads": [
+    "L9H0",
+    "L9H7",
+    "L10H1",
+    "L10H2",
+    "L10H6",
+    "L10H10",
+    "L11H2",
+    "L11H9",
+    "L10H7",
+    "L11H10",
+    "L10H3",
+    "L10H5"
+  ],
+  "reporting_panel": [
+    "L10H2",
+    "L10H1",
+    "L10H10",
+    "L9H7",
+    "L10H7",
+    "L10H6"
+  ],
+  "factors": [
+    "P=pattern",
+    "V=value",
+    "C=context"
+  ],
+  "intervention": "full hook_z all query positions",
+  "output_dir": "/root/project/results/revision_phase3c/full/seed_8",
+  "timestamp_utc": "2026-08-14T15:29:04.890886+00:00"
+}

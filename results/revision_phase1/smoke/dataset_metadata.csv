@@ -1,0 +1,9 @@
+example_idx,template_id,S,IO,prompt,end_position,IO_position,S1_position,S2_position
+0,A,Alice,John,"When Alice and John went to the garden, Alice gave a ring to",14,4,2,10
+1,B,Bob,Alice,"Then, Bob and Alice went to the town. Bob gave a coin to",15,5,3,11
+2,A,Mary,John,"When Mary and John went to the garden, Mary gave a ring to",14,4,2,10
+3,B,Lisa,John,"Then, Lisa and John went to the house. Lisa gave a coin to",15,5,3,11
+4,A,Jack,Tom,"When Jack and Tom went to the store, Jack gave a bottle to",14,4,2,10
+5,B,Mike,Bill,"Then, Mike and Bill went to the school. Mike gave a ring to",15,5,3,11
+6,A,Bill,Alice,"When Bill and Alice went to the library, Bill gave a book to",14,4,2,10
+7,B,Dave,Amy,"Then, Dave and Amy went to the store. Dave gave a cup to",15,5,3,11

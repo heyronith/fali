@@ -1,0 +1,13 @@
+seed,metric_a,metric_b,pearson_r,pearson_p,spearman_r,spearman_p
+42,causal_total,pattern_clean_patch_effect,1.0,0.0,1.0,0.0
+42,causal_total,qk_clean_effect,0.9999993889576623,6.7082097353619e-31,1.0,0.0
+42,pattern_clean_patch_effect,qk_clean_effect,0.9999993889576623,6.7082097353619e-31,1.0,0.0
+1,causal_total,pattern_clean_patch_effect,0.9999999999999999,0.0,1.0,0.0
+1,causal_total,qk_clean_effect,0.9999995094756797,2.2364177504870713e-31,1.0,0.0
+1,pattern_clean_patch_effect,qk_clean_effect,0.9999995094756797,2.2364177504870713e-31,1.0,0.0
+8,causal_total,pattern_clean_patch_effect,1.0,0.0,1.0,0.0
+8,causal_total,qk_clean_effect,0.9999995444643375,1.544764014776267e-31,1.0,0.0
+8,pattern_clean_patch_effect,qk_clean_effect,0.9999995444643375,1.544764014776267e-31,1.0,0.0
+22,causal_total,pattern_clean_patch_effect,0.9999999999999999,0.0,1.0,0.0
+22,causal_total,qk_clean_effect,0.9999994394450072,4.358542466478757e-31,1.0,0.0
+22,pattern_clean_patch_effect,qk_clean_effect,0.9999994394450072,4.358542466478757e-31,1.0,0.0

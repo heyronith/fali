@@ -1,0 +1,37 @@
+{
+  "phase": "2A/3A",
+  "num_samples": 8,
+  "seed": 42,
+  "device": "cuda",
+  "dtype": "float32",
+  "smoke": true,
+  "primary_name_movers": [
+    "L9H6",
+    "L9H9",
+    "L10H0"
+  ],
+  "descriptive_heads": [
+    "L9H0",
+    "L9H7",
+    "L10H1",
+    "L10H2",
+    "L10H6",
+    "L10H10",
+    "L11H2",
+    "L11H9",
+    "L10H7",
+    "L11H10",
+    "L10H3",
+    "L10H5"
+  ],
+  "causal_panel_heads": [
+    "L10H2",
+    "L10H1",
+    "L10H10",
+    "L9H7",
+    "L10H7",
+    "L10H6"
+  ],
+  "output_dir": "/root/project/results/revision_phase2/smoke",
+  "timestamp_utc": "2026-08-13T19:58:52.605198+00:00"
+}

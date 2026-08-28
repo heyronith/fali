@@ -1,0 +1,26 @@
+{
+  "n_rows_merged": 9600,
+  "seeds": [
+    42,
+    1,
+    8,
+    22
+  ],
+  "ridge_alpha": 1.0,
+  "zero_tol_sign_agree": 1e-08,
+  "n_bootstrap": 10000,
+  "verdict": "PIVOT",
+  "notes": [
+    "across-head seedmean pearson fali\u2194causal target=-0.3499954295042954, competing=0.24683322548864478",
+    "predictive groups better=10 worse=1 tiny=1 / 12",
+    "causal tracking failed despite some predictive signal"
+  ],
+  "reporting_panel": [
+    "L10H2",
+    "L10H1",
+    "L10H10",
+    "L9H7",
+    "L10H7",
+    "L10H6"
+  ]
+}

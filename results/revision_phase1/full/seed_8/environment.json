@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-08-13T19:28:27.721658+00:00",
+  "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+  "device": "cuda",
+  "torch": "2.6.0+cu124",
+  "torch_cuda_version": "12.4",
+  "cuda_runtime_version": "12.4",
+  "cuda_available": true,
+  "gpu_name": "NVIDIA L4",
+  "model_parameter_device": "cuda:0",
+  "token_device": "cuda:0",
+  "torch_dtype": "torch.float32",
+  "transformer_lens": "3.2.1",
+  "transformers": "4.57.6",
+  "numpy": "2.2.2",
+  "pandas": "3.0.5",
+  "mps_available": false,
+  "mixed_precision": false,
+  "dtype_policy": "fp32"
+}

@@ -1,0 +1,9 @@
+{
+  "phase": "4C",
+  "model_execution": false,
+  "raw_untouched": true,
+  "role_near_zero_tol": 0.05,
+  "verdict": "BROAD-TEMPLATE PARTIAL",
+  "n_bootstrap": 10000,
+  "pre_fix_dir": "results/revision_phase4/full/aggregate_pre_bootstrap_fix"
+}

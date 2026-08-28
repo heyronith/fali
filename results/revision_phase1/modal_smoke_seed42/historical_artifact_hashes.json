@@ -1,0 +1,47 @@
+{
+  "pre": {
+    "results/summary/attention_results.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/summary/ablation_controls_summary.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/summary/output_mediation_summary.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    }
+  },
+  "post": {
+    "results/summary/attention_results.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/summary/ablation_controls_summary.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/summary/output_mediation_summary.json": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "mtime": null,
+      "size": null
+    }
+  },
+  "unchanged": true
+}

@@ -1,0 +1,52 @@
+✓ Initialized. View run at 
+https://modal.com/apps/ronithworks/main/ap-wVMbXZN4me3FlnZQEXbsMO
+✓ Created objects.
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/modal_phase2.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/experiments/revision_phase2_fali_causal.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/results/revision_phase1/smoke/dataset_metadata.csv
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/src
+└── 🔨 Created function run_phase2_smoke_remote.
+Launching Modal GPU=L4 Phase2 smoke seed=42 N=8 -> results/revision_phase2/smoke
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase2_fali_causal.py --num-samples 8 --seed 42 --device cuda --require-cuda --smoke --output-dir /root/project/results/revision_phase2/smoke --phase1-meta /root/project/results/revision_phase1/smoke/dataset_metadata.csv
+Loading gpt2-small on cuda (FP32)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Building IOI dataset N=8 seed=42...
+Dataset aligned to /root/project/results/revision_phase1/smoke/dataset_metadata.csv
+Forward A (clean)...
+Forward B (corrected primary knockout L9H6+L9H9+L10H0)...
+Computing descriptive FALI for all 12 candidates...
+Causal panel interventions (6 heads)...
+  panel L10H2...
+  panel L10H1...
+  panel L10H10...
+  panel L9H7...
+  panel L10H7...
+  panel L10H6...
+ACCEPTANCE PASSED
+Done in 15.3s -> /root/project/results/revision_phase2/smoke
+Downloaded results to /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase2/smoke (77080 bytes zip)
+ - causal_score_hybrid_raw.csv
+ - causal_score_hybrid_summary.csv
+ - dataset_alignment_report.md
+ - dataset_metadata.csv
+ - environment.json
+ - fali_raw.csv
+ - fali_summary.csv
+ - pattern_patch_raw.csv
+ - pattern_patch_summary.csv
+ - qk_patch_raw.csv
+ - qk_patch_summary.csv
+ - qk_score_decomposition_raw.csv
+ - qk_score_decomposition_summary.csv
+ - run_config.json
+ - run_log.txt
+ - score_baseline_raw.csv
+ - score_baseline_summary.csv
+ - validation_report.md
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/ronithworks/main/ap-wVMbXZN4me3FlnZQEXbsMO

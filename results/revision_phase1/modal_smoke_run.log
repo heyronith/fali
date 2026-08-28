@@ -1,0 +1,327 @@
+✓ Initialized. View run at 
+https://modal.com/apps/ronithworks/main/ap-MtkOKLNCjIlPwRvK5M3OO0
+Building image im-pAc87UjquGkB1pzUodX58b
+
+=> Step 0: FROM base
+
+=> Step 1: RUN python -m pip install 'accelerate>=0.26.0' 'beartype>=0.14.1' 'better-abc>=0.0.3' 'datasets>=2.7.1' 'einops>=0.7.0' 'fancy-einsum>=0.0.3' 'huggingface-hub>=0.24.0,<1.0' 'jaxtyping>=0.2.0' 'matplotlib>=3.7.0' 'pandas>=2.0.0' 'plotly>=5.15.0' 'rich>=12.6.0' 'scipy>=1.10.0' sentencepiece transformer-lens==3.2.1 'transformers-stream-generator>=0.0.5,<0.1' transformers==4.57.6 'typeguard>=4.0.0'
+Looking in indexes: http://pypi-mirror.modal.local:5555/simple
+Collecting accelerate>=0.26.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/accelerate/accelerate-1.14.0-py3-none-any.whl.metadata (19 kB)
+Collecting beartype>=0.14.1
+  Downloading http://pypi-mirror.modal.local:5555/simple/beartype/beartype-0.22.9-py3-none-any.whl.metadata (37 kB)
+Collecting better-abc>=0.0.3
+  Downloading http://pypi-mirror.modal.local:5555/simple/better-abc/better_abc-0.0.3-py3-none-any.whl.metadata (1.4 kB)
+Collecting datasets>=2.7.1
+  Downloading http://pypi-mirror.modal.local:5555/simple/datasets/datasets-5.0.1-py3-none-any.whl.metadata (23 kB)
+Collecting einops>=0.7.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/einops/einops-0.8.2-py3-none-any.whl.metadata (13 kB)
+Collecting fancy-einsum>=0.0.3
+  Downloading http://pypi-mirror.modal.local:5555/simple/fancy-einsum/fancy_einsum-0.0.3-py3-none-any.whl.metadata (1.2 kB)
+Collecting huggingface-hub<1.0,>=0.24.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/huggingface-hub/huggingface_hub-0.36.2-py3-none-any.whl.metadata (15 kB)
+Collecting jaxtyping>=0.2.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/jaxtyping/jaxtyping-0.3.11-py3-none-any.whl.metadata (6.2 kB)
+Collecting matplotlib>=3.7.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/matplotlib/matplotlib-3.11.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+Collecting pandas>=2.0.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/pandas/pandas-3.0.5-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+Collecting plotly>=5.15.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/plotly/plotly-6.9.0-py3-none-any.whl.metadata (9.0 kB)
+Collecting rich>=12.6.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/rich/rich-15.0.0-py3-none-any.whl.metadata (18 kB)
+Collecting scipy>=1.10.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/scipy/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting sentencepiece
+  Downloading http://pypi-mirror.modal.local:5555/simple/sentencepiece/sentencepiece-0.2.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (33 kB)
+Collecting transformer-lens==3.2.1
+  Downloading http://pypi-mirror.modal.local:5555/simple/transformer-lens/transformer_lens-3.2.1-py3-none-any.whl.metadata (13 kB)
+Collecting transformers-stream-generator<0.1,>=0.0.5
+  Downloading http://pypi-mirror.modal.local:5555/simple/transformers-stream-generator/transformers-stream-generator-0.0.5.tar.gz (13 kB)
+  Preparing metadata (setup.py): started
+  Preparing metadata (setup.py): finished with status 'done'
+Collecting transformers==4.57.6
+  Downloading http://pypi-mirror.modal.local:5555/simple/transformers/transformers-4.57.6-py3-none-any.whl.metadata (43 kB)
+Collecting typeguard>=4.0.0
+  Downloading http://pypi-mirror.modal.local:5555/simple/typeguard/typeguard-4.6.0-py3-none-any.whl.metadata (3.7 kB)
+Requirement already satisfied: numpy>=1.24 in /opt/conda/lib/python3.11/site-packages (from transformer-lens==3.2.1) (2.2.2)
+Collecting protobuf>=3.20.0 (from transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/protobuf/protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Requirement already satisfied: torch>=2.6 in /opt/conda/lib/python3.11/site-packages (from transformer-lens==3.2.1) (2.6.0+cu124)
+Requirement already satisfied: tqdm>=4.64.1 in /opt/conda/lib/python3.11/site-packages (from transformer-lens==3.2.1) (4.67.1)
+Requirement already satisfied: typing-extensions in /opt/conda/lib/python3.11/site-packages (from transformer-lens==3.2.1) (4.12.2)
+Collecting wandb>=0.13.5 (from transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/wandb/wandb-0.28.2-py3-none-manylinux_2_28_x86_64.whl.metadata (11 kB)
+Requirement already satisfied: filelock in /opt/conda/lib/python3.11/site-packages (from transformers==4.57.6) (3.17.0)
+Requirement already satisfied: packaging>=20.0 in /opt/conda/lib/python3.11/site-packages (from transformers==4.57.6) (24.2)
+Requirement already satisfied: pyyaml>=5.1 in /opt/conda/lib/python3.11/site-packages (from transformers==4.57.6) (6.0.2)
+Collecting regex!=2019.12.17 (from transformers==4.57.6)
+  Downloading http://pypi-mirror.modal.local:5555/simple/regex/regex-2026.7.19-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+Requirement already satisfied: requests in /opt/conda/lib/python3.11/site-packages (from transformers==4.57.6) (2.32.3)
+Collecting tokenizers<=0.23.0,>=0.22.0 (from transformers==4.57.6)
+  Downloading http://pypi-mirror.modal.local:5555/simple/tokenizers/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting safetensors>=0.4.3 (from transformers==4.57.6)
+  Downloading http://pypi-mirror.modal.local:5555/simple/safetensors/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Requirement already satisfied: psutil in /opt/conda/lib/python3.11/site-packages (from accelerate>=0.26.0) (6.1.1)
+Collecting pyarrow>=21.0.0 (from datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/pyarrow/pyarrow-25.0.1-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (3.0 kB)
+Collecting dill<0.4.2,>=0.3.0 (from datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/dill/dill-0.4.1-py3-none-any.whl.metadata (10 kB)
+Collecting httpx<1.0.0 (from datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/httpx/httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting xxhash (from datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/xxhash/xxhash-4.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (17 kB)
+Collecting multiprocess<0.70.20 (from datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/multiprocess/multiprocess-0.70.19-py311-none-any.whl.metadata (7.5 kB)
+Requirement already satisfied: fsspec<=2026.6.0,>=2023.1.0 in /opt/conda/lib/python3.11/site-packages (from fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1) (2024.12.0)
+Collecting hf-xet<2.0.0,>=1.1.3 (from huggingface-hub<1.0,>=0.24.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/hf-xet/hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Collecting wadler-lindig>=0.1.3 (from jaxtyping>=0.2.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/wadler-lindig/wadler_lindig-0.1.7-py3-none-any.whl.metadata (17 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/contourpy/contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/cycler/cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/fonttools/fonttools-4.63.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (118 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/kiwisolver/kiwisolver-1.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.1 kB)
+Requirement already satisfied: pillow>=9 in /opt/conda/lib/python3.11/site-packages (from matplotlib>=3.7.0) (11.0.0)
+Collecting pyparsing>=3 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/pyparsing/pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Collecting python-dateutil>=2.7 (from matplotlib>=3.7.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/python-dateutil/python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting narwhals>=1.15.1 (from plotly>=5.15.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/narwhals/narwhals-2.24.0-py3-none-any.whl.metadata (15 kB)
+Collecting markdown-it-py>=2.2.0 (from rich>=12.6.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/markdown-it-py/markdown_it_py-4.2.0-py3-none-any.whl.metadata (7.4 kB)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /opt/conda/lib/python3.11/site-packages (from rich>=12.6.0) (2.19.1)
+Collecting typing-extensions (from transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/typing-extensions/typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting aiohttp!=4.0.0a0,!=4.0.0a1 (from fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/aiohttp/aiohttp-3.14.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.3 kB)
+Collecting anyio (from httpx<1.0.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/anyio/anyio-4.14.2-py3-none-any.whl.metadata (4.6 kB)
+Requirement already satisfied: certifi in /opt/conda/lib/python3.11/site-packages (from httpx<1.0.0->datasets>=2.7.1) (2024.12.14)
+Collecting httpcore==1.* (from httpx<1.0.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/httpcore/httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Requirement already satisfied: idna in /opt/conda/lib/python3.11/site-packages (from httpx<1.0.0->datasets>=2.7.1) (3.10)
+Collecting h11>=0.16 (from httpcore==1.*->httpx<1.0.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/h11/h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=12.6.0)
+  Downloading http://pypi-mirror.modal.local:5555/simple/mdurl/mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+Requirement already satisfied: six>=1.5 in /opt/conda/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib>=3.7.0) (1.17.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in /opt/conda/lib/python3.11/site-packages (from requests->transformers==4.57.6) (3.4.1)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/conda/lib/python3.11/site-packages (from requests->transformers==4.57.6) (2.3.0)
+Requirement already satisfied: networkx in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (3.4.2)
+Requirement already satisfied: jinja2 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (3.1.5)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.4.127 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.127)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.4.127 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.127)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.4.127 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.127)
+Requirement already satisfied: nvidia-cudnn-cu12==9.1.0.70 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (9.1.0.70)
+Requirement already satisfied: nvidia-cublas-cu12==12.4.5.8 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.5.8)
+Requirement already satisfied: nvidia-cufft-cu12==11.2.1.3 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (11.2.1.3)
+Requirement already satisfied: nvidia-curand-cu12==10.3.5.147 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (10.3.5.147)
+Requirement already satisfied: nvidia-cusolver-cu12==11.6.1.9 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (11.6.1.9)
+Requirement already satisfied: nvidia-cusparse-cu12==12.3.1.170 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.3.1.170)
+Requirement already satisfied: nvidia-cusparselt-cu12==0.6.2 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (0.6.2)
+Requirement already satisfied: nvidia-nccl-cu12==2.21.5 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (2.21.5)
+Requirement already satisfied: nvidia-nvtx-cu12==12.4.127 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.127)
+Requirement already satisfied: nvidia-nvjitlink-cu12==12.4.127 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (12.4.127)
+Requirement already satisfied: triton==3.2.0 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (3.2.0)
+Requirement already satisfied: sympy==1.13.1 in /opt/conda/lib/python3.11/site-packages (from torch>=2.6->transformer-lens==3.2.1) (1.13.1)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/conda/lib/python3.11/site-packages (from sympy==1.13.1->torch>=2.6->transformer-lens==3.2.1) (1.3.0)
+Collecting click>=8.2.0 (from wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/click/click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting opentelemetry-api>=1.43.0 (from wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/opentelemetry-api/opentelemetry_api-1.44.0-py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: platformdirs in /opt/conda/lib/python3.11/site-packages (from wandb>=0.13.5->transformer-lens==3.2.1) (4.3.6)
+Collecting pydantic<3,>=2.6 (from wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/pydantic/pydantic-2.13.4-py3-none-any.whl.metadata (109 kB)
+Collecting sentry-sdk>=2.0.0 (from wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/sentry-sdk/sentry_sdk-2.68.0-py3-none-any.whl.metadata (11 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/aiohappyeyeballs/aiohappyeyeballs-2.7.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/aiosignal/aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Requirement already satisfied: attrs>=17.3.0 in /opt/conda/lib/python3.11/site-packages (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1) (25.1.0)
+Collecting frozenlist>=1.1.1 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/frozenlist/frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+Collecting multidict<7.0,>=4.5 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/multidict/multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+Collecting propcache>=0.2.0 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/propcache/propcache-0.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (16 kB)
+Collecting yarl<2.0,>=1.17.0 (from aiohttp!=4.0.0a0,!=4.0.0a1->fsspec[http]<=2026.6.0,>=2023.1.0->datasets>=2.7.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/yarl/yarl-1.24.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (103 kB)
+Collecting annotated-types>=0.6.0 (from pydantic<3,>=2.6->wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/annotated-types/annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.46.4 (from pydantic<3,>=2.6->wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/pydantic-core/pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic<3,>=2.6->wandb>=0.13.5->transformer-lens==3.2.1)
+  Downloading http://pypi-mirror.modal.local:5555/simple/typing-inspection/typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/conda/lib/python3.11/site-packages (from jinja2->torch>=2.6->transformer-lens==3.2.1) (3.0.2)
+Downloading http://pypi-mirror.modal.local:5555/simple/transformer-lens/transformer_lens-3.2.1-py3-none-any.whl (968 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 968.6/968.6 kB 93.4 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/transformers/transformers-4.57.6-py3-none-any.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 208.5 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/accelerate/accelerate-1.14.0-py3-none-any.whl (389 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/beartype/beartype-0.22.9-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 513.9 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/better-abc/better_abc-0.0.3-py3-none-any.whl (3.5 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/datasets/datasets-5.0.1-py3-none-any.whl (559 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 559.1/559.1 kB 741.5 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/einops/einops-0.8.2-py3-none-any.whl (65 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/fancy-einsum/fancy_einsum-0.0.3-py3-none-any.whl (6.2 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/huggingface-hub/huggingface_hub-0.36.2-py3-none-any.whl (566 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 566.4/566.4 kB 632.9 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/jaxtyping/jaxtyping-0.3.11-py3-none-any.whl (56 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/matplotlib/matplotlib-3.11.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.0/10.0 MB 495.0 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/pandas/pandas-3.0.5-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (11.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.3/11.3 MB 497.3 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/plotly/plotly-6.9.0-py3-none-any.whl (9.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 503.1 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/rich/rich-15.0.0-py3-none-any.whl (310 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/scipy/scipy-1.17.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 488.6 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/sentencepiece/sentencepiece-0.2.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 242.9 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/typeguard/typeguard-4.6.0-py3-none-any.whl (36 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/contourpy/contourpy-1.3.3-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (355 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/cycler/cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/dill/dill-0.4.1-py3-none-any.whl (120 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/fonttools/fonttools-4.63.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.1/5.1 MB 508.1 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/hf-xet/hf_xet-1.6.0-cp38-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 517.5 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/httpx/httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/httpcore/httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/kiwisolver/kiwisolver-1.5.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.4/1.4 MB 527.0 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/markdown-it-py/markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/multiprocess/multiprocess-0.70.19-py311-none-any.whl (144 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/narwhals/narwhals-2.24.0-py3-none-any.whl (461 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/protobuf/protobuf-7.35.1-cp310-abi3-manylinux2014_x86_64.whl (327 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/pyarrow/pyarrow-25.0.1-cp311-cp311-manylinux_2_28_x86_64.whl (50.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.1/50.1 MB 484.7 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/pyparsing/pyparsing-3.3.2-py3-none-any.whl (122 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/python-dateutil/python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/regex/regex-2026.7.19-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.4/801.4 kB 521.8 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/safetensors/safetensors-0.8.0-cp310-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (516 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/tokenizers/tokenizers-0.22.2-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 492.1 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/typing-extensions/typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/wadler-lindig/wadler_lindig-0.1.7-py3-none-any.whl (20 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/wandb/wandb-0.28.2-py3-none-manylinux_2_28_x86_64.whl (29.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 29.6/29.6 MB 156.5 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/xxhash/xxhash-4.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (260 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/aiohttp/aiohttp-3.14.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 590.5 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/click/click-8.4.2-py3-none-any.whl (119 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/mdurl/mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/opentelemetry-api/opentelemetry_api-1.44.0-py3-none-any.whl (60 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/pydantic/pydantic-2.13.4-py3-none-any.whl (472 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/pydantic-core/pydantic_core-2.46.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 579.3 MB/s eta 0:00:00
+Downloading http://pypi-mirror.modal.local:5555/simple/sentry-sdk/sentry_sdk-2.68.0-py3-none-any.whl (518 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/anyio/anyio-4.14.2-py3-none-any.whl (125 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/aiohappyeyeballs/aiohappyeyeballs-2.7.1-py3-none-any.whl (15 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/aiosignal/aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/annotated-types/annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/frozenlist/frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (231 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/h11/h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/multidict/multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (246 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/propcache/propcache-0.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (58 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/typing-inspection/typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+Downloading http://pypi-mirror.modal.local:5555/simple/yarl/yarl-1.24.5-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (111 kB)
+Building wheels for collected packages: transformers-stream-generator
+  Building wheel for transformers-stream-generator (setup.py): started
+  Building wheel for transformers-stream-generator (setup.py): finished with status 'done'
+  Created wheel for transformers-stream-generator: filename=transformers_stream_generator-0.0.5-py3-none-any.whl size=12500 sha256=12df73137544ac8cdb9c38d41b736f8bea23926b51d99d304f2014f0a389a48f
+  Stored in directory: /tmp/pip-ephem-wheel-cache-bn50goc5/wheels/82/54/07/d9b1d78f87bf502f129fc6f52f769650096f4f6f92c1e07efc
+Successfully built transformers-stream-generator
+Installing collected packages: better-abc, xxhash, wadler-lindig, typing-extensions, sentry-sdk, sentencepiece, scipy, safetensors, regex, python-dateutil, pyparsing, pyarrow, protobuf, propcache, narwhals, multidict, mdurl, kiwisolver, hf-xet, h11, frozenlist, fonttools, fancy-einsum, einops, dill, cycler, contourpy, click, beartype, annotated-types, aiohappyeyeballs, yarl, typing-inspection, typeguard, pydantic-core, plotly, pandas, opentelemetry-api, multiprocess, matplotlib, markdown-it-py, jaxtyping, huggingface-hub, httpcore, anyio, aiosignal, tokenizers, rich, pydantic, httpx, aiohttp, wandb, transformers, accelerate, transformers-stream-generator, datasets, transformer-lens
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing_extensions 4.12.2
+    Uninstalling typing_extensions-4.12.2:
+      Successfully uninstalled typing_extensions-4.12.2
+  Attempting uninstall: click
+    Found existing installation: click 8.1.8
+    Uninstalling click-8.1.8:
+      Successfully uninstalled click-8.1.8
+Successfully installed accelerate-1.14.0 aiohappyeyeballs-2.7.1 aiohttp-3.14.3 aiosignal-1.4.0 annotated-types-0.8.0 anyio-4.14.2 beartype-0.22.9 better-abc-0.0.3 click-8.4.2 contourpy-1.3.3 cycler-0.12.1 datasets-5.0.1 dill-0.4.1 einops-0.8.2 fancy-einsum-0.0.3 fonttools-4.63.0 frozenlist-1.8.0 h11-0.16.0 hf-xet-1.6.0 httpcore-1.0.9 httpx-0.28.1 huggingface-hub-0.36.2 jaxtyping-0.3.11 kiwisolver-1.5.0 markdown-it-py-4.2.0 matplotlib-3.11.1 mdurl-0.1.2 multidict-6.7.1 multiprocess-0.70.19 narwhals-2.24.0 opentelemetry-api-1.44.0 pandas-3.0.5 plotly-6.9.0 propcache-0.5.2 protobuf-7.35.1 pyarrow-25.0.1 pydantic-2.13.4 pydantic-core-2.46.4 pyparsing-3.3.2 python-dateutil-2.9.0.post0 regex-2026.7.19 rich-15.0.0 safetensors-0.8.0 scipy-1.17.1 sentencepiece-0.2.2 sentry-sdk-2.68.0 tokenizers-0.22.2 transformer-lens-3.2.1 transformers-4.57.6 transformers-stream-generator-0.0.5 typeguard-4.6.0 typing-extensions-4.16.0 typing-inspection-0.4.4 wadler-lindig-0.1.7 wandb-0.28.2 xxhash-4.0.0 yarl-1.24.5
+Saving image...
+Image saved, took 2.57s
+
+Built image im-pAc87UjquGkB1pzUodX58b in 37.30s
+
+
+Building image im-ITn07cKvGKR1gOMkMm5lLx
+
+=> Step 0: FROM base
+
+=> Step 1: ENV HF_HOME=/tmp/hf_cache
+
+=> Step 2: ENV TOKENIZERS_PARALLELISM=false
+Saving image...
+Image saved, took 1.44s
+
+Built image im-ITn07cKvGKR1gOMkMm5lLx in 3.58s
+
+
+✓ Created objects.
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/modal_phase1.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI 
+│   ALIGNMENT/FALI/experiments/revision_phase1_conditional_gain.py
+├── 🔨 Created mount /Users/ronny/Desktop/Research/AI ALIGNMENT/FALI/src
+└── 🔨 Created function run_phase1_remote.
+Launching Modal GPU=L4 mode=smoke seed=42 N=8 bootstrap=200 -> 
+results/revision_phase1/modal_smoke_seed42
+Running: /opt/conda/bin/python /root/project/experiments/revision_phase1_conditional_gain.py --num-samples 8 --seed 42 --device cuda --require-cuda --output-dir /root/project/results/revision_phase1/modal_smoke_seed42 --n-bootstrap 200 --smoke
+========================================================================
+REVISION PHASE-1 CONDITIONAL GAIN
+========================================================================
+output_dir=/root/project/results/revision_phase1/modal_smoke_seed42
+num_samples=8 seed=42 smoke=True
+device=cuda n_bootstrap=200
+Loading gpt2-small (FP32, no mixed precision)...
+Loaded pretrained model gpt2-small into HookedTransformer
+Model loaded.
+model_param_device=cuda:0 token_device=cuda:0
+Dataset validated: N=8, seq_len=16
+Running Pass A (clean)...
+B_old hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+B hooks: ['blocks.9.attn.hook_z', 'blocks.10.attn.hook_z']
+Saved primary_ablation_summary.csv
+Evaluating 12 candidates (D_h and C_h)...
+  Candidate L9H0 (backup)
+  Candidate L9H7 (backup)
+  Candidate L10H1 (backup)
+  Candidate L10H2 (backup)
+  Candidate L10H6 (backup)
+  Candidate L10H10 (backup)
+  Candidate L11H2 (backup)
+  Candidate L11H9 (backup)
+  Candidate L10H7 (negative)
+  Candidate L11H10 (negative)
+  Candidate L10H3 (extra_control)
+  Candidate L10H5 (extra_control)
+Done in 15.08s. Outputs in /root/project/results/revision_phase1/modal_smoke_seed42
+Downloaded results to /Users/ronny/Desktop/Research/AI 
+ALIGNMENT/FALI/results/revision_phase1/modal_smoke_seed42 (17401 bytes zip)
+ - bootstrap_summary.csv
+ - candidate_raw.csv
+ - candidate_summary.csv
+ - correlation_summary.csv
+ - dataset_metadata.csv
+ - environment.json
+ - historical_artifact_hashes.json
+ - primary_ablation_summary.csv
+ - run_config.json
+ - run_log.txt
+ - validation_report.md
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/ronithworks/main/ap-MtkOKLNCjIlPwRvK5M3OO0

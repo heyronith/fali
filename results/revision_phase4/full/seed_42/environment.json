@@ -1,0 +1,75 @@
+{
+  "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+  "device": "cuda",
+  "cuda_device_name": "NVIDIA L4",
+  "torch": "2.6.0+cu124",
+  "transformer_lens": "3.2.1",
+  "transformers": "4.57.6",
+  "checks": {
+    "no_nan_inf": true,
+    "z_reconstruction_ok": true,
+    "endpoint_identity_ok": true,
+    "endpoint_preferred_tol": true,
+    "shapley_residual_ok": true,
+    "interaction_identity_ok": true,
+    "all_12_heads": true,
+    "n_rows": true,
+    "all_30_strata": true,
+    "l9_pv_invariant": true,
+    "historical_untouched": true,
+    "cuda_ok": true
+  },
+  "tokenization_filter": {
+    "usable_names": 99,
+    "rejected_names": [],
+    "usable_places": 8,
+    "rejected_places": [],
+    "usable_objects": 8,
+    "rejected_objects": []
+  },
+  "max_z_recon_err": 0.0,
+  "max_H000_err": 0.0,
+  "max_H111_err": 0.0,
+  "max_gain_err": 0.0,
+  "max_shapley_residual": 8.881784197001252e-16,
+  "max_interaction_residual": 0.0,
+  "endpoint_preferred_tol_pass": true,
+  "protected_pre": {
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase2/full/seed_42/phase2_combined_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase3c/full/seed_42/factorial_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null
+    }
+  },
+  "protected_post": {
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase2/full/seed_42/phase2_combined_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase3c/full/seed_42/factorial_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null
+    }
+  },
+  "elapsed_sec": 116.21009397506714
+}
