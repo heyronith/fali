@@ -1,0 +1,31 @@
+{
+  "phase": "EF-2",
+  "num_samples": 8,
+  "seed": 42,
+  "model": "gpt2-small",
+  "center_writing_weights": true,
+  "dtype": "float32",
+  "primary_name_movers": [
+    "L9H6",
+    "L9H9",
+    "L10H0"
+  ],
+  "candidates": [
+    "L9H0",
+    "L9H7",
+    "L10H1",
+    "L10H2",
+    "L10H6",
+    "L10H10",
+    "L11H2",
+    "L11H9",
+    "L10H7",
+    "L11H10",
+    "L10H3",
+    "L10H5"
+  ],
+  "reference_meta": "/root/project/results/revision_phase3c/smoke/dataset_metadata.csv",
+  "historical_factorial": "/root/project/results/revision_phase3c/smoke/factorial_raw.csv",
+  "duration_sec": 20.097676277160645,
+  "timestamp_utc": "2026-08-28T19:43:41.438348+00:00"
+}

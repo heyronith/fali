@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-28T19:35:30.637614+00:00",
+    "generated_at_utc": "2026-08-28T19:42:52.404443+00:00",
     "large_raw_threshold_bytes": 2097152,
     "n_indexed_large_raw_files": 50,
     "n_manifest_files": 471
@@ -23,8 +23,8 @@
     },
     {
       "relative_path": "results/extended_fali/ef1_synthetic/validation_report.json",
-      "size_bytes": 5349,
-      "sha256": "fcfd37a2c00f8611e827914212a222db050367ac4ed5e8ccfc2f4000853a267b"
+      "size_bytes": 8146,
+      "sha256": "73b81986c995c3c5dbbc85fd0707a68076587aca3c2bc6330bbbaf4e598f798f"
     },
     {
       "relative_path": "results/raw/ablation_controls_raw.csv",

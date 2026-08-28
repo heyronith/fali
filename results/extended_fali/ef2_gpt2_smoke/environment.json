@@ -1,0 +1,12 @@
+{
+  "python": "3.11.11 | packaged by conda-forge | (main, Dec  5 2024, 14:17:24) [GCC 13.3.0]",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.35",
+  "torch": "2.6.0+cu124",
+  "transformer_lens": "3.2.1",
+  "transformers": "4.57.6",
+  "device": "cuda",
+  "cuda_available": true,
+  "gpu_name": "NVIDIA L4",
+  "dtype": "float32",
+  "git_sha": null
+}

@@ -14,6 +14,7 @@ sys.path.insert(0, str(REPO / "src"))
 from extended_fali_interventions import validate_score_partition  # noqa: E402
 from extended_fali_synthetic_transformer import (  # noqa: E402
     EF1_SEED,
+    _select_target_keys,
     build_level_b_context,
     endpoint_activation_errors,
     endpoint_errors,
@@ -79,6 +80,24 @@ def test_architecture_seed(level_b_ctx):
     assert level_b_ctx.model.cfg.n_layers == 2
     assert level_b_ctx.model.cfg.n_heads == 2
     assert level_b_ctx.model.cfg.d_model == 32
+
+
+def test_select_target_keys_non_final_query_regression():
+    """Future keys with high mass must not be selected when final_query < seq_len-1."""
+    import torch
+
+    batch = 1
+    seq_len = 6
+    pattern = torch.zeros(batch, seq_len, seq_len)
+    fq = 3
+    vl = 4
+    # Valid keys at final row: k in {0,1,2,3}; put huge mass on future key 5
+    pattern[0, fq, 5] = 100.0
+    pattern[0, fq, 1] = 1.0
+    final_queries = torch.tensor([fq])
+    valid_lengths = torch.tensor([vl])
+    tk = _select_target_keys(pattern, final_queries, valid_lengths)
+    assert int(tk[0].item()) == 1
 
 
 def test_batched_partition_different_target_keys():

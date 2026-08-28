@@ -119,13 +119,14 @@ def _select_target_keys(
     if override is not None:
         return override.to(dtype=torch.long, device=pattern_a.device)
     target_keys = torch.empty(batch, dtype=torch.long, device=pattern_a.device)
+    n_keys = pattern_a.shape[-1]
+    key_idx = torch.arange(n_keys, device=pattern_a.device)
     for b in range(batch):
         fq = int(final_queries[b].item())
         vl = int(valid_lengths[b].item())
-        causal = torch.arange(pattern_a.shape[-1], device=pattern_a.device) <= fq
-        valid = causal & (torch.arange(pattern_a.shape[-2], device=pattern_a.device) < vl)
+        valid_key = (key_idx <= fq) & (key_idx < vl)
         row = pattern_a[b, fq].clone()
-        row = row.masked_fill(~valid[fq], 0.0)
+        row = row.masked_fill(~valid_key, 0.0)
         target_keys[b] = row.argmax()
     return target_keys
 

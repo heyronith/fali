@@ -1,0 +1,175 @@
+{
+  "criteria": {},
+  "overall_pass": true,
+  "dataset_alignment": "PASS",
+  "batch_partition": {
+    "final_queries": [
+      14,
+      15,
+      14,
+      15,
+      14,
+      15,
+      14,
+      15
+    ],
+    "target_keys": [
+      4,
+      5,
+      4,
+      5,
+      4,
+      5,
+      4,
+      5
+    ],
+    "valid_lengths": [
+      15,
+      16,
+      15,
+      16,
+      15,
+      16,
+      15,
+      16
+    ],
+    "coverage_error_per_example": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "overlap_count_per_example": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "target_count_per_example": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "checks": {
+    "dataset_alignment": true,
+    "cell_row_count": true,
+    "attribution_row_count": true,
+    "score_pattern": true,
+    "z_reconstruction": true,
+    "endpoints": true,
+    "owen_residual": true,
+    "quotient_consistency": true,
+    "historical_h_cells": true,
+    "historical_shapley": true,
+    "historical_hash_integrity": true,
+    "post_end_causality": true,
+    "l9_L9H7_score_v": true,
+    "l9_L9H7_owen": true,
+    "l9_L9H0_score_v": true,
+    "l9_L9H0_owen": true,
+    "scope_L10H2_candidate": true,
+    "scope_L10H2_noncandidate": true,
+    "leak_L10H2_v": true,
+    "leak_L10H2_q": true,
+    "leak_L10H2_qv": true,
+    "scope_L9H7_candidate": true,
+    "scope_L9H7_noncandidate": true,
+    "leak_L9H7_v": true,
+    "leak_L9H7_q": true,
+    "leak_L9H7_qv": true
+  },
+  "n_heads": 12,
+  "n_examples": 8,
+  "n_cell_rows": 3072,
+  "n_cell_rows_expected": 3072,
+  "n_attribution_rows": 96,
+  "max_score_pattern_error": 0.0,
+  "max_z_reconstruction_error": 4.76837158203125e-07,
+  "max_endpoint_error": 7.62939453125e-06,
+  "max_owen_residual": 2.220446049250313e-16,
+  "max_quotient_consistency_error": 4.440892098500626e-16,
+  "max_historical_h_discrepancy": 4.440892098500626e-16,
+  "max_historical_shapley_discrepancy": 6.661338147750939e-16,
+  "l9_invariant_score_v_max": {
+    "L9H0": 0.0,
+    "L9H7": 0.0
+  },
+  "l9_invariant_owen_max": {
+    "L9H0": 0.0,
+    "L9H7": 0.0
+  },
+  "injection_scope": {
+    "L9H7": {
+      "candidate_z_error": 0.0,
+      "noncandidate_z_error": 0.0
+    },
+    "L10H2": {
+      "candidate_z_error": 0.0,
+      "noncandidate_z_error": 0.0
+    }
+  },
+  "live_leak": {
+    "L9H7": {
+      "v": 0.0,
+      "q": 0.0,
+      "qv": 0.0
+    },
+    "L10H2": {
+      "v": 0.0,
+      "q": 0.0,
+      "qv": 0.0
+    }
+  },
+  "post_end_causality_error": 0.0,
+  "historical_hashes_before": {
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase2/full/seed_42/phase2_combined_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase3c/smoke/factorial_raw.csv": {
+      "sha256": "d02d4f2085a2b5e1094c8bff9c89060f8445d18873280c43e659a22ee5c3bd1a",
+      "size": 46248
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null
+    }
+  },
+  "historical_hashes_after": {
+    "results/revision_phase1/full/seed_42/candidate_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase2/full/seed_42/phase2_combined_raw.csv": {
+      "sha256": null,
+      "size": null
+    },
+    "results/revision_phase3c/smoke/factorial_raw.csv": {
+      "sha256": "d02d4f2085a2b5e1094c8bff9c89060f8445d18873280c43e659a22ee5c3bd1a",
+      "size": 46248
+    },
+    "results/raw/fali_decomposition_raw.csv": {
+      "sha256": null,
+      "size": null
+    }
+  },
+  "note": "EF-2 N=8 validation only \u2014 not scientific evidence."
+}
