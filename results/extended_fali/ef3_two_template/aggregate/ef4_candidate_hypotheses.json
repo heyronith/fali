@@ -1,0 +1,49 @@
+{
+  "previously_preregistered": {
+    "L10H2": {
+      "conditional_gain": "positive",
+      "Phi_SCORE": "positive",
+      "phi_T": "positive"
+    },
+    "L10H10": {
+      "Phi_SCORE": "positive",
+      "phi_C": "negative",
+      "conditional_gain": "negative",
+      "phi_T": "positive"
+    }
+  },
+  "ef3_discovered": {
+    "L10H2_phi_R": {
+      "head": "L10H2",
+      "channel": "phi_R",
+      "direction": "negative",
+      "observed_balanced_mean": -0.34362801220681927,
+      "ci_low": -0.35441316727962763,
+      "ci_high": -0.3329604816320869,
+      "seed_means": {
+        "42": -0.35984826472070475,
+        "1": -0.3451762412654029,
+        "8": -0.3212062573432921,
+        "22": -0.3482812854978773
+      },
+      "threshold": 0.032372787714004515,
+      "requires_canonical_template_confirmation": true
+    },
+    "L10H10_phi_R": {
+      "head": "L10H10",
+      "channel": "phi_R",
+      "direction": "negative",
+      "observed_balanced_mean": -0.14949921190738674,
+      "ci_low": -0.15970420651717313,
+      "ci_high": -0.13954562075270543,
+      "seed_means": {
+        "42": -0.14073432962099708,
+        "1": -0.1389111020829942,
+        "8": -0.15792745153109228,
+        "22": -0.1604239643944634
+      },
+      "threshold": 0.02222092274824778,
+      "requires_canonical_template_confirmation": true
+    }
+  }
+}

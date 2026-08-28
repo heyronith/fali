@@ -1,0 +1,907 @@
+{
+  "correction": "EF-3R observed balanced mean replaces bootstrap mean for point estimates",
+  "metrics": [
+    {
+      "metric": "H1::L9H0::phi_C",
+      "old_point_estimate": 0.0071276252053976055,
+      "corrected_observed_point_estimate": 0.007136914730072022,
+      "absolute_difference": 9.289524674416759e-06
+    },
+    {
+      "metric": "H1::L9H7::phi_C",
+      "old_point_estimate": 0.07201483533644676,
+      "corrected_observed_point_estimate": 0.07203758239746091,
+      "absolute_difference": 2.274706101415558e-05
+    },
+    {
+      "metric": "H2_L10H2::Phi_SCORE",
+      "old_point_estimate": 0.3238836773759126,
+      "corrected_observed_point_estimate": 0.32372787714004514,
+      "absolute_difference": 0.00015580023586747593
+    },
+    {
+      "metric": "H2_L10H2::conditional_gain",
+      "old_point_estimate": 0.2005714801505804,
+      "corrected_observed_point_estimate": 0.20033852100372315,
+      "absolute_difference": 0.00023295914685725339
+    },
+    {
+      "metric": "H2_L10H2::phi_T",
+      "old_point_estimate": 0.6668869410970641,
+      "corrected_observed_point_estimate": 0.6667200309369299,
+      "absolute_difference": 0.0001669101601342593
+    },
+    {
+      "metric": "H3_L10H10::Phi_SCORE",
+      "old_point_estimate": 0.22220135204776126,
+      "corrected_observed_point_estimate": 0.2222092274824778,
+      "absolute_difference": 7.875434716531071e-06
+    },
+    {
+      "metric": "H3_L10H10::conditional_gain",
+      "old_point_estimate": -0.086052981990695,
+      "corrected_observed_point_estimate": -0.08615363001823426,
+      "absolute_difference": 0.00010064802753925739
+    },
+    {
+      "metric": "H3_L10H10::phi_C",
+      "old_point_estimate": -0.31486460294477137,
+      "corrected_observed_point_estimate": -0.3149751718839009,
+      "absolute_difference": 0.00011056893912952948
+    },
+    {
+      "metric": "H3_L10H10::phi_T",
+      "old_point_estimate": 0.3740179829693437,
+      "corrected_observed_point_estimate": 0.37405384431282684,
+      "absolute_difference": 3.586134348315673e-05
+    },
+    {
+      "metric": "L10H10::Phi_SCORE",
+      "old_point_estimate": 0.2222013520477612,
+      "corrected_observed_point_estimate": 0.2222092274824778,
+      "absolute_difference": 7.875434716586582e-06
+    },
+    {
+      "metric": "L10H10::conditional_effect",
+      "old_point_estimate": 0.1300315786193609,
+      "corrected_observed_point_estimate": 0.13000484585762023,
+      "absolute_difference": 2.6732761740672073e-05
+    },
+    {
+      "metric": "L10H10::conditional_gain",
+      "old_point_estimate": -0.086052981990695,
+      "corrected_observed_point_estimate": -0.08615363001823426,
+      "absolute_difference": 0.00010064802753925739
+    },
+    {
+      "metric": "L10H10::intact_effect",
+      "old_point_estimate": 0.2160845606100559,
+      "corrected_observed_point_estimate": 0.2161584758758545,
+      "absolute_difference": 7.391526579858532e-05
+    },
+    {
+      "metric": "L10H10::phi_C",
+      "old_point_estimate": -0.3148646029447713,
+      "corrected_observed_point_estimate": -0.3149751718839009,
+      "absolute_difference": 0.00011056893912958499
+    },
+    {
+      "metric": "L10H10::phi_O",
+      "old_point_estimate": -0.0023407120383481,
+      "corrected_observed_point_estimate": -0.0023454049229621895,
+      "absolute_difference": 4.6928846140895965e-06
+    },
+    {
+      "metric": "L10H10::phi_R",
+      "old_point_estimate": -0.1494759188832342,
+      "corrected_observed_point_estimate": -0.14949921190738674,
+      "absolute_difference": 2.3293024152548636e-05
+    },
+    {
+      "metric": "L10H10::phi_T",
+      "old_point_estimate": 0.3740179829693437,
+      "corrected_observed_point_estimate": 0.37405384431282684,
+      "absolute_difference": 3.586134348315673e-05
+    },
+    {
+      "metric": "L10H10::phi_V",
+      "old_point_estimate": 0.0066102689063151,
+      "corrected_observed_point_estimate": 0.00661231438318886,
+      "absolute_difference": 2.0454768737600965e-06
+    },
+    {
+      "metric": "L10H1::Phi_SCORE",
+      "old_point_estimate": 0.0219707901178598,
+      "corrected_observed_point_estimate": 0.0219742202758789,
+      "absolute_difference": 3.430158019099988e-06
+    },
+    {
+      "metric": "L10H1::conditional_effect",
+      "old_point_estimate": 0.0522134692296981,
+      "corrected_observed_point_estimate": 0.05233743906021118,
+      "absolute_difference": 0.00012396983051308347
+    },
+    {
+      "metric": "L10H1::conditional_gain",
+      "old_point_estimate": 0.0701821331889629,
+      "corrected_observed_point_estimate": 0.07023347377777099,
+      "absolute_difference": 5.1340588808096443e-05
+    },
+    {
+      "metric": "L10H1::intact_effect",
+      "old_point_estimate": -0.0179686639592647,
+      "corrected_observed_point_estimate": -0.01789603471755981,
+      "absolute_difference": 7.262924170489335e-05
+    },
+    {
+      "metric": "L10H1::phi_C",
+      "old_point_estimate": 0.0494302524365186,
+      "corrected_observed_point_estimate": 0.049478958845138546,
+      "absolute_difference": 4.870640861994596e-05
+    },
+    {
+      "metric": "L10H1::phi_O",
+      "old_point_estimate": -0.0011329583362738,
+      "corrected_observed_point_estimate": -0.001134266323513448,
+      "absolute_difference": 1.3079872396479751e-06
+    },
+    {
+      "metric": "L10H1::phi_R",
+      "old_point_estimate": -0.0640207351365486,
+      "corrected_observed_point_estimate": -0.06401177661286457,
+      "absolute_difference": 8.95852368403005e-06
+    },
+    {
+      "metric": "L10H1::phi_T",
+      "old_point_estimate": 0.0871244835906823,
+      "corrected_observed_point_estimate": 0.08712026321225694,
+      "absolute_difference": 4.2203784253597165e-06
+    },
+    {
+      "metric": "L10H1::phi_V",
+      "old_point_estimate": -0.0012189093654155,
+      "corrected_observed_point_estimate": -0.0012197053432464458,
+      "absolute_difference": 7.959778309458206e-07
+    },
+    {
+      "metric": "L10H2::Phi_SCORE",
+      "old_point_estimate": 0.3238836773759126,
+      "corrected_observed_point_estimate": 0.32372787714004514,
+      "absolute_difference": 0.00015580023586747593
+    },
+    {
+      "metric": "L10H2::conditional_effect",
+      "old_point_estimate": 0.317652607735157,
+      "corrected_observed_point_estimate": 0.3173085403442383,
+      "absolute_difference": 0.0003440673909187453
+    },
+    {
+      "metric": "L10H2::conditional_gain",
+      "old_point_estimate": 0.2005714801505804,
+      "corrected_observed_point_estimate": 0.20033852100372315,
+      "absolute_difference": 0.00023295914685725339
+    },
+    {
+      "metric": "L10H2::intact_effect",
+      "old_point_estimate": 0.1170811275845766,
+      "corrected_observed_point_estimate": 0.11697001934051512,
+      "absolute_difference": 0.00011110824406147801
+    },
+    {
+      "metric": "L10H2::phi_C",
+      "old_point_estimate": -0.1246622097427844,
+      "corrected_observed_point_estimate": -0.12473985254764555,
+      "absolute_difference": 7.764280486115271e-05
+    },
+    {
+      "metric": "L10H2::phi_O",
+      "old_point_estimate": 0.000637453203443,
+      "corrected_observed_point_estimate": 0.0006358584099345651,
+      "absolute_difference": 1.5947935084349024e-06
+    },
+    {
+      "metric": "L10H2::phi_R",
+      "old_point_estimate": -0.3436407169245944,
+      "corrected_observed_point_estimate": -0.34362801220681927,
+      "absolute_difference": 1.2704717775147145e-05
+    },
+    {
+      "metric": "L10H2::phi_T",
+      "old_point_estimate": 0.6668869410970641,
+      "corrected_observed_point_estimate": 0.6667200309369299,
+      "absolute_difference": 0.0001669101601342593
+    },
+    {
+      "metric": "L10H2::phi_V",
+      "old_point_estimate": 0.0013500125174522,
+      "corrected_observed_point_estimate": 0.0013504964113235404,
+      "absolute_difference": 4.838938713403514e-07
+    },
+    {
+      "metric": "L10H3::Phi_SCORE",
+      "old_point_estimate": 0.0660751580451528,
+      "corrected_observed_point_estimate": 0.06607905586560564,
+      "absolute_difference": 3.897820452847256e-06
+    },
+    {
+      "metric": "L10H3::conditional_effect",
+      "old_point_estimate": 0.1528395045219659,
+      "corrected_observed_point_estimate": 0.1528503942489624,
+      "absolute_difference": 1.08897269965047e-05
+    },
+    {
+      "metric": "L10H3::conditional_gain",
+      "old_point_estimate": 0.0377696177089214,
+      "corrected_observed_point_estimate": 0.03773950815200805,
+      "absolute_difference": 3.0109556913349156e-05
+    },
+    {
+      "metric": "L10H3::intact_effect",
+      "old_point_estimate": 0.1150698868130445,
+      "corrected_observed_point_estimate": 0.11511088609695433,
+      "absolute_difference": 4.09992839098261e-05
+    },
+    {
+      "metric": "L10H3::phi_C",
+      "old_point_estimate": -0.0291786178360183,
+      "corrected_observed_point_estimate": -0.029211696783701575,
+      "absolute_difference": 3.307894768327449e-05
+    },
+    {
+      "metric": "L10H3::phi_O",
+      "old_point_estimate": 0.0017442697732448,
+      "corrected_observed_point_estimate": 0.0017433832420242973,
+      "absolute_difference": 8.865312205025549e-07
+    },
+    {
+      "metric": "L10H3::phi_R",
+      "old_point_estimate": -0.0420618370811044,
+      "corrected_observed_point_estimate": -0.04208868838018837,
+      "absolute_difference": 2.685129908397421e-05
+    },
+    {
+      "metric": "L10H3::phi_T",
+      "old_point_estimate": 0.1063927253530124,
+      "corrected_observed_point_estimate": 0.10642436100376973,
+      "absolute_difference": 3.163565075732511e-05
+    },
+    {
+      "metric": "L10H3::phi_V",
+      "old_point_estimate": 0.000873077499787,
+      "corrected_observed_point_estimate": 0.0008721490701039524,
+      "absolute_difference": 9.284296830475809e-07
+    },
+    {
+      "metric": "L10H5::Phi_SCORE",
+      "old_point_estimate": 0.0011484875865777,
+      "corrected_observed_point_estimate": 0.0011471261580785113,
+      "absolute_difference": 1.361428499188676e-06
+    },
+    {
+      "metric": "L10H5::conditional_effect",
+      "old_point_estimate": -0.0240870525603294,
+      "corrected_observed_point_estimate": -0.024087456464767443,
+      "absolute_difference": 4.0390443804480536e-07
+    },
+    {
+      "metric": "L10H5::conditional_gain",
+      "old_point_estimate": 0.0094919925487041,
+      "corrected_observed_point_estimate": 0.009491798877716057,
+      "absolute_difference": 1.9367098804366767e-07
+    },
+    {
+      "metric": "L10H5::intact_effect",
+      "old_point_estimate": -0.0335790451090335,
+      "corrected_observed_point_estimate": -0.0335792553424835,
+      "absolute_difference": 2.102334500028724e-07
+    },
+    {
+      "metric": "L10H5::phi_C",
+      "old_point_estimate": 0.0103718759432037,
+      "corrected_observed_point_estimate": 0.010370014508565256,
+      "absolute_difference": 1.8614346384438624e-06
+    },
+    {
+      "metric": "L10H5::phi_O",
+      "old_point_estimate": -0.000840852760997,
+      "corrected_observed_point_estimate": -0.0008409673968950745,
+      "absolute_difference": 1.146358980744916e-07
+    },
+    {
+      "metric": "L10H5::phi_R",
+      "old_point_estimate": 0.0019691176037523,
+      "corrected_observed_point_estimate": 0.001967952648798622,
+      "absolute_difference": 1.1649549536783127e-06
+    },
+    {
+      "metric": "L10H5::phi_T",
+      "old_point_estimate": 2.022274382246407e-05,
+      "corrected_observed_point_estimate": 2.014090617497308e-05,
+      "absolute_difference": 8.183764749098994e-08
+    },
+    {
+      "metric": "L10H5::phi_V",
+      "old_point_estimate": -0.0020283709810773,
+      "corrected_observed_point_estimate": -0.0020253417889276957,
+      "absolute_difference": 3.0291921496042665e-06
+    },
+    {
+      "metric": "L10H6::Phi_SCORE",
+      "old_point_estimate": 0.2022612140345772,
+      "corrected_observed_point_estimate": 0.20226377367973325,
+      "absolute_difference": 2.559645156052781e-06
+    },
+    {
+      "metric": "L10H6::conditional_effect",
+      "old_point_estimate": 0.2563445649555921,
+      "corrected_observed_point_estimate": 0.25657120466232297,
+      "absolute_difference": 0.00022663970673086897
+    },
+    {
+      "metric": "L10H6::conditional_gain",
+      "old_point_estimate": 0.0060544651154279,
+      "corrected_observed_point_estimate": 0.005906324386596681,
+      "absolute_difference": 0.00014814072883121907
+    },
+    {
+      "metric": "L10H6::intact_effect",
+      "old_point_estimate": 0.2502900998401641,
+      "corrected_observed_point_estimate": 0.2506648802757263,
+      "absolute_difference": 0.0003747804355622164
+    },
+    {
+      "metric": "L10H6::phi_C",
+      "old_point_estimate": -0.1999343310622373,
+      "corrected_observed_point_estimate": -0.20008431017398828,
+      "absolute_difference": 0.00014997911175099188
+    },
+    {
+      "metric": "L10H6::phi_O",
+      "old_point_estimate": 0.0019799879977438,
+      "corrected_observed_point_estimate": 0.001976215408907989,
+      "absolute_difference": 3.7725888358108167e-06
+    },
+    {
+      "metric": "L10H6::phi_R",
+      "old_point_estimate": -0.2288225230040914,
+      "corrected_observed_point_estimate": -0.2288071657551659,
+      "absolute_difference": 1.5357248925484956e-05
+    },
+    {
+      "metric": "L10H6::phi_T",
+      "old_point_estimate": 0.4291037490409248,
+      "corrected_observed_point_estimate": 0.42909472402599114,
+      "absolute_difference": 9.025014933661257e-06
+    },
+    {
+      "metric": "L10H6::phi_V",
+      "old_point_estimate": 0.0037275821430881,
+      "corrected_observed_point_estimate": 0.0037268608808517234,
+      "absolute_difference": 7.212622363766789e-07
+    },
+    {
+      "metric": "L10H7::Phi_SCORE",
+      "old_point_estimate": 1.46177550037086,
+      "corrected_observed_point_estimate": 1.4619771103064219,
+      "absolute_difference": 0.00020160993556195272
+    },
+    {
+      "metric": "L10H7::conditional_effect",
+      "old_point_estimate": -0.1994764581842422,
+      "corrected_observed_point_estimate": -0.1997057819366455,
+      "absolute_difference": 0.00022932375240330982
+    },
+    {
+      "metric": "L10H7::conditional_gain",
+      "old_point_estimate": 1.4788584735643864,
+      "corrected_observed_point_estimate": 1.4790334486961365,
+      "absolute_difference": 0.00017497513175013246
+    },
+    {
+      "metric": "L10H7::intact_effect",
+      "old_point_estimate": -1.6783349317486285,
+      "corrected_observed_point_estimate": -1.678739230632782,
+      "absolute_difference": 0.0004042988841534978
+    },
+    {
+      "metric": "L10H7::phi_C",
+      "old_point_estimate": 0.0146234827246665,
+      "corrected_observed_point_estimate": 0.014598221580187478,
+      "absolute_difference": 2.5261144479022876e-05
+    },
+    {
+      "metric": "L10H7::phi_O",
+      "old_point_estimate": -0.0193413206974069,
+      "corrected_observed_point_estimate": -0.01932970159583621,
+      "absolute_difference": 1.1619101570690266e-05
+    },
+    {
+      "metric": "L10H7::phi_R",
+      "old_point_estimate": 0.126171583554397,
+      "corrected_observed_point_estimate": 0.12622723695304658,
+      "absolute_difference": 5.5653398649574415e-05
+    },
+    {
+      "metric": "L10H7::phi_T",
+      "old_point_estimate": 1.35494523751387,
+      "corrected_observed_point_estimate": 1.3550795749492113,
+      "absolute_difference": 0.00013433743534130294
+    },
+    {
+      "metric": "L10H7::phi_V",
+      "old_point_estimate": 0.0024594904688596,
+      "corrected_observed_point_estimate": 0.0024581168095270662,
+      "absolute_difference": 1.3736593325337082e-06
+    },
+    {
+      "metric": "L11H10::Phi_SCORE",
+      "old_point_estimate": -0.0195922886698842,
+      "corrected_observed_point_estimate": -0.019576283494631454,
+      "absolute_difference": 1.6005175252745835e-05
+    },
+    {
+      "metric": "L11H10::conditional_effect",
+      "old_point_estimate": -0.8715576653511523,
+      "corrected_observed_point_estimate": -0.8718130874633789,
+      "absolute_difference": 0.00025542211222662203
+    },
+    {
+      "metric": "L11H10::conditional_gain",
+      "old_point_estimate": -0.0840181805057525,
+      "corrected_observed_point_estimate": -0.08403550028800964,
+      "absolute_difference": 1.7319782257149696e-05
+    },
+    {
+      "metric": "L11H10::intact_effect",
+      "old_point_estimate": -0.7875394848453998,
+      "corrected_observed_point_estimate": -0.7877775871753692,
+      "absolute_difference": 0.00023810232996934744
+    },
+    {
+      "metric": "L11H10::phi_C",
+      "old_point_estimate": -0.0719083883433937,
+      "corrected_observed_point_estimate": -0.07193124870459235,
+      "absolute_difference": 2.286036119863999e-05
+    },
+    {
+      "metric": "L11H10::phi_O",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L11H10::phi_R",
+      "old_point_estimate": -0.0700706251691381,
+      "corrected_observed_point_estimate": -0.0701125665505727,
+      "absolute_difference": 4.1941381434595915e-05
+    },
+    {
+      "metric": "L11H10::phi_T",
+      "old_point_estimate": 0.0504783364992538,
+      "corrected_observed_point_estimate": 0.05053628305594125,
+      "absolute_difference": 5.794655668745624e-05
+    },
+    {
+      "metric": "L11H10::phi_V",
+      "old_point_estimate": 0.0074824965075254,
+      "corrected_observed_point_estimate": 0.007472031911214182,
+      "absolute_difference": 1.0464596311218245e-05
+    },
+    {
+      "metric": "L11H2::Phi_SCORE",
+      "old_point_estimate": 0.1073878663918177,
+      "corrected_observed_point_estimate": 0.10744798203309376,
+      "absolute_difference": 6.0115641276059506e-05
+    },
+    {
+      "metric": "L11H2::conditional_effect",
+      "old_point_estimate": -0.2202764766987562,
+      "corrected_observed_point_estimate": -0.2203761613368988,
+      "absolute_difference": 9.968463814261086e-05
+    },
+    {
+      "metric": "L11H2::conditional_gain",
+      "old_point_estimate": 0.1146683422107696,
+      "corrected_observed_point_estimate": 0.11472012281417845,
+      "absolute_difference": 5.178060340885193e-05
+    },
+    {
+      "metric": "L11H2::intact_effect",
+      "old_point_estimate": -0.3349448189095259,
+      "corrected_observed_point_estimate": -0.33509628415107723,
+      "absolute_difference": 0.00015146524155135177
+    },
+    {
+      "metric": "L11H2::phi_C",
+      "old_point_estimate": -0.0089446942699154,
+      "corrected_observed_point_estimate": -0.008951110641161605,
+      "absolute_difference": 6.416371246204325e-06
+    },
+    {
+      "metric": "L11H2::phi_O",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L11H2::phi_R",
+      "old_point_estimate": -0.7157581119700571,
+      "corrected_observed_point_estimate": -0.7159582409262656,
+      "absolute_difference": 0.00020012895620846738
+    },
+    {
+      "metric": "L11H2::phi_T",
+      "old_point_estimate": 0.8231459783618748,
+      "corrected_observed_point_estimate": 0.8234062229593595,
+      "absolute_difference": 0.00026024459748474893
+    },
+    {
+      "metric": "L11H2::phi_V",
+      "old_point_estimate": 0.0162251700888673,
+      "corrected_observed_point_estimate": 0.01622325142224628,
+      "absolute_difference": 1.9186666210188608e-06
+    },
+    {
+      "metric": "L11H9::Phi_SCORE",
+      "old_point_estimate": -0.0320851627682447,
+      "corrected_observed_point_estimate": -0.032126308878262816,
+      "absolute_difference": 4.1146110018118465e-05
+    },
+    {
+      "metric": "L11H9::conditional_effect",
+      "old_point_estimate": -0.1048103810105323,
+      "corrected_observed_point_estimate": -0.10487677335739135,
+      "absolute_difference": 6.639234685903994e-05
+    },
+    {
+      "metric": "L11H9::conditional_gain",
+      "old_point_estimate": -0.0301346904621124,
+      "corrected_observed_point_estimate": -0.030177515745162947,
+      "absolute_difference": 4.2825283050548085e-05
+    },
+    {
+      "metric": "L11H9::intact_effect",
+      "old_point_estimate": -0.0746756905484199,
+      "corrected_observed_point_estimate": -0.07469925761222837,
+      "absolute_difference": 2.356706380847451e-05
+    },
+    {
+      "metric": "L11H9::phi_C",
+      "old_point_estimate": 0.0018486741046905,
+      "corrected_observed_point_estimate": 0.001848054329554235,
+      "absolute_difference": 6.197751362649502e-07
+    },
+    {
+      "metric": "L11H9::phi_O",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L11H9::phi_R",
+      "old_point_estimate": -0.0542662535132368,
+      "corrected_observed_point_estimate": -0.054272320568561516,
+      "absolute_difference": 6.06705532471552e-06
+    },
+    {
+      "metric": "L11H9::phi_T",
+      "old_point_estimate": 0.022181090744992,
+      "corrected_observed_point_estimate": 0.0221460116902987,
+      "absolute_difference": 3.507905469329886e-05
+    },
+    {
+      "metric": "L11H9::phi_V",
+      "old_point_estimate": 0.0001017982014417,
+      "corrected_observed_point_estimate": 0.00010073880354562843,
+      "absolute_difference": 1.0593978960715645e-06
+    },
+    {
+      "metric": "L9H0::Phi_SCORE",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H0::conditional_effect",
+      "old_point_estimate": -0.0963932016763686,
+      "corrected_observed_point_estimate": -0.09638611674308775,
+      "absolute_difference": 7.0849332808459176e-06
+    },
+    {
+      "metric": "L9H0::conditional_gain",
+      "old_point_estimate": 0.0071276252053976,
+      "corrected_observed_point_estimate": 0.007136914730072022,
+      "absolute_difference": 9.289524674421963e-06
+    },
+    {
+      "metric": "L9H0::intact_effect",
+      "old_point_estimate": -0.1035208268817663,
+      "corrected_observed_point_estimate": -0.10352303147315976,
+      "absolute_difference": 2.2045913934676253e-06
+    },
+    {
+      "metric": "L9H0::phi_C",
+      "old_point_estimate": 0.0071276252053976,
+      "corrected_observed_point_estimate": 0.007136914730072022,
+      "absolute_difference": 9.289524674421963e-06
+    },
+    {
+      "metric": "L9H0::phi_O",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H0::phi_R",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H0::phi_T",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H0::phi_V",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H7::Phi_SCORE",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H7::conditional_effect",
+      "old_point_estimate": 0.4232236222482919,
+      "corrected_observed_point_estimate": 0.4232658052444458,
+      "absolute_difference": 4.218299615388332e-05
+    },
+    {
+      "metric": "L9H7::conditional_gain",
+      "old_point_estimate": 0.0720148353364467,
+      "corrected_observed_point_estimate": 0.07203758239746093,
+      "absolute_difference": 2.2747061014224967e-05
+    },
+    {
+      "metric": "L9H7::intact_effect",
+      "old_point_estimate": 0.3512087869118451,
+      "corrected_observed_point_estimate": 0.3512282228469849,
+      "absolute_difference": 1.943593513981101e-05
+    },
+    {
+      "metric": "L9H7::phi_C",
+      "old_point_estimate": 0.0720148353364467,
+      "corrected_observed_point_estimate": 0.07203758239746091,
+      "absolute_difference": 2.274706101421109e-05
+    },
+    {
+      "metric": "L9H7::phi_O",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H7::phi_R",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H7::phi_T",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "L9H7::phi_V",
+      "old_point_estimate": 0.0,
+      "corrected_observed_point_estimate": 0.0,
+      "absolute_difference": 0.0
+    },
+    {
+      "metric": "h4::L10H10::Phi_SCORE",
+      "old_point_estimate": 0.2222013520477612,
+      "corrected_observed_point_estimate": 0.2222092274824778,
+      "absolute_difference": 7.875434716586582e-06
+    },
+    {
+      "metric": "h4::L10H10::clean_target_attn",
+      "old_point_estimate": 0.3726342498877924,
+      "corrected_observed_point_estimate": 0.3726826262846589,
+      "absolute_difference": 4.837639686650075e-05
+    },
+    {
+      "metric": "h4::L10H10::conditional_gain",
+      "old_point_estimate": -0.086052981990695,
+      "corrected_observed_point_estimate": -0.08615363001823426,
+      "absolute_difference": 0.00010064802753925739
+    },
+    {
+      "metric": "h4::L10H10::damaged_target_attn",
+      "old_point_estimate": 0.695233751787968,
+      "corrected_observed_point_estimate": 0.6952494372054934,
+      "absolute_difference": 1.5685417525390655e-05
+    },
+    {
+      "metric": "h4::L10H10::delta_target_attn",
+      "old_point_estimate": 0.3225995019001756,
+      "corrected_observed_point_estimate": 0.32256681092083456,
+      "absolute_difference": 3.269097934105458e-05
+    },
+    {
+      "metric": "h4::L10H10::desc_phi_competing",
+      "old_point_estimate": -0.0647372711820662,
+      "corrected_observed_point_estimate": -0.06473781246996022,
+      "absolute_difference": 5.412878940208588e-07
+    },
+    {
+      "metric": "h4::L10H10::desc_phi_target",
+      "old_point_estimate": 0.387336774133688,
+      "corrected_observed_point_estimate": 0.3873046244390438,
+      "absolute_difference": 3.2149694644212357e-05
+    },
+    {
+      "metric": "h4::L10H10::phi_C",
+      "old_point_estimate": -0.3148646029447713,
+      "corrected_observed_point_estimate": -0.3149751718839009,
+      "absolute_difference": 0.00011056893912958499
+    },
+    {
+      "metric": "h4::L10H10::phi_O",
+      "old_point_estimate": -0.0023407120383481,
+      "corrected_observed_point_estimate": -0.0023454049229621895,
+      "absolute_difference": 4.6928846140895965e-06
+    },
+    {
+      "metric": "h4::L10H10::phi_R",
+      "old_point_estimate": -0.1494759188832342,
+      "corrected_observed_point_estimate": -0.14949921190738674,
+      "absolute_difference": 2.3293024152548636e-05
+    },
+    {
+      "metric": "h4::L10H10::phi_T",
+      "old_point_estimate": 0.3740179829693437,
+      "corrected_observed_point_estimate": 0.37405384431282684,
+      "absolute_difference": 3.586134348315673e-05
+    },
+    {
+      "metric": "h4::L10H10::phi_V",
+      "old_point_estimate": 0.0066102689063151,
+      "corrected_observed_point_estimate": 0.00661231438318886,
+      "absolute_difference": 2.0454768737600965e-06
+    },
+    {
+      "metric": "h4::L10H2::Phi_SCORE",
+      "old_point_estimate": 0.3238836773759126,
+      "corrected_observed_point_estimate": 0.32372787714004514,
+      "absolute_difference": 0.00015580023586747593
+    },
+    {
+      "metric": "h4::L10H2::clean_target_attn",
+      "old_point_estimate": 0.2678462968094591,
+      "corrected_observed_point_estimate": 0.2678176179062575,
+      "absolute_difference": 2.867890320157329e-05
+    },
+    {
+      "metric": "h4::L10H2::conditional_gain",
+      "old_point_estimate": 0.2005714801505804,
+      "corrected_observed_point_estimate": 0.20033852100372315,
+      "absolute_difference": 0.00023295914685725339
+    },
+    {
+      "metric": "h4::L10H2::damaged_target_attn",
+      "old_point_estimate": 0.5725520872286298,
+      "corrected_observed_point_estimate": 0.5725492016971111,
+      "absolute_difference": 2.885531518725948e-06
+    },
+    {
+      "metric": "h4::L10H2::delta_target_attn",
+      "old_point_estimate": 0.3047057904191707,
+      "corrected_observed_point_estimate": 0.30473158379085363,
+      "absolute_difference": 2.5793371682958366e-05
+    },
+    {
+      "metric": "h4::L10H2::desc_phi_competing",
+      "old_point_estimate": -0.0752520184995178,
+      "corrected_observed_point_estimate": -0.07525874814255443,
+      "absolute_difference": 6.729643036620936e-06
+    },
+    {
+      "metric": "h4::L10H2::desc_phi_target",
+      "old_point_estimate": 0.3799578116812624,
+      "corrected_observed_point_estimate": 0.3799903346902366,
+      "absolute_difference": 3.252300897416127e-05
+    },
+    {
+      "metric": "h4::L10H2::phi_C",
+      "old_point_estimate": -0.1246622097427844,
+      "corrected_observed_point_estimate": -0.12473985254764555,
+      "absolute_difference": 7.764280486115271e-05
+    },
+    {
+      "metric": "h4::L10H2::phi_O",
+      "old_point_estimate": 0.000637453203443,
+      "corrected_observed_point_estimate": 0.0006358584099345651,
+      "absolute_difference": 1.5947935084349024e-06
+    },
+    {
+      "metric": "h4::L10H2::phi_R",
+      "old_point_estimate": -0.3436407169245944,
+      "corrected_observed_point_estimate": -0.34362801220681927,
+      "absolute_difference": 1.2704717775147145e-05
+    },
+    {
+      "metric": "h4::L10H2::phi_T",
+      "old_point_estimate": 0.6668869410970641,
+      "corrected_observed_point_estimate": 0.6667200309369299,
+      "absolute_difference": 0.0001669101601342593
+    },
+    {
+      "metric": "h4::L10H2::phi_V",
+      "old_point_estimate": 0.0013500125174522,
+      "corrected_observed_point_estimate": 0.0013504964113235404,
+      "absolute_difference": 4.838938713403514e-07
+    },
+    {
+      "metric": "ro::L10H10_phi_O",
+      "old_point_estimate": -0.0023407120383481194,
+      "corrected_observed_point_estimate": -0.0023454049229621895,
+      "absolute_difference": 4.692884614070081e-06
+    },
+    {
+      "metric": "ro::L10H10_phi_O::threshold",
+      "old_point_estimate": 0.02222013520477613,
+      "corrected_observed_point_estimate": 0.02222092274824778,
+      "absolute_difference": 7.875434716517193e-07
+    },
+    {
+      "metric": "ro::L10H10_phi_R",
+      "old_point_estimate": -0.14947591888323422,
+      "corrected_observed_point_estimate": -0.14949921190738674,
+      "absolute_difference": 2.329302415252088e-05
+    },
+    {
+      "metric": "ro::L10H10_phi_R::threshold",
+      "old_point_estimate": 0.02222013520477613,
+      "corrected_observed_point_estimate": 0.02222092274824778,
+      "absolute_difference": 7.875434716517193e-07
+    },
+    {
+      "metric": "ro::L10H2_phi_O",
+      "old_point_estimate": 0.0006374532034430151,
+      "corrected_observed_point_estimate": 0.0006358584099345651,
+      "absolute_difference": 1.5947935084499728e-06
+    },
+    {
+      "metric": "ro::L10H2_phi_O::threshold",
+      "old_point_estimate": 0.03238836773759126,
+      "corrected_observed_point_estimate": 0.032372787714004515,
+      "absolute_difference": 1.5580023586744818e-05
+    },
+    {
+      "metric": "ro::L10H2_phi_R",
+      "old_point_estimate": -0.34364071692459447,
+      "corrected_observed_point_estimate": -0.34362801220681927,
+      "absolute_difference": 1.2704717775202656e-05
+    },
+    {
+      "metric": "ro::L10H2_phi_R::threshold",
+      "old_point_estimate": 0.03238836773759126,
+      "corrected_observed_point_estimate": 0.032372787714004515,
+      "absolute_difference": 1.5580023586744818e-05
+    }
+  ],
+  "max_absolute_point_shift": 0.0004042988841534978,
+  "max_ci_endpoint_shift": {
+    "ci_low": 1.1102230246251565e-16,
+    "ci_high": 2.220446049250313e-16
+  },
+  "ci_endpoint_shifts_nonzero": [],
+  "status_changes": {},
+  "status_stable": true
+}

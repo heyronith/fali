@@ -39,12 +39,16 @@ def build_validation_summary(repo: Path, aggregate_dir: Path) -> dict:
         "max_historical_shapley_discrepancy": 0.0,
     }
     raw_index = []
+    observed_attribution_rows = 0
     for seed in EF3_SEEDS:
         seed_dir = repo / f"results/extended_fali/ef3_two_template/seed_{seed}"
         vr_path = seed_dir / "validation_report.json"
         vr = json.loads(vr_path.read_text())
         per_seed[str(seed)] = vr
         overall &= bool(vr.get("overall_pass", False))
+        attr_path = seed_dir / "attribution_raw.csv"
+        n_attr = sum(1 for _ in open(attr_path)) - 1
+        observed_attribution_rows += n_attr
         for k in maxima:
             if k in vr:
                 maxima[k] = max(maxima[k], float(vr[k]))
@@ -68,9 +72,15 @@ def build_validation_summary(repo: Path, aggregate_dir: Path) -> dict:
         **maxima,
         "expected_total_cell_rows": 307200,
         "expected_total_attribution_rows": 9600,
+        "observed_total_attribution_rows": observed_attribution_rows,
         "observed_total_cell_rows": sum(r["row_count"] for r in raw_index),
         "raw_cell_index": raw_index,
     }
+    if observed_attribution_rows != 9600:
+        summary["overall_pass"] = False
+        summary["attribution_row_count_error"] = (
+            f"expected 9600 attribution rows, observed {observed_attribution_rows}"
+        )
     (aggregate_dir / "validation_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     return summary
 

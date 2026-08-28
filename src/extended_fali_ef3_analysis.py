@@ -40,16 +40,40 @@ RO_HEADS = ("L10H2", "L10H10")
 H1_HEADS = ("L9H7", "L9H0")
 
 
-def balanced_bootstrap_means(
+def observed_balanced_mean(
+    values: np.ndarray,
+    seeds: np.ndarray,
+    templates: np.ndarray,
+) -> float:
+    """
+    Primary observed estimand: equal A/B within each seed, then equal across seeds.
+    """
+    values = np.asarray(values, dtype=np.float64)
+    seeds = np.asarray(seeds)
+    templates = np.asarray(templates)
+    seed_balanced: List[float] = []
+    for s in EF3_SEEDS:
+        tmpl_means: List[float] = []
+        for t in ("A", "B"):
+            idx = np.where((seeds == s) & (templates == t))[0]
+            if idx.size == 0:
+                raise ValueError(f"Empty stratum seed={s} template={t}")
+            tmpl_means.append(float(values[idx].mean()))
+        seed_balanced.append(float(np.mean(tmpl_means)))
+    return float(np.mean(seed_balanced))
+
+
+def balanced_bootstrap_distribution(
     values: np.ndarray,
     seeds: np.ndarray,
     templates: np.ndarray,
     *,
     n_bootstrap: int = N_BOOTSTRAP,
     seed_tag: str = BOOTSTRAP_SEED_TAG,
-) -> Tuple[np.ndarray, float]:
+) -> np.ndarray:
     """
-    EF-3 primary bootstrap: resample within seed×template cells, equal A/B and seed weights.
+    EF-3 bootstrap distribution only: resample within seed×template cells,
+    equal A/B and seed weights. Uncertainty quantification; not the point estimate.
     """
     values = np.asarray(values, dtype=np.float64)
     seeds = np.asarray(seeds)
@@ -68,7 +92,22 @@ def balanced_bootstrap_means(
                 tmpl_means.append(float(values[draw].mean()))
             seed_means.append(float(np.mean(tmpl_means)))
         boot[b] = float(np.mean(seed_means))
-    point = float(np.mean(boot))
+    return boot
+
+
+def balanced_bootstrap_means(
+    values: np.ndarray,
+    seeds: np.ndarray,
+    templates: np.ndarray,
+    *,
+    n_bootstrap: int = N_BOOTSTRAP,
+    seed_tag: str = BOOTSTRAP_SEED_TAG,
+) -> Tuple[np.ndarray, float]:
+    """Backward-compatible helper returning (boot, observed_point)."""
+    boot = balanced_bootstrap_distribution(
+        values, seeds, templates, n_bootstrap=n_bootstrap, seed_tag=seed_tag
+    )
+    point = observed_balanced_mean(values, seeds, templates)
     return boot, point
 
 
@@ -97,7 +136,8 @@ def direction_support(
     templates: np.ndarray,
     direction: str,
 ) -> Dict:
-    boot, point = balanced_bootstrap_means(values, seeds, templates)
+    boot = balanced_bootstrap_distribution(values, seeds, templates)
+    point = observed_balanced_mean(values, seeds, templates)
     lo, hi = bootstrap_ci(boot)
     seed_means = seed_balanced_means(values, seeds, templates)
     if direction == "positive":
@@ -127,7 +167,8 @@ def ro_discovery_eval(
     phi_score_mean: float,
     channel: str,
 ) -> Dict:
-    boot, point = balanced_bootstrap_means(values, seeds, templates)
+    boot = balanced_bootstrap_distribution(values, seeds, templates)
+    point = observed_balanced_mean(values, seeds, templates)
     lo, hi = bootstrap_ci(boot)
     seed_means = seed_balanced_means(values, seeds, templates)
     threshold = RO_DISCOVERY_FRAC * abs(phi_score_mean)
@@ -168,7 +209,10 @@ def eval_h1(df: pd.DataFrame) -> Dict:
                 and (sub["phi_C"] - sub["conditional_gain"]).abs().max() <= H1_CONTEXT_TOL
             ),
         }
-        boot, point = balanced_bootstrap_means(
+        boot = balanced_bootstrap_distribution(
+            sub["phi_C"].values, sub["seed"].values, sub["template_id"].values
+        )
+        point = observed_balanced_mean(
             sub["phi_C"].values, sub["seed"].values, sub["template_id"].values
         )
         lo, hi = bootstrap_ci(boot)
@@ -210,7 +254,10 @@ def eval_h4(df: pd.DataFrame) -> pd.DataFrame:
             "phi_C",
             "conditional_gain",
         ]:
-            boot, point = balanced_bootstrap_means(
+            boot = balanced_bootstrap_distribution(
+                sub[col].values, sub["seed"].values, sub["template_id"].values
+            )
+            point = observed_balanced_mean(
                 sub[col].values, sub["seed"].values, sub["template_id"].values
             )
             lo, hi = bootstrap_ci(boot)
@@ -230,7 +277,10 @@ def eval_all_heads(df: pd.DataFrame) -> pd.DataFrame:
         sub = df[df["head_name"] == head]
         row = {"head_name": head}
         for metric in PRIMARY_METRICS:
-            boot, point = balanced_bootstrap_means(
+            boot = balanced_bootstrap_distribution(
+                sub[metric].values, sub["seed"].values, sub["template_id"].values
+            )
+            point = observed_balanced_mean(
                 sub[metric].values, sub["seed"].values, sub["template_id"].values
             )
             lo, hi = bootstrap_ci(boot)
@@ -308,9 +358,6 @@ def go_stop_decision(
 
 
 def load_merged_attributions(aggregate_dir: Path, repo_root: Path) -> pd.DataFrame:
-    merged = aggregate_dir / "attribution_merged_raw.csv"
-    if merged.exists():
-        return pd.read_csv(merged)
     parts = []
     for seed in EF3_SEEDS:
         p = repo_root / f"results/extended_fali/ef3_two_template/seed_{seed}/attribution_raw.csv"
@@ -318,8 +365,223 @@ def load_merged_attributions(aggregate_dir: Path, repo_root: Path) -> pd.DataFra
     return pd.concat(parts, ignore_index=True)
 
 
+def _metric_key(head: str, metric: str) -> str:
+    return f"{head}::{metric}"
+
+
+def _collect_reported_metrics(
+    bootstrap_ci: pd.DataFrame,
+    hypothesis: Dict,
+    ro_discovery: Dict,
+    h4_df: Optional[pd.DataFrame] = None,
+) -> Dict[str, float]:
+    out: Dict[str, float] = {}
+    for _, row in bootstrap_ci.iterrows():
+        out[_metric_key(str(row["head_name"]), str(row["metric"]))] = float(row["mean"])
+    if h4_df is not None:
+        for _, row in h4_df.iterrows():
+            head = str(row["head_name"])
+            for col in row.index:
+                if col.endswith("_mean"):
+                    out[f"h4::{head}::{col[:-5]}"] = float(row[col])
+    for block in ("H1", "H2_L10H2", "H3_L10H10"):
+        block_data = hypothesis.get(block, {})
+        if block == "H1":
+            for head in H1_HEADS:
+                if head in block_data:
+                    out[f"H1::{head}::phi_C"] = float(block_data[head]["phi_C_mean"])
+        else:
+            for comp, res in block_data.get("components", {}).items():
+                out[f"{block}::{comp}"] = float(res["mean"])
+    for key, res in ro_discovery.items():
+        out[f"ro::{key}"] = float(res["mean"])
+        out[f"ro::{key}::threshold"] = float(res["threshold"])
+    return out
+
+
+def _hypothesis_status_snapshot(hypothesis: Dict, ro_discovery: Dict, go_stop: Dict) -> Dict:
+    h2 = {
+        comp: hypothesis["H2_L10H2"]["components"][comp]["supported"]
+        for comp in H2_COMPONENTS
+    }
+    h3 = {
+        comp: hypothesis["H3_L10H10"]["components"][comp]["supported"]
+        for comp in H3_COMPONENTS
+    }
+    ro = {
+        key: ro_discovery[key]["discovery_candidate"]
+        for key in ro_discovery
+    }
+    return {
+        "H1_L9H7_architectural": hypothesis["H1"]["L9H7"]["architectural_pass"],
+        "H2": h2,
+        "H3": h3,
+        "ro_discovery": ro,
+        "GO_STOP": go_stop["decision"],
+    }
+
+
+def generate_correction_report(
+    aggregate_dir: Path,
+    old_points: Dict[str, float],
+    new_points: Dict[str, float],
+    old_ci: pd.DataFrame,
+    new_ci: pd.DataFrame,
+    old_status: Dict,
+    new_status: Dict,
+) -> Dict:
+    metrics = []
+    max_point_shift = 0.0
+    max_ci_low_shift = 0.0
+    max_ci_high_shift = 0.0
+    all_keys = sorted(set(old_points) | set(new_points))
+    for key in all_keys:
+        old_p = old_points.get(key)
+        new_p = new_points.get(key)
+        if old_p is None or new_p is None:
+            continue
+        diff = abs(new_p - old_p)
+        max_point_shift = max(max_point_shift, diff)
+        metrics.append(
+            {
+                "metric": key,
+                "old_point_estimate": old_p,
+                "corrected_observed_point_estimate": new_p,
+                "absolute_difference": diff,
+            }
+        )
+
+    old_ci_map = {
+        _metric_key(str(r["head_name"]), str(r["metric"])): (float(r["ci_low"]), float(r["ci_high"]))
+        for _, r in old_ci.iterrows()
+    }
+    new_ci_map = {
+        _metric_key(str(r["head_name"]), str(r["metric"])): (float(r["ci_low"]), float(r["ci_high"]))
+        for _, r in new_ci.iterrows()
+    }
+    ci_shifts = []
+    for key in sorted(set(old_ci_map) & set(new_ci_map)):
+        old_lo, old_hi = old_ci_map[key]
+        new_lo, new_hi = new_ci_map[key]
+        lo_shift = abs(new_lo - old_lo)
+        hi_shift = abs(new_hi - old_hi)
+        max_ci_low_shift = max(max_ci_low_shift, lo_shift)
+        max_ci_high_shift = max(max_ci_high_shift, hi_shift)
+        if lo_shift > 1e-12 or hi_shift > 1e-12:
+            ci_shifts.append(
+                {
+                    "metric": key,
+                    "old_ci_low": old_lo,
+                    "old_ci_high": old_hi,
+                    "new_ci_low": new_lo,
+                    "new_ci_high": new_hi,
+                    "ci_low_shift": lo_shift,
+                    "ci_high_shift": hi_shift,
+                }
+            )
+
+    status_changes = {}
+    for section in ("H1_L9H7_architectural", "GO_STOP"):
+        if old_status.get(section) != new_status.get(section):
+            status_changes[section] = {
+                "before": old_status.get(section),
+                "after": new_status.get(section),
+            }
+    for block in ("H2", "H3"):
+        for comp, old_val in old_status.get(block, {}).items():
+            new_val = new_status.get(block, {}).get(comp)
+            if old_val != new_val:
+                status_changes.setdefault(block, {})[comp] = {"before": old_val, "after": new_val}
+    for key, old_val in old_status.get("ro_discovery", {}).items():
+        new_val = new_status.get("ro_discovery", {}).get(key)
+        if old_val != new_val:
+            status_changes.setdefault("ro_discovery", {})[key] = {
+                "before": old_val,
+                "after": new_val,
+            }
+
+    return {
+        "correction": "EF-3R observed balanced mean replaces bootstrap mean for point estimates",
+        "metrics": metrics,
+        "max_absolute_point_shift": max_point_shift,
+        "max_ci_endpoint_shift": {
+            "ci_low": max_ci_low_shift,
+            "ci_high": max_ci_high_shift,
+        },
+        "ci_endpoint_shifts_nonzero": ci_shifts,
+        "status_changes": status_changes,
+        "status_stable": len(status_changes) == 0,
+    }
+
+
+def generate_ef4_candidate_hypotheses(hypothesis: Dict, ro_discovery: Dict) -> Dict:
+    previously = {
+        "L10H2": {
+            "conditional_gain": "positive",
+            "Phi_SCORE": "positive",
+            "phi_T": "positive",
+        },
+        "L10H10": {
+            "Phi_SCORE": "positive",
+            "phi_C": "negative",
+            "conditional_gain": "negative",
+            "phi_T": "positive",
+        },
+    }
+    discovered = {}
+    for key, res in ro_discovery.items():
+        if not res.get("discovery_candidate"):
+            continue
+        mean = float(res["mean"])
+        head = key[: -len(f"_{res['channel']}")]
+        discovered[key] = {
+            "head": head,
+            "channel": res["channel"],
+            "direction": "negative" if mean < 0 else "positive",
+            "observed_balanced_mean": mean,
+            "ci_low": float(res["ci_low"]),
+            "ci_high": float(res["ci_high"]),
+            "seed_means": res["seed_means"],
+            "threshold": float(res["threshold"]),
+            "requires_canonical_template_confirmation": True,
+        }
+    return {
+        "previously_preregistered": previously,
+        "ef3_discovered": discovered,
+    }
+
+
 def run_analysis(repo_root: Path, aggregate_dir: Path) -> Dict:
     aggregate_dir.mkdir(parents=True, exist_ok=True)
+
+    old_h4 = (
+        pd.read_csv(aggregate_dir / "l10h2_vs_l10h10.csv")
+        if (aggregate_dir / "l10h2_vs_l10h10.csv").exists()
+        else None
+    )
+    old_bootstrap_ci = (
+        pd.read_csv(aggregate_dir / "bootstrap_ci.csv")
+        if (aggregate_dir / "bootstrap_ci.csv").exists()
+        else None
+    )
+    old_hypothesis = (
+        json.loads((aggregate_dir / "hypothesis_results.json").read_text())
+        if (aggregate_dir / "hypothesis_results.json").exists()
+        else None
+    )
+    old_ro = (
+        json.loads((aggregate_dir / "exploratory_ro_discovery.json").read_text())
+        if (aggregate_dir / "exploratory_ro_discovery.json").exists()
+        else None
+    )
+    old_go_stop = None
+    if old_hypothesis and old_ro:
+        val_summary_path = aggregate_dir / "validation_summary.json"
+        validation_pass = True
+        if val_summary_path.exists():
+            validation_pass = json.loads(val_summary_path.read_text()).get("overall_pass", False)
+        old_go_stop = go_stop_decision(validation_pass, old_hypothesis["H1"], old_ro)
+
     df = load_merged_attributions(aggregate_dir, repo_root)
     df.to_csv(aggregate_dir / "attribution_merged_raw.csv", index=False)
 
@@ -340,7 +602,10 @@ def run_analysis(repo_root: Path, aggregate_dir: Path) -> Dict:
     for head in sorted(df["head_name"].unique()):
         sub = df[df["head_name"] == head]
         for metric in PRIMARY_METRICS:
-            boot, point = balanced_bootstrap_means(
+            boot = balanced_bootstrap_distribution(
+                sub[metric].values, sub["seed"].values, sub["template_id"].values
+            )
+            point = observed_balanced_mean(
                 sub[metric].values, sub["seed"].values, sub["template_id"].values
             )
             lo, hi = bootstrap_ci(boot)
@@ -356,7 +621,8 @@ def run_analysis(repo_root: Path, aggregate_dir: Path) -> Dict:
                     ),
                 }
             )
-    pd.DataFrame(boot_rows).to_csv(aggregate_dir / "bootstrap_ci.csv", index=False)
+    bootstrap_ci_df = pd.DataFrame(boot_rows)
+    bootstrap_ci_df.to_csv(aggregate_dir / "bootstrap_ci.csv", index=False)
 
     h1 = eval_h1(df)
     h2 = eval_h2_h3(
@@ -377,10 +643,8 @@ def run_analysis(repo_root: Path, aggregate_dir: Path) -> Dict:
     ro = {}
     for head in RO_HEADS:
         sub = df[df["head_name"] == head]
-        phi_score_mean = float(
-            balanced_bootstrap_means(
-                sub["Phi_SCORE"].values, sub["seed"].values, sub["template_id"].values
-            )[1]
+        phi_score_mean = observed_balanced_mean(
+            sub["Phi_SCORE"].values, sub["seed"].values, sub["template_id"].values
         )
         for ch in ("phi_R", "phi_O"):
             ro[f"{head}_{ch}"] = ro_discovery_eval(
@@ -436,7 +700,44 @@ def run_analysis(repo_root: Path, aggregate_dir: Path) -> Dict:
         "bootstrap_seed_tag": BOOTSTRAP_SEED_TAG,
         "seeds": list(EF3_SEEDS),
         "estimand": "balanced mean over 4 seeds × 2 templates × 100 prompts",
+        "point_estimate": "observed_balanced_mean (direct from data)",
+        "uncertainty": "percentile bootstrap CI from balanced_bootstrap_distribution",
     }
     (aggregate_dir / "analysis_config.json").write_text(json.dumps(analysis_config, indent=2) + "\n")
 
-    return {"hypothesis": hypothesis, "go_stop": go_stop, "ro_discovery": ro}
+    ef4_candidates = generate_ef4_candidate_hypotheses(hypothesis, ro)
+    (aggregate_dir / "ef4_candidate_hypotheses.json").write_text(
+        json.dumps(ef4_candidates, indent=2) + "\n"
+    )
+
+    new_points = _collect_reported_metrics(bootstrap_ci_df, hypothesis, ro, h4)
+    new_status = _hypothesis_status_snapshot(hypothesis, ro, go_stop)
+    correction = None
+    if old_bootstrap_ci is not None and old_hypothesis is not None and old_ro is not None:
+        old_points = _collect_reported_metrics(old_bootstrap_ci, old_hypothesis, old_ro, old_h4)
+        old_status = _hypothesis_status_snapshot(old_hypothesis, old_ro, old_go_stop or {})
+        correction = generate_correction_report(
+            aggregate_dir,
+            old_points,
+            new_points,
+            old_bootstrap_ci,
+            bootstrap_ci_df,
+            old_status,
+            new_status,
+        )
+        (aggregate_dir / "analysis_correction_report.json").write_text(
+            json.dumps(correction, indent=2) + "\n"
+        )
+        if not correction["status_stable"]:
+            raise RuntimeError(
+                "EF-3R correction changed hypothesis/discovery/GO status; stopping before EF-4."
+            )
+
+    return {
+        "hypothesis": hypothesis,
+        "go_stop": go_stop,
+        "ro_discovery": ro,
+        "ef4_candidates": ef4_candidates,
+        "correction": correction,
+        "correction_status_stable": correction is None or correction.get("status_stable", True),
+    }

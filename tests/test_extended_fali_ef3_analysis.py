@@ -14,10 +14,11 @@ sys.path.insert(0, str(REPO / "src"))
 
 from extended_fali_ef3_analysis import (  # noqa: E402
     EF3_SEEDS,
-    balanced_bootstrap_means,
+    balanced_bootstrap_distribution,
     bootstrap_ci,
     direction_support,
     go_stop_decision,
+    observed_balanced_mean,
     ro_discovery_eval,
     seed_balanced_means,
 )
@@ -43,8 +44,8 @@ def test_balanced_bootstrap_deterministic():
     rng = np.random.default_rng(0)
     values = rng.normal(size=n)
     seeds, templates = _synthetic_cohort_values()
-    b1, _ = balanced_bootstrap_means(values, seeds, templates, n_bootstrap=100)
-    b2, _ = balanced_bootstrap_means(values, seeds, templates, n_bootstrap=100)
+    b1 = balanced_bootstrap_distribution(values, seeds, templates, n_bootstrap=100)
+    b2 = balanced_bootstrap_distribution(values, seeds, templates, n_bootstrap=100)
     assert np.allclose(b1, b2)
 
 

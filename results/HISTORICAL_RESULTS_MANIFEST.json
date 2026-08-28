@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-28T20:22:06.035654+00:00",
+    "generated_at_utc": "2026-08-28T20:49:09.350917+00:00",
     "large_raw_threshold_bytes": 2097152,
-    "n_indexed_large_raw_files": 55,
-    "n_manifest_files": 523
+    "n_indexed_large_raw_files": 51,
+    "n_manifest_files": 521
   },
   "files": [
     {
@@ -73,18 +73,23 @@
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/analysis_config.json",
-      "size_bytes": 203,
-      "sha256": "afca2f8308389bd1c0c7105720ecbad05091881b3bd17f67e00ba0967a6653bf"
+      "size_bytes": 349,
+      "sha256": "af635c10b52b21e296337f5ec62d1ff02fa4ebff346ca961576388311d09c564"
+    },
+    {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/analysis_correction_report.json",
+      "size_bytes": 31737,
+      "sha256": "d242eec0c58c78b26778040a3ea1a760ad6df89b8dea2398db5dc45c583fbc4a"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv",
-      "size_bytes": 3282400,
-      "sha256": "196cc288451fcd7e427dc35cd8cf0e2f108b3b721906a873760fec276dbe192a"
+      "size_bytes": 3282436,
+      "sha256": "59430b4866fe658ec852b185d5c36408e65f1509ae894e8c898a7bccb24e3323"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/bootstrap_ci.csv",
-      "size_bytes": 19867,
-      "sha256": "03ffe50c825b299b441ece22b5a216e220a797ed562a885f27bc664049500d71"
+      "size_bytes": 19868,
+      "sha256": "df5850f60c18efac2ff7ee4c467a859cc80958c7df1168b7dbfb446db4ec0b29"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/descriptive_vs_causal_correlations.csv",
@@ -92,29 +97,34 @@
       "sha256": "1227a8209c8d56bdf2613b4854387c485ef1bc3ed5f1eee41fc4a19170e00558"
     },
     {
+      "relative_path": "results/extended_fali/ef3_two_template/aggregate/ef4_candidate_hypotheses.json",
+      "size_bytes": 1336,
+      "sha256": "1b74067d557a225e18f50b2890745a4ab6c500e0f4380004aa74e246a2cc4670"
+    },
+    {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/exploratory_ro_discovery.json",
-      "size_bytes": 1901,
-      "sha256": "f305f19f353d19af89f85a304a0b73907abf5eb8ae61b25d1bfce7e3a33e862f"
+      "size_bytes": 1903,
+      "sha256": "1ad1a062ea4e9225207069f80902713d805a226faaca0709ff96bc194ca46f23"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/head_means.csv",
-      "size_bytes": 19738,
-      "sha256": "d2a41336dab408c9130677a5691cfc0d39eb9799c64538a686a2338e1e5f6ddd"
+      "size_bytes": 19739,
+      "sha256": "0bc2b3bc5feb2c7a0d3cbde1f633d99b5b35313f27d979590b6efc37664364b8"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/hypothesis_results.json",
-      "size_bytes": 4321,
-      "sha256": "54f07e5a05b3d07ed6940922af7921ff8c208da9ba4e3b84b517a55c2b599dc5"
+      "size_bytes": 4323,
+      "sha256": "0645c211069356eef1295a70bd1a696412b96ee5013b7768429dfec66663ab4a"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/l10h2_vs_l10h10.csv",
-      "size_bytes": 5257,
-      "sha256": "8b99df354da3158679a3ff3997a69422b8745dbd70b5a1082f597278a1a721c9"
+      "size_bytes": 5261,
+      "sha256": "c45ffacd4d1fe12fef90eb1fec1f56d04cd4575a3d68f3cba69e6ba47f199c60"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/scientific_summary.md",
       "size_bytes": 972,
-      "sha256": "924e9640d74d44e804d4416e6081f8d0820d6cdfcfcabe1ab829a834a7d6b0d0"
+      "sha256": "4431d9a58a39e065f60e14562c72ddb06145cea97947ab092388097e2389c744"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/seed_means.csv",
@@ -123,18 +133,13 @@
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/validation_summary.json",
-      "size_bytes": 1936,
-      "sha256": "76bb874274715c5903aead92ed3c3866faa7db9ca7f4ad06ad17e18cf8d30525"
+      "size_bytes": 1719,
+      "sha256": "b7e9fec4a5f8c7f5a1290d8fc9752918d2316ac1c95da3f62ed6e04d6a14918d"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/seed_1/attribution_raw.csv",
       "size_bytes": 857492,
       "sha256": "e0afe5859bfc6937c2f9f1aef095adf70122dbee96f55b1268bc5ea4c66432d2"
-    },
-    {
-      "relative_path": "results/extended_fali/ef3_two_template/seed_1/cell_raw.csv.gz",
-      "size_bytes": 1510121,
-      "sha256": "358a8badfdd4ae5af41b81b450bb1a4e6a143c11891233aa8e993b9b1304f7b0"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/seed_1/dataset_alignment_report.md",
@@ -172,11 +177,6 @@
       "sha256": "d5600c2d15de86a090c06a864284c164a989babf4994192d30df277c02b269f0"
     },
     {
-      "relative_path": "results/extended_fali/ef3_two_template/seed_22/cell_raw.csv.gz",
-      "size_bytes": 1517673,
-      "sha256": "b3872fdc6b840189d6dddb4138ef7bf075cec0d11dbdf3ca7ab53966b89e417e"
-    },
-    {
       "relative_path": "results/extended_fali/ef3_two_template/seed_22/dataset_alignment_report.md",
       "size_bytes": 196,
       "sha256": "7fc5b0f88131ed6105efa611f92184f3cecaeb5ae8281525f9c1e6c26d564f05"
@@ -212,11 +212,6 @@
       "sha256": "a07bb5fa9d9111bcd2fb5caaabe22898a40e0eb904b12104b6fa02763cfecd56"
     },
     {
-      "relative_path": "results/extended_fali/ef3_two_template/seed_42/cell_raw.csv.gz",
-      "size_bytes": 1517768,
-      "sha256": "1a3b4f7de32fd4639e96414acb3d330bb162a79c217313a5b3a52c6042673a84"
-    },
-    {
       "relative_path": "results/extended_fali/ef3_two_template/seed_42/dataset_alignment_report.md",
       "size_bytes": 196,
       "sha256": "a7b26835256b4b3d4378c2f1de795cc4c9329ff9a807213937d71bd3d53103b1"
@@ -250,11 +245,6 @@
       "relative_path": "results/extended_fali/ef3_two_template/seed_8/attribution_raw.csv",
       "size_bytes": 857464,
       "sha256": "e901bf5709436055bc2cb1088d994a94395fb133310a116b1f624e35ef18f0b0"
-    },
-    {
-      "relative_path": "results/extended_fali/ef3_two_template/seed_8/cell_raw.csv.gz",
-      "size_bytes": 1511957,
-      "sha256": "1ff89255596be0564678ab8c00407064b8c5669f74b7d1f655888835554e8061"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/seed_8/dataset_alignment_report.md",

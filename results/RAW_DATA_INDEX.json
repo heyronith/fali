@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-28T20:22:06.035654+00:00",
+    "generated_at_utc": "2026-08-28T20:49:09.350917+00:00",
     "large_raw_threshold_bytes": 2097152,
-    "n_indexed_large_raw_files": 55,
-    "n_manifest_files": 523
+    "n_indexed_large_raw_files": 51,
+    "n_manifest_files": 521
   },
   "files": [
     {
@@ -37,73 +37,13 @@
         "desc_phi_competing",
         "desc_total_delta_attn"
       ],
-      "size_bytes": 3282400,
-      "sha256": "196cc288451fcd7e427dc35cd8cf0e2f108b3b721906a873760fec276dbe192a",
+      "size_bytes": 3282436,
+      "sha256": "59430b4866fe658ec852b185d5c36408e65f1509ae894e8c898a7bccb24e3323",
       "generating_script": "experiments/extended_fali_ef3_full.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
+      "git_tracked": true,
       "notes": "Indexed raw output; likely produced by experiments/extended_fali_ef3_full.py; config_path unknown."
-    },
-    {
-      "experiment": "extended_fali_ef3",
-      "relative_path": "results/extended_fali/ef3_two_template/seed_1/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 1510121,
-      "sha256": "358a8badfdd4ae5af41b81b450bb1a4e6a143c11891233aa8e993b9b1304f7b0",
-      "generating_script": "experiments/extended_fali_ef3_full.py",
-      "config_path": "results/extended_fali/ef3_two_template/seed_1/run_config.json",
-      "seeds": [
-        1
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef3_full.py using results/extended_fali/ef3_two_template/seed_1/run_config.json."
-    },
-    {
-      "experiment": "extended_fali_ef3",
-      "relative_path": "results/extended_fali/ef3_two_template/seed_22/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 1517673,
-      "sha256": "b3872fdc6b840189d6dddb4138ef7bf075cec0d11dbdf3ca7ab53966b89e417e",
-      "generating_script": "experiments/extended_fali_ef3_full.py",
-      "config_path": "results/extended_fali/ef3_two_template/seed_22/run_config.json",
-      "seeds": [
-        22
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef3_full.py using results/extended_fali/ef3_two_template/seed_22/run_config.json."
-    },
-    {
-      "experiment": "extended_fali_ef3",
-      "relative_path": "results/extended_fali/ef3_two_template/seed_42/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 1517768,
-      "sha256": "1a3b4f7de32fd4639e96414acb3d330bb162a79c217313a5b3a52c6042673a84",
-      "generating_script": "experiments/extended_fali_ef3_full.py",
-      "config_path": "results/extended_fali/ef3_two_template/seed_42/run_config.json",
-      "seeds": [
-        42
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef3_full.py using results/extended_fali/ef3_two_template/seed_42/run_config.json."
-    },
-    {
-      "experiment": "extended_fali_ef3",
-      "relative_path": "results/extended_fali/ef3_two_template/seed_8/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 1511957,
-      "sha256": "1ff89255596be0564678ab8c00407064b8c5669f74b7d1f655888835554e8061",
-      "generating_script": "experiments/extended_fali_ef3_full.py",
-      "config_path": "results/extended_fali/ef3_two_template/seed_8/run_config.json",
-      "seeds": [
-        8
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef3_full.py using results/extended_fali/ef3_two_template/seed_8/run_config.json."
     },
     {
       "experiment": "original_fali",

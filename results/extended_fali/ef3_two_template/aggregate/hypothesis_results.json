@@ -7,7 +7,7 @@
       "max_abs_phi_V": 0.0,
       "max_context_residual": 1.1102230246251565e-16,
       "architectural_pass": true,
-      "phi_C_mean": 0.07201483533644676,
+      "phi_C_mean": 0.07203758239746091,
       "phi_C_ci": [
         0.06447500112652776,
         0.0797277056574821
@@ -26,7 +26,7 @@
       "max_abs_phi_V": 0.0,
       "max_context_residual": 1.1102230246251565e-16,
       "architectural_pass": true,
-      "phi_C_mean": 0.0071276252053976055,
+      "phi_C_mean": 0.007136914730072022,
       "phi_C_ci": [
         0.002933935731649403,
         0.01121395334601402
@@ -45,7 +45,7 @@
     "components": {
       "conditional_gain": {
         "direction": "positive",
-        "mean": 0.2005714801505804,
+        "mean": 0.20033852100372315,
         "ci_low": 0.1797672836780548,
         "ci_high": 0.22166992819309236,
         "seed_means": {
@@ -60,7 +60,7 @@
       },
       "Phi_SCORE": {
         "direction": "positive",
-        "mean": 0.3238836773759126,
+        "mean": 0.32372787714004514,
         "ci_low": 0.30553007746239497,
         "ci_high": 0.3425646197547515,
         "seed_means": {
@@ -75,7 +75,7 @@
       },
       "phi_T": {
         "direction": "positive",
-        "mean": 0.6668869410970641,
+        "mean": 0.6667200309369299,
         "ci_low": 0.646659937446316,
         "ci_high": 0.6877969088214967,
         "seed_means": {
@@ -95,7 +95,7 @@
     "components": {
       "Phi_SCORE": {
         "direction": "positive",
-        "mean": 0.22220135204776126,
+        "mean": 0.2222092274824778,
         "ci_low": 0.2080023856957753,
         "ci_high": 0.23629760609070458,
         "seed_means": {
@@ -110,7 +110,7 @@
       },
       "phi_C": {
         "direction": "negative",
-        "mean": -0.31486460294477137,
+        "mean": -0.3149751718839009,
         "ci_low": -0.3352457430213689,
         "ci_high": -0.2950374622792005,
         "seed_means": {
@@ -125,7 +125,7 @@
       },
       "conditional_gain": {
         "direction": "negative",
-        "mean": -0.086052981990695,
+        "mean": -0.08615363001823426,
         "ci_low": -0.1084491631090641,
         "ci_high": -0.06361526751518248,
         "seed_means": {
@@ -140,7 +140,7 @@
       },
       "phi_T": {
         "direction": "positive",
-        "mean": 0.3740179829693437,
+        "mean": 0.37405384431282684,
         "ci_low": 0.3551804918224612,
         "ci_high": 0.39347982901748674,
         "seed_means": {
