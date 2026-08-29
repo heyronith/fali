@@ -50,7 +50,21 @@ def _run_script(script: str, extra: list[str]) -> bytes:
     os.environ["PYTHONPATH"] = str(project / "src") + os.pathsep + os.environ.get("PYTHONPATH", "")
     cmd = [sys.executable, str(project / "experiments" / script), *extra, "--device", "cuda", "--require-cuda"]
     print("Running:", " ".join(cmd), flush=True)
-    subprocess.run(cmd, check=True, cwd=str(project))
+    result = subprocess.run(cmd, cwd=str(project), capture_output=True, text=True)
+    if result.stdout:
+        print(result.stdout, flush=True)
+    if result.stderr:
+        print(result.stderr, flush=True)
+    if result.returncode != 0:
+        for rel in (
+            "results/extended_fali/ef6_pythia_induction/smoke/validation_report.json",
+            "results/extended_fali/ef6_pythia_induction/discovery/selection_report.json",
+        ):
+            p = project / rel
+            if p.exists():
+                print("---", rel, "---", flush=True)
+                print(p.read_text(), flush=True)
+        result.check_returncode()
     return b""
 
 

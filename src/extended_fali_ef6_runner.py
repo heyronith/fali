@@ -470,31 +470,31 @@ def run_extended_fali_confirmation(
     cell_rows: List[Dict] = []
     attr_rows: List[Dict] = []
     meta = dataset.metadata
+    u_tables: Dict[int, CellTable] = {i: {} for i in range(dataset.batch_size)}
 
-    for i in range(dataset.batch_size):
-        u_table: CellTable = {}
-        for _, state in enumerate_extended_fali_cells():
-            _, _, z_hybrid = score_pattern_z_pipeline(
-                scores_a, scores_b, v_a, v_b, partition, state
-            )
-            z_i = z_hybrid[i : i + 1]
-            hooks_inj = build_ef6_factorial_hooks(
-                candidate,
-                primary,
-                context_b=bool(state[4]),
-                z_head=z_i,
-                zero_candidate=False,
-            )
-            metric_inj = target_logprob(
-                model,
-                tokens[i : i + 1],
-                dataset.query_pos[i : i + 1].to(device),
-                dataset.target_token_id[i : i + 1].to(device),
-                hooks_inj,
-            )
-            base = zero_b[i : i + 1] if state[4] else zero_a[i : i + 1]
-            u_val = float((metric_inj - base).item())
-            u_table[state] = u_val
+    for _, state in enumerate_extended_fali_cells():
+        _, _, z_hybrid = score_pattern_z_pipeline(
+            scores_a, scores_b, v_a, v_b, partition, state
+        )
+        hooks_inj = build_ef6_factorial_hooks(
+            candidate,
+            primary,
+            context_b=bool(state[4]),
+            z_head=z_hybrid,
+            zero_candidate=False,
+        )
+        metric_inj = target_logprob(
+            model,
+            tokens,
+            dataset.query_pos.to(device),
+            dataset.target_token_id.to(device),
+            hooks_inj,
+        )
+        base = zero_b if state[4] else zero_a
+        u_vec = metric_inj - base
+        for i in range(dataset.batch_size):
+            u_val = float(u_vec[i].item())
+            u_tables[i][state] = u_val
             cell_rows.append(
                 {
                     "seed": seed,
@@ -508,12 +508,14 @@ def run_extended_fali_confirmation(
                     "O": state[2],
                     "V": state[3],
                     "C": state[4],
-                    "metric_injected": float(metric_inj.item()),
-                    "metric_zero": float(base.item()),
+                    "metric_injected": float(metric_inj[i].item()),
+                    "metric_zero": float(base[i].item()),
                     "U": u_val,
                 }
             )
 
+    for i in range(dataset.batch_size):
+        u_table = u_tables[i]
         u0 = u_table[(0, 0, 0, 0, 0)]
         u1 = u_table[(1, 1, 1, 1, 1)]
         intact_i = float(intact[i].item())

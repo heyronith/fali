@@ -33,7 +33,12 @@ def main() -> int:
             repo_root=_REPO,
         )
     )
-    return 0 if val.get("overall_pass") else 2
+    if not val.get("overall_pass"):
+        import json
+
+        print(json.dumps(val, indent=2), flush=True)
+        return 2
+    return 0
 
 
 if __name__ == "__main__":
