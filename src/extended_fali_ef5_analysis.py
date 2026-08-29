@@ -36,7 +36,9 @@ from extended_fali_ef4_analysis import (
     stratum_means_table,
     template_cluster_means,
 )
-from extended_fali_gpt2 import snapshot_paths, verify_historical_hash_integrity
+from historical_integrity_audit import audit_ef5_historical_integrity
+
+EF4_BASE_REF = "79feba9d9a97c62ada673159aaa1d13f757da05b"
 
 EF5_SCHEMES = ("zero", "matched_mean", "matched_resample")
 ALT_SCHEMES = ("matched_mean", "matched_resample")
@@ -377,19 +379,8 @@ def effect_size_comparison(
 
 
 def verify_historical_integrity(repo: Path) -> Dict:
-    paths: List[str] = []
-    for seed in EF4_SEEDS:
-        paths.append(f"results/revision_phase4/full/seed_{seed}/factorial_raw.csv")
-        paths.append(f"results/extended_fali/ef4_canonical/seed_{seed}/attribution_raw.csv")
-    paths.extend(
-        [
-            "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json",
-            "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json",
-        ]
-    )
-    snap = snapshot_paths(repo, paths)
-    ok, checks = verify_historical_hash_integrity(snap, snap, paths)
-    return {"integrity_pass": ok, "checks": checks, "paths": paths}
+    """Deprecated tautology-free audit wrapper for EF-5 aggregate (prefer historical_integrity_audit)."""
+    return audit_ef5_historical_integrity(repo, ef4_base_ref=EF4_BASE_REF, ef5_branch_ref="HEAD")
 
 
 def run_analysis(repo: Path, aggregate_dir: Path, *, preregistration_sha: str) -> Dict:

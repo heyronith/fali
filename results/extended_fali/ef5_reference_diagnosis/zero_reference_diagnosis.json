@@ -1,0 +1,46 @@
+{
+  "EF5_ABLATION_GATE": "FAIL",
+  "matched_mean_channel_status": "ROBUST",
+  "matched_resample_channel_status": "ROBUST",
+  "reference_perturbation_stop": true,
+  "reconstruction_checks": {
+    "max_clean_head_discrepancy": 0.0,
+    "max_damaged_head_discrepancy": 0.0,
+    "max_ef5_forward_zero_drop_discrepancy": 3.552713678800501e-15,
+    "check_A_clean_head_agreement": true,
+    "check_B_damaged_head_agreement": true,
+    "check_C_ef5_forward_agreement": true,
+    "implementation_inconsistency_stop": false
+  },
+  "cross_run_endpoint_check": {
+    "max_clean_endpoint_cross_run_discrepancy": 0.0,
+    "check_clean_cross_run": true,
+    "schemes_compared": [
+      "zero",
+      "matched_mean",
+      "matched_resample"
+    ]
+  },
+  "damage_drop_field_consistency": {
+    "max_attribution_vs_cell_drop_discrepancy": 1.7763568394002505e-15,
+    "per_scheme": {
+      "matched_mean": 1.7763568394002505e-15,
+      "matched_resample": 1.7763568394002505e-15
+    },
+    "check_pass": true
+  },
+  "io_semantic_audit": {
+    "status": "PASS",
+    "examples_checked": 3600,
+    "failures": [],
+    "n_failures": 0,
+    "note": "Position ordering from frozen Phase-4 metadata; token-id audit deferred to dataset generation validation."
+  },
+  "diagnosis_category": "GENUINE_ZERO_HETEROGENEITY",
+  "zero_baba_balanced_mean": 0.4695530250337389,
+  "zero_abba_balanced_mean": -1.107203799618615,
+  "zero_baba_minus_abba": 1.576756824652354,
+  "zero_template_pair_baba_positive_count": 15,
+  "zero_template_pair_abba_positive_count": 0,
+  "recommended_zero_terminology": "Prefer 'pattern-heterogeneous primary zero effect on IO\u2212S' over uniform 'damage'; BABA balanced drop +0.470 vs ABBA -1.107."
+}

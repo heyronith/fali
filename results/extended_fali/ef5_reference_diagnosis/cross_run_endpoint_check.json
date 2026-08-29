@@ -1,0 +1,9 @@
+{
+  "max_clean_endpoint_cross_run_discrepancy": 0.0,
+  "check_clean_cross_run": true,
+  "schemes_compared": [
+    "zero",
+    "matched_mean",
+    "matched_resample"
+  ]
+}
