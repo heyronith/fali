@@ -17,11 +17,7 @@
 \author*[1]{\fnm{Author} \sur{Name}}\email{author@example.com}
 \affil*[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\city{City}, \country{Country}}}
 
-\abstract{%
-% TARGET: 150--250 words. Draft last, after all claims/results are frozen.
-% Required content: problem; gap; FALI estimand and factorization; validation;
-% GPT-2 IOI result; Pythia induction reversal; bounded conclusion.
-}
+\abstract{Component importance in transformer circuits can change after another component is perturbed, but detecting such conditional importance does not explain why the change occurred. We introduce FALI (Factorized Attention-Level Intervention), an output-grounded counterfactual framework that decomposes the cross-state change in a selected attention head's causal usefulness into target scores, rival scores, other attention scores, value content, and surrounding-network context. Standard Owen attribution allocates interactions while reconciling the fine score decomposition with a coarse score/value/context game. Controlled synthetic systems and a randomly initialized transformer validate factor recovery, endpoint identities, intervention isolation, and coarse--fine consistency. In GPT-2 Small on indirect object identification, a genuinely recruited head exhibits a positive target-score contribution and a negative rival-score contribution, while another head shows similar attention adaptation without positive recruitment. We then preregister transfer of this fine-score mechanism to Pythia-160M induction. Conditional recruitment appears again, but the target and rival contributions reverse sign. Thus, across the two studied settings, a common functional response does not imply a common fine-grained mechanism. FALI provides a mechanism-discrimination layer for selected conditionally important attention heads under explicit intervention semantics.}
 
 \keywords{mechanistic interpretability, causal intervention, transformer circuits, attention heads, conditional importance}
 
@@ -244,75 +240,30 @@ When the whole SCORE block switches together, its hybrid scores reproduce the co
 
 Finally, the historical two-factor attention-probability version of FALI is nested as a special case rather than identified with the present causal attributions. If the utility is changed from output-grounded usefulness to target attention probability, $O$, $V$, and $C$ are held fixed, and only $T$ and $R$ vary, Eq.~\ref{eq:owen-value} reduces to the ordinary two-player Shapley decomposition of target-score versus competing-score changes. The present method changes both the intervention scope and, crucially, the quantity being explained.
 
-\section{Method Validation}\label{sec:validation}
-
-\subsection{Analytical and synthetic ground truth}\label{sec:synthetic}
-% Five single-channel cases and cross-factor interaction tests.
-
-\subsection{Transformer implementation invariants}\label{sec:implementation-validation}
-% Batch-safe masks, endpoint identity, score->pattern, z reconstruction,
-% no-live-candidate leak, untouched-head checks, quotient bridge.
-
-\section{GPT-2 IOI: Conditional Recruitment and Fine-Score Decomposition}\label{sec:gpt2}
-
-\subsection{Experimental design}\label{sec:gpt2-design}
-% Canonical primary heads; candidate heads; 15 templates x BABA/ABBA;
-% four seeds; output metric; preregistered confirmation.
-
-\subsection{Conditional recruitment is not attention increase}\label{sec:gpt2-functional}
-% Corrected functional baseline; L10H2 genuine recruitment; L10H10 contrast.
-
-\subsection{Canonical FALI mechanism}\label{sec:gpt2-fali}
-% L10H2 and L10H10: T positive, R negative; O descriptive;
-% coarse score/value/context only where necessary.
-
-\subsection{Intervention robustness}\label{sec:gpt2-robustness}
-% Report matched-mean and matched-resample fine-channel robustness accurately.
-% Explicitly disclose that the preregistered overall EF5 gate failed because the
-% zero-damage reference criterion was not satisfied.
-
-\section{Cross-Setting Test: Pythia Induction}\label{sec:pythia}
-
-\subsection{Preregistered transfer design}\label{sec:pythia-design}
-% Pythia-160M induction; primary L5H0; candidate L8H2; frozen transfer hypotheses.
-
-\subsection{Recruitment generalizes but the fine mechanism reverses}\label{sec:pythia-results}
-% conditional effect/gain positive; phi_T negative; phi_R positive; transfer gate failed.
-
-\section{Discussion}\label{sec:discussion}
-
-\subsection{A common functional response need not imply a common mechanism}\label{sec:discussion-mechanisms}
-
-\subsection{Relationship to conditional attribution and patching}\label{sec:discussion-positioning}
-% Localization/CoAx: which; interaction methods: conditionality; FALI: mechanism resolution.
-
-\section{Limitations}\label{sec:limitations}
-% Required: hypothesis-driven target selection; off-manifold hybrids; coarse C;
-% partition/intervention dependence; only two substantive model/task settings.
-
-\section{Conclusion}\label{sec:conclusion}
-% Compact: what FALI adds and what the cross-setting reversal establishes.
+\input{method_validation}
+\input{gpt2_ioi}
+\input{pythia_induction}
+\input{discussion_limitations_conclusion}
 
 \section*{Statements and Declarations}
 
 \subsection*{Competing Interests}
-% TODO: author-provided statement.
+% Author-provided statement required before submission.
 
 \subsection*{Funding}
-% TODO: author-provided statement.
+% Author-provided statement required before submission.
 
 \subsection*{Data Availability}
-% TODO: state exact public/private data availability at submission.
+% Final repository/archive visibility and persistent identifier to be inserted before submission.
 
 \subsection*{Code Availability}
-% TODO: repository/archive and reproducibility statement.
+% Final repository/archive visibility and persistent identifier to be inserted before submission.
 
 \subsection*{Author Contributions}
-% TODO: author-provided CRediT-style contribution statement if appropriate.
+% Author-provided contribution statement required before submission.
 
 \subsection*{Use of Generative AI}
-% TODO before submission: document generative-AI use to the extent required by
-% current Springer/Machine Learning policy and the final actual workflow.
+% Final disclosure must reflect the actual workflow and current Springer/Machine Learning policy at submission.
 
 \bibliography{references}
 
