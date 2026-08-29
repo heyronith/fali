@@ -1,0 +1,106 @@
+{
+  "figure": "Fig3",
+  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig3.py",
+  "git_commit": "85f0b986ee41da3678e2d9467f2c77c1e2acadec",
+  "source_files": [
+    {
+      "path": "results/extended_fali/ef1_synthetic/validation_report.json",
+      "sha256": "73b81986c995c3c5dbbc85fd0707a68076587aca3c2bc6330bbbaf4e598f798f"
+    }
+  ],
+  "extracted_values": {
+    "single_channel_delta_u": [
+      0.26895206842589714,
+      -0.4940997625253214,
+      0.2134890065388908,
+      0.19251027051493746,
+      0.7112345942275938
+    ],
+    "tc_interaction": {
+      "delta_u": 1.9999999999958513,
+      "owen": {
+        "T": 0.9999999999979258,
+        "R": 0.0,
+        "O": 0.0,
+        "V": 0.0,
+        "C": 0.9999999999979257
+      },
+      "pass": true
+    },
+    "dashboard": [
+      [
+        "score \u2192 pattern A/B",
+        0.0
+      ],
+      [
+        "pattern/value \u2192 z A/B",
+        0.0
+      ],
+      [
+        "masked probability",
+        0.0
+      ],
+      [
+        "independent endpoint identity",
+        0.0
+      ],
+      [
+        "all-A injected-z identity",
+        0.0
+      ],
+      [
+        "all-B injected-z identity",
+        0.0
+      ],
+      [
+        "non-candidate modification",
+        0.0
+      ],
+      [
+        "live Q leak",
+        0.0
+      ],
+      [
+        "live V leak",
+        0.0
+      ],
+      [
+        "live Q+V leak",
+        0.0
+      ],
+      [
+        "model quotient bridge",
+        0.0
+      ],
+      [
+        "synthetic quotient bridge",
+        1.1102230246251565e-16
+      ],
+      [
+        "partition coverage max",
+        0.0
+      ],
+      [
+        "partition overlap max",
+        0.0
+      ]
+    ],
+    "overall_pass": true
+  },
+  "output_dimensions_inches": {
+    "width": 6.85,
+    "height": 2.32
+  },
+  "output_width_mm": 174.0,
+  "generation_timestamp_utc": "2026-08-29T19:37:16.368073+00:00",
+  "plotting_library_versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  },
+  "outputs": {
+    "pdf": "manuscript/machine_learning/figures/Fig3.pdf",
+    "svg": "manuscript/machine_learning/figures/Fig3.svg",
+    "png": "manuscript/machine_learning/figures/Fig3.png"
+  }
+}

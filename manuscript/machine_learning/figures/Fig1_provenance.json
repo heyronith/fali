@@ -1,0 +1,25 @@
+{
+  "figure": "Fig1",
+  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig1.py",
+  "git_commit": "85f0b986ee41da3678e2d9467f2c77c1e2acadec",
+  "source_files": [],
+  "extracted_values": {
+    "type": "deterministic_schematic"
+  },
+  "output_dimensions_inches": {
+    "width": 6.85,
+    "height": 1.91
+  },
+  "output_width_mm": 174.0,
+  "generation_timestamp_utc": "2026-08-29T19:37:15.873041+00:00",
+  "plotting_library_versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  },
+  "outputs": {
+    "pdf": "manuscript/machine_learning/figures/Fig1.pdf",
+    "svg": "manuscript/machine_learning/figures/Fig1.svg",
+    "png": "manuscript/machine_learning/figures/Fig1.png"
+  }
+}
