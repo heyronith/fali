@@ -12,6 +12,8 @@ from typing import Dict, List, Optional, Sequence
 
 from extended_fali_ef4_analysis import EF4_SEEDS
 
+RAW_AUDIT_REF = "audit/raw-baseline"
+
 
 def file_sha256(path: Path) -> Optional[str]:
     if not path.exists():
@@ -34,6 +36,19 @@ def git_blob_sha256(repo: Path, git_ref: str, rel_path: str) -> Optional[str]:
     except (subprocess.CalledProcessError, FileNotFoundError):
         return None
     return hashlib.sha256(data).hexdigest()
+
+
+def tracked_ef4_paths() -> List[str]:
+    paths: List[str] = []
+    for seed in EF4_SEEDS:
+        paths.append(f"results/extended_fali/ef4_canonical/seed_{seed}/attribution_raw.csv")
+    paths.extend(
+        [
+            "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json",
+            "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json",
+        ]
+    )
+    return paths
 
 
 def load_validation_hash_reports(
@@ -63,20 +78,84 @@ def compare_git_blob_across_refs(
     ref_b: str,
 ) -> Dict:
     rows = []
-    all_match = True
     for rel in rel_paths:
         ha = git_blob_sha256(repo, ref_a, rel)
         hb = git_blob_sha256(repo, ref_b, rel)
         if ha is None or hb is None:
             status = "NOT_AVAILABLE"
-            all_match = False
         elif ha == hb:
             status = "UNCHANGED"
         else:
             status = "CHANGED"
-            all_match = False
         rows.append({"path": rel, "ref_a": ref_a, "ref_b": ref_b, "sha256_a": ha, "sha256_b": hb, "status": status})
-    return {"all_match": all_match, "comparisons": rows}
+    return {"comparisons": rows}
+
+
+def tracked_git_blob_pass(git_compare: Dict) -> bool:
+    """True only when every tracked path is UNCHANGED; NOT_AVAILABLE never counts as equality."""
+    return all(row["status"] == "UNCHANGED" for row in git_compare["comparisons"])
+
+
+def audit_untracked_factorial_raw_index(
+    repo: Path,
+    *,
+    audit_ref: str = RAW_AUDIT_REF,
+) -> Dict:
+    """
+    Verify untracked Phase-4 factorial raws against RAW_DATA_INDEX sha256 and audit branch blobs.
+    Does not require files to exist in ordinary EF-4/EF-5 Git trees.
+    """
+    raw_index_path = repo / "results/RAW_DATA_INDEX.json"
+    entries: List[Dict] = []
+    if not raw_index_path.exists():
+        return {
+            "pass": False,
+            "audit_ref": audit_ref,
+            "entries": entries,
+            "note": "RAW_DATA_INDEX.json missing",
+        }
+
+    idx = json.loads(raw_index_path.read_text())
+    all_pass = True
+    for entry in idx.get("files", []):
+        rel = entry.get("relative_path", "")
+        if "revision_phase4" not in rel or "factorial_raw" not in rel:
+            continue
+        expected = entry.get("sha256")
+        audit_sha = git_blob_sha256(repo, audit_ref, rel)
+        if expected is None or audit_sha is None:
+            status = "NOT_AVAILABLE"
+            match = False
+            all_pass = False
+        elif expected == audit_sha:
+            status = "MATCH"
+            match = True
+        else:
+            status = "MISMATCH"
+            match = False
+            all_pass = False
+        entries.append(
+            {
+                "relative_path": rel,
+                "index_sha256": expected,
+                "audit_ref_sha256": audit_sha,
+                "status": status,
+                "match": match,
+            }
+        )
+
+    return {"pass": all_pass, "audit_ref": audit_ref, "entries": entries}
+
+
+def per_seed_prepost_pass(validation_reports: Dict) -> bool:
+    for key, report in validation_reports.items():
+        if not key.startswith("seed_"):
+            continue
+        if report.get("status") == "NOT_AVAILABLE":
+            return False
+        if report.get("hash_integrity_check_pass") is not True:
+            return False
+    return True
 
 
 def audit_ef5_historical_integrity(
@@ -84,23 +163,9 @@ def audit_ef5_historical_integrity(
     *,
     ef4_base_ref: str = "79feba9d9a97c62ada673159aaa1d13f757da05b",
     ef5_branch_ref: str = "HEAD",
+    raw_audit_ref: str = RAW_AUDIT_REF,
 ) -> Dict:
-    """Aggregate integrity audit using per-seed validation reports and git blob checks."""
-    tracked_paths: List[str] = []
-    for seed in EF4_SEEDS:
-        tracked_paths.extend(
-            [
-                f"results/extended_fali/ef4_canonical/seed_{seed}/attribution_raw.csv",
-                f"results/revision_phase4/full/seed_{seed}/factorial_raw.csv",
-            ]
-        )
-    tracked_paths.extend(
-        [
-            "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json",
-            "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json",
-        ]
-    )
-
+    """Aggregate integrity audit using per-seed validation reports, tracked git blobs, and raw index."""
     ef5_seed_dirs = [
         repo / f"results/extended_fali/ef5_ablation_robustness/matched_mean/seed_{s}" for s in EF4_SEEDS
     ] + [
@@ -108,42 +173,31 @@ def audit_ef5_historical_integrity(
     ]
 
     validation_reports = load_validation_hash_reports(repo, ef5_seed_dirs)
-
-    git_compare = compare_git_blob_across_refs(repo, tracked_paths, ef4_base_ref, ef5_branch_ref)
-
-    raw_index_path = repo / "results/RAW_DATA_INDEX.json"
-    raw_index_entries = []
-    if raw_index_path.exists():
-        idx = json.loads(raw_index_path.read_text())
-        for entry in idx.get("entries", []):
-            rel = entry.get("relative_path", "")
-            if "revision_phase4" in rel and "factorial_raw" in rel:
-                disk = repo / rel
-                raw_index_entries.append(
-                    {
-                        "relative_path": rel,
-                        "index_sha256": entry.get("sha256"),
-                        "disk_sha256": file_sha256(disk),
-                        "match": entry.get("sha256") == file_sha256(disk) if disk.exists() else False,
-                    }
-                )
-
-    per_seed_pass = all(
-        v.get("hash_integrity_check_pass") is True
-        for k, v in validation_reports.items()
-        if k.startswith("seed_")
+    git_compare = compare_git_blob_across_refs(
+        repo, tracked_ef4_paths(), ef4_base_ref, ef5_branch_ref
     )
-    overall = per_seed_pass and git_compare["all_match"]
+    raw_index_audit = audit_untracked_factorial_raw_index(repo, audit_ref=raw_audit_ref)
+
+    tracked_pass = tracked_git_blob_pass(git_compare)
+    untracked_pass = raw_index_audit["pass"]
+    prepost_pass = per_seed_prepost_pass(validation_reports)
+    overall = tracked_pass and untracked_pass and prepost_pass
 
     return {
         "overall_pass": overall,
+        "tracked_git_blob_pass": tracked_pass,
+        "untracked_raw_index_audit_pass": untracked_pass,
+        "per_seed_prepost_pass": prepost_pass,
         "method_note": (
-            "Uses per-seed validation_report pre/post hashes and git blob equality "
-            "between EF-4 base and EF-5 branch; NOT snapshot(self,self)."
+            "Tracked EF-4 artifacts: git blob equality between EF-4 base and current branch. "
+            "Untracked Phase-4 factorial raws: RAW_DATA_INDEX sha256 vs audit branch blob. "
+            "Per-seed EF-5 validation_report pre/post hashes as independent supporting evidence. "
+            "NOT snapshot(self,self); NOT_AVAILABLE never counts as equality."
         ),
         "ef4_base_ref": ef4_base_ref,
         "ef5_branch_ref": ef5_branch_ref,
+        "raw_audit_ref": raw_audit_ref,
         "validation_reports": validation_reports,
         "git_blob_compare": git_compare,
-        "raw_data_index_factorial": raw_index_entries,
+        "raw_data_index_factorial": raw_index_audit,
     }

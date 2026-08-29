@@ -11,15 +11,21 @@ import pytest
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO / "src"))
 
+from extended_fali_ef4_analysis import observed_canonical_balanced_mean  # noqa: E402
 from extended_fali_ef5r_diagnosis import (  # noqa: E402
     TOL,
     endpoint_metrics_from_cells,
     extract_cell_state,
     classify_diagnosis,
     informative_label_clarification_md,
+    io_semantic_audit,
     summarize_damage_by_pattern,
 )
-from historical_integrity_audit import compare_git_blob_across_refs  # noqa: E402
+from historical_integrity_audit import (  # noqa: E402
+    audit_ef5_historical_integrity,
+    compare_git_blob_across_refs,
+    tracked_git_blob_pass,
+)
 
 
 def _synthetic_cells(n_ex=2, seed=42):
@@ -164,6 +170,60 @@ def test_historical_audit_not_tautological():
     )
     assert "comparisons" in cmp
     assert cmp["comparisons"][0]["ref_a"] != cmp["comparisons"][0]["ref_b"]
+    assert "all_match" not in cmp
+
+
+def test_balanced_zero_mean_equals_half_pattern_means():
+    rows = []
+    for seed in (42, 1, 8, 22):
+        for tid in range(15):
+            for pat, val in (("BABA", 1.0), ("ABBA", -1.0)):
+                for _ in range(30):
+                    rows.append(
+                        {
+                            "damage_scheme": "zero",
+                            "damage_drop": val + 0.01 * tid,
+                            "seed": seed,
+                            "low_level_template_id": tid,
+                            "pattern_type": pat,
+                        }
+                    )
+    damage_df = pd.DataFrame(rows)
+    pat_df = summarize_damage_by_pattern(damage_df, "zero")
+    baba = float(pat_df[pat_df["pattern_type"] == "BABA"]["exact_balanced_mean"].iloc[0])
+    abba = float(pat_df[pat_df["pattern_type"] == "ABBA"]["exact_balanced_mean"].iloc[0])
+    zero_rows = damage_df[damage_df["damage_scheme"] == "zero"]
+    balanced = observed_canonical_balanced_mean(
+        zero_rows["damage_drop"].values,
+        zero_rows["seed"].values,
+        zero_rows["low_level_template_id"].values,
+        zero_rows["pattern_type"].values,
+    )
+    assert balanced == pytest.approx((baba + abba) / 2)
+    assert balanced != pytest.approx(baba + abba)
+
+
+@pytest.mark.skipif(not (REPO / "results/RAW_DATA_INDEX.json").exists(), reason="needs RAW_DATA_INDEX")
+def test_historical_audit_raw_index_and_tracked_git():
+    audit = audit_ef5_historical_integrity(REPO)
+    assert "tracked_git_blob_pass" in audit
+    assert "untracked_raw_index_audit_pass" in audit
+    assert "per_seed_prepost_pass" in audit
+    assert audit["untracked_raw_index_audit_pass"] is True
+    assert audit["tracked_git_blob_pass"] == tracked_git_blob_pass(audit["git_blob_compare"])
+    assert audit["overall_pass"] == (
+        audit["tracked_git_blob_pass"]
+        and audit["untracked_raw_index_audit_pass"]
+        and audit["per_seed_prepost_pass"]
+    )
+    assert audit["raw_data_index_factorial"]["entries"]
+
+
+def test_io_semantic_audit_distinguishes_position_and_token_identity():
+    audit = io_semantic_audit(REPO)
+    assert audit["position_order_audit"]["status"] == "PASS"
+    assert audit["token_identity_audit"]["direct_per_example_token_id_revalidation"] is False
+    assert audit["token_identity_audit"]["status"] == "INHERITED"
 
 
 @pytest.mark.skipif(not (REPO / "results/extended_fali/ef5_ablation_robustness").exists(), reason="needs EF-5 results")

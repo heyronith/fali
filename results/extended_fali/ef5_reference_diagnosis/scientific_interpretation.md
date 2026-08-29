@@ -4,7 +4,7 @@
 Under informative matched-mean and matched-resample schemes, all four frozen channels remained **ROBUST_SAME** in EF-5. EF-5R does not alter that verdict.
 
 ## 2. Task-performance effect by scheme
-- Zero reference balanced damage_drop: -0.6377 (masking pattern split).
+- Zero reference balanced damage_drop: -0.3188253873 (exact balanced estimator; not BABA+ABBA sum).
 - Zero BABA: +0.4696; zero ABBA: -1.1072.
 - Matched mean/resample: positive balanced damage_drop (performance-degrading).
 

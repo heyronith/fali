@@ -31,12 +31,21 @@
   },
   "io_semantic_audit": {
     "status": "PASS",
-    "examples_checked": 3600,
-    "failures": [],
-    "n_failures": 0,
-    "note": "Position ordering from frozen Phase-4 metadata; token-id audit deferred to dataset generation validation."
+    "position_order_audit": {
+      "status": "PASS",
+      "method": "direct check over frozen Phase-4 dataset_metadata rows",
+      "examples_checked": 3600,
+      "failures": [],
+      "n_failures": 0
+    },
+    "token_identity_audit": {
+      "status": "INHERITED",
+      "method": "StandardIOIDataset generation validation + exact EF-4 cohort alignment (io_token_id / s_token_id not revalidated per example in EF-5R)",
+      "direct_per_example_token_id_revalidation": false
+    }
   },
   "diagnosis_category": "GENUINE_ZERO_HETEROGENEITY",
+  "zero_balanced_mean": -0.3188253872924381,
   "zero_baba_balanced_mean": 0.4695530250337389,
   "zero_abba_balanced_mean": -1.107203799618615,
   "zero_baba_minus_abba": 1.576756824652354,

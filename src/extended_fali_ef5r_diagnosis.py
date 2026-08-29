@@ -455,12 +455,24 @@ def io_semantic_audit(repo: Path) -> Dict:
                     failures.append(f"seed={seed} ex={row['example_idx']} ABBA order fail")
             else:
                 failures.append(f"unknown pattern {pat}")
+    position_pass = not failures
     return {
-        "status": "PASS" if not failures else "FAIL",
-        "examples_checked": checked,
-        "failures": failures[:20],
-        "n_failures": len(failures),
-        "note": "Position ordering from frozen Phase-4 metadata; token-id audit deferred to dataset generation validation.",
+        "status": "PASS" if position_pass else "FAIL",
+        "position_order_audit": {
+            "status": "PASS" if position_pass else "FAIL",
+            "method": "direct check over frozen Phase-4 dataset_metadata rows",
+            "examples_checked": checked,
+            "failures": failures[:20],
+            "n_failures": len(failures),
+        },
+        "token_identity_audit": {
+            "status": "INHERITED",
+            "method": (
+                "StandardIOIDataset generation validation + exact EF-4 cohort alignment "
+                "(io_token_id / s_token_id not revalidated per example in EF-5R)"
+            ),
+            "direct_per_example_token_id_revalidation": False,
+        },
     }
 
 
@@ -563,9 +575,16 @@ def run_diagnosis(repo: Path, out_dir: Path) -> Dict:
     integrity = audit_ef5_historical_integrity(repo, ef4_base_ref=EF4_BASE_REF, ef5_branch_ref="HEAD")
 
     category = classify_diagnosis(recon, damage_by_pattern)
+    zero_rows = damage_df[damage_df["damage_scheme"] == "zero"]
     zero_pat = damage_by_pattern[damage_by_pattern["scheme"] == "zero"]
     baba_mean = float(zero_pat[zero_pat["pattern_type"] == "BABA"]["exact_balanced_mean"].iloc[0])
     abba_mean = float(zero_pat[zero_pat["pattern_type"] == "ABBA"]["exact_balanced_mean"].iloc[0])
+    zero_balanced_mean = observed_canonical_balanced_mean(
+        zero_rows["damage_drop"].values,
+        zero_rows["seed"].values,
+        zero_rows["low_level_template_id"].values,
+        zero_rows["pattern_type"].values,
+    )
 
     template_pairs = damage_by_template[
         (damage_by_template["scheme"] == "zero") & (damage_by_template["pattern_type"] == "PAIR")
@@ -580,6 +599,7 @@ def run_diagnosis(repo: Path, out_dir: Path) -> Dict:
         "damage_drop_field_consistency": drop_check,
         "io_semantic_audit": io_audit,
         "diagnosis_category": category,
+        "zero_balanced_mean": zero_balanced_mean,
         "zero_baba_balanced_mean": baba_mean,
         "zero_abba_balanced_mean": abba_mean,
         "zero_baba_minus_abba": baba_mean - abba_mean,
@@ -601,7 +621,8 @@ def run_diagnosis(repo: Path, out_dir: Path) -> Dict:
         "remained **ROBUST_SAME** in EF-5. EF-5R does not alter that verdict.",
         "",
         "## 2. Task-performance effect by scheme",
-        f"- Zero reference balanced damage_drop: {baba_mean + abba_mean:.4f} (masking pattern split).",
+        f"- Zero reference balanced damage_drop: {zero_balanced_mean:.10f} "
+        "(exact balanced estimator; not BABA+ABBA sum).",
         f"- Zero BABA: {baba_mean:+.4f}; zero ABBA: {abba_mean:+.4f}.",
         "- Matched mean/resample: positive balanced damage_drop (performance-degrading).",
         "",
