@@ -303,3 +303,36 @@ results/extended_fali/ef5_ablation_robustness/
 ```
 
 Raw cells on `audit/extended-fali-ef5-raw` (private).
+
+---
+
+## G. EF-6 — Pythia-160M induction transfer (frozen before execution)
+
+**Purpose:** One authorized cross-setting generalization test. After EF-5R/EF-5R2
+established genuine zero-reference heterogeneity (not implementation error) and
+matched-scheme fine-channel robustness, test whether fine-score organization
+(phi_T > 0, phi_R < 0) transfers to repeated-token induction in Pythia-160M.
+
+**Scope:**
+- Model: `EleutherAI/pythia-160m` (FP32, Modal L4)
+- Task: synthetic repeated-token induction (no natural language)
+- Discovery: seed 42, 384 examples (128 × offsets 8/16/24)
+- Confirmation: seeds 1, 8, 22 (384 examples/seed)
+- Frozen head-pair selection before confirmation Extended-FALI
+
+**Preregistration:** `docs/EF6_PYTHIA_INDUCTION_TRANSFER_PLAN.md`
+
+**EF-5 status unchanged:** EF5_ABLATION_GATE = FAIL (not reinterpreted).
+
+### Frozen gates
+
+G0–G4 confirmatory; EF6_GATE PASS iff all five confirm. PARTIAL iff G0–G2 plus
+exactly one of G3/G4. DistilGPT2 not in planned scientific path.
+
+### Deliverables
+
+```
+results/extended_fali/ef6_pythia_induction/
+```
+
+Raw cells on `audit/extended-fali-ef6-raw` (private).
