@@ -305,6 +305,7 @@ def run_discovery_pair_selection(
     dataset: InductionDataset,
     device: str,
     attn_df: pd.DataFrame,
+    intact_df: pd.DataFrame,
 ) -> Tuple[Optional[PairCandidate], pd.DataFrame, List[PairCandidate], int]:
     """Discovery pair selection without phi_*."""
     offsets = dataset.metadata["query_offset"].values
@@ -313,7 +314,6 @@ def run_discovery_pair_selection(
         attn_heads[(int(layer), int(head))] = float(grp["clean_induction_attention"].mean())
 
     candidate_heads = [h for h, v in attn_heads.items() if v >= ATTN_THRESHOLD]
-    intact_df = compute_head_effect(model, dataset, device, candidate_heads)
     pair_rows: List[PairCandidate] = []
     pairs_evaluated = 0
 
@@ -350,9 +350,15 @@ def run_discovery_pair_selection(
         cond_df = compute_head_effect(model, dataset, device, later_heads, primary=primary)
         for (cl, ch), grp in cond_df.groupby(["layer", "head"]):
             pairs_evaluated += 1
-            cond_vals = grp["effect"].values
-            intact_sub = intact_df[(intact_df.layer == cl) & (intact_df.head == ch)]
-            intact_vals = intact_sub["effect"].values
+            cl_int, ch_int = int(cl), int(ch)
+            merged = grp.merge(
+                intact_df[(intact_df.layer == cl_int) & (intact_df.head == ch_int)][
+                    ["example_idx", "effect"]
+                ].rename(columns={"effect": "intact_effect"}),
+                on="example_idx",
+            )
+            cond_vals = merged["effect"].values
+            intact_vals = merged["intact_effect"].values
             gain_vals = cond_vals - intact_vals
             cond_boot = bootstrap_offset_balanced(
                 cond_vals, offsets, scope=f"cond_{pl}_{ph}_{cl}_{ch}", metric="conditional"
@@ -677,7 +683,9 @@ def run_ef6_discovery(cfg: EF6RunConfig) -> Dict:
     intact_df = compute_head_effect(model, dataset, cfg.device, intact_heads)
     intact_df.to_csv(cfg.out_dir / "all_head_intact_effects.csv", index=False)
 
-    selected, pairwise, pair_rows, n_pairs = run_discovery_pair_selection(model, dataset, cfg.device, attn_df)
+    selected, pairwise, pair_rows, n_pairs = run_discovery_pair_selection(
+        model, dataset, cfg.device, attn_df, intact_df
+    )
     pairwise.to_csv(cfg.out_dir / "pairwise_recruitment.csv", index=False)
 
     eligible_primaries = len({(p.primary_layer, p.primary_head) for p in pair_rows if p.eligible})
