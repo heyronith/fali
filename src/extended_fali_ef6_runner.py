@@ -319,24 +319,28 @@ def run_discovery_pair_selection(
 
     primaries = []
     for (pl, ph), grp in intact_df.groupby(["layer", "head"]):
+        pl_i, ph_i = int(pl), int(ph)
+        if attn_heads.get((pl_i, ph_i), 0) < ATTN_THRESHOLD:
+            continue
         vals = grp["effect"].values
-        boot = bootstrap_offset_balanced(vals, offsets, scope=f"intact_{pl}_{ph}", metric="intact")
+        grp_offsets = grp["query_offset"].values
+        boot = bootstrap_offset_balanced(vals, grp_offsets, scope=f"intact_{pl_i}_{ph_i}", metric="intact")
         ci_lo, ci_hi = percentile_ci(boot)
-        off_m = offset_means(vals, offsets)
+        off_m = offset_means(vals, grp_offsets)
         later = any(
-            cl > pl and attn_heads.get((cl, ch), 0) >= ATTN_THRESHOLD
+            cl > pl_i and attn_heads.get((cl, ch), 0) >= ATTN_THRESHOLD
             for cl in range(N_LAYERS)
             for ch in range(N_HEADS)
         )
         ok, _ = primary_eligible(
-            clean_attention=attn_heads.get((int(pl), int(ph)), 0),
+            clean_attention=attn_heads.get((pl_i, ph_i), 0),
             intact_ci_low=ci_lo,
             intact_ci_high=ci_hi,
             offset_intact_means=off_m,
             has_later_attention_head=later,
         )
         if ok:
-            primaries.append((int(pl), int(ph)))
+            primaries.append((pl_i, ph_i))
 
     for primary in primaries:
         pl, ph = primary
@@ -351,25 +355,50 @@ def run_discovery_pair_selection(
         for (cl, ch), grp in cond_df.groupby(["layer", "head"]):
             pairs_evaluated += 1
             cl_int, ch_int = int(cl), int(ch)
+            intact_sub = intact_df[
+                (intact_df["layer"].astype(int) == cl_int) & (intact_df["head"].astype(int) == ch_int)
+            ]
             merged = grp.merge(
-                intact_df[(intact_df.layer == cl_int) & (intact_df.head == ch_int)][
-                    ["example_idx", "effect"]
-                ].rename(columns={"effect": "intact_effect"}),
+                intact_sub[["example_idx", "effect"]].rename(columns={"effect": "intact_effect"}),
                 on="example_idx",
+                how="inner",
             )
+            if len(merged) != len(offsets):
+                pair_rows.append(
+                    PairCandidate(
+                        primary_layer=pl,
+                        primary_head=ph,
+                        candidate_layer=cl_int,
+                        candidate_head=ch_int,
+                        conditional_gain_balanced=float("nan"),
+                        conditional_effect_balanced=float("nan"),
+                        candidate_clean_attention=attn_heads.get((cl_int, ch_int), 0),
+                        primary_intact_effect=observed_offset_balanced_mean(
+                            intact_df[
+                                (intact_df["layer"].astype(int) == pl)
+                                & (intact_df["head"].astype(int) == ph)
+                            ]["effect"].values,
+                            offsets,
+                        ),
+                        eligible=False,
+                        reason="merge_empty",
+                    )
+                )
+                continue
             cond_vals = merged["effect"].values
             intact_vals = merged["intact_effect"].values
+            pair_offsets = merged["query_offset"].values
             gain_vals = cond_vals - intact_vals
             cond_boot = bootstrap_offset_balanced(
-                cond_vals, offsets, scope=f"cond_{pl}_{ph}_{cl}_{ch}", metric="conditional"
+                cond_vals, pair_offsets, scope=f"cond_{pl}_{ph}_{cl}_{ch}", metric="conditional"
             )
             gain_boot = bootstrap_offset_balanced(
-                gain_vals, offsets, scope=f"gain_{pl}_{ph}_{cl}_{ch}", metric="gain"
+                gain_vals, pair_offsets, scope=f"gain_{pl}_{ph}_{cl}_{ch}", metric="gain"
             )
             c_lo, c_hi = percentile_ci(cond_boot)
             g_lo, g_hi = percentile_ci(gain_boot)
-            off_cond = offset_means(cond_vals, offsets)
-            off_gain = offset_means(gain_vals, offsets)
+            off_cond = offset_means(cond_vals, pair_offsets)
+            off_gain = offset_means(gain_vals, pair_offsets)
             elig, reason = candidate_pair_eligible(
                 primary_layer=pl,
                 candidate_layer=int(cl),
@@ -385,8 +414,8 @@ def run_discovery_pair_selection(
                 primary_head=ph,
                 candidate_layer=int(cl),
                 candidate_head=int(ch),
-                conditional_gain_balanced=observed_offset_balanced_mean(gain_vals, offsets),
-                conditional_effect_balanced=observed_offset_balanced_mean(cond_vals, offsets),
+                conditional_gain_balanced=observed_offset_balanced_mean(gain_vals, pair_offsets),
+                conditional_effect_balanced=observed_offset_balanced_mean(cond_vals, pair_offsets),
                 candidate_clean_attention=attn_heads.get((int(cl), int(ch)), 0),
                 primary_intact_effect=observed_offset_balanced_mean(
                     intact_df[(intact_df.layer == pl) & (intact_df.head == ph)]["effect"].values,
