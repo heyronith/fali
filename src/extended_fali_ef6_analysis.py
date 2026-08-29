@@ -213,12 +213,33 @@ def _aggregate_offset_means(values, seed_ids, offsets) -> Dict[int, float]:
     return out
 
 
-def evaluate_phi_gate(
-    name: str,
-    values: np.ndarray,
+def phi_score_share_components(
+    phi_t: np.ndarray,
+    phi_r: np.ndarray,
+    phi_o: np.ndarray,
     seed_ids: np.ndarray,
     offsets: np.ndarray,
-    phi_score_values: np.ndarray,
+) -> Tuple[float, float, float, float, float, float]:
+    """Shared confirmation-balanced phi_T/R/O means and magnitude shares for G3/G4."""
+    mean_t = observed_confirmation_balanced_mean(phi_t, seed_ids, offsets)
+    mean_r = observed_confirmation_balanced_mean(phi_r, seed_ids, offsets)
+    mean_o = observed_confirmation_balanced_mean(phi_o, seed_ids, offsets)
+    score_abs_total = abs(mean_t) + abs(mean_r) + abs(mean_o)
+    if score_abs_total >= 1e-6:
+        g3_share = abs(mean_t) / score_abs_total
+        g4_share = abs(mean_r) / score_abs_total
+    else:
+        g3_share = 0.0
+        g4_share = 0.0
+    return mean_t, mean_r, mean_o, score_abs_total, g3_share, g4_share
+
+
+def evaluate_phi_gate(
+    name: str,
+    channel_values: np.ndarray,
+    seed_ids: np.ndarray,
+    offsets: np.ndarray,
+    phi_t_values: np.ndarray,
     phi_r_values: np.ndarray,
     phi_o_values: np.ndarray,
     *,
@@ -227,22 +248,24 @@ def evaluate_phi_gate(
 ) -> GateResult:
     base = evaluate_scalar_gate(
         name,
-        values,
+        channel_values,
         seed_ids,
         offsets,
         discovery=False,
         positive=positive,
         scope=scope,
     )
-    mt = abs(float(np.mean(values)))
-    mr = abs(float(np.mean(phi_r_values)))
-    mo = abs(float(np.mean(phi_o_values)))
-    score_abs = mt + mr + mo
-    share_num = mt if positive else mr
-    share = share_num / score_abs if score_abs >= 1e-6 else 0.0
-    mag_ok = score_abs >= 1e-6 and share >= PHI_SHARE_THRESHOLD
+    _, _, _, score_abs_total, g3_share, g4_share = phi_score_share_components(
+        phi_t_values,
+        phi_r_values,
+        phi_o_values,
+        seed_ids,
+        offsets,
+    )
+    share = g3_share if positive else g4_share
+    mag_ok = score_abs_total >= 1e-6 and share >= PHI_SHARE_THRESHOLD
     status = "CONFIRMED" if base.status == "CONFIRMED" and mag_ok else "NOT_CONFIRMED"
-    note = f"share={share:.4f}; score_abs_total={score_abs:.6f}"
+    note = f"share={share:.4f}; score_abs_total={score_abs_total:.6f}"
     return GateResult(
         name=name,
         status=status,
@@ -441,25 +464,28 @@ def run_ef6_aggregate(repo: Path, aggregate_dir: Path) -> Dict:
     )
     g2_status = "CONFIRMED" if g2_ce.status == "CONFIRMED" and g2_cg.status == "CONFIRMED" else "NOT_CONFIRMED"
 
+    phi_t = attr["phi_T"].values
+    phi_r = attr["phi_R"].values
+    phi_o = attr["phi_O"].values
     g3 = evaluate_phi_gate(
         "G3_phi_T",
-        attr["phi_T"].values,
+        phi_t,
         seeds,
         offsets,
-        attr["Phi_SCORE"].values,
-        attr["phi_R"].values,
-        attr["phi_O"].values,
+        phi_t,
+        phi_r,
+        phi_o,
         positive=True,
         scope="g3",
     )
     g4 = evaluate_phi_gate(
         "G4_phi_R",
-        attr["phi_R"].values,
+        phi_r,
         seeds,
         offsets,
-        attr["Phi_SCORE"].values,
-        attr["phi_R"].values,
-        attr["phi_O"].values,
+        phi_t,
+        phi_r,
+        phi_o,
         positive=False,
         scope="g4",
     )
@@ -482,7 +508,7 @@ def run_ef6_aggregate(repo: Path, aggregate_dir: Path) -> Dict:
         "G3": g3.__dict__,
         "G4": g4.__dict__,
         "phi_O_descriptive": {
-            "mean": float(attr["phi_O"].mean()),
+            "mean": observed_confirmation_balanced_mean(phi_o, seeds, offsets),
             "note": "exploratory only — not confirmatory",
         },
     }
@@ -522,16 +548,24 @@ def run_ef6_aggregate(repo: Path, aggregate_dir: Path) -> Dict:
     pd.DataFrame(boot_rows).to_csv(aggregate_dir / "bootstrap_ci.csv", index=False)
     pd.concat(beh_frames, ignore_index=True).to_csv(aggregate_dir / "behavior_results.csv", index=False)
 
+    phi_o_balanced = observed_confirmation_balanced_mean(phi_o, seeds, offsets)
+    gate_labels = {
+        "G0": "held-out induction advantage",
+        "G1": "primary removal / primary_drop",
+        "G2": "conditional recruitment",
+        "G3": "phi_T fine-score channel",
+        "G4": "phi_R fine-score channel",
+    }
     summary_lines = [
         "# EF-6 Pythia induction transfer — scientific summary",
         "",
         f"**EF6_GATE:** {ef6_gate_status}",
         "",
         "## Confirmatory gates",
-        *[f"- {k}: {v}" for k, v in gates.items()],
+        *[f"- {k} ({gate_labels[k]}): {v}" for k, v in gates.items()],
         "",
         "## phi_O (exploratory only)",
-        f"Mean phi_O = {float(attr['phi_O'].mean()):.6f} (not confirmatory).",
+        f"Balanced mean phi_O = {phi_o_balanced:.6f} (not confirmatory).",
         "",
         "Do not claim universal mechanism or cross-architecture universality.",
     ]

@@ -106,10 +106,10 @@
       "16": 0.2225280227024389,
       "24": 0.07467305774120749
     },
-    "rule_notes": "95% CI + seed + offset means; share=0.4994; score_abs_total=0.235870"
+    "rule_notes": "95% CI + seed + offset means; share=0.4500; score_abs_total=0.261807"
   },
   "phi_O_descriptive": {
-    "mean": -0.00026964753412335213,
+    "mean": -0.0002696475341233522,
     "note": "exploratory only \u2014 not confirmatory"
   }
 }

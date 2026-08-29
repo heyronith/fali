@@ -24,6 +24,7 @@ from extended_fali_ef6_analysis import (  # noqa: E402
     evaluate_phi_gate,
     observed_confirmation_balanced_mean,
     observed_offset_balanced_mean,
+    phi_score_share_components,
     primary_eligible,
     select_head_pair,
 )
@@ -222,14 +223,94 @@ def test_ef6_gate_pass_and_fail():
 
 def test_g3_share_rule():
     n = 384 * 3
-    values = np.ones(n)
-    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
-    offsets = np.tile(QUERY_OFFSETS, 384)
-    phi_score = np.full(n, 0.01)
+    phi_t = np.ones(n)
     phi_r = np.full(n, -0.01)
     phi_o = np.zeros(n)
-    g3 = evaluate_phi_gate("G3", values, seeds, offsets, phi_score, phi_r, phi_o, positive=True, scope="g3t")
+    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
+    offsets = np.tile(QUERY_OFFSETS, 384)
+    g3 = evaluate_phi_gate(
+        "G3",
+        phi_t,
+        seeds,
+        offsets,
+        phi_t,
+        phi_r,
+        phi_o,
+        positive=True,
+        scope="g3t",
+    )
     assert g3.status == "CONFIRMED"
+
+
+def test_phi_g3_g4_share_same_denominator():
+    n = 384 * 3
+    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
+    offsets = np.tile(QUERY_OFFSETS, 384)
+    phi_t = np.full(n, 0.2)
+    phi_r = np.full(n, -0.15)
+    phi_o = np.full(n, 0.05)
+    _, _, _, score_abs, g3_share, g4_share = phi_score_share_components(phi_t, phi_r, phi_o, seeds, offsets)
+    assert score_abs == pytest.approx(0.4)
+    assert g3_share == pytest.approx(0.5)
+    assert g4_share == pytest.approx(0.375)
+    g3 = evaluate_phi_gate("G3", phi_t, seeds, offsets, phi_t, phi_r, phi_o, positive=True, scope="den")
+    g4 = evaluate_phi_gate("G4", phi_r, seeds, offsets, phi_t, phi_r, phi_o, positive=False, scope="den")
+    g3_score = float(g3.rule_notes.split("score_abs_total=")[1])
+    g4_score = float(g4.rule_notes.split("score_abs_total=")[1])
+    assert g3_score == pytest.approx(g4_score)
+    assert g3_score == pytest.approx(score_abs)
+
+
+def test_phi_share_no_channel_double_counting():
+    n = 384 * 3
+    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
+    offsets = np.tile(QUERY_OFFSETS, 384)
+    phi_t = np.zeros(n)
+    phi_r = np.full(n, 0.12)
+    phi_o = np.full(n, 0.03)
+    _, _, _, score_abs, g3_share, g4_share = phi_score_share_components(phi_t, phi_r, phi_o, seeds, offsets)
+    assert score_abs == pytest.approx(0.15)
+    assert g3_share == pytest.approx(0.0)
+    assert g4_share == pytest.approx(0.8)
+    g4 = evaluate_phi_gate("G4", phi_r, seeds, offsets, phi_t, phi_r, phi_o, positive=False, scope="dc")
+    g4_score = float(g4.rule_notes.split("score_abs_total=")[1])
+    assert g4_score == pytest.approx(0.15)
+
+
+def test_phi_share_uses_balanced_estimator_for_denominator():
+    n = 384 * 3
+    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
+    offsets = np.tile(QUERY_OFFSETS, 384)
+    phi_t = np.full(n, -0.14373658294868089)
+    phi_r = np.full(n, 0.1178003300768512)
+    phi_o = np.full(n, -0.00026964753412335213)
+    mean_t = observed_confirmation_balanced_mean(phi_t, seeds, offsets)
+    mean_r = observed_confirmation_balanced_mean(phi_r, seeds, offsets)
+    mean_o = observed_confirmation_balanced_mean(phi_o, seeds, offsets)
+    expected_total = abs(mean_t) + abs(mean_r) + abs(mean_o)
+    _, _, _, score_abs, g3_share, g4_share = phi_score_share_components(phi_t, phi_r, phi_o, seeds, offsets)
+    assert score_abs == pytest.approx(expected_total)
+    assert score_abs == pytest.approx(0.261807, rel=1e-4)
+    assert g3_share == pytest.approx(0.549, rel=1e-3)
+    assert g4_share == pytest.approx(0.450, rel=1e-3)
+    naive_g4_denominator = abs(float(np.mean(phi_r))) * 2 + abs(float(np.mean(phi_o)))
+    assert score_abs != pytest.approx(naive_g4_denominator)
+
+
+def test_phi_wrong_direction_fails_despite_large_share():
+    n = 384 * 3
+    seeds = np.array([1] * 384 + [8] * 384 + [22] * 384)
+    offsets = np.tile(QUERY_OFFSETS, 384)
+    phi_t = np.full(n, -0.5)
+    phi_r = np.full(n, 0.01)
+    phi_o = np.zeros(n)
+    g3 = evaluate_phi_gate("G3", phi_t, seeds, offsets, phi_t, phi_r, phi_o, positive=True, scope="dir")
+    assert g3.status == "NOT_CONFIRMED"
+    assert "share=" in g3.rule_notes
+    phi_t2 = np.full(n, 0.01)
+    phi_r2 = np.full(n, 0.5)
+    g4 = evaluate_phi_gate("G4", phi_r2, seeds, offsets, phi_t2, phi_r2, phi_o, positive=False, scope="dir")
+    assert g4.status == "NOT_CONFIRMED"
 
 
 def test_discovery_seed_not_in_confirmation_constants():
