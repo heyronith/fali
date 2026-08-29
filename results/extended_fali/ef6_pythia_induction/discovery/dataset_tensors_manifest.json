@@ -1,0 +1,5 @@
+{
+  "repeated_tokens_sha256": "25e0e2342bd5d774a2c1b7d07584568ee9701c05d174a090ae21e0faa201f7fc",
+  "batch_size": 384,
+  "max_seq_len": 57
+}

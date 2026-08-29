@@ -93,16 +93,13 @@ def run_discovery_remote() -> bytes:
     out = Path("/root/project/results/extended_fali/ef6_pythia_induction/discovery")
     _run_script("extended_fali_ef6_discovery.py", ["--output-dir", str(out)])
     root = Path("/root/project/results/extended_fali/ef6_pythia_induction")
-    buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
-        for sub in ("discovery", "aggregate", "model_revision.json"):
+        for sub in ("discovery", "aggregate"):
             p = root / sub
-            if p.is_file():
-                zf.write(p, arcname=str(p.relative_to(root.parent.parent.parent)))
-            elif p.is_dir():
+            if p.is_dir():
                 for fp in sorted(p.rglob("*")):
                     if fp.is_file():
-                        zf.write(fp, arcname=str(fp.relative_to(root.parent.parent.parent)))
+                        zf.write(fp, arcname=str(fp.relative_to(root)))
     return buf.getvalue()
 
 
@@ -138,9 +135,10 @@ def smoke():
 @app.local_entrypoint()
 def discovery():
     payload = run_discovery_remote.remote()
+    dest = REPO_ROOT / "results/extended_fali/ef6_pythia_induction"
     with zipfile.ZipFile(io.BytesIO(payload), "r") as zf:
-        zf.extractall(REPO_ROOT / "results")
-    print("Discovery complete")
+        zf.extractall(dest)
+    print("Discovery complete ->", dest)
 
 
 @app.local_entrypoint()

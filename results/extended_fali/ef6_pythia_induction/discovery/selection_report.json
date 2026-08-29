@@ -1,0 +1,37 @@
+{
+  "dataset_sha256": "25e0e2342bd5d774a2c1b7d07584568ee9701c05d174a090ae21e0faa201f7fc",
+  "G0_discovery": {
+    "name": "G0_discovery",
+    "status": "CONFIRMED",
+    "point": 14.023384845790133,
+    "ci_low": 11.5522901027809,
+    "ci_high": 17.0989562236522,
+    "seed_means": {
+      "42": 14.023384845790133
+    },
+    "offset_means": {
+      "8": 11.030547099726391,
+      "16": 18.079672340099933,
+      "24": 12.959935097544076
+    },
+    "rule_notes": "95% CI + seed + offset means"
+  },
+  "fine_attributions_used_for_selection": false,
+  "pairs_evaluated": 241,
+  "eligible_pairs": 238,
+  "eligible_primary_count": 19,
+  "selected_primary": {
+    "layer": 5,
+    "head": 0,
+    "head_name": "L5H0",
+    "intact_effect": 1.2873377851101395
+  },
+  "selected_candidate": {
+    "layer": 8,
+    "head": 2,
+    "head_name": "L8H2",
+    "conditional_gain": 1.6844519775331719,
+    "conditional_effect": 1.804489853274087,
+    "clean_attention": 0.9118604086738079
+  }
+}

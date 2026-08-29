@@ -1,0 +1,7 @@
+{
+  "phase": "discovery",
+  "seed": 42,
+  "model": "EleutherAI/pythia-160m",
+  "model_revision": "50f5173d932e8e61f858120bcb800b97af589f46",
+  "preregistration_sha": "3a095b4a73b4e82c2c7003dfeb6b64c6a0aeb301"
+}
