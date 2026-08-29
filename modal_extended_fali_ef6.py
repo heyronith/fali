@@ -36,6 +36,14 @@ image = (
     .env({"HF_HOME": "/tmp/hf_cache", "TOKENIZERS_PARALLELISM": "false"})
     .add_local_dir(str(REPO_ROOT / "src"), remote_path="/root/project/src")
     .add_local_dir(str(REPO_ROOT / "experiments"), remote_path="/root/project/experiments")
+    .add_local_file(
+        str(REPO_ROOT / "results/extended_fali/ef6_pythia_induction/aggregate/selection_lock.json"),
+        remote_path="/root/project/results/extended_fali/ef6_pythia_induction/aggregate/selection_lock.json",
+    )
+    .add_local_file(
+        str(REPO_ROOT / "results/extended_fali/ef6_pythia_induction/model_revision.json"),
+        remote_path="/root/project/results/extended_fali/ef6_pythia_induction/model_revision.json",
+    )
 )
 
 app = modal.App(APP_NAME, image=image)
