@@ -1,7 +1,8 @@
 {
   "figure": "Fig4",
   "generating_script": "manuscript/machine_learning/figure_scripts/render_fig4.py",
-  "git_commit": "85f0b986ee41da3678e2d9467f2c77c1e2acadec",
+  "git_commit": "09cd1b651601dc3588aa6107fe1eb65b59d4a5a6",
+  "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
   "source_files": [
     {
       "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
@@ -92,10 +93,10 @@
   },
   "output_dimensions_inches": {
     "width": 6.85,
-    "height": 2.32
+    "height": 2.46
   },
   "output_width_mm": 174.0,
-  "generation_timestamp_utc": "2026-08-29T19:37:16.616651+00:00",
+  "generation_timestamp_utc": "2026-08-29T20:25:13.227880+00:00",
   "plotting_library_versions": {
     "matplotlib": "3.10.9",
     "numpy": "2.2.6",

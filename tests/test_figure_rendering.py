@@ -13,6 +13,7 @@ import pytest
 REPO = Path(__file__).resolve().parents[1]
 SCRIPTS = REPO / "manuscript/machine_learning/figure_scripts"
 FIGURES = REPO / "manuscript/machine_learning/figures"
+FIRST_DRAFT = "09cd1b651601dc3588aa6107fe1eb65b59d4a5a6"
 
 
 @pytest.fixture(scope="module")
@@ -20,7 +21,14 @@ def rendered_figures():
     cmd = [sys.executable, str(SCRIPTS / "render_all.py")]
     proc = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True)
     assert proc.returncode == 0, proc.stdout + proc.stderr
+    assert "UserWarning" not in proc.stderr, proc.stderr
     return FIGURES
+
+
+def _git_show_provenance(stem: str) -> dict:
+    rel = f"manuscript/machine_learning/figures/{stem}_provenance.json"
+    raw = subprocess.check_output(["git", "show", f"{FIRST_DRAFT}:{rel}"], cwd=REPO, text=True)
+    return json.loads(raw)
 
 
 def test_required_source_files_exist():
@@ -42,6 +50,28 @@ def test_scientific_validation():
     assert summary["l10h2"]["phi_R"]["point"] < 0
     assert summary["pythia"]["phi_T"]["point"] < 0
     assert summary["pythia"]["phi_R"]["point"] > 0
+
+
+def test_figure2_partition_schematic():
+    sys.path.insert(0, str(SCRIPTS))
+    from score_partition import build_score_partition, validate_illustrative_partition
+
+    summary = validate_illustrative_partition()
+    grid = build_score_partition()
+    assert summary.n_T == 1
+    assert summary.n_R == summary.q_star == 5
+    assert summary.n_O == 15
+    assert summary.n_mask == 15
+    assert summary.n_valid == 21
+    assert grid[(5, 5)] == "R"
+    assert summary.final_row == ["R", "R", "T", "R", "R", "R"]
+    for q in range(5):
+        for k in range(q + 1):
+            assert grid[(q, k)] == "O"
+    for q in range(6):
+        for k in range(6):
+            if k > q:
+                assert grid[(q, k)] == "MASK"
 
 
 def test_ef4_heads_present():
@@ -67,6 +97,19 @@ def test_no_hardcoded_locked_values_in_render_scripts():
             assert re.search(pattern, text) is None, f"{script.name} contains locked value {pattern}"
 
 
+def test_fig5_has_no_unicode_checkmarks():
+    text = (SCRIPTS / "render_fig5.py").read_text()
+    assert "✓" not in text
+    assert "✗" not in text
+
+
+def test_empirical_extracted_values_unchanged(rendered_figures):
+    for stem in ("Fig3", "Fig4", "Fig5"):
+        current = json.loads((rendered_figures / f"{stem}_provenance.json").read_text())
+        baseline = _git_show_provenance(stem)
+        assert current["extracted_values"] == baseline["extracted_values"], stem
+
+
 def test_figure_outputs_and_provenance(rendered_figures):
     for n in range(1, 6):
         stem = f"Fig{n}"
@@ -79,13 +122,15 @@ def test_figure_outputs_and_provenance(rendered_figures):
         doc = json.loads(prov.read_text())
         assert doc["figure"] == stem
         assert "git_commit" in doc
-        assert "plotting_library_versions" in doc
+        if n >= 2:
+            assert doc.get("revision_note") == "visual/scientific-diagram correction only; no empirical recomputation"
 
 
-def test_contact_sheet(rendered_figures):
-    path = rendered_figures / "figures_contact_sheet.png"
-    assert path.exists()
-    assert path.stat().st_size > 0
+def test_contact_sheets(rendered_figures):
+    for name in ("figures_contact_sheet.png", "figures_contact_sheet_printsize.png"):
+        path = rendered_figures / name
+        assert path.exists()
+        assert path.stat().st_size > 0
 
 
 def test_captions_tex_exists():
@@ -94,6 +139,14 @@ def test_captions_tex_exists():
     text = path.read_text()
     assert text.count("\\caption") == 5
     assert "\\label{fig:" in text
+
+
+def test_fig2_provenance_partition_counts(rendered_figures):
+    doc = json.loads((rendered_figures / "Fig2_provenance.json").read_text())
+    counts = doc["extracted_values"]["partition_counts"]
+    assert counts == {"T": 1, "R": 5, "O": 15, "MASK": 15}
+    assert doc["extracted_values"]["q_star_q_star_player"] == "R"
+
 
 def test_fig3_provenance_sources(rendered_figures):
     doc = json.loads((rendered_figures / "Fig3_provenance.json").read_text())

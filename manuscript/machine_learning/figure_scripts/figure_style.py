@@ -111,6 +111,7 @@ def save_figure(
     source_files: Sequence[Path],
     extracted_values: Dict[str, Any],
     tight: bool = True,
+    revision_note: Optional[str] = None,
 ) -> Dict[str, Any]:
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     if tight:
@@ -131,6 +132,7 @@ def save_figure(
         "figure": stem,
         "generating_script": str(script_path.relative_to(REPO_ROOT)),
         "git_commit": git_commit(),
+        "revision_note": revision_note,
         "source_files": [
             {
                 "path": str(p.relative_to(REPO_ROOT)),

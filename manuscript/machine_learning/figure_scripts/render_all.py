@@ -24,8 +24,9 @@ def main() -> int:
     render_fig3()
     render_fig4()
     render_fig5()
-    contact = render_contact()
+    contact, printsize = render_contact()
     print(f"Contact sheet: {contact}")
+    print(f"Print-size contact sheet: {printsize}")
     return 0
 
 
