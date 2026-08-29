@@ -76,9 +76,13 @@ def generate_induction_metadata(
     rng = np.random.default_rng(seed)
     rows: List[Dict] = []
     example_idx = 0
-    n_examples = smoke_n if smoke_deterministic else examples_per_offset
-    for offset in offsets:
-        for _ in range(n_examples):
+    if smoke_deterministic:
+        offset_cycle = [offsets[i % len(offsets)] for i in range(smoke_n)]
+        iter_offsets = [(off, 1) for off in offset_cycle]
+    else:
+        iter_offsets = [(off, examples_per_offset) for off in offsets]
+    for offset, n_ex in iter_offsets:
+        for _ in range(n_ex):
             ids = rng.choice(
                 np.arange(TOKEN_POOL_LOW, TOKEN_POOL_HIGH, dtype=np.int64),
                 size=64,
