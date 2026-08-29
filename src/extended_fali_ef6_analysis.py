@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 
 from extended_fali_induction import CONFIRMATION_SEEDS, DISCOVERY_SEED, QUERY_OFFSETS
+from historical_integrity_audit import audit_ef5_historical_integrity
 from revision_stats import stable_sha256_seed
 
 N_BOOTSTRAP = 10_000

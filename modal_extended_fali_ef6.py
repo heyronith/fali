@@ -101,6 +101,7 @@ def run_discovery_remote() -> bytes:
     out = Path("/root/project/results/extended_fali/ef6_pythia_induction/discovery")
     _run_script("extended_fali_ef6_discovery.py", ["--output-dir", str(out)])
     root = Path("/root/project/results/extended_fali/ef6_pythia_induction")
+    buf = io.BytesIO()
     with zipfile.ZipFile(buf, "w", compression=zipfile.ZIP_DEFLATED) as zf:
         for sub in ("discovery", "aggregate"):
             p = root / sub
