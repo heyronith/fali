@@ -488,6 +488,77 @@ def run_ef6_aggregate(repo: Path, aggregate_dir: Path) -> Dict:
     (aggregate_dir / "ef6_gate.json").write_text(
         json.dumps({"EF6_GATE": ef6_gate_status, "gates": gates}, indent=2) + "\n"
     )
+
+    metrics = {
+        "induction_advantage": behavior["induction_advantage"].values,
+        "primary_drop": behavior["primary_drop"].values,
+        "conditional_effect": attr["conditional_effect"].values,
+        "conditional_gain": attr["conditional_gain"].values,
+        "phi_T": attr["phi_T"].values,
+        "phi_R": attr["phi_R"].values,
+        "phi_O": attr["phi_O"].values,
+        "phi_V": attr["phi_V"].values,
+        "phi_C": attr["phi_C"].values,
+    }
+    exact_rows = []
+    seed_rows = []
+    offset_rows = []
+    boot_rows = []
+    for name, vals in metrics.items():
+        point = observed_confirmation_balanced_mean(vals, seeds, offsets)
+        boot = bootstrap_confirmation_balanced(vals, seeds, offsets, scope=f"agg_{name}", metric=name)
+        lo, hi = percentile_ci(boot)
+        exact_rows.append({"metric": name, "exact_balanced_mean": point, "ci_low": lo, "ci_high": hi})
+        boot_rows.append({"metric": name, "ci_low": lo, "ci_high": hi, "point_observed": point})
+        for s, sm in seed_means(vals, seeds, offsets).items():
+            seed_rows.append({"metric": name, "seed": s, "mean": sm})
+        for off, om in _aggregate_offset_means(vals, seeds, offsets).items():
+            offset_rows.append({"metric": name, "query_offset": off, "mean": om})
+    pd.DataFrame(exact_rows).to_csv(aggregate_dir / "exact_means.csv", index=False)
+    pd.DataFrame(seed_rows).to_csv(aggregate_dir / "seed_means.csv", index=False)
+    pd.DataFrame(offset_rows).to_csv(aggregate_dir / "offset_means.csv", index=False)
+    pd.DataFrame(boot_rows).to_csv(aggregate_dir / "bootstrap_ci.csv", index=False)
+    pd.concat(beh_frames, ignore_index=True).to_csv(aggregate_dir / "behavior_results.csv", index=False)
+
+    summary_lines = [
+        "# EF-6 Pythia induction transfer — scientific summary",
+        "",
+        f"**EF6_GATE:** {ef6_gate_status}",
+        "",
+        "## Confirmatory gates",
+        *[f"- {k}: {v}" for k, v in gates.items()],
+        "",
+        "## phi_O (exploratory only)",
+        f"Mean phi_O = {float(attr['phi_O'].mean()):.6f} (not confirmatory).",
+        "",
+        "Do not claim universal mechanism or cross-architecture universality.",
+    ]
+    (aggregate_dir / "scientific_summary.md").write_text("\n".join(summary_lines) + "\n")
+    (aggregate_dir / "analysis_config.json").write_text(
+        json.dumps(
+            {
+                "phase": "EF-6",
+                "model": "EleutherAI/pythia-160m",
+                "point_estimate": "observed_offset_balanced_confirmation_mean",
+                "bootstrap_draws": N_BOOTSTRAP,
+                "confirmation_seeds": list(CONFIRMATION_SEEDS),
+            },
+            indent=2,
+        )
+        + "\n"
+    )
+    val_pass = True
+    for s in CONFIRMATION_SEEDS:
+        vp = ef6_root / f"confirmation/seed_{s}/validation_report.json"
+        if not vp.exists():
+            val_pass = False
+            break
+        if not json.loads(vp.read_text()).get("overall_pass", False):
+            val_pass = False
+    (aggregate_dir / "validation_summary.json").write_text(
+        json.dumps({"overall_pass": val_pass}, indent=2) + "\n"
+    )
+
     integrity = audit_ef5_historical_integrity(repo)
     (aggregate_dir / "historical_integrity.json").write_text(json.dumps(integrity, indent=2) + "\n")
     return {"EF6_GATE": ef6_gate_status, "gates": gates, "integrity": integrity}
