@@ -317,6 +317,12 @@ def run_discovery_pair_selection(
     pair_rows: List[PairCandidate] = []
     pairs_evaluated = 0
 
+    def primary_intact_balanced(p_layer: int, p_head: int) -> float:
+        sub = intact_df[
+            (intact_df["layer"].astype(int) == p_layer) & (intact_df["head"].astype(int) == p_head)
+        ]
+        return observed_offset_balanced_mean(sub["effect"].values, sub["query_offset"].values)
+
     primaries = []
     for (pl, ph), grp in intact_df.groupby(["layer", "head"]):
         pl_i, ph_i = int(pl), int(ph)
@@ -373,13 +379,7 @@ def run_discovery_pair_selection(
                         conditional_gain_balanced=float("nan"),
                         conditional_effect_balanced=float("nan"),
                         candidate_clean_attention=attn_heads.get((cl_int, ch_int), 0),
-                        primary_intact_effect=observed_offset_balanced_mean(
-                            intact_df[
-                                (intact_df["layer"].astype(int) == pl)
-                                & (intact_df["head"].astype(int) == ph)
-                            ]["effect"].values,
-                            offsets,
-                        ),
+                        primary_intact_effect=primary_intact_balanced(pl, ph),
                         eligible=False,
                         reason="merge_empty",
                     )
@@ -417,10 +417,7 @@ def run_discovery_pair_selection(
                 conditional_gain_balanced=observed_offset_balanced_mean(gain_vals, pair_offsets),
                 conditional_effect_balanced=observed_offset_balanced_mean(cond_vals, pair_offsets),
                 candidate_clean_attention=attn_heads.get((int(cl), int(ch)), 0),
-                primary_intact_effect=observed_offset_balanced_mean(
-                    intact_df[(intact_df.layer == pl) & (intact_df.head == ph)]["effect"].values,
-                    offsets,
-                ),
+                primary_intact_effect=primary_intact_balanced(pl, ph),
                 eligible=elig,
                 reason=reason,
             )
