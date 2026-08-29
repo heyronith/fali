@@ -59,3 +59,4 @@ results/extended_fali/ef3_two_template/seed_*/cell_raw.csv.gz
 results/extended_fali/ef4_canonical/seed_*/cell_raw.csv.gz
 results/extended_fali/ef5_ablation_robustness/matched_mean/seed_*/cell_raw.csv.gz
 results/extended_fali/ef5_ablation_robustness/matched_resample/seed_*/cell_raw.csv.gz
+results/extended_fali/ef6_pythia_induction/confirmation/seed_*/cell_raw.csv.gz

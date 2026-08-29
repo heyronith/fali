@@ -42,6 +42,8 @@ LARGE_RAW_GLOBS = [
     "extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv",
     "extended_fali/ef4_canonical/seed_*/cell_raw.csv.gz",
     "extended_fali/ef4_canonical/aggregate/attribution_merged_raw.csv",
+    "extended_fali/ef6_pythia_induction/confirmation/seed_*/cell_raw.csv.gz",
+    "extended_fali/ef6_pythia_induction/aggregate/attribution_merged_raw.csv",
 ]
 
 REVISION_SCRIPT_MAP = {
@@ -51,6 +53,7 @@ REVISION_SCRIPT_MAP = {
     "revision_phase4": "experiments/revision_phase4_factorial.py",
     "extended_fali_ef3": "experiments/extended_fali_ef3_full.py",
     "extended_fali_ef4": "experiments/extended_fali_ef4_canonical.py",
+    "extended_fali_ef6": "experiments/extended_fali_ef6_confirm.py",
 }
 
 # Original-FALI raw filename stem -> generating script (exact where known).
@@ -112,6 +115,8 @@ def infer_experiment(rel: str) -> str:
         return "extended_fali_ef3"
     if "extended_fali/ef4_canonical" in rel:
         return "extended_fali_ef4"
+    if "extended_fali/ef6_pythia_induction" in rel:
+        return "extended_fali_ef6"
     for key in REVISION_SCRIPT_MAP:
         if key in rel:
             return key
@@ -137,6 +142,11 @@ def infer_revision_config(rel: str) -> Optional[str]:
     if "extended_fali/ef4_canonical/seed_" in rel:
         seed = m.group(1)
         return f"results/extended_fali/ef4_canonical/seed_{seed}/run_config.json"
+    if rel == "extended_fali/ef6_pythia_induction/aggregate/attribution_merged_raw.csv":
+        return "results/extended_fali/ef6_pythia_induction/aggregate/analysis_config.json"
+    if "extended_fali/ef6_pythia_induction/confirmation/seed_" in rel:
+        seed = m.group(1)
+        return f"results/extended_fali/ef6_pythia_induction/confirmation/seed_{seed}/run_config.json"
     return None
 
 
