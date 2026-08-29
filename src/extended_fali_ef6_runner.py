@@ -473,7 +473,7 @@ def run_extended_fali_confirmation(
 
     for i in range(dataset.batch_size):
         u_table: CellTable = {}
-        for state in enumerate_extended_fali_cells():
+        for _, state in enumerate_extended_fali_cells():
             _, _, z_hybrid = score_pattern_z_pipeline(
                 scores_a, scores_b, v_a, v_b, partition, state
             )
