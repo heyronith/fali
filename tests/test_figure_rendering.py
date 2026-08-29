@@ -133,6 +133,28 @@ def test_contact_sheets(rendered_figures):
         assert path.stat().st_size > 0
 
 
+def test_figure_include_files_exist():
+    for n in range(1, 6):
+        path = FIGURES / f"fig{n}.tex"
+        assert path.exists(), path
+        text = path.read_text()
+        assert f"figures/Fig{n}.pdf" in text
+        assert "\\begin{figure*}" in text
+
+
+def test_manuscript_integrates_all_figures():
+    main = (REPO / "manuscript/machine_learning/main.tex").read_text()
+    method = (REPO / "manuscript/machine_learning/method_validation.tex").read_text()
+    gpt2 = (REPO / "manuscript/machine_learning/gpt2_ioi.tex").read_text()
+    pythia = (REPO / "manuscript/machine_learning/pythia_induction.tex").read_text()
+    assert "\\input{figures/fig1}" in main
+    assert "\\input{figures/fig2}" in main
+    assert "\\input{figures/fig3}" in method
+    assert "\\input{figures/fig4}" in gpt2
+    assert "\\input{figures/fig5}" in pythia
+    assert main.count("\\input{figures/fig") == 2
+
+
 def test_captions_tex_exists():
     path = FIGURES / "captions.tex"
     assert path.exists()

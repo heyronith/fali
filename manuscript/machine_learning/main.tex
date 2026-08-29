@@ -102,7 +102,9 @@ This definition deliberately evaluates the candidate against a zero-candidate ba
 
 The problem begins after a candidate head and a task-relevant attention target have been chosen. They may come from prior circuit analysis, conditional co-ablation, patching, or a task-specific hypothesis. FALI does not search over heads, discover a target edge, or infer a circuit automatically. Its input is a selected head $h$, two model states $A$ and $B$, a scalar task metric $m$, and a target query--key edge (or prespecified target edge set) whose score is meaningful for the task.
 
-The objective is to account for $\Delta_h$ using changes in three architecture-level objects associated with the candidate: its pre-softmax attention scores, its value vectors, and the surrounding computation in which the resulting head output is used. The score tensor is then resolved more finely into the task-target score, rivals in the same query row, and scores at other query positions. This yields a controlled mechanism-discrimination question: under a fixed intervention algebra, which candidate-local or surrounding changes receive credit for the observed change in output-grounded usefulness?
+The objective is to account for $\Delta_h$ using changes in three architecture-level objects associated with the candidate: its pre-softmax attention scores, its value vectors, and the surrounding computation in which the resulting head output is used. The score tensor is then resolved more finely into the task-target score, rivals in the same query row, and scores at other query positions. This yields a controlled mechanism-discrimination question: under a fixed intervention algebra, which candidate-local or surrounding changes receive credit for the observed change in output-grounded usefulness? Figure~\ref{fig:fali-overview} summarizes this distinction.
+
+\input{figures/fig1}
 
 \section{Factorized Attention-Level Intervention}\label{sec:fali}
 
@@ -181,7 +183,9 @@ so that
 \end{equation}
 This endpoint identity is a required implementation invariant, not an approximation in the mathematical definition.
 
-Most mixed cells need not correspond to an activation state encountered during an unmodified forward pass. FALI should therefore be read as an explicit counterfactual/interchange-intervention game. Its attributions are conditional on the chosen endpoint states, target partition, masking semantics, and intervention construction; they are not claims that the model naturally executes five separable causal pathways.
+Most mixed cells need not correspond to an activation state encountered during an unmodified forward pass. FALI should therefore be read as an explicit counterfactual/interchange-intervention game. Its attributions are conditional on the chosen endpoint states, target partition, masking semantics, and intervention construction; they are not claims that the model naturally executes five separable causal pathways. Figure~\ref{fig:fali-game} depicts the 32-cell construction.
+
+\input{figures/fig2}
 
 \subsection{Standard Owen attribution and coarse--fine reconciliation}\label{sec:owen}
 

@@ -1,0 +1,11 @@
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/Fig3.pdf}
+\caption{\textbf{FALI recovers controlled ground truth and satisfies implementation invariants.}
+(a) In five deterministic attention systems where only one of $T$, $R$, $O$, $V$, or $C$ differs between endpoints, the entire endpoint change is assigned to the manipulated factor up to floating-point error.
+Rows are normalized by their own absolute endpoint change for visual comparison; raw $\Delta U$ is annotated.
+(b) A constructed pure $T\times C$ interaction yields an equal Owen split between $T$ and $C$, as analytically expected.
+(c) A randomly initialized two-layer TransformerLens model independently validates score-to-pattern and pattern/value-to-output reconstruction, endpoint identity, batch-safe partitions, candidate-isolation, live-computation leakage checks, and coarse--fine quotient reconciliation.
+These are implementation/ground-truth tests, not evidence that FALI's hybrid factors are unique natural pathways.}
+\label{fig:validation}
+\end{figure*}
