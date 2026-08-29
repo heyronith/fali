@@ -1,0 +1,11 @@
+{
+  "phase": "EF-6",
+  "model": "EleutherAI/pythia-160m",
+  "point_estimate": "observed_offset_balanced_confirmation_mean",
+  "bootstrap_draws": 10000,
+  "confirmation_seeds": [
+    1,
+    8,
+    22
+  ]
+}

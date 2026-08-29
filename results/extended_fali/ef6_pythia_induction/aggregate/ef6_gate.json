@@ -1,0 +1,10 @@
+{
+  "EF6_GATE": "FAIL",
+  "gates": {
+    "G0": "CONFIRMED",
+    "G1": "CONFIRMED",
+    "G2": "CONFIRMED",
+    "G3": "NOT_CONFIRMED",
+    "G4": "NOT_CONFIRMED"
+  }
+}

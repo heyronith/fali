@@ -1,0 +1,18 @@
+{
+  "phase": "confirmation",
+  "seed": 1,
+  "model": "EleutherAI/pythia-160m",
+  "model_revision": "50f5173d932e8e61f858120bcb800b97af589f46",
+  "preregistration_sha": "3a095b4a73b4e82c2c7003dfeb6b64c6a0aeb301",
+  "selection_lock": "/root/project/results/extended_fali/ef6_pythia_induction/aggregate/selection_lock.json",
+  "primary": {
+    "layer": 5,
+    "head": 0,
+    "head_name": "L5H0"
+  },
+  "candidate": {
+    "layer": 8,
+    "head": 2,
+    "head_name": "L8H2"
+  }
+}
