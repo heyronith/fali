@@ -1,0 +1,141 @@
+\documentclass[pdflatex,sn-mathphys-ay]{sn-jnl}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{multirow}
+
+\jyear{2026}
+
+\raggedbottom
+
+\begin{document}
+
+\title[FALI]{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance}
+
+% Replace all author metadata before submission.
+\author*[1]{\fnm{Author} \sur{Name}}\email{author@example.com}
+\affil*[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\city{City}, \country{Country}}}
+
+\abstract{%
+% TARGET: 150--250 words. Draft last, after all claims/results are frozen.
+% Required content: problem; gap; FALI estimand and factorization; validation;
+% GPT-2 IOI result; Pythia induction reversal; bounded conclusion.
+}
+
+\keywords{mechanistic interpretability, causal intervention, transformer circuits, attention heads, conditional importance}
+
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+% Target: ~1.75--2 pages.
+% Arc: conditional importance is known -> mechanism remains unresolved -> FALI ->
+% validation -> GPT-2/Pythia mechanism reversal -> contributions.
+
+\section{Related Work}\label{sec:related}
+
+\subsection{Self-repair and conditional component importance}\label{sec:rw-conditional}
+% Hydra, copy suppression, self-repair, CoAx.
+
+\subsection{Interaction-aware causal attribution}\label{sec:rw-interaction}
+% Activation/path patching, CHG, Curse of Multiple Mediators.
+
+\subsection{Decomposing attention computation}\label{sec:rw-attention}
+% QK/OV, causal attention communication, QK/value decompositions, Owen machinery.
+
+\section{Problem Formulation}\label{sec:problem}
+
+\subsection{Conditional causal usefulness}\label{sec:conditional-usefulness}
+% Define intact state A, perturbed state B, candidate head h, output-grounded
+% usefulness, intact effect, conditional effect, conditional gain.
+
+\subsection{Mechanism-resolution objective}\label{sec:mechanism-objective}
+% State that FALI assumes the candidate head/target edge are already selected.
+
+\section{Factorized Attention-Level Intervention}\label{sec:fali}
+
+\subsection{Architecture-aligned factors}\label{sec:factors}
+% T target score(s); R rival scores; O other structurally valid scores;
+% V value content; C surrounding-network/context.
+
+\subsection{Counterfactual intervention game}\label{sec:game}
+% Define U(T,R,O,V,C) as output-grounded candidate usefulness in the same C context.
+% State explicit off-manifold/counterfactual semantics.
+
+\subsection{Standard Owen attribution and coarse--fine reconciliation}\label{sec:owen}
+% Partition: SCORE={T,R,O}, VALUE={V}, CONTEXT={C}.
+% State efficiency and quotient identities. No mathematical novelty claim.
+
+\section{Method Validation}\label{sec:validation}
+
+\subsection{Analytical and synthetic ground truth}\label{sec:synthetic}
+% Five single-channel cases and cross-factor interaction tests.
+
+\subsection{Transformer implementation invariants}\label{sec:implementation-validation}
+% Batch-safe masks, endpoint identity, score->pattern, z reconstruction,
+% no-live-candidate leak, untouched-head checks, quotient bridge.
+
+\section{GPT-2 IOI: Conditional Recruitment and Fine-Score Decomposition}\label{sec:gpt2}
+
+\subsection{Experimental design}\label{sec:gpt2-design}
+% Canonical primary heads; candidate heads; 15 templates x BABA/ABBA;
+% four seeds; output metric; preregistered confirmation.
+
+\subsection{Conditional recruitment is not attention increase}\label{sec:gpt2-functional}
+% Corrected functional baseline; L10H2 genuine recruitment; L10H10 contrast.
+
+\subsection{Canonical FALI mechanism}\label{sec:gpt2-fali}
+% L10H2 and L10H10: T positive, R negative; O descriptive;
+% coarse score/value/context only where necessary.
+
+\subsection{Intervention robustness}\label{sec:gpt2-robustness}
+% Report matched-mean and matched-resample fine-channel robustness accurately.
+% Explicitly disclose that the preregistered overall EF5 gate failed because the
+% zero-damage reference criterion was not satisfied.
+
+\section{Cross-Setting Test: Pythia Induction}\label{sec:pythia}
+
+\subsection{Preregistered transfer design}\label{sec:pythia-design}
+% Pythia-160M induction; primary L5H0; candidate L8H2; frozen transfer hypotheses.
+
+\subsection{Recruitment generalizes but the fine mechanism reverses}\label{sec:pythia-results}
+% conditional effect/gain positive; phi_T negative; phi_R positive; transfer gate failed.
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{A common functional response need not imply a common mechanism}\label{sec:discussion-mechanisms}
+
+\subsection{Relationship to conditional attribution and patching}\label{sec:discussion-positioning}
+% Localization/CoAx: which; interaction methods: conditionality; FALI: mechanism resolution.
+
+\section{Limitations}\label{sec:limitations}
+% Required: hypothesis-driven target selection; off-manifold hybrids; coarse C;
+% partition/intervention dependence; only two substantive model/task settings.
+
+\section{Conclusion}\label{sec:conclusion}
+% Compact: what FALI adds and what the cross-setting reversal establishes.
+
+\section*{Statements and Declarations}
+
+\subsection*{Competing Interests}
+% TODO: author-provided statement.
+
+\subsection*{Funding}
+% TODO: author-provided statement.
+
+\subsection*{Data Availability}
+% TODO: state exact public/private data availability at submission.
+
+\subsection*{Code Availability}
+% TODO: repository/archive and reproducibility statement.
+
+\subsection*{Author Contributions}
+% TODO: author-provided CRediT-style contribution statement if appropriate.
+
+\subsection*{Use of Generative AI}
+% TODO before submission: document generative-AI use to the extent required by
+% current Springer/Machine Learning policy and the final actual workflow.
+
+\bibliography{references}
+
+\end{document}

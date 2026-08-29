@@ -1,0 +1,48 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\setlist{nosep,leftmargin=*}
+
+\begin{document}
+
+\begin{center}
+{\Large\bfseries MLJ Contribution Information Sheet}\\[0.5em]
+{\bfseries FALI: Mechanistic Decomposition of Conditional Attention-Head Importance}
+\end{center}
+
+\section*{1. What is the main claim, and why is it important to machine learning?}
+
+The paper's main claim is that conditional component importance and its mechanism should be treated as distinct questions. Existing intervention methods can establish that a transformer component becomes more or less causally important after another component is perturbed. FALI (Factorized Attention-Level Intervention) addresses the next question for a selected attention head: which changes in and around that head account for the cross-state change in its output-grounded causal usefulness under an explicit counterfactual intervention model?
+
+FALI factorizes the candidate head into target attention scores ($T$), rival scores ($R$), other structurally valid scores ($O$), value content ($V$), and surrounding-network/context state ($C$). Standard Owen attribution is used with the prospectively fixed coalition structure $\{T,R,O\}$, $\{V\}$, $\{C\}$ so that the fine score attributions reconcile with the coarser score/value/context decomposition. We do not claim mathematical novelty for Owen values, nor do we claim that FALI discovers circuits or conditional importance.
+
+The contribution matters because the same high-level functional response can conceal different internal mechanisms. A method that only reports that a head is conditionally recruited cannot distinguish whether that change is associated with target routing, rival routing, value content, or the surrounding network. This distinction is directly relevant to mechanistic interpretation: a common behavioral or causal label should not be assumed to imply a common internal computation.
+
+\section*{2. What evidence supports the claim?}
+
+The paper provides four layers of evidence.
+
+\begin{enumerate}
+\item \textbf{Formal and synthetic validation.} The five-factor intervention game was tested on controlled systems in which only one of $T,R,O,V,C$ changes, as well as cross-factor interaction cases. The implementation was separately checked for batch-safe score partitions, score-to-pattern reconstruction, value/pattern-to-head-output reconstruction, endpoint identities, candidate-injection scope, absence of live-candidate leakage, and reconciliation with the coarse score/value/context quotient game.
+
+\item \textbf{GPT-2 IOI confirmation.} On 15 canonical low-level IOI templates crossed with BABA/ABBA patterns and four prompt seeds, L10H2 has positive conditional recruitment (mean conditional gain approximately $0.298$, hierarchical 95\% CI $[0.263,0.335]$). Its fine FALI decomposition has a positive target contribution ($\phi_T\approx0.783$, CI $[0.722,0.838]$) and negative rival contribution ($\phi_R\approx-0.341$, CI $[-0.372,-0.311]$). L10H10 provides an important contrast: its target attention increases while its conditional gain is negative, showing that attention adaptation is not itself functional recruitment.
+
+\item \textbf{Intervention-scheme checks.} Under the preregistered EF-5 analysis, the matched-mean and matched-resample alternative schemes were each classified as ROBUST for the fine-channel result. The overall EF-5 gate nevertheless failed because the zero-damage reference perturbation criterion was not satisfied. We report both facts rather than collapsing them into a blanket robustness claim.
+
+\item \textbf{Cross-model/task test.} In Pythia-160M induction, removing primary head L5H0 conditionally recruits L8H2 (conditional gain approximately $0.486$, 95\% CI $[0.326,0.722]$). However, the fine-score signs reverse relative to GPT-2: $\phi_T\approx-0.144$ (CI $[-0.247,-0.084]$) and $\phi_R\approx0.118$ (CI $[0.058,0.219]$). The preregistered mechanism-generalization gate therefore fails. The resulting empirical conclusion is deliberately narrower: conditional recruitment occurs in both studied settings, but its fine mechanism is not shared.
+\end{enumerate}
+
+\section*{3. What prior work is closest, and how does this paper differ?}
+
+The closest work includes: self-repair and backup-head studies such as the Hydra Effect, Copy Suppression, and broader self-repair analyses; Conditional Co-Ablation (CoAx), which explicitly measures conditional component importance; interaction-aware causal work including Causal Head Gating and \emph{The Curse of Multiple Mediators}; activation/path patching; foundational QK/OV circuit analysis; and recent causal decompositions separating query-key routing from value updates.
+
+These works establish that compensation exists, that component importance can depend on other components, and that routing and transported content can be causally distinguished. FALI is positioned downstream of those results. It does not ask which component becomes important, nor merely whether the component interacts with the rest of the model. Given a selected attention head whose causal usefulness changes across two circuit states, FALI resolves that change into architecture-aligned score, value, and surrounding-context contributions, with target/rival/other resolution inside the score channel. To our knowledge, this exact output-grounded cross-state intervention game is not provided by the closest prior methods; this novelty statement will remain explicitly qualified and cited in the manuscript.
+
+\section*{4. Has any part appeared previously? What is substantially new?}
+
+An earlier public preprint, \emph{When Attention Repairs Itself: A Mechanistic Study of Backup Heads in GPT-2} (May 2026), used the earlier expansion ``Frozen Attention Logit Intervention'' and centered an attention-based interpretation of GPT-2 backup behavior. That interpretation was subsequently invalidated by corrected functional analysis: attention increase was not a reliable indicator that a head became more causally useful.
+
+The present paper substantially changes the estimand, method, validation, and empirical conclusions. It introduces the output-grounded Factorized Attention-Level Intervention framework; uses the corrected canonical primary intervention; validates the five-factor causal game synthetically and through implementation invariants; confirms fine score mechanisms across broad canonical IOI templates and multiple seeds; evaluates alternative intervention schemes; and adds a preregistered cross-model/task test on Pythia induction. The cross-setting test rejects the earlier implicit universality story by finding opposite target/rival signs. The new manuscript therefore supersedes, rather than merely lengthens, the earlier interpretation.
+
+\end{document}
