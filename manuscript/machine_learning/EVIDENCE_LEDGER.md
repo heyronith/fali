@@ -38,8 +38,8 @@ Legend:
 | ID | Planned claim | Status | Internal evidence | Allowed wording |
 |---|---|---:|---|---|
 | F1 | Attention increase is not equivalent to positive functional recruitment. | GREEN | `results/revision_phase1/full/aggregate_corrected/functional_classification.csv`; EF-4 exact means | Use L10H2/L10H10 contrast. Positive conditional gain alone is also insufficient if conditional effect remains negative. |
-| F2 | L10H2 is a genuine recruited GPT-2 IOI backup under the corrected canonical primary knockout. | GREEN | corrected Phase-1 classification; EF-4 conditional gain | Report conditional effect/gain, not attention alone. |
-| F3 | L10H10 shows strong target-attention adaptation but becomes less useful under the corrected primary knockout. | GREEN | EF-4: conditional_gain=-0.2634, CI [-0.3019,-0.2249]; delta_target_attn=+0.3103, CI [0.2853,0.3345] | “Attention adaptation without functional recruitment” / “supportive but downregulated” where consistent with functional taxonomy. |
+| F2 | L10H2 is a genuine recruited GPT-2 IOI backup under the corrected canonical primary knockout. | GREEN | corrected Phase-1 classification; `results/revision_phase4/full/aggregate/L10H2_broad_template_report.md` (conditional effect); EF-4 conditional gain | Report conditional effect/gain, not attention alone. |
+| F3 | L10H10 shows strong target-attention adaptation but becomes less useful under the corrected primary knockout. | GREEN | `results/revision_phase4/full/aggregate/L10H10_broad_template_report.md` (negative broad-canonical conditional effect); EF-4: conditional_gain=-0.2634, CI [-0.3019,-0.2249]; delta_target_attn=+0.3103, CI [0.2853,0.3345] | “Attention adaptation without functional recruitment” / “supportive but downregulated” where consistent with functional taxonomy. |
 
 ## GPT-2 canonical claims
 

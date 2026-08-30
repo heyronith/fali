@@ -4,9 +4,9 @@
 **Scope:** claim→evidence traceability; claim→citation/novelty; internal consistency; adversarial limitations.  
 **Experimental phase:** CLOSED. No new experiments authorized or required by this audit.
 
-## Verdict
+**Verdict**
 
-**PASS AFTER MECHANICAL PATCHES.**
+**PASS**
 
 The central scientific story is supported and internally coherent:
 
@@ -304,3 +304,11 @@ No meaningful external security/capability attack surface is introduced beyond o
 6. Run `python -m pytest tests/ -q` and `render_all.py`; empirical outputs/gates must remain unchanged.
 
 After these mechanical patches and a clean compile/test pass, the scientific audit status becomes **PASS**. Remaining work is submission metadata + supplement completion, not further experimentation or scientific-story changes.
+
+## Completion note (mechanical patches applied)
+
+- **Patch commit SHA:** 29a28094e5e5692235d55085db14dccc1f2955fa
+- **Compile status:** PASS (`main.tex`, `contribution_information_sheet.tex`)
+- **Final page count:** 21 pages (`main.pdf`; +1 vs. pre-patch 20-page recompile due to expanded limitations text and inline novelty citations; within acceptable 21–22 band)
+- **Tests status:** `pytest tests/ -q` → 205 passed
+- **Empirical outputs:** `render_all.py` → VALIDATION PASS; EF-1R PASS, EF-4 PASS, EF-5 overall FAIL, EF-6 FAIL unchanged; all point estimates/CIs unchanged

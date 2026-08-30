@@ -1,11 +1,29 @@
 # Manuscript Compile Audit
 
 **Branch:** `manuscript/reconstruction`  
-**Compression prose base:** `c0f32af378598c4faecea173836d1970ee28fc97`  
-**Prior compile baseline:** `dc4fa55` (24 pages, pre-compression)  
+**Audit patch base:** `e751bf9289dfd588e1c13f86d6650ef75684e585`  
 **Status:** **PASS**
 
-## Post-compression recompile (current)
+## Final audit-patch recompile (current)
+
+Applied mechanical patches from `FINAL_SCIENTIFIC_AUDIT.md` only (metric wording, novelty citations, Evidence Ledger provenance, MIB author metadata). No layout hacks.
+
+| Metric | Pre-patch (`f61ed4d`) | Post-patch (current) | Δ |
+|--------|----------------------:|---------------------:|--:|
+| Total pages | 20 | **21** | +1 |
+| References begin | 19 | **18** | −1 |
+| Bibliography pages | 2 (19–20) | **3 (18–20)** | +1 |
+| Fig 1–5 pages | 8, 10, 12, 14, 16 | 8, 10, 12, 14, 16 | 0 |
+| Undefined citations | 0 | **0** | 0 |
+| Undefined references | 0 | **0** | 0 |
+| Duplicate labels | 0 | **0** | 0 |
+| Overfull `\hbox` | 0 | **0** | 0 |
+| Underfull `\hbox` | 3 | **3** | 0 |
+| Underfull `\vbox` | 20 | **21** | +1 |
+
+**Page-budget classification:** **ACCEPTABLE** (21 pages; internal target ≤20, acceptable band 21–22)
+
+## Post-compression recompile (prior)
 
 Recompiled after research-lead scientific compression pass. No further prose edits, layout hacks, or margin/font changes applied in this step.
 
@@ -60,9 +78,10 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 | Document | Status | Output | Pages |
 |----------|--------|--------|------:|
-| `main.tex` | **PASS** | `main.pdf` | **20** |
+| `main.tex` | **PASS** | `main.pdf` | **21** |
+| `contribution_information_sheet.tex` | **PASS** | `contribution_information_sheet.pdf` | 2 |
 
-## Bibliography
+## Bibliography (current)
 
 | Check | Result |
 |-------|--------|
@@ -70,17 +89,19 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 | Style `sn-mathphys-ay.bst` used | yes |
 | BibTeX completed | yes |
 | Author--year citations render | yes |
-| Bibliography in PDF | yes (pages **19–20**) |
+| Bibliography in PDF | yes (pages **18–20**) |
+| References begin | **page 18** |
+| Bibliography page count | **3** |
 | `?` / `??` citations | none |
 
 ## Page budget (current)
 
 | Metric | Value |
 |--------|------:|
-| Total `main.pdf` pages | **20** |
-| References begin | **page 19** |
-| Bibliography page count | **2** |
-| Approx. scientific main text (title through conclusion) | **~18 pages** |
+| Total `main.pdf` pages | **21** |
+| References begin | **page 18** |
+| Bibliography page count | **3** |
+| Approx. scientific main text (title through conclusion) | **~17 pages** |
 
 ## Figure pages and float placement (current)
 
@@ -112,7 +133,7 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 | Duplicate labels | 0 |
 | Overfull `\hbox` | 0 |
 | Underfull `\hbox` | 3 |
-| Underfull `\vbox` | 20 |
+| Underfull `\vbox` | 21 |
 | Worst overfull overflow | n/a |
 
 **Other warnings**
@@ -136,14 +157,14 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Remaining items for research-lead review
 
-1. **Declaration placeholders** on p. 19 (empty subsection headings before References) will expand when filled.
+1. **Declaration placeholders** on p. 20 (empty subsection headings before References) will expand when filled.
 2. **Supplement** remains outline-only.
 3. **Author/metadata placeholders** in `main.tex` unchanged.
 
 ## Review artifacts (local)
 
 - `manuscript/machine_learning/main.pdf`
-- `manuscript/machine_learning/review_renders/main_page-*.png` (20 pages at 150 dpi; not committed)
+- `manuscript/machine_learning/review_renders/main_page-*.png` (21 pages at 150 dpi; not committed)
 
 ## Historical note — pre-compression compile (`dc4fa55`)
 
