@@ -307,7 +307,7 @@ After these mechanical patches and a clean compile/test pass, the scientific aud
 
 ## Completion note (mechanical patches applied)
 
-- **Patch commit SHA:** 29a28094e5e5692235d55085db14dccc1f2955fa
+- **Patch commit SHA:** `167d79285f839ad5047a5f43b357dd6986f52a10`
 - **Compile status:** PASS (`main.tex`, `contribution_information_sheet.tex`)
 - **Final page count:** 21 pages (`main.pdf`; +1 vs. pre-patch 20-page recompile due to expanded limitations text and inline novelty citations; within acceptable 21–22 band)
 - **Tests status:** `pytest tests/ -q` → 205 passed
