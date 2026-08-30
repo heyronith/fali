@@ -1,8 +1,29 @@
 # Manuscript Compile Audit
 
 **Branch:** `manuscript/reconstruction`  
-**Integration commit base:** `1889ce34705e5c9c5d64a6c6a74ea0b6ccc68793`  
+**Compression prose base:** `c0f32af378598c4faecea173836d1970ee28fc97`  
+**Prior compile baseline:** `dc4fa55` (24 pages, pre-compression)  
 **Status:** **PASS**
+
+## Post-compression recompile (current)
+
+Recompiled after research-lead scientific compression pass. No further prose edits, layout hacks, or margin/font changes applied in this step.
+
+| Metric | Baseline (`dc4fa55`) | Current (`c0f32af` + recompile) | Δ |
+|--------|---------------------:|----------------------------------:|--:|
+| Total pages | 24 | **20** | **−4** |
+| References begin | 22 | **19** | −3 |
+| Bibliography pages | 3 (22–24) | **2 (19–20)** | −1 |
+| Fig 1 page | 8 | 8 | 0 |
+| Fig 2 page | 10 | 10 | 0 |
+| Fig 3 page | 12 | 12 | 0 |
+| Fig 4 page | 16 | **14** | −2 |
+| Fig 5 page | 19 | **16** | −3 |
+| Overfull `\hbox` | 0 | 0 | 0 |
+| Underfull `\hbox` | 6 | **3** | −3 |
+| Underfull `\vbox` | 24 | **20** | −4 |
+
+**Page-budget classification:** **ON TARGET** (≤20 pages including references)
 
 ## Official Springer Nature template provenance
 
@@ -15,11 +36,11 @@ Downloaded from Springer Nature LaTeX Author Support, **journal article template
 - **`sn-jnl.cls` SHA256:** `36d0c3273a59d48dc6a9c7b080dfa1ec50dc10229d8751568d1f2e490ffa5ecc`
 - **`sn-mathphys-ay.bst` SHA256:** `6a2306683997db76b5e58190acea4dac360c742044114f6a923a4380fbab9008`
 
-Unmodified copies placed in `manuscript/machine_learning/` per `README.md`. LPPL-licensed Springer Nature template assets are tracked in Git for reproducible local compilation.
+Unmodified copies in `manuscript/machine_learning/`.
 
 ## LaTeX toolchain
 
-Installed via user-local TinyTeX at `/Users/ronny/fali-tinytex` (no sudo required on macOS).
+User-local TinyTeX at `/Users/ronny/fali-tinytex`.
 
 | Tool | Version |
 |------|---------|
@@ -27,32 +48,19 @@ Installed via user-local TinyTeX at `/Users/ronny/fali-tinytex` (no sudo require
 | `latexmk` | John Collins, 9 March 2026. Version 4.88 |
 | `bibtex` | BibTeX 0.99e (TeX Live 2026) |
 
-## Compile commands
-
-From `manuscript/machine_learning/`:
+## Compile command
 
 ```bash
 export PATH="/Users/ronny/fali-tinytex/bin/universal-darwin:$PATH"
+cd manuscript/machine_learning
 latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-latexmk -pdf -interaction=nonstopmode -halt-on-error contribution_information_sheet.tex
-latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex
 ```
 
-## Compile results
+## Compile result
 
 | Document | Status | Output | Pages |
-|----------|--------|--------|-------|
-| `main.tex` | **PASS** | `main.pdf` | 24 |
-| `contribution_information_sheet.tex` | **PASS** | `contribution_information_sheet.pdf` | 2 |
-| `supplement.tex` | **PLACEHOLDER-BUT-COMPILES** | `supplement.pdf` | 1 |
-
-## LaTeX plumbing fixes (non-scientific)
-
-| Fix | File | Reason |
-|-----|------|--------|
-| Removed `\jyear{2026}` | `main.tex` | Undefined in official December-2024 `sn-jnl.cls`; not part of Springer template API |
-
-No Springer class/style files were edited. No scientific prose, results, or figure data were changed.
+|----------|--------|--------|------:|
+| `main.tex` | **PASS** | `main.pdf` | **20** |
 
 ## Bibliography
 
@@ -62,47 +70,40 @@ No Springer class/style files were edited. No scientific prose, results, or figu
 | Style `sn-mathphys-ay.bst` used | yes |
 | BibTeX completed | yes |
 | Author--year citations render | yes |
-| Bibliography in PDF | yes (pages 22--24) |
-| `?` / `??` citations | none observed |
+| Bibliography in PDF | yes (pages **19–20**) |
+| `?` / `??` citations | none |
 
-## Page budget
+## Page budget (current)
 
 | Metric | Value |
-|--------|-------|
-| Total `main.pdf` pages | 24 |
-| References begin | page 22 |
-| Bibliography page count | 3 (pages 22--24) |
-| Approx. scientific main text (title through conclusion) | ~21 pages |
+|--------|------:|
+| Total `main.pdf` pages | **20** |
+| References begin | **page 19** |
+| Bibliography page count | **2** |
+| Approx. scientific main text (title through conclusion) | **~18 pages** |
 
-**Classification:** **PAGE-BUDGET CONCERN** (23--24 band; internal target ~20 including references)
+## Figure pages and float placement (current)
 
-Space is consumed primarily by: long FALI formalism (Sec. 4), five full-width figures, and a 3-page alphabetized reference list (20 entries).
+| Figure | Label | Figure page | Baseline page | Notes |
+|--------|-------|------------:|--------------:|-------|
+| Fig 1 | `fig:fali-overview` | 8 | 8 | unchanged |
+| Fig 2 | `fig:fali-game` | 10 | 10 | unchanged |
+| Fig 3 | `fig:validation` | 12 | 12 | unchanged |
+| Fig 4 | `fig:gpt2-attention-recruitment` | **14** | 16 | closer to GPT-2 Sec. 6; explicit `\ref` in Sec. 6.3 |
+| Fig 5 | `fig:cross-setting-reversal` | **16** | 19 | adjacent to Pythia Sec. 7.2; Discussion Sec. 8 begins same page |
 
-## Figure pages and float placement
+## Visual layout audit (150 dpi, post-compression)
 
-| Figure | Label | First textual mention | Figure page | Page distance | Notes |
-|--------|-------|----------------------|-------------|---------------|-------|
-| Fig 1 | `fig:fali-overview` | Sec. 3.2 (~p. 7) | 8 | 1 | OK |
-| Fig 2 | `fig:fali-game` | Sec. 4.2 (~p. 9) | 10 | 1 | OK |
-| Fig 3 | `fig:validation` | Sec. 5 opening (~p. 11) | 12 | 1 | OK |
-| Fig 4 | `fig:gpt2-attention-recruitment` | Sec. 6.3 (~p. 15); no `\ref` in `gpt2_ioi.tex` | 16 | ~1 | Missing explicit in-text `\ref`; figure follows subsection |
-| Fig 5 | `fig:cross-setting-reversal` | Sec. 7.2 (~p. 17) | 19 | 2 | OK; float drifts into Discussion (Sec. 8 starts p. 18) |
+| Check | Result |
+|-------|--------|
+| Paragraph/heading orphans from compression | none observed |
+| Fig 4 near GPT-2 discussion | **improved** (p. 14 vs. p. 16 baseline) |
+| Fig 5 near Pythia result | **improved** (p. 16 vs. p. 19 baseline) |
+| Discussion around Fig 5 | acceptable — Sec. 8 begins below Fig 5 on p. 16 |
+| Figure text readability | all five figures legible at manuscript size |
+| New large blank regions | none; modest trailing whitespace on p. 17 (Limitations lead-in) |
 
-No figure is >2 pages from first discussion. No aggressive float hacks applied.
-
-## Visual figure audit (150 dpi page renders)
-
-| Figure | Page | Visual check |
-|--------|------|--------------|
-| Fig 1 | 8 | Three-panel narrative readable; no clipping |
-| Fig 2 | 10 | Full 6×6 matrix; T/R/O/mask legend; `(q*,q*)` as R; V column in flowchart |
-| Fig 3 | 12 | Single-channel heatmap; ΔU annotations; implementation dashboard PASS |
-| Fig 4 | 16 | L10H2/L10H10 labels; CI bars; fine T/R panel; context labels legible |
-| Fig 5 | 19 | Panel (b) prominent; task-specific units; gate table G0--G2 CONFIRMED, G3/G4 NOT CONFIRMED; EF-6 FAIL reads as hypothesis failure |
-
-Local review PNGs: `review_renders/` (not committed).
-
-## Log-derived QA (`main.log`)
+## Log-derived QA (`main.log`, current)
 
 | Metric | Count |
 |--------|------:|
@@ -110,45 +111,14 @@ Local review PNGs: `review_renders/` (not committed).
 | Undefined references | 0 |
 | Duplicate labels | 0 |
 | Overfull `\hbox` | 0 |
-| Underfull `\hbox` | 6 |
-| Underfull `\vbox` | 24 |
-| Worst overfull overflow | n/a (no overfull boxes) |
+| Underfull `\hbox` | 3 |
+| Underfull `\vbox` | 20 |
+| Worst overfull overflow | n/a |
 
 **Other warnings**
 
-- `Package hyperref Warning`: bookmark level jumps at declarations subsections (lines 25, 28 of `discussion_limitations_conclusion.tex`) — cosmetic PDF outline only
-- Many `Underfull \vbox (badness 10000)` on float-heavy pages — typical Springer single-column float spacing; not corrected (no `\vspace` compression)
-
-**Font / PDF inclusion:** no font-substitution or missing-file warnings in final pass.
-
-## Approximate section page usage (main text)
-
-| Block | Approx. pages |
-|-------|---------------|
-| Title + abstract + keywords | 1 |
-| Introduction + Related Work | 2--6 |
-| Problem + FALI (Sec. 3--4) | 6--11 |
-| Validation (Sec. 5) | 11--13 |
-| GPT-2 IOI (Sec. 6) | 14--16 |
-| Pythia induction (Sec. 7) | 17--18 |
-| Discussion / Limitations / Conclusion | 18--22 |
-| References | 22--24 |
-
-**Low-cost future savings (not executed here):** float whitespace around Fig. 5; Fig. 4 explicit cross-ref + tighter local placement; bibliography already compact; declaration placeholders add ~1 page when filled.
-
-## Contribution Information Sheet
-
-| Check | Result |
-|-------|--------|
-| Compile | **PASS** |
-| Pages | 2 |
-| Overflow | none |
-| Missing metadata | none beyond intentional author placeholders |
-| MLJ 1--2 page format | **satisfied** |
-
-## Supplement
-
-Outline-only placeholder. LaTeX infrastructure compiles (**PLACEHOLDER-BUT-COMPILES**, 1 page). Empty bibliography warning expected (`natbib`: empty `thebibliography`).
+- 2× `Package hyperref Warning` (bookmark level jumps at declaration subsections in `main.tex`) — cosmetic PDF outline only
+- Residual underfull vboxes on float-heavy pages — unchanged in character, reduced in count
 
 ## Scientific integrity (unchanged)
 
@@ -161,18 +131,20 @@ Outline-only placeholder. LaTeX infrastructure compiles (**PLACEHOLDER-BUT-COMPI
 | GPT-2 φ_T > 0, φ_R < 0 | unchanged |
 | Pythia φ_T < 0, φ_R > 0 | unchanged |
 | `pytest tests/ -q` | **205 passed** |
-| `render_all.py` validation | **PASS** (empirical values/CIs/gates unchanged) |
+| `render_all.py` validation | **PASS** |
 | Experiments rerun | **no** |
 
-## Items requiring research-lead review
+## Remaining items for research-lead review
 
-1. **Page budget:** 24 pages vs. internal ~20-page target — editorial compression needed later, not layout hacks.
-2. **Fig. 5 float drift:** appears on p. 19 while Discussion begins p. 18.
-3. **Fig. 4:** no explicit `Figure~\ref{fig:gpt2-attention-recruitment}` in `gpt2_ioi.tex`.
-4. **Submission metadata placeholders** remain in `main.tex` (authors, declarations, repository IDs).
-5. **Supplement** remains outline-only for substantive writing pass.
+1. **Declaration placeholders** on p. 19 (empty subsection headings before References) will expand when filled.
+2. **Supplement** remains outline-only.
+3. **Author/metadata placeholders** in `main.tex` unchanged.
 
-## Review artifacts preserved locally
+## Review artifacts (local)
 
 - `manuscript/machine_learning/main.pdf`
-- `manuscript/machine_learning/review_renders/main_page-*.png` (24 pages at 150 dpi)
+- `manuscript/machine_learning/review_renders/main_page-*.png` (20 pages at 150 dpi; not committed)
+
+## Historical note — pre-compression compile (`dc4fa55`)
+
+First successful Springer compile before scientific compression: 24 pages, references pp. 22–24, page-budget concern. LaTeX plumbing fix only: removed undefined `\jyear{2026}` from `main.tex`.
