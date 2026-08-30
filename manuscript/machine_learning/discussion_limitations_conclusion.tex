@@ -17,7 +17,7 @@ The method likewise does not claim novelty for separating routing from transport
 \section{Limitations}\label{sec:limitations}
 
 \paragraph{Hypothesis-driven scope.}
-FALI requires a selected attention head and task-relevant target edge or edge set. IOI and repeated-token induction provide clear target coordinates; less structured tasks may require substantial prior circuit analysis. The method is therefore mechanism resolution, not automatic circuit discovery.
+FALI requires a selected attention head and task-relevant target edge or edge set. IOI and repeated-token induction provide clear target coordinates; less structured tasks may require substantial prior circuit analysis. The five-factor game evaluates all 32 cells per example and candidate, so it is intended for hypothesis-driven analysis of selected heads rather than exhaustive whole-model scanning. The method is also vulnerable to researcher degrees of freedom if candidates or target edges are chosen after inspecting FALI results; our confirmatory analyses mitigate this risk by freezing the relevant selections and directional hypotheses before confirmation. FALI is therefore mechanism resolution, not automatic circuit discovery.
 
 \paragraph{Counterfactual hybrids.}
 Mixed $T/R/O/V/C$ cells need not occur in natural model execution. They answer what the model does under the specified interchange intervention, not which latent state it would otherwise visit. Representation-level interventions can move computation away from natural internal distributions \citep{grant2025divergent}; accordingly, FALI attributions are not evidence for five independent natural pathways.
