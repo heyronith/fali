@@ -15,10 +15,24 @@ import matplotlib.pyplot as plt
 REPO_ROOT = Path(__file__).resolve().parents[3]
 FIGURES_DIR = REPO_ROOT / "manuscript/machine_learning/figures"
 SCRIPTS_DIR = REPO_ROOT / "manuscript/machine_learning/figure_scripts"
+READABILITY_REVIEW_DIR = FIGURES_DIR / "readability_review"
 
 FIG_WIDTH_MM = 174.0
 FIG_WIDTH_IN = FIG_WIDTH_MM / 25.4
 DPI_PNG = 300
+
+MIN_FONT_PT = 8.0
+PREF_FONT_PT = 8.5
+PANEL_LABEL_PT = 11.0
+TICK_FONT_PT = 8.0
+
+FIG_HEIGHT_MM = {
+    "Fig1": 85.0,
+    "Fig2": 102.0,
+    "Fig3": 107.0,
+    "Fig4": 107.0,
+    "Fig5": 130.0,
+}
 
 COLORS = {
     "T": "#0072B2",
@@ -41,6 +55,10 @@ MARKERS = {
 
 CHANNELS = ["T", "R", "O", "V", "C"]
 PHI_COLS = ["phi_T", "phi_R", "phi_O", "phi_V", "phi_C"]
+
+
+def fig_height_in(stem: str) -> float:
+    return FIG_HEIGHT_MM[stem] / 25.4
 
 
 def sha256_file(path: Path) -> str:
@@ -77,11 +95,10 @@ def apply_style() -> None:
             "figure.facecolor": "white",
             "axes.facecolor": "white",
             "savefig.facecolor": "white",
-            "font.size": 9,
-            "axes.labelsize": 9,
-            "xtick.labelsize": 8,
-            "ytick.labelsize": 8,
-            "axes.linewidth": 0.8,
+            "font.size": PREF_FONT_PT,
+            "axes.labelsize": PREF_FONT_PT,
+            "xtick.labelsize": TICK_FONT_PT,
+            "ytick.labelsize": TICK_FONT_PT,
             "pdf.fonttype": 42,
             "ps.fonttype": 42,
             "svg.fonttype": "none",
@@ -92,11 +109,11 @@ def apply_style() -> None:
 
 def panel_label(ax, label: str) -> None:
     ax.text(
-        -0.08,
-        1.06,
+        -0.06,
+        1.04,
         label,
         transform=ax.transAxes,
-        fontsize=10.5,
+        fontsize=PANEL_LABEL_PT,
         fontweight="bold",
         va="top",
         ha="left",
@@ -143,6 +160,7 @@ def save_figure(
         "extracted_values": extracted_values,
         "output_dimensions_inches": {"width": float(size[0]), "height": float(size[1])},
         "output_width_mm": FIG_WIDTH_MM,
+        "output_height_mm": float(size[1] * 25.4),
         "generation_timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "plotting_library_versions": library_versions(),
         "outputs": outputs,

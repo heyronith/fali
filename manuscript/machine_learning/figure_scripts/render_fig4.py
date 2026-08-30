@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
 
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
@@ -17,13 +18,25 @@ from figure_data import (  # noqa: E402
     load_ef4_ci,
     load_ef4_gate,
 )
-from figure_style import COLORS, FIG_WIDTH_IN, MARKERS, apply_style, panel_label, save_figure, zero_line  # noqa: E402
+from figure_style import (  # noqa: E402
+    COLORS,
+    FIG_WIDTH_IN,
+    MARKERS,
+    MIN_FONT_PT,
+    PREF_FONT_PT,
+    apply_style,
+    fig_height_in,
+    panel_label,
+    save_figure,
+    zero_line,
+)
 
 
 def render() -> dict:
     df = load_ef4_ci()
     gate = load_ef4_gate()
     heads = ["L10H2", "L10H10"]
+    head_markers = {"L10H2": "o", "L10H10": "^"}
     extracted = {"heads": {}}
     for head in heads:
         extracted["heads"][head] = {
@@ -37,90 +50,120 @@ def render() -> dict:
         }
 
     apply_style()
-    fig, axes = plt.subplots(1, 3, figsize=(FIG_WIDTH_IN, FIG_WIDTH_IN * 0.36), gridspec_kw={"width_ratios": [1.0, 1.05, 1.15]})
-    fig.subplots_adjust(left=0.07, right=0.98, top=0.90, bottom=0.16, wspace=0.42)
+    fig = plt.figure(figsize=(FIG_WIDTH_IN, fig_height_in("Fig4")))
+    gs = GridSpec(2, 2, figure=fig, height_ratios=[1.05, 1.0], width_ratios=[1.0, 1.0], hspace=0.38, wspace=0.32)
+    ax_a = fig.add_subplot(gs[0, :])
+    ax_b = fig.add_subplot(gs[1, 0])
+    ax_c = fig.add_subplot(gs[1, 1])
 
-    ax = axes[0]
-    panel_label(ax, "(a)")
-    callouts = {
-        "L10H2": ("attention ↑, usefulness ↑", (12, 12)),
-        "L10H10": ("attention ↑, usefulness ↓", (12, -18)),
-    }
+    panel_label(ax_a, "(a)")
     for head in heads:
         d = extracted["heads"][head]
         x = d["delta_target_attn"]["point"]
         y = d["conditional_gain"]["point"]
         xerr = [[x - d["delta_target_attn"]["ci_low"]], [d["delta_target_attn"]["ci_high"] - x]]
         yerr = [[y - d["conditional_gain"]["ci_low"]], [d["conditional_gain"]["ci_high"] - y]]
-        ax.errorbar(x, y, xerr=xerr, yerr=yerr, fmt="o", color=COLORS["endpoint"], markersize=5, capsize=3, linewidth=1, zorder=3)
-        ax.annotate(
+        ax_a.errorbar(
+            x,
+            y,
+            xerr=xerr,
+            yerr=yerr,
+            fmt=head_markers[head],
+            color=COLORS["endpoint"],
+            markersize=7,
+            capsize=3,
+            linewidth=1.2,
+            zorder=3,
+            label=head,
+        )
+        ax_a.annotate(
             head,
             (x, y),
-            xytext=(8, 8),
+            xytext=(10, 10),
             textcoords="offset points",
-            fontsize=8,
+            fontsize=PREF_FONT_PT,
             ha="left",
         )
-        note, off = callouts[head]
-        ax.annotate(note, (x, y), xytext=off, textcoords="offset points", fontsize=6.5, style="italic", ha="left")
-    zero_line(ax, "x")
-    zero_line(ax, "y")
-    ax.set_xlabel("Change in target attention", fontsize=8)
-    ax.set_ylabel("Conditional gain", fontsize=8)
-    ax.margins(x=0.12, y=0.18)
+    zero_line(ax_a, "x")
+    zero_line(ax_a, "y")
+    ax_a.set_xlabel("Change in target attention", fontsize=PREF_FONT_PT)
+    ax_a.set_ylabel("Conditional gain", fontsize=PREF_FONT_PT)
+    ax_a.margins(x=0.15, y=0.20)
 
-    ax = axes[1]
-    panel_label(ax, "(b)")
+    panel_label(ax_b, "(b)")
     rows = [
-        ("L10H2 — T", "L10H2", "phi_T", "T"),
-        ("L10H2 — R", "L10H2", "phi_R", "R"),
-        ("L10H10 — T", "L10H10", "phi_T", "T"),
-        ("L10H10 — R", "L10H10", "phi_R", "R"),
+        ("L10H2  T", "L10H2", "phi_T", "T"),
+        ("L10H2  R", "L10H2", "phi_R", "R"),
+        ("L10H10 T", "L10H10", "phi_T", "T"),
+        ("L10H10 R", "L10H10", "phi_R", "R"),
     ]
+    y_positions = list(range(len(rows)))
     xmax = 0.0
-    for i, (label, head, metric, ch) in enumerate(rows):
+    xmin = 0.0
+    for i, (_label, head, metric, ch) in enumerate(rows):
         d = extracted["heads"][head][metric]
-        ax.errorbar(d["point"], i, xerr=[[d["point"] - d["ci_low"]], [d["ci_high"] - d["point"]]], fmt=MARKERS[ch], color=COLORS[ch], capsize=3, markersize=6, zorder=3)
+        ax_b.errorbar(
+            d["point"],
+            i,
+            xerr=[[d["point"] - d["ci_low"]], [d["ci_high"] - d["point"]]],
+            fmt=MARKERS[ch],
+            color=COLORS[ch],
+            capsize=3,
+            markersize=7,
+            zorder=3,
+        )
         xmax = max(xmax, d["ci_high"])
-        ax.text(d["ci_high"] + 0.03, i, label, va="center", fontsize=7.5)
-    zero_line(ax, "x")
-    ax.set_yticks([])
-    ax.set_xlim(min(-0.45, ax.get_xlim()[0]), xmax + 0.22)
-    ax.set_xlabel("FALI attribution", fontsize=8)
-    ax.text(0.02, -0.22, f"EF-4 fine-score gate: {gate['EF4_FINE_SCORE_GATE']}", transform=ax.transAxes, fontsize=7)
+        xmin = min(xmin, d["ci_low"])
+    zero_line(ax_b, "x")
+    ax_b.set_yticks(y_positions)
+    ax_b.set_yticklabels([r[0] for r in rows], fontsize=PREF_FONT_PT)
+    ax_b.set_xlim(min(-0.45, xmin - 0.08), xmax + 0.12)
+    ax_b.set_xlabel("FALI attribution", fontsize=PREF_FONT_PT)
+    ax_b.text(
+        0.0,
+        -0.22,
+        f"EF-4 fine-score gate: {gate['EF4_FINE_SCORE_GATE']}",
+        transform=ax_b.transAxes,
+        fontsize=MIN_FONT_PT,
+    )
 
-    ax = axes[2]
-    panel_label(ax, "(c)")
+    panel_label(ax_c, "(c)")
     metrics = [("Phi_SCORE", "SCORE"), ("phi_V", "V"), ("phi_C", "C"), ("conditional_gain", "gain")]
-    head_markers = {"L10H2": "o", "L10H10": "^"}
-    offsets = {"L10H2": -0.15, "L10H10": 0.15}
+    y_positions = list(range(len(metrics)))
     xmax = 0.0
+    xmin = 0.0
     for head in heads:
         for j, (metric, short) in enumerate(metrics):
             d = extracted["heads"][head][metric]
-            y = j + offsets[head]
+            y = j + (-0.18 if head == "L10H2" else 0.18)
             color = COLORS.get(short, COLORS["endpoint"])
-            marker = head_markers[head] if metric == "conditional_gain" else MARKERS.get(short, "o")
-            ax.errorbar(
+            marker = head_markers[head]
+            ax_c.errorbar(
                 d["point"],
                 y,
                 xerr=[[d["point"] - d["ci_low"]], [d["ci_high"] - d["point"]]],
                 fmt=marker,
                 color=color,
                 capsize=3,
-                markersize=5,
+                markersize=6,
                 zorder=3,
+                label=head if j == 0 else "_nolegend_",
             )
-            xmax = max(xmax, d["ci_high"], abs(d["ci_low"]))
-            if metric == "conditional_gain":
-                ax.text(d["point"], y + 0.10, f"{head} endpoint", fontsize=6.5, ha="center")
-            elif metric == "phi_C":
-                ax.text(min(d["ci_high"] + 0.02, xmax + 0.05), y, f"{head} context", fontsize=6.5, va="center")
-    zero_line(ax, "x")
-    ax.set_yticks(range(len(metrics)))
-    ax.set_yticklabels(["Φ_SCORE", "φ_V", "φ_C", "endpoint gain"], fontsize=8)
-    ax.set_xlim(min(-0.55, ax.get_xlim()[0]), xmax + 0.18)
-    ax.set_xlabel("Coarse / endpoint contribution", fontsize=8)
+            xmax = max(xmax, d["ci_high"])
+            xmin = min(xmin, d["ci_low"])
+    zero_line(ax_c, "x")
+    ax_c.set_yticks(y_positions)
+    ax_c.set_yticklabels(["SCORE", "V", "C", "endpoint gain"], fontsize=PREF_FONT_PT)
+    ax_c.set_xlim(min(-0.55, xmin - 0.08), xmax + 0.12)
+    ax_c.set_xlabel("Coarse / endpoint contribution", fontsize=PREF_FONT_PT)
+    ax_c.legend(
+        loc="lower right",
+        fontsize=MIN_FONT_PT,
+        frameon=False,
+        title="Head",
+        title_fontsize=MIN_FONT_PT,
+        markerscale=1.0,
+    )
 
     return save_figure(
         fig,

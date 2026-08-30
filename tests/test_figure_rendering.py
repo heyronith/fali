@@ -103,6 +103,22 @@ def test_fig5_has_no_unicode_checkmarks():
     assert "✗" not in text
 
 
+def test_minimum_font_sizes_in_figure_scripts():
+    """Fail if render scripts explicitly request font sizes below 8 pt."""
+    pattern = re.compile(
+        r"fontsize\s*=\s*(6(?:\.5)?|7(?:\.5)?)\b|set_fontsize\s*\(\s*(6(?:\.5)?|7(?:\.5)?)\s*\)"
+    )
+    files = [
+        SCRIPTS / "figure_style.py",
+        *sorted(SCRIPTS.glob("render_fig*.py")),
+    ]
+    offenders: list[str] = []
+    for path in files:
+        for match in pattern.finditer(path.read_text()):
+            offenders.append(f"{path.name}: {match.group(0)}")
+    assert not offenders, "Font sizes below 8 pt found:\n" + "\n".join(offenders)
+
+
 def test_empirical_extracted_values_unchanged(rendered_figures):
     for stem in ("Fig3", "Fig4", "Fig5"):
         current = json.loads((rendered_figures / f"{stem}_provenance.json").read_text())

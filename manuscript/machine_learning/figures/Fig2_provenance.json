@@ -1,7 +1,7 @@
 {
   "figure": "Fig2",
   "generating_script": "manuscript/machine_learning/figure_scripts/render_fig2.py",
-  "git_commit": "09cd1b651601dc3588aa6107fe1eb65b59d4a5a6",
+  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
   "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
   "source_files": [],
   "extracted_values": {
@@ -25,10 +25,11 @@
   },
   "output_dimensions_inches": {
     "width": 6.85,
-    "height": 2.32
+    "height": 4.01
   },
   "output_width_mm": 174.0,
-  "generation_timestamp_utc": "2026-08-29T20:25:12.727265+00:00",
+  "output_height_mm": 101.85399999999998,
+  "generation_timestamp_utc": "2026-08-30T03:43:06.407018+00:00",
   "plotting_library_versions": {
     "matplotlib": "3.10.9",
     "numpy": "2.2.6",

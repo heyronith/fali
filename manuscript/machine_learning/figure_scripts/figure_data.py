@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Tuple
 
 import pandas as pd
 
-from figure_style import REPO_ROOT
+from figure_style import REPO_ROOT, format_sci
 
 EF1_PATH = REPO_ROOT / "results/extended_fali/ef1_synthetic/validation_report.json"
 EF4_CI_PATH = REPO_ROOT / "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv"
@@ -161,6 +161,49 @@ def ef1_dashboard_rows(ef1: Dict[str, Any]) -> List[Tuple[str, float]]:
         ("synthetic quotient bridge", float(lvl_a["quotient_bridge_max"])),
         ("partition coverage max", float(max(part["coverage_error_per_example"]))),
         ("partition overlap max", float(max(part["overlap_count_per_example"]))),
+    ]
+
+
+def ef1_grouped_validation_rows(ef1: Dict[str, Any]) -> List[Tuple[str, str]]:
+    """Six grouped validation rows for readable Figure 3 panel (c)."""
+    lvl_a = ef1["level_a"]
+    lvl_b = ef1["level_b"]
+    recon = lvl_b["reconstruction"]
+    ep = lvl_b["independent_endpoints"]
+    act = lvl_b["endpoint_activation"]
+    inj = lvl_b["injection_scope"]
+    leak = lvl_b["live_leak"]
+    part = lvl_b["batch_partition"]
+
+    score_pattern = max(float(recon["pattern_a"]), float(recon["pattern_b"]))
+    pattern_z = max(float(recon["z_a"]), float(recon["z_b"]))
+    coverage_max = float(max(part["coverage_error_per_example"]))
+    overlap_max = float(max(part["overlap_count_per_example"]))
+    mask_partition = max(float(recon["masked_prob_max"]), coverage_max, overlap_max)
+    mask_status = "PASS" if coverage_max == 0.0 and overlap_max == 0.0 else format_sci(mask_partition)
+
+    endpoints = max(
+        float(ep["u00000_vs_intact"]),
+        float(ep["u11111_vs_conditional"]),
+        float(ep["gain_vs_delta_u"]),
+    )
+    isolation = max(
+        float(inj["noncandidate_z_error"]),
+        float(leak["q_leak_error"]),
+        float(leak["v_leak_error"]),
+        float(leak["qv_leak_error"]),
+        float(act["all_a_z_error"]),
+        float(act["all_b_z_error"]),
+    )
+    quotient = max(float(lvl_b["quotient_bridge_max"]), float(lvl_a["quotient_bridge_max"]))
+
+    return [
+        ("Score → pattern reconstruction", format_sci(score_pattern)),
+        ("Pattern/value → z reconstruction", format_sci(pattern_z)),
+        ("Mask + batch partition", mask_status),
+        ("Independent endpoints", format_sci(endpoints)),
+        ("Candidate isolation / live leakage", format_sci(isolation)),
+        ("Coarse–fine quotient bridge", format_sci(quotient)),
     ]
 
 

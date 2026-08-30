@@ -14,6 +14,7 @@ from render_fig2 import render as render_fig2  # noqa: E402
 from render_fig3 import render as render_fig3  # noqa: E402
 from render_fig4 import render as render_fig4  # noqa: E402
 from render_fig5 import render as render_fig5  # noqa: E402
+from render_readability_review import render as render_readability  # noqa: E402
 from validate_figure_inputs import main as validate_inputs  # noqa: E402
 
 
