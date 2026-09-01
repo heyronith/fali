@@ -1,11 +1,10 @@
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/Fig3.pdf}
-\caption{\textbf{FALI recovers controlled ground truth and satisfies implementation invariants.}
-(a) In five deterministic attention systems where only one of $T$, $R$, $O$, $V$, or $C$ differs between endpoints, the entire endpoint change is assigned to the manipulated factor up to floating-point error.
-Rows are normalized by their own absolute endpoint change for visual comparison; raw $\Delta U$ is annotated.
-(b) A constructed pure $T\times C$ interaction yields an equal Owen split between $T$ and $C$, as analytically expected.
-(c) A randomly initialized two-layer TransformerLens model independently validates score-to-pattern and pattern/value-to-output reconstruction, endpoint identity, batch-safe partitions, candidate-isolation, live-computation leakage checks, and coarse--fine quotient reconciliation.
-These are implementation/ground-truth tests, not evidence that FALI's hybrid factors are unique natural pathways.}
+\includegraphics[width=\textwidth]{figures/Fig3.png}
+\caption{\textbf{FALI recovers controlled ground truth and the analytically expected interaction split.}
+In five deterministic single-factor systems, the normalized attribution matrix places the full endpoint change on the manipulated factor; the annotated raw endpoint changes are $0.268952$, $-0.494100$, $0.213489$, $0.192510$, and $0.711235$ for $T,R,O,V,$ and $C$, respectively, with maximum discrepancy $1.11\times10^{-16}$.
+A separate pure $T\times C$ construction has $\Delta_h\approx2$ and yields the expected equal Owen split, $\phi_T\approx1$ and $\phi_C\approx1$, with $R,O,V=0$.
+The independently checked transformer endpoints are intact effect $0.455046$, conditional effect $-0.085684$, and conditional gain $-0.540729$.
+These are implementation and ground-truth checks, not evidence that the hybrid factors are unique natural pathways.}
 \label{fig:validation}
 \end{figure*}

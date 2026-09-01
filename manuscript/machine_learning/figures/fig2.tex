@@ -1,10 +1,11 @@
 \begin{figure*}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/Fig2.pdf}
+\includegraphics[width=\textwidth]{figures/Fig2.png}
 \caption{\textbf{FALI constructs an output-grounded 32-cell intervention game.}
-Structurally valid attention scores are partitioned into the task-target coordinate(s) $T$, rivals $R$ in the same query row, and all other valid scores $O$; $V$ denotes the candidate value tensor and $C$ the surrounding intact or perturbed computation.
-Each hybrid score tensor is passed through the model's masked softmax, combined with the selected values, and injected as the candidate's full head output.
-Utility is the task metric relative to a candidate-zero run in the same context.
-Standard Owen attribution under $\mathrm{SCORE}=\{T,R,O\}$, $\mathrm{VALUE}=\{V\}$, $\mathrm{CONTEXT}=\{C\}$ allocates interactions while reconciling the fine score attributions with the coarse three-factor game.}
+First, structurally valid candidate-head scores are partitioned into task-target coordinates $T$, rivals $R$ in the same query row, and all other valid scores $O$.
+Second, each hybrid chooses intact or perturbed sources independently for $T,R,O,V,$ and $C$, reconstructs the candidate attention pattern and head output, and defines utility relative to a candidate-zero run in the same context.
+Third, all $2^5=32$ hybrid states are evaluated and attributed with the standard Owen value under $\mathrm{SCORE}=\{T,R,O\}$, $\mathrm{VALUE}=\{V\}$, and $\mathrm{CONTEXT}=\{C\}$.
+The fine attributions sum to $\Delta_h$, and $\phi_T+\phi_R+\phi_O$ equals the coarse SCORE contribution.
+Hybrid cells are controlled counterfactual states rather than claims about unique natural pathways.}
 \label{fig:fali-game}
 \end{figure*}
