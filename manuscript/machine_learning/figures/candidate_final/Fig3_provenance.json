@@ -1,0 +1,77 @@
+{
+  "figure": "Fig3",
+  "generating_script": "manuscript/machine_learning/figure_scripts_pub/render_fig3.py",
+  "git_commit": "d79edb7c50911d8ca0b359e931fe42e0e61e70f0",
+  "source_files": [
+    {
+      "path": "results/extended_fali/ef1_synthetic/validation_report.json",
+      "sha256": "73b81986c995c3c5dbbc85fd0707a68076587aca3c2bc6330bbbaf4e598f798f"
+    }
+  ],
+  "extracted_values": {
+    "single_channel_delta_u": [
+      0.26895206842589714,
+      -0.4940997625253214,
+      0.2134890065388908,
+      0.19251027051493746,
+      0.7112345942275938
+    ],
+    "tc_interaction": {
+      "delta_u": 1.9999999999958513,
+      "owen": {
+        "T": 0.9999999999979258,
+        "R": 0.0,
+        "O": 0.0,
+        "V": 0.0,
+        "C": 0.9999999999979257
+      },
+      "pass": true
+    },
+    "grouped_validation": [
+      [
+        "Score \u2192 pattern reconstruction",
+        "0"
+      ],
+      [
+        "Pattern/value \u2192 z reconstruction",
+        "0"
+      ],
+      [
+        "Mask + batch partition",
+        "PASS"
+      ],
+      [
+        "Independent endpoints",
+        "0"
+      ],
+      [
+        "Candidate isolation / live leakage",
+        "0"
+      ],
+      [
+        "Coarse\u2013fine quotient bridge",
+        "1.11e-16"
+      ]
+    ],
+    "endpoints": {
+      "intact": 0.4550457000732422,
+      "conditional": -0.08568350225687027,
+      "gain": -0.5407292023301125
+    },
+    "overall_pass": true
+  },
+  "output_width_pt": 372.0,
+  "output_width_mm": 131.24333333333334,
+  "output_height_mm": 91.948,
+  "output_dimensions_inches": {
+    "width": 5.16,
+    "height": 3.62
+  },
+  "dpi_png": 450,
+  "png_sha256": "70255e97f9802191b89ee32f6c9687804178273d4b4714e6e129d51eab98ff3c",
+  "generation_timestamp_utc": "2026-09-01T22:41:04.122334+00:00",
+  "outputs": {
+    "png": "manuscript/machine_learning/figures/candidate_final/Fig3.png",
+    "svg": "manuscript/machine_learning/figures/candidate_final/Fig3.svg"
+  }
+}

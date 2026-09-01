@@ -1,8 +1,7 @@
 {
   "figure": "Fig4",
-  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig4.py",
-  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
-  "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
+  "generating_script": "manuscript/machine_learning/figure_scripts_pub/render_fig4.py",
+  "git_commit": "d79edb7c50911d8ca0b359e931fe42e0e61e70f0",
   "source_files": [
     {
       "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
@@ -36,10 +35,10 @@
           "ci_low": -0.3716732608334701,
           "ci_high": -0.3109089380952494
         },
-        "Phi_SCORE": {
-          "point": 0.4452515088187323,
-          "ci_low": 0.408801726511783,
-          "ci_high": 0.4771069926376695
+        "phi_O": {
+          "point": 0.0038643372390005,
+          "ci_low": 0.0023628455446458,
+          "ci_high": 0.0053291022741684
         },
         "phi_V": {
           "point": -0.0003494754764768,
@@ -50,6 +49,11 @@
           "point": -0.1464506285058127,
           "ci_low": -0.1646850214159046,
           "ci_high": -0.1283239132899928
+        },
+        "Phi_SCORE": {
+          "point": 0.4452515088187323,
+          "ci_low": 0.408801726511783,
+          "ci_high": 0.4771069926376695
         }
       },
       "L10H10": {
@@ -73,10 +77,10 @@
           "ci_low": -0.1386101436026302,
           "ci_high": -0.1130543539159827
         },
-        "Phi_SCORE": {
-          "point": 0.2062508994340896,
-          "ci_low": 0.185088717718919,
-          "ci_high": 0.2256607000463538
+        "phi_O": {
+          "point": 0.0036344449608414,
+          "ci_low": 0.0025859764705837,
+          "ci_high": 0.0046191379308332
         },
         "phi_V": {
           "point": 0.0015555783112843,
@@ -87,25 +91,28 @@
           "point": -0.4712486914131375,
           "ci_low": -0.5142722480098406,
           "ci_high": -0.4274670255117945
+        },
+        "Phi_SCORE": {
+          "point": 0.2062508994340896,
+          "ci_low": 0.185088717718919,
+          "ci_high": 0.2256607000463538
         }
       }
-    }
+    },
+    "gate": "PASS"
   },
+  "output_width_pt": 372.0,
+  "output_width_mm": 131.24333333333334,
+  "output_height_mm": 107.94999999999999,
   "output_dimensions_inches": {
-    "width": 6.85,
-    "height": 4.21
+    "width": 5.16,
+    "height": 4.25
   },
-  "output_width_mm": 174.0,
-  "output_height_mm": 106.934,
-  "generation_timestamp_utc": "2026-08-30T03:43:06.882556+00:00",
-  "plotting_library_versions": {
-    "matplotlib": "3.10.9",
-    "numpy": "2.2.6",
-    "pandas": "2.3.3"
-  },
+  "dpi_png": 450,
+  "png_sha256": "e6910b7695ae6a8dd0a7787b8f8fc7f7fc885f57ebb5dfdb81d6b17744f7b948",
+  "generation_timestamp_utc": "2026-09-01T22:38:05.715528+00:00",
   "outputs": {
-    "pdf": "manuscript/machine_learning/figures/Fig4.pdf",
-    "svg": "manuscript/machine_learning/figures/Fig4.svg",
-    "png": "manuscript/machine_learning/figures/Fig4.png"
+    "png": "manuscript/machine_learning/figures/candidate_final/Fig4.png",
+    "svg": "manuscript/machine_learning/figures/candidate_final/Fig4.svg"
   }
 }

@@ -1,0 +1,91 @@
+{
+  "figure": "Fig5",
+  "generating_script": "manuscript/machine_learning/figure_scripts_pub/render_fig5.py",
+  "git_commit": "d79edb7c50911d8ca0b359e931fe42e0e61e70f0",
+  "source_files": [
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
+      "sha256": "cfb8db3c2edae1563f0b59673be3aac561c55d9c16d7cd516c93611539449487"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/exact_means.csv",
+      "sha256": "341f786a959b3556b448ae6c43cc0628d22a3323e8ceef5b5493f3b562b5c971"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/bootstrap_ci.csv",
+      "sha256": "f001f1fdf7c14c99c01694c9fccb42782b5a2f4122aa30c3ce75cc102c4b61bd"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/ef6_gate.json",
+      "sha256": "f6475c3b35e581b03def6f8cceeae26ac0a1759443ebb9d455cb00ad38726b35"
+    }
+  ],
+  "extracted_values": {
+    "gpt2_l10h2": {
+      "conditional_gain": {
+        "point": 0.2984514048364426,
+        "ci_low": 0.262939664857255,
+        "ci_high": 0.335184266080459
+      },
+      "phi_T": {
+        "point": 0.7828059418444279,
+        "ci_low": 0.7218558721812787,
+        "ci_high": 0.8383378905223474
+      },
+      "phi_R": {
+        "point": -0.3414187702646962,
+        "ci_low": -0.3716732608334701,
+        "ci_high": -0.3109089380952494
+      },
+      "phi_C": {
+        "point": -0.1464506285058127,
+        "ci_low": -0.1646850214159046,
+        "ci_high": -0.1283239132899928
+      }
+    },
+    "pythia_l8h2": {
+      "conditional_gain": {
+        "point": 0.4856525427158986,
+        "ci_low": 0.3264860623875493,
+        "ci_high": 0.7218153487472388
+      },
+      "phi_T": {
+        "point": -0.1437365829486808,
+        "ci_low": -0.2474350130809982,
+        "ci_high": -0.084084796497823
+      },
+      "phi_R": {
+        "point": 0.1178003300768512,
+        "ci_low": 0.0582247184794345,
+        "ci_high": 0.2191251687378179
+      },
+      "phi_C": {
+        "point": 0.5139577861957184,
+        "ci_low": 0.3544603288022577,
+        "ci_high": 0.7521487289173829
+      }
+    },
+    "ef6_gate": "FAIL",
+    "ef6_gates": {
+      "G0": "CONFIRMED",
+      "G1": "CONFIRMED",
+      "G2": "CONFIRMED",
+      "G3": "NOT_CONFIRMED",
+      "G4": "NOT_CONFIRMED"
+    }
+  },
+  "output_width_pt": 372.0,
+  "output_width_mm": 131.24333333333334,
+  "output_height_mm": 77.978,
+  "output_dimensions_inches": {
+    "width": 5.16,
+    "height": 3.07
+  },
+  "dpi_png": 450,
+  "png_sha256": "291524bb6faf2463028d583a06744b5874356c1930801a17661e6940c24807e4",
+  "generation_timestamp_utc": "2026-09-01T22:41:04.486423+00:00",
+  "outputs": {
+    "png": "manuscript/machine_learning/figures/candidate_final/Fig5.png",
+    "svg": "manuscript/machine_learning/figures/candidate_final/Fig5.svg"
+  }
+}

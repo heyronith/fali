@@ -1,9 +1,9 @@
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/Fig1.png}
-\caption{\textbf{FALI explains a conditional change in candidate-head usefulness.}
-The candidate head has output-grounded causal usefulness $E_A(h)$ in the intact context and $E_B(h)$ after the prespecified primary-circuit perturbation, with $\Delta_h=E_B(h)-E_A(h)$ the cross-state change to be explained.
-FALI allocates this change among target scores ($T$), rival scores ($R$), other valid scores ($O$), value content ($V$), and surrounding-network context ($C$).
-The candidate head and task-relevant target coordinates are specified before FALI analysis; the resulting attributions are defined by the explicit counterfactual intervention game.}
+\caption{\textbf{FALI explains a cross-state change in a selected attention head's causal usefulness.}
+The same candidate head $h$ is evaluated in an intact model state $A$ and a prespecified perturbed state $B$, giving output-grounded causal usefulness $E_A(h)$ and $E_B(h)$.
+FALI takes their difference, $\Delta_h=E_B(h)-E_A(h)$, as the quantity to explain and factorizes it under an explicit intervention game into changes associated with task-target scores ($T$), rival scores ($R$), other structurally valid scores ($O$), value content ($V$), and surrounding-network context ($C$).
+The candidate head and task-relevant target coordinates are specified before the FALI analysis.}
 \label{fig:fali-overview}
 \end{figure*}

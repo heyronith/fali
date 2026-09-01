@@ -1,10 +1,11 @@
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/Fig3.png}
-\caption{\textbf{FALI recovers controlled ground truth and the analytically expected interaction split.}
-In five deterministic single-factor systems, the normalized attribution matrix places the full endpoint change on the manipulated factor; the annotated raw endpoint changes are $0.268952$, $-0.494100$, $0.213489$, $0.192510$, and $0.711235$ for $T,R,O,V,$ and $C$, respectively, with maximum discrepancy $1.11\times10^{-16}$.
-A separate pure $T\times C$ construction has $\Delta_h\approx2$ and yields the expected equal Owen split, $\phi_T\approx1$ and $\phi_C\approx1$, with $R,O,V=0$.
-The independently checked transformer endpoints are intact effect $0.455046$, conditional effect $-0.085684$, and conditional gain $-0.540729$.
-These are implementation and ground-truth checks, not evidence that the hybrid factors are unique natural pathways.}
+\caption{\textbf{Controlled validation recovers known factors, interaction allocation, and transformer implementation invariants.}
+\textbf{(a)} In deterministic single-factor systems, the full normalized endpoint change is recovered on the manipulated factor; raw $\Delta U$ values are annotated by row and the maximum attribution discrepancy is $1.11\times10^{-16}$.
+\textbf{(b)} A pure $T\times C$ construction with $\Delta_h\approx2$ yields the analytically expected Owen split $\phi_T\approx1$ and $\phi_C\approx1$, with the remaining factors zero.
+\textbf{(c)} A randomly initialized two-layer TransformerLens model checks score-to-pattern reconstruction, pattern/value-to-head-output reconstruction, masking and batch-specific partitions, endpoint identity, candidate isolation and live-computation leakage, and coarse--fine quotient reconciliation.
+The independently measured intact effect, conditional effect, and conditional gain are $0.455046$, $-0.085684$, and $-0.540729$, respectively.
+These are implementation and controlled-ground-truth tests, not evidence that mixed FALI hybrids are unique natural model states or pathways.}
 \label{fig:validation}
 \end{figure*}

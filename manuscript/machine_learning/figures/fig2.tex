@@ -1,11 +1,11 @@
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/Fig2.png}
-\caption{\textbf{FALI constructs an output-grounded 32-cell intervention game.}
-First, structurally valid candidate-head scores are partitioned into task-target coordinates $T$, rivals $R$ in the same query row, and all other valid scores $O$.
-Second, each hybrid chooses intact or perturbed sources independently for $T,R,O,V,$ and $C$, reconstructs the candidate attention pattern and head output, and defines utility relative to a candidate-zero run in the same context.
-Third, all $2^5=32$ hybrid states are evaluated and attributed with the standard Owen value under $\mathrm{SCORE}=\{T,R,O\}$, $\mathrm{VALUE}=\{V\}$, and $\mathrm{CONTEXT}=\{C\}$.
-The fine attributions sum to $\Delta_h$, and $\phi_T+\phi_R+\phi_O$ equals the coarse SCORE contribution.
-Hybrid cells are controlled counterfactual states rather than claims about unique natural pathways.}
+\caption{\textbf{FALI defines a 32-cell counterfactual intervention game for the selected attention head.}
+\textbf{(a)} At the task-relevant query $q^\ast$, structurally valid pre-softmax scores are partitioned into the prespecified target coordinate(s) $T$, competing valid scores in the same query row $R$, and all other valid scores $O$; masked coordinates are not players.
+\textbf{(b)} A hybrid cell independently takes $T,R,O,V,$ and $C$ from the intact or perturbed endpoint, reconstructs the candidate attention pattern and head output, and defines utility as the task metric with the hybrid candidate output minus the metric with that candidate zeroed in the same surrounding context.
+\textbf{(c)} All $2^5=32$ hybrid states are evaluated.
+Standard Owen attribution under $\mathrm{SCORE}=\{T,R,O\}$, $\mathrm{VALUE}=\{V\}$, and $\mathrm{CONTEXT}=\{C\}$ allocates the endpoint change so that $\sum_i\phi_i=\Delta_h$ and $\Phi_{\mathrm{SCORE}}=\phi_T+\phi_R+\phi_O$.
+These quantities are defined by the explicit counterfactual game and are not claims that the model naturally implements five independent causal pathways.}
 \label{fig:fali-game}
 \end{figure*}
