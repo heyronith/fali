@@ -100,7 +100,9 @@ This definition deliberately evaluates the candidate against a zero-candidate ba
 
 The problem begins after a candidate head and a task-relevant attention target have been chosen. They may come from prior circuit analysis, conditional co-ablation, patching, or a task-specific hypothesis. FALI does not search over heads, discover a target edge, or infer a circuit automatically. Its input is a selected head $h$, two model states $A$ and $B$, a scalar task metric $m$, and a target query--key edge (or prespecified target edge set) whose score is meaningful for the task.
 
-The objective is to account for $\Delta_h$ using changes in three architecture-level objects associated with the candidate: its pre-softmax attention scores, its value vectors, and the surrounding computation in which the resulting head output is used. The score tensor is then resolved more finely into the task-target score, rivals in the same query row, and scores at other query positions. This yields a controlled mechanism-discrimination question: under a fixed intervention algebra, which candidate-local or surrounding changes receive credit for the observed change in output-grounded usefulness? Figure~\ref{fig:fali-overview} summarizes this distinction.
+The objective is to account for $\Delta_h$ using changes in three architecture-level objects associated with the candidate: its pre-softmax attention scores, its value vectors, and the surrounding computation in which the resulting head output is used. The score tensor is then resolved more finely into the task-target score, rivals in the same query row, and scores at other query positions. This yields a controlled mechanism-discrimination question: under a fixed intervention algebra, which candidate-local or surrounding changes receive credit for the observed change in output-grounded usefulness?
+
+Figure~\ref{fig:fali-overview} defines the quantity analyzed below: FALI does not explain the candidate's attention probability itself, but the cross-state change $\Delta_h$ in its output-grounded causal usefulness.
 
 \input{figures/fig1}
 
@@ -181,9 +183,7 @@ so that
 \end{equation}
 This endpoint identity is a required implementation invariant, not an approximation in the mathematical definition.
 
-Most mixed cells need not correspond to an activation state encountered during an unmodified forward pass. FALI should therefore be read as an explicit counterfactual/interchange-intervention game. Its attributions are conditional on the chosen endpoint states, target partition, masking semantics, and intervention construction; they are not claims that the model naturally executes five separable causal pathways. Figure~\ref{fig:fali-game} depicts the 32-cell construction.
-
-\input{figures/fig2}
+Most mixed cells need not correspond to an activation state encountered during an unmodified forward pass. FALI should therefore be read as an explicit counterfactual/interchange-intervention game. Its attributions are conditional on the chosen endpoint states, target partition, masking semantics, and intervention construction; they are not claims that the model naturally executes five separable causal pathways.
 
 \subsection{Standard Owen attribution and coarse--fine reconciliation}\label{sec:owen}
 
@@ -241,6 +241,10 @@ Standard Owen group consistency gives
 When the whole SCORE block switches together, its hybrid scores reproduce the complete $A$ or $B$ candidate pattern. The quotient SCORE/V/C game therefore matches the earlier pattern/value/context intervention game at the corresponding cells; this numerical bridge is tested explicitly in Section~\ref{sec:implementation-validation}. The purpose of Owen attribution here is not mathematical novelty but consistency between a coarse score/value/context explanation and the finer $T/R/O$ explanation inside SCORE.
 
 Finally, the historical two-factor attention-probability version of FALI is nested as a special case rather than identified with the present causal attributions. If the utility is changed from output-grounded usefulness to target attention probability, $O$, $V$, and $C$ are held fixed, and only $T$ and $R$ vary, Eq.~\ref{eq:owen-value} reduces to the ordinary two-player Shapley decomposition of target-score versus competing-score changes. The present method changes both the intervention scope and, crucially, the quantity being explained.
+
+Figure~\ref{fig:fali-game} summarizes the complete intervention construction. Panel (a) of Fig.~\ref{fig:fali-game} shows the task-conditioned $T/R/O$ score partition, panel (b) of Fig.~\ref{fig:fali-game} shows how one hybrid candidate utility is constructed, and panel (c) of Fig.~\ref{fig:fali-game} shows how the 32 utilities are reconciled into fine and coarse Owen attributions.
+
+\input{figures/fig2}
 
 \input{method_validation}
 \input{gpt2_ioi}
