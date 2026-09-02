@@ -12,13 +12,12 @@
 
 \title[FALI]{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance}
 
-% Primary author publication-name spelling: AUTHOR CONFIRMATION REQUIRED.
-\author*[1]{\fnm{[PUBLICATION NAME]} \sur{[AUTHOR CONFIRMATION REQUIRED]}}\email{Rohanth.Sharmula@swosu.edu}
+\author*[1]{\fnm{Ronith} \sur{Sharmila}}\email{Rohanth.Sharmula@swosu.edu}
 \affil*[1]{\orgname{Southwestern Oklahoma State University}, \orgaddress{\city{Weatherford}, \country{USA}}}
-\author[2]{\fnm{Dylan} \sur{Darshan}}
+\author[2]{\fnm{Delen} \sur{Dursun}}\email{dursun.delen@okstate.edu}
 \affil[2]{\orgname{Oklahoma State University}, \orgaddress{\city{Stillwater}, \country{USA}}}
-\author[3]{\fnm{Rupesh} \sur{Agrawal}}
-\affil[3]{\orgname{[AFFILIATION REQUIRED]}, \orgaddress{\city{[CITY REQUIRED]}, \country{USA}}}
+\author[3]{\fnm{Rupesh} \sur{Agrawal}}\email{rupesh.agrawal@nku.edu}
+\affil[3]{\orgname{Northern Kentucky University}, \orgaddress{\country{USA}}}
 
 \abstract{Component importance in transformer circuits can change after another component is perturbed, but detecting such conditional importance does not explain why the change occurred. We introduce FALI (Factorized Attention-Level Intervention), an output-grounded counterfactual framework that decomposes the cross-state change in a selected attention head's causal usefulness into target scores, rival scores, other attention scores, value content, and surrounding-network context. Standard Owen attribution allocates interactions while reconciling the fine score decomposition with a coarse score/value/context game. Controlled synthetic systems and a randomly initialized transformer validate factor recovery, endpoint identities, intervention isolation, and coarse--fine consistency. In GPT-2 Small on indirect object identification, a head satisfying the positive-recruitment criterion exhibits a positive target-score contribution and a negative rival-score contribution, while another head shows similar attention adaptation without positive recruitment. We then preregister transfer of this fine-score mechanism to Pythia-160M induction. Conditional recruitment appears again, but the target and rival contributions reverse sign. Thus, across the two studied settings, a common functional response does not imply a common fine-grained mechanism. FALI provides a mechanism-discrimination layer for selected conditionally important attention heads under explicit intervention semantics.}
 
@@ -259,22 +258,22 @@ Finally, the historical two-factor attention-probability version of FALI is nest
 \section*{Statements and Declarations}
 
 \subsection*{Competing Interests}
-The authors declare no competing interests. \textbf{[ALL-AUTHORS CONFIRMATION REQUIRED]}
+The authors declare no competing interests.
 
 \subsection*{Funding}
 This research received no external funding.
 
 \subsection*{Data Availability}
-The study uses publicly available pretrained models and programmatically generated experimental datasets. The processed datasets, aggregate result files, preregistration records, and analysis artifacts supporting the reported figures and tables will be archived with the accompanying code release. No private participant data were used. \textbf{[PERMANENT DOI/URL REQUIRED BEFORE FINAL SUBMISSION]}
+The study uses publicly available pretrained models and programmatically generated experimental datasets. Processed datasets, aggregate result files, preregistration records, and analysis artifacts supporting the reported results will be archived with the accompanying code release. No private participant data were used.
 
 \subsection*{Code Availability}
-The code required to reproduce the reported analyses, statistical summaries, and scientific figures will be made publicly available in the project repository and archived in a persistent release at the time of publication. The manuscript will be updated with the permanent repository/DOI before final submission. \textbf{[PERMANENT DOI/URL REQUIRED BEFORE FINAL SUBMISSION]}
+The code required to reproduce the reported analyses, statistical summaries, and scientific figures will be made publicly available in the project repository and archived in a persistent release. The final manuscript will provide the permanent repository URL or archival DOI.
 
 \subsection*{Author Contributions}
-The primary author led the conceptualization, methodology, experimental design and execution, formal analysis, visualization, software/research workflow, and preparation of the original manuscript. Dylan Darshan and Rupesh Agrawal contributed mentorship and supervision. All authors reviewed and approved the final manuscript. \textbf{[AUTHOR-CONFIRMATION REQUIRED: mentor roles and any additional CRediT roles for co-authors]}
+The primary author led the conceptualization, methodology, experimental design and execution, software development, formal analysis, validation, visualization, and preparation of the original manuscript. Rupesh Agrawal and Delen Dursun contributed mentorship and supervision. All authors contributed to manuscript review and approved the final version.
 
 \subsection*{Use of Generative AI}
-Generative AI tools, including OpenAI ChatGPT and Cursor, were used during manuscript development to assist with literature-search support, drafting and editing, code generation and review, figure-layout development, and LaTeX/repository integration. All experimental designs, scientific claims, numerical results, citations, and final manuscript content were reviewed and verified by the authors against the underlying source code, result artifacts, and primary literature. Quantitative figures were produced from deterministic source-backed plotting workflows. Generative AI tools are not listed as authors and bear no responsibility for the work. \textbf{[AUTHOR-APPROVAL REQUIRED]}
+Generative AI tools, including OpenAI ChatGPT and Cursor, were used during manuscript development to assist with literature-search support, drafting and editing, code generation and review, figure-layout development, and LaTeX/repository integration. All experimental designs, scientific claims, numerical results, citations, and final manuscript content were reviewed and verified by the authors against the underlying source code, result artifacts, and primary literature. Quantitative scientific figures were produced using deterministic, source-backed plotting workflows. Generative AI tools are not listed as authors and bear no responsibility for the work.
 
 \bibliography{references}
 
