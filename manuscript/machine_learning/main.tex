@@ -12,12 +12,12 @@
 
 \title[FALI]{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance}
 
-\author*[1]{\fnm{Ronith} \sur{Sharmila}}\email{Rohanth.Sharmula@swosu.edu}
+\author*[1]{\fnm{Ronith} \sur{Sharmila}}\email{ronith.sharmila@swosu.edu}
 \affil*[1]{\orgname{Southwestern Oklahoma State University}, \orgaddress{\city{Weatherford}, \country{USA}}}
 \author[2]{\fnm{Delen} \sur{Dursun}}\email{dursun.delen@okstate.edu}
 \affil[2]{\orgname{Oklahoma State University}, \orgaddress{\city{Stillwater}, \country{USA}}}
 \author[3]{\fnm{Rupesh} \sur{Agrawal}}\email{rupesh.agrawal@nku.edu}
-\affil[3]{\orgname{Northern Kentucky University}, \orgaddress{\country{USA}}}
+\affil[3]{\orgname{Northern Kentucky University}, \orgaddress{\city{Highland Heights}, \state{Kentucky}, \country{USA}}}
 
 \abstract{Component importance in transformer circuits can change after another component is perturbed, but detecting such conditional importance does not explain why the change occurred. We introduce FALI (Factorized Attention-Level Intervention), an output-grounded counterfactual framework that decomposes the cross-state change in a selected attention head's causal usefulness into target scores, rival scores, other attention scores, value content, and surrounding-network context. Standard Owen attribution allocates interactions while reconciling the fine score decomposition with a coarse score/value/context game. Controlled synthetic systems and a randomly initialized transformer validate factor recovery, endpoint identities, intervention isolation, and coarse--fine consistency. In GPT-2 Small on indirect object identification, a head satisfying the positive-recruitment criterion exhibits a positive target-score contribution and a negative rival-score contribution, while another head shows similar attention adaptation without positive recruitment. We then preregister transfer of this fine-score mechanism to Pythia-160M induction. Conditional recruitment appears again, but the target and rival contributions reverse sign. Thus, across the two studied settings, a common functional response does not imply a common fine-grained mechanism. FALI provides a mechanism-discrimination layer for selected conditionally important attention heads under explicit intervention semantics.}
 
