@@ -1,0 +1,257 @@
+{
+  "created_utc": "2026-09-15T16:54:38.813323+00:00",
+  "branch": "manuscript/neural-networks-template-audit",
+  "source_head": "9672c029ad64dcce746b103125ff5f4e6619f842",
+  "note": "Protective manifest before any cleanup. Case C: Neural Networks template NOT FOUND; no scientific files deleted.",
+  "files": [
+    {
+      "path": "manuscript/machine_learning/main.tex",
+      "sha256": "a0061ae9a9a440f772bffe17a87ca0df8ca95c1b2341fb66706b25b6add5a3bf",
+      "size": 35602,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "title",
+        "abstract",
+        "intro",
+        "related",
+        "method FALI",
+        "inputs to validation/IOI/Pythia/discussion"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/method_validation.tex",
+      "sha256": "a829aeebb9fbb1b9d475e58591ed313187abf67adf00cdb99914bf99c7c23de3",
+      "size": 3666,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "Method Validation"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/gpt2_ioi.tex",
+      "sha256": "585a4ef4b12eda90bfda6c1f60750e64cc80a0c01d461e2363c2618892f10f6d",
+      "size": 5354,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "GPT-2 IOI"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/pythia_induction.tex",
+      "sha256": "823191e48774a2adcf92d2c45febf745acb96a287838d332a5fcd8f859340d70",
+      "size": 3735,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "Pythia induction"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/discussion_limitations_conclusion.tex",
+      "sha256": "d92c4ccea43d3a07ef2f068bc89cb27e85a8f7d40f7ed0d8e089a8fcd260500e",
+      "size": 7619,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "Discussion",
+        "Limitations",
+        "Conclusion"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/supplement.tex",
+      "sha256": "b329b484f4208d900900720ff8bf4897abbe78534e95a5a04a8cf834ba05b4b7",
+      "size": 11489,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "Supplement"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/references.bib",
+      "sha256": "557aefc42a1e48978eb3a86b5a92e53737321953cb53cfbd92c8f55e5b44451a",
+      "size": 8685,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "bibliography"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/contribution_information_sheet.tex",
+      "sha256": "eb5d2298136adf3f5c50ef4bd9e6738ebef151fef92522fc01f873bc298329ef",
+      "size": 7265,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ / generic article",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "author contributions sheet"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig1.tex",
+      "sha256": "0bd3f11a77b13f68eac90630b7ff07f85cba9cb7b5f017a308d4a5e8cb0ba7e7",
+      "size": 846,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig1 wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig2.tex",
+      "sha256": "db15cf6173a73d6886dd877c4fa6b9d8fbc5164ecb668b448d7bf4ec6f26d5f2",
+      "size": 1161,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig2 wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig3.tex",
+      "sha256": "5bb4614917c8bd2b8b227775e1535bc94b87aa9050bb8113d52c94986e814ddf",
+      "size": 1213,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig3 wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig4.tex",
+      "sha256": "527844fb99a706b8f409ea001941f990c187cee3c8cf22a087205cb61b95f101",
+      "size": 980,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig4 wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig4a.tex",
+      "sha256": "6b20947670590ce40e8d77d09504357bc7ae3a279548c21c18655eaf0d08dc22",
+      "size": 696,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig4a wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig4bc.tex",
+      "sha256": "e9c6bff5820dc96855110d075b7fbb310fbc3c33bb63a1fb6d742c4d295bf7e3",
+      "size": 976,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig4bc wrapper"
+      ]
+    },
+    {
+      "path": "manuscript/machine_learning/figures/fig5.tex",
+      "sha256": "3e8e3c7df35e5f07451a0cb2b99b4cbc26a1cf52229fb8a8bc1a5741837eed00",
+      "size": 1140,
+      "git_status": "tracked-clean",
+      "venue_template": "Springer MLJ",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "Fig5 wrapper"
+      ]
+    },
+    {
+      "path": "paper.tex",
+      "sha256": "21bbb9e0be57d774338474501d5b0aa5c7c4d6179c20083fac2824e81a54bd57",
+      "size": 58142,
+      "git_status": "tracked-clean",
+      "venue_template": "generic article",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "historical Frozen Attention Logit Intervention full paper"
+      ]
+    },
+    {
+      "path": "archive/manuscripts/tmlr_rejected_main.tex",
+      "sha256": "b9c5d9228e3b084bb0af4cce5dbea1a0f3e9505149d77bb0d7cf5300974177f5",
+      "size": 58817,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "historical Frozen Attention Logit Intervention TMLR submission"
+      ]
+    },
+    {
+      "path": "archive/manuscripts/tmlr_rejected_math_commands.tex",
+      "sha256": "90473c4d0542070db244cea73ef962d6cddc5b2a746757e6a40ddf5fdfb90ba9",
+      "size": 12284,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "math macros"
+      ]
+    },
+    {
+      "path": "archive/manuscripts/tmlr_rejected_references.bib",
+      "sha256": "9e8eae4afc39412ed595665ccf6f7fb368bcb7388d566cdd48cd34173139e83e",
+      "size": 8228,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "historical bibliography"
+      ]
+    },
+    {
+      "path": "submission_tmlr/main.tex",
+      "sha256": "b9c5d9228e3b084bb0af4cce5dbea1a0f3e9505149d77bb0d7cf5300974177f5",
+      "size": 58817,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "duplicate/near-duplicate of rejected TMLR main"
+      ]
+    },
+    {
+      "path": "submission_tmlr/references.bib",
+      "sha256": "9e8eae4afc39412ed595665ccf6f7fb368bcb7388d566cdd48cd34173139e83e",
+      "size": 8228,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": true,
+      "sections": [
+        "TMLR bibliography"
+      ]
+    },
+    {
+      "path": "submission_tmlr/math_commands.tex",
+      "sha256": "90473c4d0542070db244cea73ef962d6cddc5b2a746757e6a40ddf5fdfb90ba9",
+      "size": 12284,
+      "git_status": "tracked-clean",
+      "venue_template": "TMLR",
+      "substantive_scientific_prose": false,
+      "sections": [
+        "math macros"
+      ]
+    }
+  ]
+}
