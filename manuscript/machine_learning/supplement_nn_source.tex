@@ -1,0 +1,341 @@
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{hyperref}
+\usepackage{xurl}
+\journal{Neural Networks}
+\begin{document}
+\begin{frontmatter}
+\title{Supplementary Information for ``FALI: Mechanistic Decomposition of Conditional Attention-Head Causal Usefulness''}
+\author[inst1]{Ronith Sharmila}
+\author[inst2]{Delen Dursun}
+\author[inst3]{Rupesh Agrawal}
+\affiliation[inst1]{organization={Southwestern Oklahoma State University}, city={Weatherford}, country={USA}}
+\affiliation[inst2]{organization={Oklahoma State University}, city={Stillwater}, country={USA}}
+\affiliation[inst3]{organization={Northern Kentucky University}, city={Highland Heights}, state={Kentucky}, country={USA}}
+\begin{abstract}
+Supplementary tables and technical details for the Factorized FALI Neural Networks manuscript.
+\end{abstract}
+\end{frontmatter}
+
+
+\section{Standard Owen attribution and intervention identities}
+
+FALI uses five binary factors $N=\{T,R,O,V,C\}$ and the prospectively fixed
+coalition partition
+\[
+\Pi=\{\mathrm{SCORE}=\{T,R,O\},\mathrm{VALUE}=\{V\},\mathrm{CONTEXT}=\{C\}\}.
+\]
+Each coalition $K\subseteq N$ indexes the hybrid state in which members of $K$
+take their perturbed-state values and all remaining factors take their intact-state
+values. The characteristic function is $v(K)=U(\mathbf{1}_K)$, where utility is the
+candidate-present task metric minus the candidate-zero task metric in the same
+surrounding context.
+
+The standard Owen value averages marginal contributions over all permutations
+that keep members of each block contiguous. For the partition above there are
+$3!\times 3!=36$ admissible permutations. Efficiency gives
+\[
+\phi_T+\phi_R+\phi_O+\phi_V+\phi_C
+=v(N)-v(\varnothing)
+=\Delta_h.
+\]
+The quotient game on SCORE/VALUE/CONTEXT satisfies
+\[
+\Phi_{\mathrm{SCORE}}=\phi_T+\phi_R+\phi_O.
+\]
+These identities allocate interaction under the specified counterfactual game.
+They do not identify unique natural pathways.
+
+\section{Method-validation chronology and controlled ground truth}
+
+The attribution implementation was validated before substantive pretrained
+model experiments. An initial fixed block-order implementation was rejected
+because it was not the standard Owen value; EF-0R restored all 36 admissible
+permutations and ordinary Shapley attribution on the quotient game. A subsequent
+implementation review identified a batch-shared target partition and
+insufficiently independent endpoint checks in EF-1; EF-1R introduced
+per-example batched partitions and independent direct endpoint validation before
+pretrained model experiments began. The superseded implementations are retained
+only for audit history.
+
+\subsection{Single-factor synthetic systems}
+
+\begin{table}[h]
+\centering
+\caption{Exact single-factor validation values. In each row only the manipulated
+factor received attribution up to floating-point error.}
+\begin{tabular}{lrr}
+\toprule
+Manipulated factor & $\Delta U$ & Maximum unintended attribution \\
+\midrule
+$T$ & 0.2689520684 & 0 \\
+$R$ & -0.4940997625 & 0 \\
+$O$ & 0.2134890065 & 0 \\
+$V$ & 0.1925102705 & 0 \\
+$C$ & 0.7112345942 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The largest intended-channel discrepancy was
+$1.11\times 10^{-16}$. A pure $T\times C$ construction had
+$\Delta U=1.999999999996$ with
+$\phi_T=0.999999999998$,
+$\phi_C=0.999999999998$, and
+$\phi_R=\phi_O=\phi_V=0$.
+
+\subsection{Random-transformer implementation invariants}
+
+The random TransformerLens validation model used two layers, two heads per layer,
+$d_{\mathrm{model}}=32$, $d_{\mathrm{head}}=16$, $d_{\mathrm{mlp}}=64$,
+context length 8, vocabulary size 48, FP32 CPU execution, and seed 4242.
+The primary and candidate were L0H0 and L1H0.
+
+Independent ordinary forwards gave
+\begin{align*}
+E_A&=0.4550457001,\\
+E_B&=-0.0856835023,\\
+\Delta_h&=-0.5407292023.
+\end{align*}
+The all-intact and all-perturbed FALI endpoint cells reproduced these quantities
+with zero recorded discrepancy. Score-to-pattern reconstruction, pattern and
+value reconstruction of $z$, masked probability, candidate-output injection,
+non-candidate isolation, live-leak checks (Q, V, and Q+V), and quotient-game
+reconciliation all had zero recorded discrepancy at the reported precision.
+
+\section{GPT-2 IOI confirmation}
+
+\subsection{Design and prospectively frozen fine-channel hypotheses}
+
+The canonical cohort used GPT-2 Small, the primary Name Movers L9H6, L9H9, and
+L10H0 as the perturbed set, candidates L10H2 and L10H10, and architectural controls
+L9H7 and L9H0. The design contained 15 low-level templates crossed with BABA/ABBA
+structure, 30 prompts per stratum, and seeds 42, 1, 8, and 22, for 3600 prompts.
+
+The EF-4 confirmation plan was committed before canonical fine-channel
+execution and was recorded in the run configurations. The four primary
+directional hypotheses were
+\[
+\phi_T>0,\ \phi_R<0
+\]
+for both L10H2 and L10H10. $\phi_O$ was descriptive. Point estimates equally
+weighted 30 strata within each seed and then averaged across the four seeds.
+Intervals used 10{,}000 hierarchical bootstrap draws over template clusters.
+Confirmation also required directional agreement in every seed, broad stratum
+support, and a sensitivity that excludes template~0.
+
+\subsection{Canonical exact estimates}
+
+\begin{table}[h]
+\centering
+\caption{Canonical GPT-2 FALI results. Intervals are hierarchical 95\% bootstrap
+confidence intervals.}
+\begin{tabular}{llrrr}
+\toprule
+Head & Quantity & Mean & CI low & CI high \\
+\midrule
+L10H2 & conditional gain & 0.298451 & 0.262940 & 0.335184 \\
+      & $\Delta$ target attention & 0.279460 & 0.261643 & 0.295510 \\
+      & $\phi_T$ & 0.782806 & 0.721856 & 0.838338 \\
+      & $\phi_R$ & -0.341419 & -0.371673 & -0.310909 \\
+      & $\phi_O$ & 0.003864 & 0.002363 & 0.005329 \\
+      & $\phi_V$ & -0.000349 & -0.000810 & 0.000104 \\
+      & $\phi_C$ & -0.146451 & -0.164685 & -0.128324 \\
+      & $\Phi_{\mathrm{SCORE}}$ & 0.445252 & 0.408802 & 0.477107 \\
+\midrule
+L10H10 & conditional gain & -0.263442 & -0.301914 & -0.224875 \\
+       & $\Delta$ target attention & 0.310250 & 0.285276 & 0.334539 \\
+       & $\phi_T$ & 0.328524 & 0.300205 & 0.355043 \\
+       & $\phi_R$ & -0.125907 & -0.138610 & -0.113054 \\
+       & $\phi_O$ & 0.003634 & 0.002586 & 0.004619 \\
+       & $\phi_V$ & 0.001556 & 0.001019 & 0.002090 \\
+       & $\phi_C$ & -0.471249 & -0.514272 & -0.427467 \\
+       & $\Phi_{\mathrm{SCORE}}$ & 0.206251 & 0.185089 & 0.225661 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The EF-4 fine-score gate passed for both heads. The fine-score signs were in the
+predicted direction in all four seed means and all 30 stratum means for both channels.
+The template-0-excluded analysis retained confidence intervals excluding zero in the
+predicted directions.
+
+The broad functional effects used to classify recruitment were measured in the
+corrected historical canonical analysis. L10H2 had conditional effect
+$0.382239$ (95\% CI $[0.340647,0.423865]$), while L10H10 had conditional effect
+$-0.078890$ ($[-0.111127,-0.045726]$). Positive functional recruitment therefore
+holds for L10H2 but not L10H10.
+
+\section{Alternative primary-intervention schemes}
+
+EF-5 tested matched-mean and matched-resample alternatives. The four frozen
+fine-channel directions were retained under both alternatives.
+
+\begin{table}[h]
+\centering
+\caption{EF-5 fine-channel robustness under the tested alternatives.}
+\begin{tabular}{llrrr}
+\toprule
+Scheme & Channel & Mean & CI low & CI high \\
+\midrule
+matched mean & L10H2 $\phi_T$ & 0.440043 & 0.408205 & 0.469904 \\
+             & L10H2 $\phi_R$ & -0.165506 & -0.178350 & -0.152149 \\
+             & L10H10 $\phi_T$ & 0.187863 & 0.172625 & 0.202101 \\
+             & L10H10 $\phi_R$ & -0.081585 & -0.088512 & -0.074357 \\
+\midrule
+matched resample & L10H2 $\phi_T$ & 0.265058 & 0.245147 & 0.285338 \\
+                 & L10H2 $\phi_R$ & -0.047390 & -0.057199 & -0.038001 \\
+                 & L10H10 $\phi_T$ & 0.085806 & 0.077595 & 0.094128 \\
+                 & L10H10 $\phi_R$ & -0.014964 & -0.018855 & -0.011402 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All 30 strata retained the frozen direction for each reported channel. These
+channel-level results do not imply an overall EF-5 pass. The preregistered
+experiment-level gate failed because the zero-reference damage-drop estimate was
+$-0.318825$ with 95\% CI $[-0.395660,-0.243713]$, violating the required positive
+reference criterion. The correct interpretation is therefore ROBUST for the tested
+fine-channel alternatives and FAIL for the overall EF-5 gate.
+
+\section{Pythia-160M induction transfer}
+
+\subsection{Prospective design}
+
+EF-6 was the one authorized cross-setting transfer test. Discovery used seed 42
+only and was prohibited from inspecting FALI attributions. The frozen selection rule
+chose L5H0 as the primary and L8H2 as the candidate. Confirmation used seeds 1,
+8, and 22 with offsets 8, 16, and 24 and 128 examples per offset per seed.
+The task metric was target-token natural-log probability. The transfer hypotheses
+predicted $\phi_T>0$ and $\phi_R<0$.
+
+The repeated-token construction used base length 32, target token $x_{j+1}$,
+final query $q=32+j$, and target key $k=j+1$. The control replaced the first
+32-token block with a disjoint token block. Estimates weighted offsets equally within
+seed and seeds equally; confidence intervals used 10,000 deterministic bootstrap draws
+within seed--offset cells.
+
+\subsection{Held-out exact results}
+
+\begin{table}[h]
+\centering
+\caption{Pythia-160M confirmation results.}
+\begin{tabular}{lrrr}
+\toprule
+Quantity & Mean & CI low & CI high \\
+\midrule
+induction advantage & 14.017091 & 12.280371 & 15.939234 \\
+primary drop & 1.145992 & 0.886752 & 1.538771 \\
+conditional effect & 0.621197 & 0.455912 & 0.860486 \\
+conditional gain & 0.485653 & 0.326486 & 0.721815 \\
+$\phi_T$ & -0.143737 & -0.247435 & -0.084085 \\
+$\phi_R$ & 0.117800 & 0.058225 & 0.219125 \\
+$\phi_O$ & -0.000270 & -0.000847 & 0.000256 \\
+$\phi_V$ & -0.002099 & -0.002762 & -0.001557 \\
+$\phi_C$ & 0.513958 & 0.354460 & 0.752149 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+G0 (induction behavior), G1 (primary causal importance), and G2 (positive
+conditional recruitment) were confirmed. G3 and G4 were not confirmed because the
+target and rival signs were opposite to the preregistered transfer hypothesis.
+Accordingly, EF-6 is FAIL. This is a failed mechanism-transfer hypothesis, not a
+failed recruitment result and not confirmation of a universal opposite mechanism.
+
+
+\section{Softmax-gauge sensitivity (prespecified row-centering)}
+
+Native-logit FALI is the primary analysis. The following tables report the
+preregistered zero-mean (row-centering) gauge sensitivity (preregistration
+commit~\path{e60f81acfff8fc9dd4f924ebb1c087ec89734c05}; executed results
+commit~\path{43135198065e4a13acb241c677a0965e2165b988}). Source report:
+\path{results/extended_fali/gauge_sensitivity/GAUGE_SENSITIVITY_REPORT.md}.
+
+Cross-setting fine contrast: PRESERVED. Interpretation code: A
+(fine-channel sign conclusions robust to the prespecified zero-mean gauge
+sensitivity only; not universal gauge invariance; not magnitude invariance).
+
+\begin{table}[h]
+\centering
+\caption{GPT-2 EF-4 L10H2 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & 0.782806 & 0.643597 & $-0.139209$ \\
+$\phi_R$ & $-0.341419$ & $-0.202220$ & $0.139199$ \\
+$\phi_O$ & 0.003864 & 0.003875 & $1.02\times10^{-5}$ \\
+$\phi_V$ & $-0.000349$ & $-0.000349$ & $0$ \\
+$\phi_C$ & $-0.146451$ & $-0.146451$ & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & 0.445252 & 0.445252 & $\approx0$ \\
+conditional gain & 0.298451 & 0.298451 & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{GPT-2 EF-4 L10H10 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & 0.328524 & 0.305908 & $-0.022616$ \\
+$\phi_R$ & $-0.125907$ & $-0.103273$ & $0.022635$ \\
+$\phi_O$ & 0.003634 & 0.003615 & $-1.91\times10^{-5}$ \\
+$\phi_V$ & 0.001556 & 0.001556 & $0$ \\
+$\phi_C$ & $-0.471249$ & $-0.471249$ & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & 0.206251 & 0.206251 & $\approx0$ \\
+conditional gain & $-0.263442$ & $-0.263442$ & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Pythia EF-6 L8H2 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & $-0.143737$ & $-0.047046$ & $0.096690$ \\
+$\phi_R$ & 0.117800 & 0.021088 & $-0.096712$ \\
+$\phi_O$ & $-0.000270$ & $-0.000247$ & $2.22\times10^{-5}$ \\
+$\phi_V$ & $-0.002099$ & $-0.002099$ & $0$ \\
+$\phi_C$ & 0.513958 & 0.513958 & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & $-0.026206$ & $-0.026206$ & $\approx0$ \\
+conditional gain & 0.485653 & 0.485653 & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Fine-channel decisions: L10H2, L10H10, and L8H2 all PRESERVED under the
+preregistered sign criteria. Magnitudes change (especially Pythia). No claim of
+complete gauge invariance is made.
+
+\section{Reproducibility and audit trail}
+
+The experiment repository contains the prospective analysis plans, run
+configurations with preregistration commit identifiers, exact balanced means,
+bootstrap intervals, gate files, validation reports, and machine-readable raw and
+aggregate outputs. The central evidence paths are:
+
+\begin{itemize}
+\item \path{results/extended_fali/ef1_synthetic/validation_report.json}
+\item \path{results/extended_fali/ef4_canonical/aggregate/}
+\item \path{results/extended_fali/ef5_ablation_robustness/aggregate/}
+\item \path{results/extended_fali/ef6_pythia_induction/aggregate/}
+\item \path{results/extended_fali/gauge_sensitivity/}
+\item \path{results/revision_phase4/full/aggregate/}
+\end{itemize}
+
+No additional model, task, threshold, or replacement pair was introduced after the
+reported EF-5 or EF-6 failures. Hybrid-state results should be interpreted as outcomes
+of the stated counterfactual intervention game; the surrounding context factor remains
+coarse and can aggregate multiple external computations.
+
+\end{document}

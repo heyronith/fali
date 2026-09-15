@@ -1,0 +1,19 @@
+\section{Limitations}\label{sec:limitations}
+
+\paragraph{Hypothesis-driven scope.}
+FALI requires a selected attention head and a task-relevant target edge or edge set. IOI and repeated-token induction provide clear target coordinates; less structured tasks may require substantial prior circuit analysis. Because the five-factor game evaluates 32 counterfactual cells per example and candidate, FALI is intended for focused mechanism resolution rather than exhaustive whole-model scanning. Candidate or target selection after inspecting FALI results would introduce substantial researcher degrees of freedom, so confirmatory use should freeze these choices prospectively.
+
+\paragraph{Counterfactual hybrids.}
+Mixed $T/R/O/V/C$ states need not occur during natural model execution. They answer what the model would do under the specified interchange intervention, not which latent state it would otherwise visit. Representation-level interventions can move computation away from naturally occurring internal distributions \citep{grant2025divergent}; FALI attributions therefore do not identify five independent natural pathways.
+
+\paragraph{Intervention and coalition dependence.}
+Attributions depend on the intact and perturbed endpoints, the candidate-zero baseline, the score partition, and the SCORE/VALUE/CONTEXT coalition structure. Owen attribution allocates interactions consistently within that game, but a different defensible intervention or grouping can allocate credit differently. In GPT-2, the target-positive/rival-negative pattern persists under the tested matched alternatives (mean and resample), while the broader preregistered robustness criterion fails because the zero-ablation reference is invalid. The evidence therefore supports only the intervention variants actually tested.
+
+\paragraph{Score representation dependence.}
+Fine $T/R/O$ attributions operate on pre-softmax scores, which admit per-row additive gauge freedom. The primary native-logit conclusions retain their signs under a prospectively specified zero-mean row-centering sensitivity, but the magnitudes change, particularly in Pythia. We therefore claim sign robustness to that sensitivity, not general gauge invariance or magnitude invariance.
+
+\paragraph{Coarse context factor.}
+$C$ aggregates surrounding computation outside the explicitly supplied candidate score/value state, potentially including other heads, MLPs, residual representations, normalization, and upstream or downstream changes. A large $\phi_C$ assigns credit to this block of the game but does not identify the external component or pathway responsible. Resolving $C$ would require additional hypotheses and interventions.
+
+\paragraph{Empirical scope.}
+The substantive evidence covers GPT-2 Small IOI and Pythia-160M repeated-token induction. This is sufficient to falsify transfer of the preregistered GPT-2 target/rival pattern to the tested Pythia setting, but not to characterize recruitment mechanisms across architectures, scales, tasks, or training stages. Prompt-specific circuit results reinforce this distributional caution \citep{franco2026promptspecific}. The present factorization is also attention-head-specific; MLPs, residual features, or distributed mechanisms would require different architecture-aligned factors rather than mechanically reusing $T/R/O/V/C$.

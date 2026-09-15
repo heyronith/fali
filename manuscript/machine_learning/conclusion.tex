@@ -1,0 +1,7 @@
+\section{Conclusion}\label{sec:conclusion}
+
+FALI explains how a selected attention head's causal usefulness changes after a circuit perturbation by separating target, rival, and other score changes from value content and surrounding-network context. The framework is output-grounded, interaction-aware, and explicit about the counterfactual intervention semantics under which its attributions are defined.
+
+The experiments show why this resolution is useful. In GPT-2 IOI, attention adaptation is not sufficient for positive recruitment, and a target-positive/rival-negative score pattern can occur even when a head becomes less useful. More importantly, positive conditional recruitment appears in both GPT-2 IOI and Pythia induction while their target/rival score contributions have opposite signs. The preregistered mechanism-transfer hypothesis therefore fails.
+
+The resulting claim is deliberately bounded: a common functional label need not imply a common fine-grained mechanism. FALI provides a way to test that distinction for selected attention heads rather than infer mechanism from conditional importance or attention change alone.

@@ -1,0 +1,15 @@
+\section{Robustness and Representation Sensitivity}\label{sec:robustness}
+
+\subsection{Alternative primary interventions}\label{sec:gpt2-robustness}
+
+We tested whether the GPT-2 target-positive/rival-negative pattern persisted under matched-mean and matched-resample alternatives to the canonical zero ablation. It did. For L10H2, matched mean gives $\phi_T=0.440$ and $\phi_R=-0.166$, while matched resample gives $\phi_T=0.265$ and $\phi_R=-0.0474$. L10H10 retains the same signs under both alternatives. Hierarchical confidence intervals exclude zero in the predicted direction, and the sign pattern is preserved across all canonical strata. Full estimates are reported in the Supplementary Information.
+
+This channel-level robustness should not be confused with an overall robustness pass. The preregistered experiment-level criterion also required a valid zero-ablation damage reference; that reference failed, with estimate $-0.319$ and 95\% CI $[-0.396,-0.244]$. We therefore conclude only that the fine-channel directions persist under the tested matched alternatives. We do not claim robustness to arbitrary ablation schemes.
+
+\subsection{Softmax-gauge sensitivity}\label{sec:gauge}
+
+Pre-softmax attention scores are defined only up to a per-query additive constant under softmax. Fine attributions obtained by intervening directly on raw scores can therefore depend on the chosen logit representation even when the resulting attention probabilities are unchanged. Native-logit FALI remains our primary analysis; we additionally evaluate a prospectively specified sensitivity in which valid scores are row-centered before hybridization.
+
+The qualitative fine-channel conclusions survive this gauge fix. In GPT-2 IOI, L10H2 retains $\phi_T>0$ and $\phi_R<0$ (native $0.783,-0.341$; row-centered $0.644,-0.202$), and L10H10 likewise retains $T>0,R<0$ (native $0.329,-0.126$; row-centered $0.306,-0.103$). In Pythia induction, the reversed pattern also remains: L8H2 retains $T<0,R>0$ (native $-0.144,+0.118$; row-centered $-0.047,+0.021$). Coarse SCORE, value, context, and endpoint conditional gain remain unchanged at recorded precision, while the fine magnitudes shift, especially in Pythia.
+
+The supported conclusion is deliberately narrow: \emph{the fine-channel sign conclusions are robust to the prespecified zero-mean gauge sensitivity analysis}. This does not establish complete gauge invariance, magnitude invariance, or a uniquely privileged score representation. Detailed paired results are provided in the Supplementary Information.

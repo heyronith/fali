@@ -1,0 +1,75 @@
+%% Machine Learning (Springer Nature) manuscript
+%% Template: sn-jnl (Springer Nature journal-article authoring template)
+%% Bibliography option: sn-apa (APA-based name--year; MLJ encourages APA 7)
+%% Scientific source: neural_networks production HEAD 95358ad + MLJ_SCIENTIFIC_ADAPTATION.md
+
+\documentclass[pdflatex,sn-apa]{sn-jnl}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{placeins}
+\usepackage{xcolor}
+\usepackage{textcomp}
+\usepackage{manyfoot}
+\usepackage{geometry}
+\usepackage{url}
+
+\flushbottom
+
+\begin{document}
+
+\title[FALI]{FALI: Mechanistic Decomposition of Conditional Attention-Head Causal Usefulness}
+
+\author*[1]{\fnm{Ronith} \sur{Sharmila}}\email{ronith.sharmila@swosu.edu}
+\affil*[1]{\orgname{Southwestern Oklahoma State University}, \orgaddress{\city{Weatherford}, \country{USA}}}
+
+\author[2]{\fnm{Delen} \sur{Dursun}}\email{dursun.delen@okstate.edu}
+\affil[2]{\orgname{Oklahoma State University}, \orgaddress{\city{Stillwater}, \country{USA}}}
+
+\author[3]{\fnm{Rupesh} \sur{Agrawal}}\email{rupesh.agrawal@nku.edu}
+\affil[3]{\orgname{Northern Kentucky University}, \orgaddress{\city{Highland Heights}, \state{Kentucky}, \country{USA}}}
+
+\abstract{Mechanistic analyses of learned neural networks often compare component importance before and after an intervention, but detecting conditional importance does not explain why the component's causal contribution changed. We introduce FALI (Factorized Attention-Level Intervention), an output-grounded counterfactual methodology that decomposes the cross-state change in a selected attention head's causal usefulness into target, rival, and other attention-score contributions, value content, and surrounding-network context. Standard Owen attribution allocates interactions while reconciling the fine score decomposition with a coarse score/value/context game. Controlled synthetic systems and a randomly initialized transformer validate factor isolation, endpoint recovery, intervention isolation, and coarse--fine consistency. In GPT-2 Small on indirect object identification, L10H2 is positively recruited after primary Name Movers are ablated and exhibits a target-positive/rival-negative score decomposition, whereas L10H10 shows stronger target-attention adaptation without positive recruitment. A prospectively specified transfer test in Pythia-160M induction again finds positive recruitment, but the target and rival contributions reverse sign. Thus, the same high-level functional response can arise through different fine-grained mechanisms. FALI provides a verifiable mechanism-discrimination stage for selected conditionally important attention heads under explicit intervention semantics.}
+
+\keywords{mechanistic interpretability, causal intervention, transformer circuits, attention heads, conditional importance, causal attribution}
+
+\maketitle
+
+\input{introduction}
+\input{related_work}
+\input{problem_formulation}
+\input{fali_method}
+\input{method_validation}
+\input{gpt2_ioi}
+\input{ablation_and_gauge}
+\input{pythia_induction}
+\input{discussion}
+\input{limitations}
+\input{conclusion}
+
+\section*{Acknowledgements}
+The authors thank colleagues who provided feedback on earlier drafts of this work.
+
+\section*{Statements and Declarations}
+
+\subsection*{Funding}
+This research received no external funding.
+
+\subsection*{Competing Interests}
+The authors declare that they have no financial or non-financial interests that are directly or indirectly related to the work submitted for publication.
+
+\subsection*{Data and Code Availability}
+The study uses publicly available pretrained models and programmatically generated experimental datasets. Processed datasets, aggregate result files, preregistration records, and analysis artifacts supporting the reported results will be archived with the accompanying code release. The code required to reproduce the reported analyses will be made publicly available in the project repository and archived in a persistent release.
+
+\subsection*{Author Contributions}
+Ronith Sharmila: Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing -- original draft, Visualization, Project administration.
+Delen Dursun: Supervision, Writing -- review and editing.
+Rupesh Agrawal: Supervision, Writing -- review and editing.
+All authors read and approved the final manuscript.
+
+\bibliography{references}
+
+\end{document}
