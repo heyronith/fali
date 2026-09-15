@@ -1,0 +1,657 @@
+{
+  "deleted_count": 97,
+  "deleted_bytes": 204669736,
+  "archived_count": 23,
+  "archived_bytes": 58159858,
+  "deleted": [
+    {
+      "path": "fali_manuscript_integration.zip",
+      "size_bytes": 1241382,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "fali_review_package.zip",
+      "size_bytes": 1129727,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "fali_submission_finalization_package.zip",
+      "size_bytes": 821843,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "manuscript/machine_learning.zip",
+      "size_bytes": 11029190,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase1a_review_package.zip",
+      "size_bytes": 48270,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase1b_review_package.zip",
+      "size_bytes": 1204529,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase1c_review_package.zip",
+      "size_bytes": 40202,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase2a3a_review_package.zip",
+      "size_bytes": 110418,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase2b3b_review_package.zip",
+      "size_bytes": 3607977,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase3c_review_package.zip",
+      "size_bytes": 53647,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase3d_review_package.zip",
+      "size_bytes": 2184085,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase4a_review_package.zip",
+      "size_bytes": 201336,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase4b_review_package.zip",
+      "size_bytes": 592628,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "phase4c_review_package.zip",
+      "size_bytes": 88024,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "submission_tmlr.zip",
+      "size_bytes": 16541008,
+      "reason": "review/export ZIP"
+    },
+    {
+      "path": "fali_manuscript_integration",
+      "size_bytes": 1504827,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase1a_review_package_build",
+      "size_bytes": 140385,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase1a_review_staging",
+      "size_bytes": 6500,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase1b_review_build",
+      "size_bytes": 2900857,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase1c_review_build",
+      "size_bytes": 121931,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase2a3a_review_package_build",
+      "size_bytes": 310146,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase2b3b_review_package_build",
+      "size_bytes": 9233483,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase3c_review_package_build",
+      "size_bytes": 154175,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase3d_review_package_build",
+      "size_bytes": 6746924,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "phase4a_review_package_build",
+      "size_bytes": 685096,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "review_package",
+      "size_bytes": 4563801,
+      "reason": "review build/staging tree"
+    },
+    {
+      "path": "git_diff_phase3c.patch",
+      "size_bytes": 44849,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase2a3a.patch",
+      "size_bytes": 84357,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase2b3b.patch",
+      "size_bytes": 98049,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase3d.patch",
+      "size_bytes": 76806,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase4b.patch",
+      "size_bytes": 124844,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase4a.patch",
+      "size_bytes": 72970,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "git_diff_phase4c.patch",
+      "size_bytes": 47186,
+      "reason": "historical patch export"
+    },
+    {
+      "path": "PHASE4A_REVIEW_SUMMARY.md",
+      "size_bytes": 4245,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE4B_REVIEW_SUMMARY.md",
+      "size_bytes": 3239,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE4C_REVIEW_SUMMARY.md",
+      "size_bytes": 1568,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE2A3A_REVIEW_SUMMARY.md",
+      "size_bytes": 5717,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE3D_REVIEW_SUMMARY.md",
+      "size_bytes": 2893,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE3C_REVIEW_SUMMARY.md",
+      "size_bytes": 2623,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "PHASE2B3B_REVIEW_SUMMARY.md",
+      "size_bytes": 4052,
+      "reason": "phase review summary (registry retained)"
+    },
+    {
+      "path": "submission_tmlr",
+      "size_bytes": 52028646,
+      "reason": "TMLR working tree + caches"
+    },
+    {
+      "path": "tmlr-style-file-main",
+      "size_bytes": 774049,
+      "reason": "unused TMLR style clone"
+    },
+    {
+      "path": "Hydra.pdf",
+      "size_bytes": 2799263,
+      "reason": "unrelated PDF"
+    },
+    {
+      "path": "IOI.pdf",
+      "size_bytes": 1342518,
+      "reason": "unrelated PDF"
+    },
+    {
+      "path": "manuscript/Untitled",
+      "size_bytes": 440,
+      "reason": "scratch"
+    },
+    {
+      "path": "figures",
+      "size_bytes": 574501,
+      "reason": "root figures superseded by manuscript/neural_networks/figures"
+    },
+    {
+      "path": "tools/texlive-local",
+      "size_bytes": 51788008,
+      "reason": "local TeX extract"
+    },
+    {
+      "path": "tools/tectonic.tar.gz",
+      "size_bytes": 19860242,
+      "reason": "local TeX tarball"
+    },
+    {
+      "path": "tools/pydeps",
+      "size_bytes": 5994054,
+      "reason": "vendored pypdf extract"
+    },
+    {
+      "path": "tools/springer-template",
+      "size_bytes": 2430457,
+      "reason": "Springer extract; Elsevier is active venue"
+    },
+    {
+      "path": "tools/install-tinytex.sh",
+      "size_bytes": 916,
+      "reason": "local TinyTeX helper"
+    },
+    {
+      "path": "tools/tectonic-home",
+      "size_bytes": 0,
+      "reason": "empty tectonic placeholder"
+    },
+    {
+      "path": "tools/tectonic-cache",
+      "size_bytes": 0,
+      "reason": "empty tectonic placeholder"
+    },
+    {
+      "path": "tools/tectonic-bundles",
+      "size_bytes": 0,
+      "reason": "empty tectonic placeholder"
+    },
+    {
+      "path": "__pycache__",
+      "size_bytes": 71579,
+      "reason": "Python cache"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/figure_scripts/__pycache__",
+      "size_bytes": 49887,
+      "reason": "Python cache"
+    },
+    {
+      "path": "experiments/__pycache__",
+      "size_bytes": 114583,
+      "reason": "Python cache"
+    },
+    {
+      "path": "tests/__pycache__",
+      "size_bytes": 254751,
+      "reason": "Python cache"
+    },
+    {
+      "path": "src/__pycache__",
+      "size_bytes": 297113,
+      "reason": "Python cache"
+    },
+    {
+      "path": ".pytest_cache",
+      "size_bytes": 23187,
+      "reason": "pytest cache"
+    },
+    {
+      "path": ".DS_Store",
+      "size_bytes": 14340,
+      "reason": "OS junk"
+    },
+    {
+      "path": "manuscript/.DS_Store",
+      "size_bytes": 6148,
+      "reason": "OS junk"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/.DS_Store",
+      "size_bytes": 10244,
+      "reason": "OS junk"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/contribution_information_sheet.fls",
+      "size_bytes": 4749,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.bbl",
+      "size_bytes": 2176,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/contribution_information_sheet.aux",
+      "size_bytes": 32,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/contribution_information_sheet.log",
+      "size_bytes": 7881,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.bbl",
+      "size_bytes": 13744,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.fdb_latexmk",
+      "size_bytes": 16752,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.out",
+      "size_bytes": 2825,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.out",
+      "size_bytes": 7238,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.fdb_latexmk",
+      "size_bytes": 20420,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/contribution_information_sheet.fdb_latexmk",
+      "size_bytes": 6066,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.fls",
+      "size_bytes": 21007,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.blg",
+      "size_bytes": 2383,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.aux",
+      "size_bytes": 2656,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/supplement.log",
+      "size_bytes": 36313,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.aux",
+      "size_bytes": 21364,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.log",
+      "size_bytes": 41273,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.fls",
+      "size_bytes": 24325,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/archive/machine_learning/main.blg",
+      "size_bytes": 2357,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.bbl",
+      "size_bytes": 12771,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.spl",
+      "size_bytes": 0,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.out",
+      "size_bytes": 6647,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.fdb_latexmk",
+      "size_bytes": 18915,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.aux",
+      "size_bytes": 23065,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.log",
+      "size_bytes": 26398,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.fls",
+      "size_bytes": 19652,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/main.blg",
+      "size_bytes": 1308,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.bbl",
+      "size_bytes": 568,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.fdb_latexmk",
+      "size_bytes": 14104,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.spl",
+      "size_bytes": 0,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.out",
+      "size_bytes": 3166,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.fls",
+      "size_bytes": 15065,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.blg",
+      "size_bytes": 1030,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.aux",
+      "size_bytes": 3262,
+      "reason": "LaTeX temporary"
+    },
+    {
+      "path": "manuscript/neural_networks/supplement/supplement.log",
+      "size_bytes": 19509,
+      "reason": "LaTeX temporary"
+    }
+  ],
+  "archived": [
+    {
+      "path": "paper.tex",
+      "dest": "archive/historical_fali/paper_frozen_attention.tex",
+      "size_bytes": 58142,
+      "reason": "Frozen Attention manuscript",
+      "op": "move"
+    },
+    {
+      "path": "submission_tmlr/main.tex",
+      "dest": "archive/historical_fali/tmlr_submission_main.tex",
+      "size_bytes": 58817,
+      "reason": "TMLR submission prose copy before deleting tree",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "experiments/qk_decomposition.py",
+      "dest": "archive/historical_fali/experiments/qk_decomposition.py",
+      "size_bytes": 21066,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/output_mediation.py",
+      "dest": "archive/historical_fali/experiments/output_mediation.py",
+      "size_bytes": 28137,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/fali_decomposition.py",
+      "dest": "archive/historical_fali/experiments/fali_decomposition.py",
+      "size_bytes": 15089,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/fali_rigorous_validation.py",
+      "dest": "archive/historical_fali/experiments/fali_rigorous_validation.py",
+      "size_bytes": 16433,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/hybrid_intervention.py",
+      "dest": "archive/historical_fali/experiments/hybrid_intervention.py",
+      "size_bytes": 16161,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/ablate_primary.py",
+      "dest": "archive/historical_fali/experiments/ablate_primary.py",
+      "size_bytes": 8933,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/cache_baseline.py",
+      "dest": "archive/historical_fali/experiments/cache_baseline.py",
+      "size_bytes": 7645,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/causal_validation.py",
+      "dest": "archive/historical_fali/experiments/causal_validation.py",
+      "size_bytes": 5381,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/scale_evaluation.py",
+      "dest": "archive/historical_fali/experiments/scale_evaluation.py",
+      "size_bytes": 20673,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/generate_new_figures.py",
+      "dest": "archive/historical_fali/experiments/generate_new_figures.py",
+      "size_bytes": 11172,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "experiments/ablation_controls.py",
+      "dest": "archive/historical_fali/experiments/ablation_controls.py",
+      "size_bytes": 18678,
+      "reason": "Frozen/superseded experiment script",
+      "op": "move"
+    },
+    {
+      "path": "results/raw/qk_decomposition_raw.csv",
+      "dest": "archive/historical_fali/raw/qk_decomposition_raw.csv",
+      "size_bytes": 7772432,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/qk_decomposition_raw.json",
+      "dest": "archive/historical_fali/raw/qk_decomposition_raw.json",
+      "size_bytes": 26348091,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/fali_decomposition_raw.csv",
+      "dest": "archive/historical_fali/raw/fali_decomposition_raw.csv",
+      "size_bytes": 3464423,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/fali_decomposition_raw.json",
+      "dest": "archive/historical_fali/raw/fali_decomposition_raw.json",
+      "size_bytes": 17230553,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/output_mediation_raw.csv",
+      "dest": "archive/historical_fali/raw/output_mediation_raw.csv",
+      "size_bytes": 387570,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/output_mediation_raw.json",
+      "dest": "archive/historical_fali/raw/output_mediation_raw.json",
+      "size_bytes": 1161413,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/ln_frozen_raw_results.csv",
+      "dest": "archive/historical_fali/raw/ln_frozen_raw_results.csv",
+      "size_bytes": 299522,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/ln_frozen_raw_results.json",
+      "dest": "archive/historical_fali/raw/ln_frozen_raw_results.json",
+      "size_bytes": 285890,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/ablation_controls_raw.csv",
+      "dest": "archive/historical_fali/raw/ablation_controls_raw.csv",
+      "size_bytes": 210919,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    },
+    {
+      "path": "results/raw/ablation_controls_raw.json",
+      "dest": "archive/historical_fali/raw/ablation_controls_raw.json",
+      "size_bytes": 712718,
+      "reason": "Frozen-era raw copy; original kept",
+      "op": "copy_keep_original"
+    }
+  ],
+  "errors": []
+}
