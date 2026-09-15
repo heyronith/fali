@@ -245,6 +245,76 @@ Accordingly, EF-6 is FAIL. This is a failed mechanism-transfer hypothesis, not a
 failed recruitment result and not confirmation of a universal opposite mechanism.
 
 
+\section{Softmax-gauge sensitivity (prespecified row-centering)}
+
+Native-logit FALI is the primary analysis. The following tables report the
+preregistered zero-mean (row-centering) gauge sensitivity (preregistration
+commit \texttt{e60f81acfff8fc9dd4f924ebb1c087ec89734c05}; executed results
+commit \texttt{43135198065e4a13acb241c677a0965e2165b988}). Source report:
+\texttt{results/extended\_fali/gauge\_sensitivity/GAUGE\_SENSITIVITY\_REPORT.md}.
+
+Cross-setting fine contrast: PRESERVED. Interpretation code: A
+(fine-channel sign conclusions robust to the prespecified zero-mean gauge
+sensitivity only; not universal gauge invariance; not magnitude invariance).
+
+\begin{table}[h]
+\centering
+\caption{GPT-2 EF-4 L10H2 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & 0.782806 & 0.643597 & $-0.139209$ \\
+$\phi_R$ & $-0.341419$ & $-0.202220$ & $0.139199$ \\
+$\phi_O$ & 0.003864 & 0.003875 & $1.02\times10^{-5}$ \\
+$\phi_V$ & $-0.000349$ & $-0.000349$ & $0$ \\
+$\phi_C$ & $-0.146451$ & $-0.146451$ & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & 0.445252 & 0.445252 & $\approx0$ \\
+conditional gain & 0.298451 & 0.298451 & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{GPT-2 EF-4 L10H10 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & 0.328524 & 0.305908 & $-0.022616$ \\
+$\phi_R$ & $-0.125907$ & $-0.103273$ & $0.022635$ \\
+$\phi_O$ & 0.003634 & 0.003615 & $-1.91\times10^{-5}$ \\
+$\phi_V$ & 0.001556 & 0.001556 & $0$ \\
+$\phi_C$ & $-0.471249$ & $-0.471249$ & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & 0.206251 & 0.206251 & $\approx0$ \\
+conditional gain & $-0.263442$ & $-0.263442$ & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Pythia EF-6 L8H2 native vs row-mean gauge sensitivity.}
+\begin{tabular}{lrrr}
+\toprule
+Metric & Native mean & Row-mean mean & Paired $\Delta$ \\
+\midrule
+$\phi_T$ & $-0.143737$ & $-0.047046$ & $0.096690$ \\
+$\phi_R$ & 0.117800 & 0.021088 & $-0.096712$ \\
+$\phi_O$ & $-0.000270$ & $-0.000247$ & $2.22\times10^{-5}$ \\
+$\phi_V$ & $-0.002099$ & $-0.002099$ & $0$ \\
+$\phi_C$ & 0.513958 & 0.513958 & $0$ \\
+$\Phi_{\mathrm{SCORE}}$ & $-0.026206$ & $-0.026206$ & $\approx0$ \\
+conditional gain & 0.485653 & 0.485653 & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Fine-channel decisions: L10H2, L10H10, and L8H2 all PRESERVED under the
+preregistered sign criteria. Magnitudes change (especially Pythia). No claim of
+complete gauge invariance is made.
+
 \section{Reproducibility and audit trail}
 
 The experiment repository contains the prospective analysis plans, run
@@ -257,6 +327,7 @@ outputs. The central evidence paths are:
 \item \texttt{results/extended\_fali/ef4\_canonical/aggregate/}
 \item \texttt{results/extended\_fali/ef5\_ablation\_robustness/aggregate/}
 \item \texttt{results/extended\_fali/ef6\_pythia\_induction/aggregate/}
+\item \texttt{results/extended\_fali/gauge\_sensitivity/}
 \item \texttt{results/revision\_phase4/full/aggregate/}
 \end{itemize}
 

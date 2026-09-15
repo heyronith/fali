@@ -19,7 +19,7 @@
 | Ablation | Overall EF-5 gate FAIL (zero-ref) | EF-5 / archive | ref $-0.319$ $[-0.396,-0.244]$ | YES |
 | Pythia | Positive recruitment | EF-6 / archive | gain $0.486$ $[0.326,0.722]$ | YES |
 | Pythia | Fine signs reverse $T<0$, $R>0$ | EF-6 / archive | $\phi_T=-0.144$; $\phi_R=+0.118$ | YES |
-| Gauge (pending commit 3) | Signs preserved under row-mean | commit `4313519` `GAUGE_SENSITIVITY_REPORT.md` | GPT-2 $T>0,R<0$; Pythia $T<0,R>0$ | PENDING |
+| Gauge | Fine signs preserved under row-mean; magnitudes change | commit `43135198065e4a13acb241c677a0965e2165b988` `GAUGE_SENSITIVITY_REPORT.md`; prereg `e60f81acfff8fc9dd4f924ebb1c087ec89734c05` | GPT-2 L10H2/L10H10 $T>0,R<0$; Pythia L8H2 $T<0,R>0$; cross-setting PRESERVED / code A | YES |
 
 ## Novelty / literature bounds
 
@@ -38,4 +38,4 @@ None introduced. All migrated numbers match the Factorized archive prose.
 ## Notes
 
 - Historical Frozen Attention Logit Intervention sources were not used as scientific content.
-- Gauge-sensitivity numbers are integrated only after verification against commit `4313519` (separate commit).
+- Gauge-sensitivity numbers integrated from verified commit `4313519` only; claim bounded to prespecified zero-mean sensitivity.
