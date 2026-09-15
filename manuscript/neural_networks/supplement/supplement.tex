@@ -4,6 +4,7 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{hyperref}
+\usepackage{xurl}
 \journal{Neural Networks}
 \begin{document}
 \begin{frontmatter}
@@ -50,14 +51,15 @@ They do not identify unique natural pathways.
 
 \section{Method-validation chronology and controlled ground truth}
 
-The attribution implementation was validated before substantive pretrained-model
-experiments. An initial fixed-block-order implementation was rejected because it
-was not the standard Owen value; EF-0R restored all 36 admissible permutations and
-ordinary Shapley attribution on the quotient game. A subsequent implementation
-review identified a batch-shared target partition and insufficiently independent
-endpoint checks in EF-1; EF-1R introduced per-example batched partitions and
-independent direct endpoint validation before pretrained-model experiments began.
-The superseded implementations are retained only for audit history.
+The attribution implementation was validated before substantive pretrained
+model experiments. An initial fixed block-order implementation was rejected
+because it was not the standard Owen value; EF-0R restored all 36 admissible
+permutations and ordinary Shapley attribution on the quotient game. A subsequent
+implementation review identified a batch-shared target partition and
+insufficiently independent endpoint checks in EF-1; EF-1R introduced
+per-example batched partitions and independent direct endpoint validation before
+pretrained model experiments began. The superseded implementations are retained
+only for audit history.
 
 \subsection{Single-factor synthetic systems}
 
@@ -93,15 +95,15 @@ context length 8, vocabulary size 48, FP32 CPU execution, and seed 4242.
 The primary and candidate were L0H0 and L1H0.
 
 Independent ordinary forwards gave
-\[
-E_A=0.4550457001,\qquad
-E_B=-0.0856835023,\qquad
-\Delta_h=-0.5407292023.
-\]
+\begin{align*}
+E_A&=0.4550457001,\\
+E_B&=-0.0856835023,\\
+\Delta_h&=-0.5407292023.
+\end{align*}
 The all-intact and all-perturbed FALI endpoint cells reproduced these quantities
-with zero recorded discrepancy. Score-to-pattern reconstruction,
-pattern/value-to-$z$ reconstruction, masked probability, candidate-output
-injection, non-candidate isolation, Q/V/Q+V live-leak checks, and quotient-game
+with zero recorded discrepancy. Score-to-pattern reconstruction, pattern and
+value reconstruction of $z$, masked probability, candidate-output injection,
+non-candidate isolation, live-leak checks (Q, V, and Q+V), and quotient-game
 reconciliation all had zero recorded discrepancy at the reported precision.
 
 \section{GPT-2 IOI confirmation}
@@ -113,17 +115,17 @@ L10H0 as the perturbed set, candidates L10H2 and L10H10, and architectural contr
 L9H7 and L9H0. The design contained 15 low-level templates crossed with BABA/ABBA
 structure, 30 prompts per stratum, and seeds 42, 1, 8, and 22, for 3600 prompts.
 
-The EF-4 confirmation plan was committed before canonical fine-channel execution
-and was recorded in the run configurations. The four primary directional hypotheses
-were
+The EF-4 confirmation plan was committed before canonical fine-channel
+execution and was recorded in the run configurations. The four primary
+directional hypotheses were
 \[
 \phi_T>0,\ \phi_R<0
 \]
 for both L10H2 and L10H10. $\phi_O$ was descriptive. Point estimates equally
-weighted 30 strata within each seed and then weighted the four seeds equally.
-Confidence intervals used 10,000 hierarchical template-cluster bootstrap draws.
-The confirmation additionally required all-seed directional agreement, broad
-stratum support, and a template-0-excluded sensitivity.
+weighted 30 strata within each seed and then averaged across the four seeds.
+Intervals used 10{,}000 hierarchical bootstrap draws over template clusters.
+Confirmation also required directional agreement in every seed, broad stratum
+support, and a sensitivity that excludes template~0.
 
 \subsection{Canonical exact estimates}
 
@@ -249,9 +251,9 @@ failed recruitment result and not confirmation of a universal opposite mechanism
 
 Native-logit FALI is the primary analysis. The following tables report the
 preregistered zero-mean (row-centering) gauge sensitivity (preregistration
-commit \texttt{e60f81acfff8fc9dd4f924ebb1c087ec89734c05}; executed results
-commit \texttt{43135198065e4a13acb241c677a0965e2165b988}). Source report:
-\texttt{results/extended\_fali/gauge\_sensitivity/GAUGE\_SENSITIVITY\_REPORT.md}.
+commit~\path{e60f81acfff8fc9dd4f924ebb1c087ec89734c05}; executed results
+commit~\path{43135198065e4a13acb241c677a0965e2165b988}). Source report:
+\path{results/extended_fali/gauge_sensitivity/GAUGE_SENSITIVITY_REPORT.md}.
 
 Cross-setting fine contrast: PRESERVED. Interpretation code: A
 (fine-channel sign conclusions robust to the prespecified zero-mean gauge
@@ -319,16 +321,16 @@ complete gauge invariance is made.
 
 The experiment repository contains the prospective analysis plans, run
 configurations with preregistration commit identifiers, exact balanced means,
-bootstrap intervals, gate files, validation reports, and machine-readable raw/aggregate
-outputs. The central evidence paths are:
+bootstrap intervals, gate files, validation reports, and machine-readable raw and
+aggregate outputs. The central evidence paths are:
 
 \begin{itemize}
-\item \texttt{results/extended\_fali/ef1\_synthetic/validation\_report.json}
-\item \texttt{results/extended\_fali/ef4\_canonical/aggregate/}
-\item \texttt{results/extended\_fali/ef5\_ablation\_robustness/aggregate/}
-\item \texttt{results/extended\_fali/ef6\_pythia\_induction/aggregate/}
-\item \texttt{results/extended\_fali/gauge\_sensitivity/}
-\item \texttt{results/revision\_phase4/full/aggregate/}
+\item \path{results/extended_fali/ef1_synthetic/validation_report.json}
+\item \path{results/extended_fali/ef4_canonical/aggregate/}
+\item \path{results/extended_fali/ef5_ablation_robustness/aggregate/}
+\item \path{results/extended_fali/ef6_pythia_induction/aggregate/}
+\item \path{results/extended_fali/gauge_sensitivity/}
+\item \path{results/revision_phase4/full/aggregate/}
 \end{itemize}
 
 No additional model, task, threshold, or replacement pair was introduced after the

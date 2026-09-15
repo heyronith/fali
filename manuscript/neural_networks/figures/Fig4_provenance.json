@@ -1,7 +1,7 @@
 {
   "figure": "Fig4",
-  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig4.py",
-  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
+  "generating_script": "manuscript/archive/machine_learning/figure_scripts/render_fig4.py",
+  "git_commit": "563cc688242a5b04ec9fc857f30e770604f2c743",
   "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
   "source_files": [
     {
@@ -92,20 +92,20 @@
     }
   },
   "output_dimensions_inches": {
-    "width": 6.85,
-    "height": 4.21
+    "width": 6.850393700787402,
+    "height": 4.212598425196851
   },
   "output_width_mm": 174.0,
-  "output_height_mm": 106.934,
-  "generation_timestamp_utc": "2026-08-30T03:43:06.882556+00:00",
+  "output_height_mm": 107.0,
+  "generation_timestamp_utc": "2026-09-15T20:16:00.859567+00:00",
   "plotting_library_versions": {
     "matplotlib": "3.10.9",
     "numpy": "2.2.6",
     "pandas": "2.3.3"
   },
   "outputs": {
-    "pdf": "manuscript/machine_learning/figures/Fig4.pdf",
-    "svg": "manuscript/machine_learning/figures/Fig4.svg",
-    "png": "manuscript/machine_learning/figures/Fig4.png"
+    "pdf": "manuscript/neural_networks/figures/Fig4.pdf",
+    "svg": "manuscript/neural_networks/figures/Fig4.svg",
+    "png": "manuscript/neural_networks/figures/Fig4.png"
   }
 }

@@ -14,46 +14,67 @@
 | Unresolved references | 0 |
 | Duplicate labels | 0 |
 | Overfull `\hbox` (main) | **13** |
-| Underfull `\hbox` (main) | 0 |
 | BibTeX empty-pages warnings | 7 |
 
-### Baseline overfull drivers (main)
-
-- Long unbreakable `SCORE/VALUE/CONTEXT` strings
-- Limitations paragraph (endpoints / coalition)
-- Appendix path `supplement/` in typewriter
-- Minor hyphenation tightness (<5 pt) in related work / AI disclosure
-
-### Baseline figure format
-
-All inclusions use PNG (`Fig1.png` … `Fig5.png`); no PDF vectors in tree at baseline.
-
-### Title mismatch (to fix)
-
-| Location | Title |
-|---|---|
-| `main.tex` | FALI: Mechanistic Decomposition of Conditional Attention-Head **Causal Usefulness** |
-| `supplement/supplement.tex` | … Conditional Attention-Head **Importance** (stale) |
-
-## Production goals
-
-1. Sync supplement title to approved manuscript title.
-2. Prefer vector PDF figures from retained plotting scripts without re-running models.
-3. Reduce meaningful overfull boxes without margin/font hacks.
-4. Clean bibliography empty-pages warnings where metadata allows.
-5. Soften main-figure captions that still use internal EF/G gate jargon (science unchanged).
-6. Package final deliverables under `final/`.
-
-Updates after production edits are appended below.
-
----
-
-## Post-production compile (filled after final build)
+## Post-production compile (final)
 
 | Item | Value |
 |---|---|
-| Main | TBD |
-| Supplement | TBD |
-| Overfull body | TBD |
-| Vector figures | TBD |
-| Clean ZIP recompile | TBD |
+| Main | SUCCESS — **27 pages** |
+| Supplement | SUCCESS — **8 pages** |
+| Unresolved references | **0** |
+| Unresolved citations | **0** |
+| Duplicate labels | **0** |
+| Overfull `\hbox` (main) | 4 total; **0 meaningful (>5pt)** |
+| Overfull `\hbox` (supplement) | **0** |
+| BibTeX empty-pages warnings | **7** (preprints/arXiv/proceedings without pages; not invented) |
+| Abstract word count | **173** (≤250) |
+| Keywords | **6** |
+| Highlights | **5** bullets; all ≤85 chars |
+- H1: 74 chars
+- H2: 71 chars
+- H3: 68 chars
+- H4: 78 chars
+- H5: 66 chars
+| Approx. main-text word count | **~4509** |
+| Vector figures | Fig1–Fig5 PDF (true vector); Fig4a/Fig4bc PDF wrappers of archival PNG |
+| Clean ZIP recompile | **PASS** (main 27pp, supplement 8pp, 0 undefined refs/cites) |
+| Critical tests | **114 passed** (`results/TEST_PRODUCTION_BASELINE.txt`) |
+
+### Main overfull detail (all <3pt; not meaningful)
+
+- `Overfull \hbox (0.83492pt too wide) in paragraph at lines 13--14`
+- `Overfull \hbox (0.38795pt too wide) in paragraph at lines 16--17`
+- `Overfull \hbox (2.28891pt too wide) in paragraph at lines 3--4`
+- `Overfull \hbox (0.59207pt too wide) in paragraph at lines 96--97`
+
+### Bibliography empty-pages (unavoidable without inventing pages)
+
+- franco2025attentioncausal, grant2025divergent, nam2025causalhead, owen1977values, wang2026fewshot, wang2023ioi, zhang2024activationpatching
+
+### Title sync
+
+Manuscript and supplement titles both use:
+**FALI: Mechanistic Decomposition of Conditional Attention-Head Causal Usefulness**
+
+### Process language
+
+Main text: no EF-/G-gate/SHA jargon. Allowed Frozen Attention supersession retained.
+Supplement retains EF/G audit terminology.
+
+### Deliverables
+
+`manuscript/neural_networks/final/`
+
+- `FALI_Neural_Networks_Manuscript.pdf`
+- `FALI_Neural_Networks_Supplement.pdf`
+- `FALI_Neural_Networks_LaTeX_Source.zip`
+- `FALI_Neural_Networks_Submission_Package.zip`
+- `README.txt`
+
+### Author / research-lead decisions still required
+
+- Confirm corresponding-author postal address / ORCIDs if journal requires them beyond current affiliations.
+- Confirm funding acknowledgement completeness.
+- Replace data/code availability with public archival DOI/URL when available (current statement retained; no DOI invented).
+- Final Editorial Manager upload (not performed here).
