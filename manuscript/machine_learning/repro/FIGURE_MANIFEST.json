@@ -1,0 +1,82 @@
+{
+  "Fig1.eps": {
+    "sha256": "367fee0455ab94d9a30e6992e163b28f81c3ee5d59dca2538749fec3e153d476",
+    "size_bytes": 74316
+  },
+  "Fig1.pdf": {
+    "sha256": "9b3a27f2edf55350b094a9e9dbff91cdddf744d4b24356e2c74baff7b9d5192d",
+    "size_bytes": 26627
+  },
+  "Fig1.png": {
+    "sha256": "5b4158b65006777808f26b9e5c310bc6c6b81e2894a542af15beb220ff0ae2a6",
+    "size_bytes": 252538
+  },
+  "Fig1.svg": {
+    "sha256": "b59ff0291ce1e3c56218870eeeb0031875a479710805d298060438a29afd945f",
+    "size_bytes": 17861
+  },
+  "Fig2.eps": {
+    "sha256": "7a8cb30a98ee5018ce7175bef0ada433c24ada097c2b202d289a4b9ee0b33dcc",
+    "size_bytes": 109123
+  },
+  "Fig2.pdf": {
+    "sha256": "249e00d6087ab099103b1a08615a4a77e3412ae1fdab8056c7728af74bd31f81",
+    "size_bytes": 36753
+  },
+  "Fig2.png": {
+    "sha256": "9e2ea175423bcf6ca3c3cfb2adb8ba23076137bb4acadfae3d4cad01566b7731",
+    "size_bytes": 322729
+  },
+  "Fig2.svg": {
+    "sha256": "d83b55d7e78d1092ebe8d57e01b557302a44a82eb9dd25bc92a4c2fede7586b0",
+    "size_bytes": 44786
+  },
+  "Fig3.eps": {
+    "sha256": "794b31c4aee2b4e793e9cb5a51731b6c8a34315ba1d3323905f5edd9bcec395c",
+    "size_bytes": 6054211
+  },
+  "Fig3.pdf": {
+    "sha256": "2b7c027d24f1e8dbbc70ffd67fe216d12e1082123d970a757b2136cdea2642b3",
+    "size_bytes": 27464
+  },
+  "Fig3.png": {
+    "sha256": "1a7abdcf05acc8b91aa64c35fe80076f1ebe39ecc00ecfdb837713e56faa7bf3",
+    "size_bytes": 344792
+  },
+  "Fig3.svg": {
+    "sha256": "0c644140ae37f2a5e89d546c010dab3457cebde9b6b978ddd2c03ecfc3c7d631",
+    "size_bytes": 32081
+  },
+  "Fig4.eps": {
+    "sha256": "e64b3ba1229a46b957a7ef0adc9fd6ec3c93cda875389f814e6446c45b74d57d",
+    "size_bytes": 165623
+  },
+  "Fig4.pdf": {
+    "sha256": "e13229bab02be507aa4b91e6d068f5bc827ffa0f72cb57578a71d2071edc68e8",
+    "size_bytes": 40638
+  },
+  "Fig4.png": {
+    "sha256": "aa631afadc447feb33df4112c37b6cd92acec7251f14e82209d5dd0719bfde24",
+    "size_bytes": 378576
+  },
+  "Fig4.svg": {
+    "sha256": "d1619201d537522a5f2327eb0747faf4353200638ceda17f0caf50abc33b68f1",
+    "size_bytes": 118167
+  },
+  "Fig5.eps": {
+    "sha256": "ec13bddc6c6f8ed1514364bf9a00302f68d22563cd3aa1ca047afcb69c16055c",
+    "size_bytes": 78479
+  },
+  "Fig5.pdf": {
+    "sha256": "48f7b261f359c2b9d6fcb147c2ad5a77dc0d167a772e1b9cafdb17a0764b3073",
+    "size_bytes": 24963
+  },
+  "Fig5.png": {
+    "sha256": "8caafe661917ab96cef567beed41ff907b04670b944155b81c6a581bccaaaf7c",
+    "size_bytes": 276783
+  },
+  "Fig5.svg": {
+    "sha256": "c16294ad0691cd86eb06baa4058afaad036bbb60d24f80d41998dbcce74ceac7",
+    "size_bytes": 28778
+  }
+}

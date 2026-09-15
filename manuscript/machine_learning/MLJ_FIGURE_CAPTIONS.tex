@@ -1,0 +1,17 @@
+% Springer Machine Learning figure captions. Captions remain in manuscript source,
+% not inside the artwork.
+
+% Fig. 1
+\caption{FALI resolves a conditional change in a selected attention head's causal usefulness. (a) The same candidate head is evaluated in intact state $A$ and prespecified perturbed state $B$. (b) The quantity to explain is $\Delta_h=E_B(h)-E_A(h)$. (c) FALI attributes this endpoint change across task-target scores $T$, rival scores $R$, other structurally valid scores $O$, value content $V$, and surrounding-network context $C$, with Owen efficiency $\phi_T+\phi_R+\phi_O+\phi_V+\phi_C=\Delta_h$}
+
+% Fig. 2
+\caption{FALI counterfactual intervention game. (a) Structurally valid pre-softmax scores are partitioned into task-target coordinate(s) $T$, rivals $R$ in the same task-relevant query row, and other valid scores $O$; masked coordinates are excluded. (b) Each hybrid cell selects $T,R,O,V,C$ from intact or perturbed endpoints, reconstructs the candidate attention computation, and measures utility relative to a candidate-zero run in the same context. (c) The $2^5=32$ cells are attributed with the standard Owen value under SCORE=$\{T,R,O\}$, VALUE=$\{V\}$, CONTEXT=$\{C\}$, yielding exact coarse--fine reconciliation}
+
+% Fig. 3
+\caption{Controlled validation of the FALI intervention semantics. (a) In five deterministic single-factor systems, attribution is isolated to the manipulated factor; the values at right give the corresponding endpoint changes. (b) A pure $T\times C$ interaction with total change approximately 2 receives the expected 1/1 Owen split between $T$ and $C$. (c) Random-transformer reconstruction, endpoint, intervention-isolation, and quotient-game checks pass, with maximum coarse--fine discrepancy $1.11\times10^{-16}$}
+
+% Fig. 4
+\caption{GPT-2 IOI separates attention adaptation from positive functional recruitment. (a) L10H2 and L10H10 both increase attention to the indirect-object target after ablation of the canonical primary Name Movers, but their conditional gains have opposite signs. (b) Both heads show positive target-score and negative rival-score FALI contributions, while $O$ and $V$ remain near zero on the plotted scale. (c) Coarse score/value/context accounting explains the difference: L10H10 retains a positive SCORE contribution, but its negative surrounding-context contribution outweighs it and yields negative conditional gain. Points are balanced means; intervals are hierarchical 95\% bootstrap confidence intervals}
+
+% Fig. 5
+\caption{Conditional recruitment occurs in both studied settings, but the preregistered fine-score mechanism does not transfer. (a) GPT-2 IOI L10H2 and Pythia-160M induction L8H2 both have positive conditional gain after their respective primary interventions; task-specific axes are used because the utility metrics differ. (b) The fine attribution signs reverse: GPT-2 is target-positive/rival-negative, whereas Pythia is target-negative/rival-positive; their surrounding-context contributions also differ in sign. Points are balanced means and intervals are the prespecified 95\% bootstrap confidence intervals for each experiment}
