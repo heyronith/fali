@@ -1,59 +1,50 @@
-# COMPILE REPORT — Neural Networks Elsevier shell
+# COMPILE REPORT — Neural Networks content migration
 
-**Workspace:** `manuscript/neural_networks/`  
 **Date:** 2026-09-15  
-**Result:** **SUCCESS**
+**Branch:** `manuscript/neural-networks-content-migration`  
+**Engine:** TinyTeX `pdflatex` + `bibtex` via `latexmk`
 
-## Engine / toolchain
+## Main manuscript (`main.tex`)
 
-| Tool | Version / path |
+| Metric | Value |
 |---|---|
-| Engine | pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) via TinyTeX |
-| Driver | `pdflatex` |
-| Bibliography | `bibtex` + `elsarticle-harv.bst` |
-| Build wrapper | `latexmk` 4.88 |
-| TinyTeX path | `/Users/ronny/fali-tinytex/bin/universal-darwin` |
+| Compile | **SUCCESS** |
+| Pages | **34** |
+| Abstract words | **181** (≤250) |
+| Keywords | **6** |
+| Highlights | 5 items; all ≤85 characters (checked by `tools/check_highlights.py`) |
+| Unresolved citations | **0** |
+| Unresolved references | **0** |
+| Duplicate labels | **0** |
+| Missing figures | **0** |
+| Overfull `\hbox` | **17** |
+| Underfull `\hbox` | **0** |
 
-## Exact command
+### Bibliography warnings (`main.blg`)
 
-```bash
-export PATH="/Users/ronny/fali-tinytex/bin/universal-darwin:$PATH"
-cd manuscript/neural_networks
-latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-```
+`Warning--empty pages` for: franco2025attentioncausal, grant2025divergent, nam2025causalhead, owen1977values, wang2026fewshot, wang2023ioi, zhang2024activationpatching.
 
-## Document class
+All 22 `.bib` keys are cited; no orphan entries; no unresolved keys.
 
-```text
-Document Class: elsarticle 2026/01/09, 3.5: Elsevier Ltd
-```
+### Highlights character counts
 
-Copied unmodified from `tools/elsevier-template/elsarticle/elsarticle.cls`  
-(`cmp` identical to pristine extract).
+| # | Chars | Text |
+|---|---|---|
+| H1 | 74 | FALI decomposes conditional causal usefulness of selected attention heads. |
+| H2 | 71 | GPT-2 IOI shows target-positive and rival-negative fine-score channels. |
+| H3 | 68 | Pythia induction reverses the preregistered target/rival fine signs. |
+| H4 | 65 | Conditional recruitment generalizes; the fine mechanism does not. |
+| H5 | 66 | FALI discriminates mechanisms under an explicit intervention game. |
 
-Options used:
+## Supplement (`supplement/supplement.tex`)
 
-```latex
-\documentclass[preprint,12pt,authoryear]{elsarticle}
-```
+| Metric | Value |
+|---|---|
+| Compile | **SUCCESS** |
+| Pages | **7** |
+| Bibliography | omitted (no `\cite` in supplement body) |
 
-Bibliography style: `elsarticle-harv` (APA / author–year; Neural Networks GFA).
+## Style
 
-## Output
-
-- `main.pdf` produced (4 pages for placeholder shell)
-- Exit code: 0
-- `latexmk`: All targets up-to-date
-
-## Warnings (non-fatal)
-
-- Hyperref PDF-string warnings from math in abstract placeholder (`$\leq$`)
-- Font size substitution warnings from empty graphical-abstract box (template default)
-- Overfull `\hbox` on supplement path line (placeholder text)
-- Duplicate destination identifiers (hyperref / elsarticle interaction on short shell)
-
-No errors. No missing class/style files.
-
-## Notes
-
-Scientific content not yet migrated. Recompile after prose migration.
+- Class: `elsarticle` preprint, 12pt, `authoryear`
+- BST: `elsarticle-harv.bst` (unmodified; see `REFERENCE_STYLE_AUDIT.md`)
