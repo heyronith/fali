@@ -60,3 +60,14 @@ results/extended_fali/ef4_canonical/seed_*/cell_raw.csv.gz
 results/extended_fali/ef5_ablation_robustness/matched_mean/seed_*/cell_raw.csv.gz
 results/extended_fali/ef5_ablation_robustness/matched_resample/seed_*/cell_raw.csv.gz
 results/extended_fali/ef6_pythia_induction/confirmation/seed_*/cell_raw.csv.gz
+
+# Elsevier Neural Networks local builds
+manuscript/neural_networks/*.aux
+manuscript/neural_networks/*.bbl
+manuscript/neural_networks/*.blg
+manuscript/neural_networks/*.fdb_latexmk
+manuscript/neural_networks/*.fls
+manuscript/neural_networks/*.log
+manuscript/neural_networks/*.out
+manuscript/neural_networks/*.synctex.gz
+manuscript/neural_networks/COMPILE_LOG.txt

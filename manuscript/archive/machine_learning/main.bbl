@@ -1,0 +1,399 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{22}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{Elhage et~al.}{2021}]{elhage2021mathematical}
+\begin{botherref}
+\oauthor{\bsnm{Elhage}, \binits{N.}},
+\oauthor{\bsnm{Nanda}, \binits{N.}},
+\oauthor{\bsnm{Olsson}, \binits{C.}},
+\oauthor{\bsnm{Henighan}, \binits{T.}},
+\oauthor{\bsnm{Joseph}, \binits{N.}},
+\oauthor{\bsnm{Mann}, \binits{B.}},
+\oauthor{\bsnm{Askell}, \binits{A.}},
+\oauthor{\bsnm{Bai}, \binits{Y.}},
+\oauthor{\bsnm{Chen}, \binits{A.}},
+\oauthor{\bsnm{Conerly}, \binits{T.}},
+\oauthor{\bsnm{DasSarma}, \binits{N.}},
+\oauthor{\bsnm{Drain}, \binits{D.}},
+\oauthor{\bsnm{Ganguli}, \binits{D.}},
+\oauthor{\bsnm{Hatfield-Dodds}, \binits{Z.}},
+\oauthor{\bsnm{Hernandez}, \binits{D.}},
+\oauthor{\bsnm{Jones}, \binits{A.}},
+\oauthor{\bsnm{Kernion}, \binits{J.}},
+\oauthor{\bsnm{Lovitt}, \binits{L.}},
+\oauthor{\bsnm{Ndousse}, \binits{K.}},
+\oauthor{\bsnm{Amodei}, \binits{D.}},
+\oauthor{\bsnm{Brown}, \binits{T.}},
+\oauthor{\bsnm{Clark}, \binits{J.}},
+\oauthor{\bsnm{Kaplan}, \binits{J.}},
+\oauthor{\bsnm{McCandlish}, \binits{S.}},
+\oauthor{\bsnm{Olah}, \binits{C.}}:
+A mathematical framework for transformer circuits.
+Transformer Circuits Thread
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{Franco and Crovella}{2025}]{franco2025attentioncausal}
+\begin{bchapter}
+\bauthor{\bsnm{Franco}, \binits{G.}},
+\bauthor{\bsnm{Crovella}, \binits{M.}}:
+\bctitle{Pinpointing attention-causal communication in language models}.
+In: \bbtitle{Advances in Neural Information Processing Systems},
+vol. \bseriesno{38}
+(\byear{2025}).
+\doiurl{10.52202/085713-1239}
+\end{bchapter}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{Franco et~al.}{2026}]{franco2026promptspecific}
+\begin{botherref}
+\oauthor{\bsnm{Franco}, \binits{G.}},
+\oauthor{\bsnm{Tassis}, \binits{L.M.}},
+\oauthor{\bsnm{Rohr}, \binits{A.}},
+\oauthor{\bsnm{Crovella}, \binits{M.}}:
+Finding highly interpretable prompt-specific circuits in language models.
+arXiv preprint arXiv:2602.13483
+(2026)
+\end{botherref}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{Goldowsky-Dill et~al.}{2023}]{goldowskydill2023pathpatching}
+\begin{botherref}
+\oauthor{\bsnm{Goldowsky-Dill}, \binits{N.}},
+\oauthor{\bsnm{MacLeod}, \binits{C.}},
+\oauthor{\bsnm{Sato}, \binits{L.}},
+\oauthor{\bsnm{Arora}, \binits{A.}}:
+Localizing model behavior with path patching.
+arXiv preprint arXiv:2304.05969
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{Grant et~al.}{2026}]{grant2025divergent}
+\begin{bchapter}
+\bauthor{\bsnm{Grant}, \binits{S.}},
+\bauthor{\bsnm{Han}, \binits{S.J.}},
+\bauthor{\bsnm{Tartaglini}, \binits{A.}},
+\bauthor{\bsnm{Potts}, \binits{C.}}:
+\bctitle{Addressing divergent representations from causal interventions on neural networks}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2026}).
+\bcomment{ICLR 2026 proceedings}
+\end{bchapter}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{Gong et~al.}{2026}]{gong2026coax}
+\begin{botherref}
+\oauthor{\bsnm{Gong}, \binits{Z.}},
+\oauthor{\bsnm{Zeng}, \binits{Z.}},
+\oauthor{\bsnm{Yuen}, \binits{C.}},
+\oauthor{\bsnm{Lim}, \binits{W.Y.B.}}:
+Conditional co-ablation: Recovering self-repair backups in transformer circuits.
+arXiv preprint arXiv:2607.01940
+(2026)
+\end{botherref}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{Heimersheim and Nanda}{2024}]{heimersheim2024activationpatching}
+\begin{botherref}
+\oauthor{\bsnm{Heimersheim}, \binits{S.}},
+\oauthor{\bsnm{Nanda}, \binits{N.}}:
+How to use and interpret activation patching.
+arXiv preprint arXiv:2404.15255
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{McDougall et~al.}{2023}]{mcdougall2023copysuppression}
+\begin{botherref}
+\oauthor{\bsnm{McDougall}, \binits{C.}},
+\oauthor{\bsnm{Conmy}, \binits{A.}},
+\oauthor{\bsnm{Rushing}, \binits{C.}},
+\oauthor{\bsnm{McGrath}, \binits{T.}},
+\oauthor{\bsnm{Nanda}, \binits{N.}}:
+Copy suppression: Comprehensively understanding an attention head.
+arXiv preprint arXiv:2310.04625
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{Miller et~al.}{2024}]{miller2024faithfulness}
+\begin{botherref}
+\oauthor{\bsnm{Miller}, \binits{J.}},
+\oauthor{\bsnm{Chughtai}, \binits{B.}},
+\oauthor{\bsnm{Saunders}, \binits{W.}}:
+Transformer circuit faithfulness metrics are not robust.
+arXiv preprint arXiv:2407.08734
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Mueller et~al.}{2025}]{mueller2025mib}
+\begin{bchapter}
+\bauthor{\bsnm{Mueller}, \binits{A.}},
+\bauthor{\bsnm{Geiger}, \binits{A.}},
+\bauthor{\bsnm{Wiegreffe}, \binits{S.}},
+\bauthor{\bsnm{Arad}, \binits{D.}},
+\bauthor{\bsnm{Arcuschin}, \binits{I.}},
+\bauthor{\bsnm{Belfki}, \binits{A.}},
+\bauthor{\bsnm{Chan}, \binits{Y.S.}},
+\bauthor{\bsnm{Fiotto-Kaufman}, \binits{J.F.}},
+\bauthor{\bsnm{Haklay}, \binits{T.}},
+\bauthor{\bsnm{Hanna}, \binits{M.}},
+\bauthor{\bsnm{Huang}, \binits{J.}},
+\bauthor{\bsnm{Gupta}, \binits{R.}},
+\bauthor{\bsnm{Nikankin}, \binits{Y.}},
+\bauthor{\bsnm{Orgad}, \binits{H.}},
+\bauthor{\bsnm{Prakash}, \binits{N.}},
+\bauthor{\bsnm{Reusch}, \binits{A.}},
+\bauthor{\bsnm{Sankaranarayanan}, \binits{A.}},
+\bauthor{\bsnm{Shao}, \binits{S.}},
+\bauthor{\bsnm{Stolfo}, \binits{A.}},
+\bauthor{\bsnm{Tutek}, \binits{M.}},
+\bauthor{\bsnm{Zur}, \binits{A.}},
+\bauthor{\bsnm{Bau}, \binits{D.}},
+\bauthor{\bsnm{Belinkov}, \binits{Y.}}:
+\bctitle{{MIB}: A mechanistic interpretability benchmark}.
+In: \bbtitle{Proceedings of the 42nd International Conference on Machine Learning}.
+\bsertitle{Proceedings of Machine Learning Research},
+vol. \bseriesno{267},
+pp. \bfpage{45069}--\blpage{45108}
+(\byear{2025}).
+\burl{https://proceedings.mlr.press/v267/mueller25a.html}
+\end{bchapter}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{McGrath et~al.}{2023}]{mcgrath2023hydra}
+\begin{botherref}
+\oauthor{\bsnm{McGrath}, \binits{T.}},
+\oauthor{\bsnm{Rahtz}, \binits{M.}},
+\oauthor{\bsnm{Kramar}, \binits{J.}},
+\oauthor{\bsnm{Mikulik}, \binits{V.}},
+\oauthor{\bsnm{Legg}, \binits{S.}}:
+The hydra effect: Emergent self-repair in language model computations.
+arXiv preprint arXiv:2307.15771
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Nam et~al.}{2025}]{nam2025causalhead}
+\begin{bchapter}
+\bauthor{\bsnm{Nam}, \binits{A.}},
+\bauthor{\bsnm{Conklin}, \binits{H.}},
+\bauthor{\bsnm{Yang}, \binits{Y.}},
+\bauthor{\bsnm{Griffiths}, \binits{T.}},
+\bauthor{\bsnm{Cohen}, \binits{J.}},
+\bauthor{\bsnm{Leslie}, \binits{S.-J.}}:
+\bctitle{Causal head gating: A framework for interpreting roles of attention heads in transformers}.
+In: \bbtitle{Advances in Neural Information Processing Systems}
+(\byear{2025}).
+\burl{https://arxiv.org/abs/2505.13737}
+\end{bchapter}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Olsson et~al.}{2022}]{olsson2022induction}
+\begin{botherref}
+\oauthor{\bsnm{Olsson}, \binits{C.}},
+\oauthor{\bsnm{Elhage}, \binits{N.}},
+\oauthor{\bsnm{Nanda}, \binits{N.}},
+\oauthor{\bsnm{Joseph}, \binits{N.}},
+\oauthor{\bsnm{DasSarma}, \binits{N.}},
+\oauthor{\bsnm{Henighan}, \binits{T.}},
+\oauthor{\bsnm{Mann}, \binits{B.}},
+\oauthor{\bsnm{Askell}, \binits{A.}},
+\oauthor{\bsnm{Bai}, \binits{Y.}},
+\oauthor{\bsnm{Chen}, \binits{A.}},
+\oauthor{\bsnm{Conerly}, \binits{T.}},
+\oauthor{\bsnm{Drain}, \binits{D.}},
+\oauthor{\bsnm{Ganguli}, \binits{D.}},
+\oauthor{\bsnm{Hatfield-Dodds}, \binits{Z.}},
+\oauthor{\bsnm{Hernandez}, \binits{D.}},
+\oauthor{\bsnm{Johnston}, \binits{S.}},
+\oauthor{\bsnm{Jones}, \binits{A.}},
+\oauthor{\bsnm{Kernion}, \binits{J.}},
+\oauthor{\bsnm{Lovitt}, \binits{L.}},
+\oauthor{\bsnm{Ndousse}, \binits{K.}},
+\oauthor{\bsnm{Amodei}, \binits{D.}},
+\oauthor{\bsnm{Brown}, \binits{T.}},
+\oauthor{\bsnm{Clark}, \binits{J.}},
+\oauthor{\bsnm{Kaplan}, \binits{J.}},
+\oauthor{\bsnm{McCandlish}, \binits{S.}},
+\oauthor{\bsnm{Olah}, \binits{C.}}:
+In-context learning and induction heads.
+arXiv preprint arXiv:2209.11895
+(2022)
+\end{botherref}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{Owen}{1977}]{owen1977values}
+\begin{bchapter}
+\bauthor{\bsnm{Owen}, \binits{G.}}:
+\bctitle{Values of games with a priori unions}.
+In: \bbtitle{Mathematical Economics and Game Theory: Essays in Honor of Oskar Morgenstern}.
+\bpublisher{Springer},
+\blocation{New York}
+(\byear{1977})
+\end{bchapter}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Rushing and Nanda}{2024}]{rushing2024selfrepair}
+\begin{botherref}
+\oauthor{\bsnm{Rushing}, \binits{C.}},
+\oauthor{\bsnm{Nanda}, \binits{N.}}:
+Explorations of self-repair in language models.
+arXiv preprint arXiv:2402.15390
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Sharmila}{2026}]{sharmila2026attentionrepairs}
+\begin{botherref}
+\oauthor{\bsnm{Sharmila}, \binits{R.}}:
+When Attention Repairs Itself: A Mechanistic Study of Backup Heads in GPT-2.
+Zenodo
+(2026).
+\doiurl{10.5281/zenodo.20350000} .
+\url{https://doi.org/10.5281/zenodo.20350000}
+\end{botherref}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Tower}{2026}]{tower2026epistatic}
+\begin{botherref}
+\oauthor{\bsnm{Tower}, \binits{E.}}:
+Epistatic Circuits: Exhaustive Interaction Decomposition of Transformer Circuits.
+Zenodo
+(2026).
+\doiurl{10.5281/zenodo.21913332} .
+\url{https://doi.org/10.5281/zenodo.21913332}
+\end{botherref}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{Vaidyanathan et~al.}{2026}]{vaidyanathan2026curse}
+\begin{botherref}
+\oauthor{\bsnm{Vaidyanathan}, \binits{S.}},
+\oauthor{\bsnm{Arbour}, \binits{D.}},
+\oauthor{\bsnm{Mueller}, \binits{A.}},
+\oauthor{\bsnm{Niekum}, \binits{S.}},
+\oauthor{\bsnm{Jensen}, \binits{D.}}:
+The curse of multiple mediators: Hidden interaction effects in activation patching.
+arXiv preprint arXiv:2606.27510
+(2026)
+\end{botherref}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2023}]{wang2023ioi}
+\begin{bchapter}
+\bauthor{\bsnm{Wang}, \binits{K.R.}},
+\bauthor{\bsnm{Variengien}, \binits{A.}},
+\bauthor{\bsnm{Conmy}, \binits{A.}},
+\bauthor{\bsnm{Shlegeris}, \binits{B.}},
+\bauthor{\bsnm{Steinhardt}, \binits{J.}}:
+\bctitle{Interpretability in the wild: A circuit for indirect object identification in {GPT-2} small}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2023}).
+\burl{https://arxiv.org/abs/2211.00593}
+\end{bchapter}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Wang et~al.}{2026}]{wang2026fewshot}
+\begin{bchapter}
+\bauthor{\bsnm{Wang}, \binits{E.}},
+\bauthor{\bsnm{Wang}, \binits{Y.}},
+\bauthor{\bsnm{Bakalova}, \binits{A.}},
+\bauthor{\bsnm{Hahn}, \binits{M.}}:
+\bctitle{How few-shot examples add up: A causal decomposition of function vectors in in-context learning}.
+In: \bbtitle{International Conference on Machine Learning}
+(\byear{2026}).
+\burl{https://arxiv.org/abs/2605.16591}
+\end{bchapter}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{Zhang and Nanda}{2024}]{zhang2024activationpatching}
+\begin{bchapter}
+\bauthor{\bsnm{Zhang}, \binits{F.}},
+\bauthor{\bsnm{Nanda}, \binits{N.}}:
+\bctitle{Towards best practices of activation patching in language models: Metrics and methods}.
+In: \bbtitle{International Conference on Learning Representations}
+(\byear{2024}).
+\burl{https://arxiv.org/abs/2309.16042}
+\end{bchapter}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{Zhu et~al.}{2026}]{zhu2026lexical}
+\begin{botherref}
+\oauthor{\bsnm{Zhu}, \binits{J.}},
+\oauthor{\bsnm{Zhang}, \binits{Y.}},
+\oauthor{\bsnm{Ding}, \binits{J.}},
+\oauthor{\bsnm{Yu}, \binits{X.}}:
+Lexical perturbations disrupt {LLM} reasoning: An empirical study of attention diversion.
+arXiv preprint arXiv:2608.22140
+(2026)
+\end{botherref}
+\endbibitem
+
+\end{thebibliography}

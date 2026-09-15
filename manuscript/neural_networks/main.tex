@@ -1,0 +1,147 @@
+%% Canonical Neural Networks (Elsevier) manuscript shell
+%% Based on official elsarticle-template-harv.tex (elsarticle 3.5, 2026-01-09)
+%% Do not modify elsarticle.cls or elsarticle-harv.bst.
+%% Scientific prose intentionally omitted — placeholders only.
+
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\journal{Neural Networks}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance
+\tnoteref{t1}}
+\tnotetext[t1]{Placeholder title from the Factorized FALI Springer draft.
+Scientific wording will be migrated in a later authorized step.}
+
+%% Author / affiliation placeholders — migrate verified metadata later
+\author[inst1]{Author One\corref{cor1}}
+\ead{author.one@example.edu}
+\author[inst1]{Author Two}
+\author[inst2]{Author Three}
+\cortext[cor1]{Corresponding author}
+
+\affiliation[inst1]{organization={Affiliation One},%
+            addressline={Address line},
+            city={City},
+            postcode={00000},
+            state={State},
+            country={Country}}
+
+\affiliation[inst2]{organization={Affiliation Two},%
+            addressline={Address line},
+            city={City},
+            postcode={00000},
+            state={State},
+            country={Country}}
+
+\begin{abstract}
+Placeholder abstract (Neural Networks Guide for Authors: $\leq$ 250 words).
+Scientific abstract will be migrated from the Factorized FALI source without
+claim rewriting in this shell-establishment step.
+\end{abstract}
+
+%% Graphical abstract is optional unless required at submission; left empty.
+\begin{graphicalabstract}
+%% \includegraphics{figures/graphical_abstract}
+\end{graphicalabstract}
+
+%% Research highlights (encouraged by Neural Networks GFA).
+%% Also provided as standalone highlights.tex for Editorial Manager upload.
+\begin{highlights}
+\item Placeholder highlight 1 (max 85 characters including spaces)
+\item Placeholder highlight 2 (max 85 characters including spaces)
+\item Placeholder highlight 3 (max 85 characters including spaces)
+\end{highlights}
+
+\begin{keyword}
+mechanistic interpretability \sep attention \sep causal attribution \sep
+transformers \sep FALI
+\end{keyword}
+
+\end{frontmatter}
+
+\section{Introduction}
+\label{sec:intro}
+%% Placeholder — migrate Factorized FALI Introduction later.
+%% Temporary citation so BibTeX resolves during shell compile:
+Shell compilation check cite \citep{placeholder2026}.
+
+\section{Related Work}
+\label{sec:related}
+%% Placeholder — migrate Related Work later.
+
+\section{Problem Formulation}
+\label{sec:problem}
+%% Placeholder — migrate problem/setup later.
+
+\section{Factorized Attention-Level Intervention}
+\label{sec:fali}
+%% Placeholder — migrate FALI method later.
+%% Do not migrate Frozen Attention Logit Intervention framing.
+
+\section{Method Validation}
+\label{sec:validation}
+%% Placeholder — migrate method-validation results later.
+
+\section{GPT-2 Indirect Object Identification}
+\label{sec:gpt2}
+%% Placeholder — migrate GPT-2 IOI results later.
+
+\section{Ablation and Gauge Robustness}
+\label{sec:robustness}
+%% Placeholder — EF-5 ablation robustness and/or gauge-sensitivity analysis.
+%% Gauge-sensitivity prose may require a separate authorized migration.
+
+\section{Pythia Induction Transfer}
+\label{sec:pythia}
+%% Placeholder — migrate Pythia induction results later.
+
+\section{Discussion}
+\label{sec:discussion}
+%% Placeholder.
+
+\section{Limitations}
+\label{sec:limitations}
+%% Placeholder.
+
+\section{Conclusion}
+\label{sec:conclusion}
+%% Placeholder.
+
+\section*{Acknowledgements}
+%% Placeholder acknowledgements (Neural Networks: separate section before references).
+
+\section*{Funding}
+%% Placeholder funding sources statement.
+
+\section*{CRediT authorship contribution statement}
+%% Placeholder CRediT roles (required for corresponding authors per GFA).
+
+\section*{Data and code availability}
+%% Placeholder research-data / code statement.
+
+\section*{Declaration of competing interest}
+%% Placeholder. If none: The authors declare that they have no known competing
+%% financial interests or personal relationships that could have appeared to
+%% influence the work reported in this paper.
+
+%% Bibliography (APA / author--year via elsarticle-harv)
+\bibliographystyle{elsarticle-harv}
+\bibliography{references}
+
+%% Optional appendix pointer (supplementary materials submitted separately)
+\section*{Appendix A. Supplementary data}
+Supplementary material associated with this article will be provided in
+\texttt{supplement/} and uploaded as separate Editorial Manager files.
+See \texttt{supplement/README.md}.
+
+\end{document}
