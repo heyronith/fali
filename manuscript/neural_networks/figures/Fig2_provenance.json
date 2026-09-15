@@ -1,0 +1,43 @@
+{
+  "figure": "Fig2",
+  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig2.py",
+  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
+  "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
+  "source_files": [],
+  "extracted_values": {
+    "type": "deterministic_schematic",
+    "revision": "visual/scientific-diagram correction only; no empirical recomputation",
+    "partition_counts": {
+      "T": 1,
+      "R": 5,
+      "O": 15,
+      "MASK": 15
+    },
+    "final_row_players": [
+      "R",
+      "R",
+      "T",
+      "R",
+      "R",
+      "R"
+    ],
+    "q_star_q_star_player": "R"
+  },
+  "output_dimensions_inches": {
+    "width": 6.85,
+    "height": 4.01
+  },
+  "output_width_mm": 174.0,
+  "output_height_mm": 101.85399999999998,
+  "generation_timestamp_utc": "2026-08-30T03:43:06.407018+00:00",
+  "plotting_library_versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  },
+  "outputs": {
+    "pdf": "manuscript/machine_learning/figures/Fig2.pdf",
+    "svg": "manuscript/machine_learning/figures/Fig2.svg",
+    "png": "manuscript/machine_learning/figures/Fig2.png"
+  }
+}

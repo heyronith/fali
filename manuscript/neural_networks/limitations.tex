@@ -1,0 +1,16 @@
+\section{Limitations}\label{sec:limitations}
+
+\paragraph{Hypothesis-driven scope.}
+FALI requires a selected attention head and task-relevant target edge or edge set. IOI and repeated-token induction provide clear target coordinates; less structured tasks may require substantial prior circuit analysis. The five-factor game evaluates all 32 cells per example and candidate, so it is intended for hypothesis-driven analysis of selected heads rather than exhaustive whole-model scanning. The method is also vulnerable to researcher degrees of freedom if candidates or target edges are chosen after inspecting FALI results; our confirmatory analyses mitigate this risk by freezing the relevant selections and directional hypotheses before confirmation. FALI is therefore mechanism resolution, not automatic circuit discovery.
+
+\paragraph{Counterfactual hybrids.}
+Mixed $T/R/O/V/C$ cells need not occur in natural model execution. They answer what the model does under the specified interchange intervention, not which latent state it would otherwise visit. Representation-level interventions can move computation away from natural internal distributions \citep{grant2025divergent}; accordingly, FALI attributions are not evidence for five independent natural pathways.
+
+\paragraph{Intervention and coalition dependence.}
+Attributions depend on the intact/perturbed endpoints, candidate-zero baseline, score partition, and SCORE/VALUE/CONTEXT coalition structure. Owen attribution allocates interactions consistently within that game, but another defensible intervention or grouping can allocate credit differently. In GPT-2, the target-positive/rival-negative channels persisted under the tested matched-mean and matched-resample alternatives, while the overall EF-5 gate failed its zero-damage reference criterion; we therefore make no claim of robustness to arbitrary ablations.
+
+\paragraph{Coarse context factor.}
+$C$ aggregates surrounding computation outside the injected candidate score/value state, potentially including other heads, MLPs, residual representations, normalization, and upstream or downstream changes. A large $\phi_C$ therefore assigns credit to this block of the game but does not identify the external component or pathway responsible. Decomposing $C$ would require additional hypotheses and interventions.
+
+\paragraph{Empirical and architectural scope.}
+The substantive evidence covers GPT-2 Small IOI and Pythia-160M repeated-token induction. This is sufficient to falsify transfer of the preregistered GPT-2 target/rival mechanism to the tested Pythia setting, but not to characterize recruitment mechanisms across architectures, scales, tasks, or training stages. The present algebra is also attention-head-specific; MLPs, residual features, or distributed mechanisms would require different architecture-aligned factors rather than mechanically reusing $T/R/O/V/C$. This distributional caution is especially important given recent evidence that IOI circuits can be prompt-specific across GPT-2, Pythia, and Gemma~2; our canonical-template bootstrap and cross-setting test should therefore be read as evidence on the explicitly sampled distributions, not as task-wide mechanism identification \citep{franco2026promptspecific}.

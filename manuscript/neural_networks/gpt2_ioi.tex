@@ -1,0 +1,25 @@
+\section{GPT-2 IOI: Conditional Recruitment and Fine-Score Decomposition}\label{sec:gpt2}
+
+\subsection{Experimental design}\label{sec:gpt2-design}
+
+We apply FALI to GPT-2 Small on indirect object identification (IOI), using the canonical primary Name Movers L9H6, L9H9, and L10H0 as the perturbed set and final-position IO-minus-subject logit difference as the task metric \citep{wang2023ioi}. The confirmatory cohort contains 15 low-level templates crossed with BABA/ABBA structure (30 strata), 30 prompts per stratum, and four independent seeds (42, 1, 8, 22), for 900 prompts per seed and 3600 total. L10H2 and L10H10 are the two primary candidates; L9H7 and L9H0 are same-layer architectural controls.
+
+Confirmation is specific to the previously unseen fine channels $\phi_T$, $\phi_R$, and $\phi_O$. The preregistered directional hypotheses were $\phi_T>0$ and $\phi_R<0$ for each target head, with $\phi_O$ descriptive only. Point estimates equally weight strata within seed and then seeds; 95\% intervals use 10,000 deterministic hierarchical template-cluster bootstrap draws with shared template resampling across seeds and prompt resampling within seed--template--pattern cells. A preregistered sensitivity removes template 0, which overlaps a legacy discovery template, leaving 14 clusters and 28 strata.
+
+\subsection{Conditional recruitment is not attention increase}\label{sec:gpt2-functional}
+
+L10H2 is positively recruited on the broad canonical cohort: its conditional effect is $0.382$ (95\% CI $[0.341,0.424]$) and its conditional gain is $0.298$ ($[0.263,0.335]$). Target attention alone does not identify this response. L10H2's target-attention increase is $0.279$ ($[0.262,0.296]$), whereas L10H10 increases target attention even more, by $0.310$ ($[0.285,0.335]$), despite a negative conditional gain of $-0.263$ ($[-0.302,-0.225]$) and negative conditional effect of $-0.079$ ($[-0.111,-0.046]$). Panel (a) of Fig.~\ref{fig:gpt2-attention-recruitment} makes this dissociation explicit: both candidates increase target attention, while their conditional gains lie on opposite sides of zero.
+
+The earlier corrected two-template screen had found L10H10 still supportive but downregulated; on the broader canonical distribution its mean conditional effect crosses below zero. The stable conclusion is therefore distributionally bounded but clear: a strong target-attention increase is not sufficient evidence of positive functional recruitment. FALI consequently explains the output-grounded conditional change rather than the attention change itself.
+
+\input{figures/fig4a}
+
+\subsection{Canonical FALI mechanism}\label{sec:gpt2-fali}
+
+For L10H2, $\Phi_{\mathrm{SCORE}}=0.445$, $\phi_V=-0.00035$, and $\phi_C=-0.146$. Within SCORE, the target contribution is strongly positive, $\phi_T=0.783$ (95\% CI $[0.722,0.838]$), while the rival contribution is negative, $\phi_R=-0.341$ ($[-0.372,-0.311]$); $\phi_O=0.0039$. All four seed means and all 30 stratum means have the preregistered $T+$/$R-$ signs.
+
+L10H10 shows the same fine-score signs despite its negative total gain: $\phi_T=0.329$ ($[0.300,0.355]$), $\phi_R=-0.126$ ($[-0.139,-0.113]$), and $\phi_O=0.0036$. Panel (b) of Fig.~\ref{fig:gpt2-attention-recruitment} shows the fine-factor profiles for both heads. Its positive SCORE contribution ($0.206$) is outweighed by a negative surrounding-context contribution ($\phi_C=-0.471$), with near-zero value contribution. Thus a favorable-looking score adaptation under the specified game need not imply functional recruitment. Panel (c) of Fig.~\ref{fig:gpt2-attention-recruitment} shows the cumulative SCORE/VALUE/CONTEXT decomposition that drives L10H10's net gain below zero.
+
+The preregistered EF-4 fine-score gate passes for both heads. All four directional hypotheses hold in every seed and all 30 strata, and the template-0-excluded sensitivity retains the predicted directions with CIs excluding zero for both heads. The same-layer controls L9H7 and L9H0 have zero recorded $T/R/O/V$ attributions, with their endpoint changes assigned to $C$ up to numerical residual $1.11\times10^{-16}$. These results support a stable GPT-2 mechanism pattern under the tested game, not a universal recruitment mechanism: L10H10 already shows that the same fine-score signs can occur without positive recruitment, and Owen values allocate interactions rather than pure direct effects.
+
+\input{figures/fig4bc}

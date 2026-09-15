@@ -1,0 +1,89 @@
+{
+  "figure": "Fig5",
+  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig5.py",
+  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
+  "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
+  "source_files": [
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
+      "sha256": "cfb8db3c2edae1563f0b59673be3aac561c55d9c16d7cd516c93611539449487"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/exact_means.csv",
+      "sha256": "341f786a959b3556b448ae6c43cc0628d22a3323e8ceef5b5493f3b562b5c971"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/bootstrap_ci.csv",
+      "sha256": "f001f1fdf7c14c99c01694c9fccb42782b5a2f4122aa30c3ce75cc102c4b61bd"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/ef6_gate.json",
+      "sha256": "f6475c3b35e581b03def6f8cceeae26ac0a1759443ebb9d455cb00ad38726b35"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/hypothesis_results.json",
+      "sha256": "a19abbd4cddad93167f5a50954b119444f924139467d216227773d39dba6dd7c"
+    }
+  ],
+  "extracted_values": {
+    "gpt2_l10h2": {
+      "conditional_gain": {
+        "point": 0.2984514048364426,
+        "ci_low": 0.262939664857255,
+        "ci_high": 0.335184266080459
+      },
+      "phi_T": {
+        "point": 0.7828059418444279,
+        "ci_low": 0.7218558721812787,
+        "ci_high": 0.8383378905223474
+      },
+      "phi_R": {
+        "point": -0.3414187702646962,
+        "ci_low": -0.3716732608334701,
+        "ci_high": -0.3109089380952494
+      }
+    },
+    "pythia_l8h2": {
+      "conditional_gain": {
+        "point": 0.4856525427158986,
+        "ci_low": 0.3264860623875493,
+        "ci_high": 0.7218153487472388
+      },
+      "phi_T": {
+        "point": -0.1437365829486808,
+        "ci_low": -0.2474350130809982,
+        "ci_high": -0.084084796497823
+      },
+      "phi_R": {
+        "point": 0.1178003300768512,
+        "ci_low": 0.0582247184794345,
+        "ci_high": 0.2191251687378179
+      }
+    },
+    "ef6_gates": {
+      "G0": "CONFIRMED",
+      "G1": "CONFIRMED",
+      "G2": "CONFIRMED",
+      "G3": "NOT_CONFIRMED",
+      "G4": "NOT_CONFIRMED"
+    },
+    "ef6_gate": "FAIL"
+  },
+  "output_dimensions_inches": {
+    "width": 6.85,
+    "height": 5.11
+  },
+  "output_width_mm": 174.0,
+  "output_height_mm": 129.794,
+  "generation_timestamp_utc": "2026-08-30T03:43:07.211293+00:00",
+  "plotting_library_versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  },
+  "outputs": {
+    "pdf": "manuscript/machine_learning/figures/Fig5.pdf",
+    "svg": "manuscript/machine_learning/figures/Fig5.svg",
+    "png": "manuscript/machine_learning/figures/Fig5.png"
+  }
+}

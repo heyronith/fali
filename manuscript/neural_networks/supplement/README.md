@@ -1,15 +1,12 @@
-# Supplement directory
+# Neural Networks supplement
 
-Placeholder for Neural Networks supplementary materials.
+Source: Factorized FALI supplement migrated from `manuscript/archive/machine_learning/supplement.tex`.
 
-Per the Neural Networks Guide for Authors:
+Compile from this directory:
+```
+export PATH="/Users/ronny/fali-tinytex/bin/universal-darwin:$PATH"
+latexmk -pdf -interaction=nonstopmode supplement.tex
+```
 
-- Supplementary material is encouraged when accurate and relevant.
-- Cite all supplementary files in the manuscript.
-- Submit with the manuscript; files appear online as received.
-
-Scientific supplement content will be migrated later from the Factorized FALI
-Springer supplement (`supplement.tex` / PDF in the archived ML workspace).
-
-Do not place Frozen Attention Logit Intervention historical material here
-without explicit scientific review.
+Includes Owen details, synthetic validation, GPT-2/Pythia tables, EF-5 diagnostics,
+and gauge-sensitivity tables.

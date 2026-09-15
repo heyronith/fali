@@ -1,7 +1,7 @@
-%% Canonical Neural Networks (Elsevier) manuscript shell
-%% Based on official elsarticle-template-harv.tex (elsarticle 3.5, 2026-01-09)
+%% Canonical Neural Networks (Elsevier) manuscript
+%% Based on official elsarticle-template-harv.tex (elsarticle 3.5)
 %% Do not modify elsarticle.cls or elsarticle-harv.bst.
-%% Scientific prose intentionally omitted — placeholders only.
+%% Scientific source: manuscript/archive/machine_learning/ (Factorized FALI)
 
 \documentclass[preprint,12pt,authoryear]{elsarticle}
 
@@ -9,6 +9,8 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{placeins}
 \usepackage{hyperref}
 
 \journal{Neural Networks}
@@ -17,131 +19,87 @@
 
 \begin{frontmatter}
 
-\title{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance
-\tnoteref{t1}}
-\tnotetext[t1]{Placeholder title from the Factorized FALI Springer draft.
-Scientific wording will be migrated in a later authorized step.}
+\title{FALI: Mechanistic Decomposition of Conditional Attention-Head Importance}
 
-%% Author / affiliation placeholders — migrate verified metadata later
-\author[inst1]{Author One\corref{cor1}}
-\ead{author.one@example.edu}
-\author[inst1]{Author Two}
-\author[inst2]{Author Three}
+\author[inst1]{Ronith Sharmila\corref{cor1}}
+\ead{ronith.sharmila@swosu.edu}
+\author[inst2]{Delen Dursun}
+\ead{dursun.delen@okstate.edu}
+\author[inst3]{Rupesh Agrawal}
+\ead{rupesh.agrawal@nku.edu}
 \cortext[cor1]{Corresponding author}
 
-\affiliation[inst1]{organization={Affiliation One},%
-            addressline={Address line},
-            city={City},
-            postcode={00000},
-            state={State},
-            country={Country}}
+\affiliation[inst1]{organization={Southwestern Oklahoma State University},%
+            city={Weatherford},
+            country={USA}}
 
-\affiliation[inst2]{organization={Affiliation Two},%
-            addressline={Address line},
-            city={City},
-            postcode={00000},
-            state={State},
-            country={Country}}
+\affiliation[inst2]{organization={Oklahoma State University},%
+            city={Stillwater},
+            country={USA}}
+
+\affiliation[inst3]{organization={Northern Kentucky University},%
+            city={Highland Heights},
+            state={Kentucky},
+            country={USA}}
 
 \begin{abstract}
-Placeholder abstract (Neural Networks Guide for Authors: $\leq$ 250 words).
-Scientific abstract will be migrated from the Factorized FALI source without
-claim rewriting in this shell-establishment step.
+Component importance in transformer circuits can change after another component is perturbed, but detecting such conditional importance does not explain why the change occurred. We introduce FALI (Factorized Attention-Level Intervention), an output-grounded counterfactual framework that decomposes the cross-state change in a selected attention head's causal usefulness into target scores, rival scores, other attention scores, value content, and surrounding-network context. Standard Owen attribution allocates interactions while reconciling the fine score decomposition with a coarse score/value/context game. Controlled synthetic systems and a randomly initialized transformer validate factor recovery, endpoint identities, intervention isolation, and coarse--fine consistency. In GPT-2 Small on indirect object identification, a head satisfying the positive-recruitment criterion exhibits a positive target-score contribution and a negative rival-score contribution, while another head shows similar attention adaptation without positive recruitment. We then preregister transfer of this fine-score mechanism to Pythia-160M induction. Conditional recruitment appears again, but the target and rival contributions reverse sign. Thus, across the two studied settings, a common functional response does not imply a common fine-grained mechanism. FALI provides a mechanism-discrimination layer for selected conditionally important attention heads under explicit intervention semantics.
 \end{abstract}
 
-%% Graphical abstract is optional unless required at submission; left empty.
 \begin{graphicalabstract}
-%% \includegraphics{figures/graphical_abstract}
+%% Optional at submission; figure assets live under figures/.
 \end{graphicalabstract}
 
-%% Research highlights (encouraged by Neural Networks GFA).
-%% Also provided as standalone highlights.tex for Editorial Manager upload.
+%% Research highlights (also in standalone highlights.tex)
 \begin{highlights}
-\item Placeholder highlight 1 (max 85 characters including spaces)
-\item Placeholder highlight 2 (max 85 characters including spaces)
-\item Placeholder highlight 3 (max 85 characters including spaces)
+\input{highlights_items}
 \end{highlights}
 
 \begin{keyword}
-mechanistic interpretability \sep attention \sep causal attribution \sep
-transformers \sep FALI
+mechanistic interpretability \sep causal intervention \sep transformer circuits \sep
+attention heads \sep conditional importance \sep FALI
 \end{keyword}
 
 \end{frontmatter}
 
-\section{Introduction}
-\label{sec:intro}
-%% Placeholder — migrate Factorized FALI Introduction later.
-%% Temporary citation so BibTeX resolves during shell compile:
-Shell compilation check cite \citep{placeholder2026}.
-
-\section{Related Work}
-\label{sec:related}
-%% Placeholder — migrate Related Work later.
-
-\section{Problem Formulation}
-\label{sec:problem}
-%% Placeholder — migrate problem/setup later.
-
-\section{Factorized Attention-Level Intervention}
-\label{sec:fali}
-%% Placeholder — migrate FALI method later.
-%% Do not migrate Frozen Attention Logit Intervention framing.
-
-\section{Method Validation}
-\label{sec:validation}
-%% Placeholder — migrate method-validation results later.
-
-\section{GPT-2 Indirect Object Identification}
-\label{sec:gpt2}
-%% Placeholder — migrate GPT-2 IOI results later.
-
-\section{Ablation and Gauge Robustness}
-\label{sec:robustness}
-%% Placeholder — EF-5 ablation robustness and/or gauge-sensitivity analysis.
-%% Gauge-sensitivity prose may require a separate authorized migration.
-
-\section{Pythia Induction Transfer}
-\label{sec:pythia}
-%% Placeholder — migrate Pythia induction results later.
-
-\section{Discussion}
-\label{sec:discussion}
-%% Placeholder.
-
-\section{Limitations}
-\label{sec:limitations}
-%% Placeholder.
-
-\section{Conclusion}
-\label{sec:conclusion}
-%% Placeholder.
+\input{introduction}
+\input{related_work}
+\input{problem_formulation}
+\input{fali_method}
+\input{method_validation}
+\input{gpt2_ioi}
+\input{ablation_and_gauge}
+\input{pythia_induction}
+\input{discussion}
+\input{limitations}
+\input{conclusion}
 
 \section*{Acknowledgements}
-%% Placeholder acknowledgements (Neural Networks: separate section before references).
+The authors thank colleagues who provided feedback on earlier drafts of this work.
 
 \section*{Funding}
-%% Placeholder funding sources statement.
+This research received no external funding.
 
 \section*{CRediT authorship contribution statement}
-%% Placeholder CRediT roles (required for corresponding authors per GFA).
+\textbf{Ronith Sharmila:} Conceptualization, Methodology, Software, Validation, Formal analysis, Investigation, Data curation, Writing -- original draft, Visualization, Project administration.
+\textbf{Delen Dursun:} Supervision, Writing -- review \& editing.
+\textbf{Rupesh Agrawal:} Supervision, Writing -- review \& editing.
 
 \section*{Data and code availability}
-%% Placeholder research-data / code statement.
+The study uses publicly available pretrained models and programmatically generated experimental datasets. Processed datasets, aggregate result files, preregistration records, and analysis artifacts supporting the reported results will be archived with the accompanying code release. The code required to reproduce the reported analyses will be made publicly available in the project repository and archived in a persistent release.
 
 \section*{Declaration of competing interest}
-%% Placeholder. If none: The authors declare that they have no known competing
-%% financial interests or personal relationships that could have appeared to
-%% influence the work reported in this paper.
+The authors declare that they have no known competing financial interests or personal relationships that could have appeared to influence the work reported in this paper.
 
-%% Bibliography (APA / author--year via elsarticle-harv)
+\section*{Declaration of generative AI and AI-assisted technologies in the writing process}
+Generative AI tools, including OpenAI ChatGPT and Cursor, were used during manuscript development to assist with literature-search support, drafting and editing, code generation and review, figure-layout development, and LaTeX/repository integration. All experimental designs, scientific claims, numerical results, citations, and final manuscript content were reviewed and verified by the authors against the underlying source code, result artifacts, and primary literature. Quantitative scientific figures were produced using deterministic, source-backed plotting workflows. Generative AI tools are not listed as authors and bear no responsibility for the work.
+
 \bibliographystyle{elsarticle-harv}
 \bibliography{references}
 
-%% Optional appendix pointer (supplementary materials submitted separately)
 \section*{Appendix A. Supplementary data}
-Supplementary material associated with this article will be provided in
-\texttt{supplement/} and uploaded as separate Editorial Manager files.
-See \texttt{supplement/README.md}.
+Supplementary material associated with this article is provided in
+\texttt{supplement/} (compiled separately as \texttt{supplement/supplement.tex})
+and will be uploaded as separate Editorial Manager files.
 
 \end{document}

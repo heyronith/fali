@@ -1,0 +1,111 @@
+{
+  "figure": "Fig4",
+  "generating_script": "manuscript/machine_learning/figure_scripts/render_fig4.py",
+  "git_commit": "2524a2f1c3356f6bbb088625b3ca12bdcc2b6c26",
+  "revision_note": "visual/scientific-diagram correction only; no empirical recomputation",
+  "source_files": [
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
+      "sha256": "cfb8db3c2edae1563f0b59673be3aac561c55d9c16d7cd516c93611539449487"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json",
+      "sha256": "2cdc6ddc49dda7c749419337a162fd8fa162f125f496d45bc659af78039959a1"
+    }
+  ],
+  "extracted_values": {
+    "heads": {
+      "L10H2": {
+        "delta_target_attn": {
+          "point": 0.2794597122150783,
+          "ci_low": 0.2616430716103641,
+          "ci_high": 0.2955101500807019
+        },
+        "conditional_gain": {
+          "point": 0.2984514048364426,
+          "ci_low": 0.262939664857255,
+          "ci_high": 0.335184266080459
+        },
+        "phi_T": {
+          "point": 0.7828059418444279,
+          "ci_low": 0.7218558721812787,
+          "ci_high": 0.8383378905223474
+        },
+        "phi_R": {
+          "point": -0.3414187702646962,
+          "ci_low": -0.3716732608334701,
+          "ci_high": -0.3109089380952494
+        },
+        "Phi_SCORE": {
+          "point": 0.4452515088187323,
+          "ci_low": 0.408801726511783,
+          "ci_high": 0.4771069926376695
+        },
+        "phi_V": {
+          "point": -0.0003494754764768,
+          "ci_low": -0.0008100891494088,
+          "ci_high": 0.0001035610343571
+        },
+        "phi_C": {
+          "point": -0.1464506285058127,
+          "ci_low": -0.1646850214159046,
+          "ci_high": -0.1283239132899928
+        }
+      },
+      "L10H10": {
+        "delta_target_attn": {
+          "point": 0.3102503810802267,
+          "ci_low": 0.2852762205745093,
+          "ci_high": 0.3345387746581756
+        },
+        "conditional_gain": {
+          "point": -0.2634422136677636,
+          "ci_low": -0.301913907908731,
+          "ci_high": -0.2248747150235706
+        },
+        "phi_T": {
+          "point": 0.3285238243473901,
+          "ci_low": 0.3002046477933541,
+          "ci_high": 0.3550433726499293
+        },
+        "phi_R": {
+          "point": -0.1259073698741417,
+          "ci_low": -0.1386101436026302,
+          "ci_high": -0.1130543539159827
+        },
+        "Phi_SCORE": {
+          "point": 0.2062508994340896,
+          "ci_low": 0.185088717718919,
+          "ci_high": 0.2256607000463538
+        },
+        "phi_V": {
+          "point": 0.0015555783112843,
+          "ci_low": 0.0010188283313203,
+          "ci_high": 0.0020904957674167
+        },
+        "phi_C": {
+          "point": -0.4712486914131375,
+          "ci_low": -0.5142722480098406,
+          "ci_high": -0.4274670255117945
+        }
+      }
+    }
+  },
+  "output_dimensions_inches": {
+    "width": 6.85,
+    "height": 4.21
+  },
+  "output_width_mm": 174.0,
+  "output_height_mm": 106.934,
+  "generation_timestamp_utc": "2026-08-30T03:43:06.882556+00:00",
+  "plotting_library_versions": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  },
+  "outputs": {
+    "pdf": "manuscript/machine_learning/figures/Fig4.pdf",
+    "svg": "manuscript/machine_learning/figures/Fig4.svg",
+    "png": "manuscript/machine_learning/figures/Fig4.png"
+  }
+}
