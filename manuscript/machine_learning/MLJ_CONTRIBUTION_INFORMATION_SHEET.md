@@ -1,0 +1,55 @@
+# MLJ Contribution Information Sheet
+
+**Manuscript:** *FALI: Mechanistic Decomposition of Conditional Attention-Head Causal Usefulness*
+
+## 1. What is the main claim of the paper, and why is this important to the machine learning literature?
+
+The paper's main claim is methodological: **detecting that an internal component of a learned neural network becomes more or less causally important after another component is perturbed does not by itself explain the mechanism of that change, and FALI provides a controlled way to discriminate among candidate mechanisms for a selected attention head.**
+
+FALI (Factorized Attention-Level Intervention) defines the quantity to be explained as the cross-state change in a selected attention head's output-grounded causal usefulness. It then decomposes that change into five architecture-aligned factors: task-target attention scores ($T$), rival scores in the same task-relevant query row ($R$), other structurally valid scores ($O$), value content ($V$), and surrounding-network context ($C$). The resulting 32-cell counterfactual game is attributed with the standard Owen value under the fixed coalition structure SCORE=$\{T,R,O\}$, VALUE=$\{V\}$, CONTEXT=$\{C\}$. This yields both a fine target/rival/other score decomposition and a coarser score/value/context decomposition that reconcile exactly.
+
+This matters to machine-learning research because mechanistic interpretability increasingly uses interventions to make causal claims about learned systems. Existing methods can localize behaviorally relevant components, identify conditionally important components, or show that component effects depend on the surrounding network. Those results still leave an explanatory ambiguity: whether a selected attention head changed its routing, its transported content, or primarily the context in which its output is used. FALI addresses that methodological gap. It is not proposed as a new theory of self-repair, an automatic circuit-discovery algorithm, or a new cooperative-game attribution theorem.
+
+## 2. What evidence supports the claim? Be precise.
+
+The evidence has three layers.
+
+**Controlled validation.** In deterministic synthetic attention systems, each single manipulated factor is recovered in the intended FALI channel, with the largest attribution discrepancy $1.11\times10^{-16}$. A pure $T\times C$ interaction with total utility change approximately 2 receives the analytically expected approximately 1/1 Owen split between $T$ and $C$. In a randomly initialized two-layer TransformerLens model, independent ordinary forward passes give intact candidate effect 0.455046, conditional effect -0.085684, and conditional gain -0.540729; the corresponding FALI endpoint cells reproduce these quantities at recorded precision. Score-to-pattern reconstruction, pattern/value-to-output reconstruction, masking and batch-specific partitions, intervention isolation, live Q/V leakage checks, and the fine-to-coarse quotient identity are also verified. These experiments validate the intervention semantics rather than claiming that the mixed counterfactual states are unique natural model pathways.
+
+**GPT-2 Small on indirect object identification.** The canonical confirmation uses 15 low-level templates crossed with BABA/ABBA structure (30 strata), 30 prompts per stratum per seed, and four seeds (42, 1, 8, 22), for 3,600 prompts. After ablation of the canonical primary Name Movers L9H6, L9H9, and L10H0, L10H2 satisfies positive functional recruitment: conditional effect 0.382 (95% CI [0.341, 0.424]) and conditional gain 0.298 ([0.263, 0.335]). Its fine FALI decomposition is target-positive and rival-negative: $\phi_T=0.783$ ([0.722, 0.838]) and $\phi_R=-0.341$ ([-0.372, -0.311]). In contrast, L10H10 increases target attention by 0.310 ([0.285, 0.335]) yet has negative conditional gain -0.263 ([-0.302, -0.225]) and negative conditional effect -0.079 ([-0.111, -0.046]). L10H10 nevertheless also shows $\phi_T>0$ and $\phi_R<0$; its positive SCORE contribution is outweighed by a large negative context contribution ($\phi_C=-0.471$). Thus neither a target-attention increase nor the sign of one fine score channel is sufficient to define recruitment. The canonical fine-score directions hold in every seed and all 30 strata, and remain in the preregistered template-0-excluded sensitivity.
+
+The tested matched-mean and matched-resample alternatives preserve the four frozen GPT-2 fine-channel directions, but the overall preregistered ablation-robustness experiment fails its zero-reference validity criterion. We report that negative result explicitly rather than treating the experiment as an overall robustness success.
+
+**Cross-setting mechanism-transfer test.** In Pythia-160M repeated-token induction, head selection is separated from FALI attribution. Discovery selects L5H0 as the primary and L8H2 as the candidate; held-out confirmation uses seeds 1, 8, and 22, offsets 8, 16, and 24, and 128 examples per offset per seed (1,152 examples). L8H2 is positively recruited: conditional effect 0.621 ([0.456, 0.860]) and conditional gain 0.486 ([0.326, 0.722]). However, the preregistered GPT-2 fine-mechanism transfer fails: $\phi_T=-0.144$ ([-0.247, -0.084]) and $\phi_R=+0.118$ ([0.058, 0.219]), the opposite signs from GPT-2. The reversed signs hold in every confirmation seed and offset. A prespecified zero-mean score-gauge sensitivity preserves the qualitative target/rival signs in GPT-2 and Pythia while changing fine-channel magnitudes, so the supported claim is sign robustness to that sensitivity analysis, not full gauge invariance.
+
+Together these results support the paper's central methodological conclusion: the same high-level functional response---positive conditional recruitment---can arise with different fine-grained score mechanisms, and FALI can distinguish those mechanisms under explicit intervention semantics.
+
+## 3. What papers make the most closely related contributions, and how is this paper related to them?
+
+The closest operational neighbor is **Conditional Co-Ablation (CoAx)**, which measures how a component's ablation effect changes after a primary set is removed and can identify backup components that first-order rankings miss. CoAx addresses *which* components become conditionally important. FALI assumes a candidate has already been selected and addresses a subsequent question: *why* did that selected attention head's causal usefulness change?
+
+A close conceptual neighbor is the causal-mediation analysis described in the manuscript as **The Curse of Multiple Mediators**, which shows that component effects can contain substantial interactions with the rest of the network and that such interactions can hide or inflate measured component importance. This establishes that context-dependent causal effects are not novel to FALI. FALI instead factorizes a selected cross-state change into attention-score, value, and surrounding-context contributions.
+
+**Activation patching and path patching** localize activations or computational paths whose intervention changes model behavior. They provide causal localization/testing tools, whereas FALI's estimand is the change in one selected head's causal usefulness between two circuit states.
+
+Finally, prior transformer-circuit work distinguishes **QK routing from OV/value content**, and later causal work separately manipulates routing and content. FALI does not claim this separation as novel. Its contribution is the output-grounded cross-state estimand, the $T/R/O/V/C$ intervention game, and the coarse--fine accounting used to discriminate mechanisms of conditional importance.
+
+## 4. Have parts of this paper been published before? If so, what is new here?
+
+An earlier public preprint from this project used the name **FALI** for **Frozen Attention Logit Intervention**, a narrower target-versus-background decomposition of attention-probability changes in GPT-2 IOI. The current manuscript explicitly cites and supersedes that preprint rather than treating it as unrelated work.
+
+The present submission differs substantively in the scientific question, estimand, method, validation, and empirical evidence. Specifically, it:
+
+1. changes the dependent quantity from an attention-probability change to the **output-grounded change in a selected head's causal usefulness**;
+2. expands the intervention factors from a target/background attention-logit decomposition to **$T/R/O/V/C$**;
+3. uses the **standard Owen value** under a fixed coalition structure and verifies exact coarse--fine reconciliation;
+4. adds deterministic synthetic ground truth and random-transformer implementation validation, including endpoint and leakage checks;
+5. corrects the functional interpretation of GPT-2 recruitment, distinguishing L10H2 positive recruitment from L10H10 attention adaptation without positive recruitment;
+6. confirms the GPT-2 fine-score mechanism on a broad 3,600-prompt canonical design with seed/stratum and template-exclusion sensitivity analyses;
+7. evaluates matched alternative ablations while preserving the overall failed robustness criterion rather than selectively reporting only positive outcomes;
+8. adds a prespecified score-gauge sensitivity analysis; and
+9. adds a prospectively specified Pythia-160M induction transfer test in which conditional recruitment replicates but the target/rival fine-mechanism prediction fails.
+
+Accordingly, the earlier preprint is best viewed as a historical, nested special case and motivation for the present research program, not as the same method or evidence base.
+
+**Author confirmation before submission:** if any additional conference, workshop, journal, or archival version overlaps with this manuscript beyond the cited public preprint, it must be listed here with an exact overlap statement.
