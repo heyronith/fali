@@ -1,0 +1,19 @@
+{
+  "score_gauge": "row_mean",
+  "max_gauge_endpoint_pattern_error": 4.76837158203125e-07,
+  "max_gauge_endpoint_z_error": 1.430511474609375e-06,
+  "max_endpoint_error": 5.960464477539063e-08,
+  "max_owen_residual": 4.440892098500626e-16,
+  "max_quotient_consistency_error": 3.226585665316861e-16,
+  "checks": {
+    "score_pattern": true,
+    "z_reconstruction": true,
+    "endpoints": true,
+    "owen_residual": true,
+    "quotient_consistency": true,
+    "gauge_endpoint_pattern": true,
+    "gauge_endpoint_z": true,
+    "row_counts": true
+  },
+  "overall_pass": true
+}

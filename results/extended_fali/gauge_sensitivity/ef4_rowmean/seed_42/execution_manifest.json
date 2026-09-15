@@ -1,0 +1,47 @@
+{
+  "experiment": "gauge_sensitivity_ef4",
+  "score_gauge": "row_mean",
+  "seed": 42,
+  "heads": [
+    "L10H2",
+    "L10H10"
+  ],
+  "gauge_preregistration_sha": "e60f81acfff8fc9dd4f924ebb1c087ec89734c05",
+  "ef4_preregistration_sha": "2661459f047f65fabc418993d00e3bb06cc0b3b6",
+  "timestamp_utc": "2026-09-15T16:24:30.676232+00:00",
+  "overall_pass": true,
+  "artifact_hashes": {
+    "attribution_raw.csv": {
+      "sha256": "c226c5f92b5af8f45919a6e78e0f7c16ab7e4b93fbcfdc60c0930a9e6d84f79c",
+      "bytes": 732769
+    },
+    "cell_raw.csv.gz": {
+      "sha256": "6fe528e4e975de6552f7e0cc90a9e1a095a64f45bcec8d12b9fb6a091b342c1a",
+      "bytes": 1615018
+    },
+    "score_gauge_artifacts.pt": {
+      "sha256": "7043f5149e4c00d9757932c4d3e9fd107aa6b9ec5bcd6092661fc15ab857c66f",
+      "bytes": 15910826
+    },
+    "dataset_metadata.csv": {
+      "sha256": "57d6133cb32f81a351c3ac80d12dd7efb94a6453b746aaa875abfeac9ec86bc8",
+      "bytes": 128891
+    },
+    "invariant_report.json": {
+      "sha256": "e5067549180337c156c09ccf588811df680d79be32b3e708deb11c72c61e5487",
+      "bytes": 664
+    },
+    "run_config.json": {
+      "sha256": "ae5b86cb5698a7633d40db673fa0ed193ed7fdb74a3523de745a09fb0b359e56",
+      "bytes": 446
+    },
+    "environment.json": {
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5",
+      "bytes": 336
+    },
+    "preregistration_sha.txt": {
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "bytes": 41
+    }
+  }
+}

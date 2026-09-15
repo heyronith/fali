@@ -1,0 +1,10 @@
+........................................................................ [ 63%]
+..........................................                               [100%]
+114 passed in 91.38s (0:01:31)
+
+CRITICAL_SUBSET: 114 passed in 91.38s
+Modules: math, gpt2_smoke, ef4_analysis, ef6, manifests, revision_phase1/4, ef5_analysis
+FULL_SUITE_NOTES:
+- 206 tests collected
+- Hang (deselected from full runs): test_ef3r_point_estimate_correction.py::test_run_analysis_produces_correction_report
+- Hang risk: test_extended_fali_ef5r_diagnosis.py as whole module (isolated tests pass)

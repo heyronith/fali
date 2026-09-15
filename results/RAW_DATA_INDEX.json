@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-29T03:11:34.391424+00:00",
+    "generated_at_utc": "2026-09-15T18:12:17.044747+00:00",
     "large_raw_threshold_bytes": 2097152,
-    "n_indexed_large_raw_files": 57,
-    "n_manifest_files": 725
+    "n_indexed_large_raw_files": 61,
+    "n_manifest_files": 838
   },
   "files": [
     {
@@ -118,53 +118,8 @@
       "generating_script": "experiments/extended_fali_ef6_confirm.py",
       "config_path": null,
       "seeds": null,
-      "git_tracked": false,
+      "git_tracked": true,
       "notes": "Indexed raw output; likely produced by experiments/extended_fali_ef6_confirm.py; config_path unknown."
-    },
-    {
-      "experiment": "extended_fali_ef6",
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_1/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 389440,
-      "sha256": "1e002ef9cbe090a8ccc3b23dc18b6c59cb6dbb02fe9a98dbda204f4ae59af7f9",
-      "generating_script": "experiments/extended_fali_ef6_confirm.py",
-      "config_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_1/run_config.json",
-      "seeds": [
-        1
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef6_confirm.py using results/extended_fali/ef6_pythia_induction/confirmation/seed_1/run_config.json."
-    },
-    {
-      "experiment": "extended_fali_ef6",
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_22/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 391071,
-      "sha256": "03d34b5f9f1e2fc7e77572d1dfb5e705c8d0bbc4baff5965fa4e9357c7e07c1b",
-      "generating_script": "experiments/extended_fali_ef6_confirm.py",
-      "config_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_22/run_config.json",
-      "seeds": [
-        22
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef6_confirm.py using results/extended_fali/ef6_pythia_induction/confirmation/seed_22/run_config.json."
-    },
-    {
-      "experiment": "extended_fali_ef6",
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_8/cell_raw.csv.gz",
-      "row_count": null,
-      "schema": null,
-      "size_bytes": 389723,
-      "sha256": "1ebdd446cc08460477dec16d2f64866f431069151f5859a4f8423848d5301730",
-      "generating_script": "experiments/extended_fali_ef6_confirm.py",
-      "config_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_8/run_config.json",
-      "seeds": [
-        8
-      ],
-      "git_tracked": false,
-      "notes": "Large per-example raw output; indexed for reproducibility. Regenerate with experiments/extended_fali_ef6_confirm.py using results/extended_fali/ef6_pythia_induction/confirmation/seed_8/run_config.json."
     },
     {
       "experiment": "extended_fali_ef6",
@@ -189,6 +144,111 @@
       "notes": "Indexed raw output; likely produced by experiments/extended_fali_ef6_confirm.py; config_path unknown."
     },
     {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 15910826,
+      "sha256": "11f5c26e75921b258aade46b1fa7c1ae767c31154705c0d1bb30f84c2f7964f6",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        1
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 15910826,
+      "sha256": "aa84a342f5cdbea72d130b650be2f5c18fbb60ecbc3ef5d52c153f304d570d3b",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        22
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 15910826,
+      "sha256": "7043f5149e4c00d9757932c4d3e9fd107aa6b9ec5bcd6092661fc15ab857c66f",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        42
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 15910826,
+      "sha256": "57e73abed6f2d879393758c17668cff96e1ee6e94238aa67d69dc12a84d9b9c0",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        8
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 24962364,
+      "sha256": "6d4675758b7f6e631ff8d80cc154414aaf9a82b85cd927c0aa88038976d44af2",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        1
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 24962364,
+      "sha256": "a913d3106ef62fed877cf2a1cd89f4352ccb4f42c01934e7eeb54ec333f473e2",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        22
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
+      "experiment": "unknown",
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/score_gauge_artifacts.pt",
+      "row_count": null,
+      "schema": null,
+      "size_bytes": 24962364,
+      "sha256": "3f036201d433694c41df6584b854a13d3d36d8baf86edcd21355b68b25b3735b",
+      "generating_script": null,
+      "config_path": null,
+      "seeds": [
+        8
+      ],
+      "git_tracked": false,
+      "notes": "generator/config unknown"
+    },
+    {
       "experiment": "original_fali",
       "relative_path": "results/raw/ablation_controls_raw.csv",
       "row_count": 1400,
@@ -205,11 +265,11 @@
       ],
       "size_bytes": 210919,
       "sha256": "ea713b03b89ae94d9f1aad24c115513a350ab6700edf9b059b4e9cdb5e44a072",
-      "generating_script": "experiments/ablation_controls.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/ablation_controls.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -218,11 +278,11 @@
       "schema": null,
       "size_bytes": 712718,
       "sha256": "734fce2c747bc7a6c0a3db88c93866e67490d36b295794de886e5b1d06995d0a",
-      "generating_script": "experiments/ablation_controls.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/ablation_controls.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -248,11 +308,11 @@
       ],
       "size_bytes": 3464423,
       "sha256": "b600d06eed00484d694d13b20ef2260720c51607247540b422981b815f7d88cc",
-      "generating_script": "experiments/fali_decomposition.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_decomposition.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -261,11 +321,11 @@
       "schema": null,
       "size_bytes": 17230553,
       "sha256": "f89046208eb3fb704c7b22c77d434dfb048c23c5b40c815bdd78c7643c4d85e2",
-      "generating_script": "experiments/fali_decomposition.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_decomposition.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -280,11 +340,11 @@
       ],
       "size_bytes": 2067890,
       "sha256": "23bcfc301382b82abeb44ce069c12f528328cc92f1f201f8f9b9764e8d89d7bd",
-      "generating_script": "experiments/hybrid_intervention.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/hybrid_intervention.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -293,11 +353,11 @@
       "schema": null,
       "size_bytes": 2959273,
       "sha256": "eacec48c3bb17527f82f84dd8b5264141edb11e62190c7130ea77d9a57520312",
-      "generating_script": "experiments/hybrid_intervention.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/hybrid_intervention.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -315,11 +375,11 @@
       ],
       "size_bytes": 299522,
       "sha256": "363014ca28a8b5cd81922cd29fffbb28de90f56aaaac2311c48a6ea839af31d3",
-      "generating_script": "experiments/fali_rigorous_validation.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_rigorous_validation.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -328,11 +388,11 @@
       "schema": null,
       "size_bytes": 285890,
       "sha256": "8666164625a67d3064f964272891d506388d83b4b17e49e46c4ab95f775341d3",
-      "generating_script": "experiments/fali_rigorous_validation.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/fali_rigorous_validation.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -357,11 +417,11 @@
       ],
       "size_bytes": 387570,
       "sha256": "4d57a22095a3715455370a38c53ef5a17525f8e6b4d87c7b00ae374bee4397b3",
-      "generating_script": "experiments/output_mediation.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/output_mediation.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -370,11 +430,11 @@
       "schema": null,
       "size_bytes": 1161413,
       "sha256": "2cfa518a1423ae50e6265db2289099831e83e03c8596ed48721732883e60c20b",
-      "generating_script": "experiments/output_mediation.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/output_mediation.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -408,11 +468,11 @@
       ],
       "size_bytes": 7772432,
       "sha256": "bd3ad09062ac7bb1758483c57d1589560bb2822a8814a0268b15d707d13600b7",
-      "generating_script": "experiments/qk_decomposition.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/qk_decomposition.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "original_fali",
@@ -421,11 +481,11 @@
       "schema": null,
       "size_bytes": 26348091,
       "sha256": "c27b7883c32cdfc67e2e08d7e9f3e570810a6fa5c73b50fe679564bc64a44564",
-      "generating_script": "experiments/qk_decomposition.py",
+      "generating_script": null,
       "config_path": null,
       "seeds": null,
       "git_tracked": true,
-      "notes": "Original-FALI raw output; indexed for reproducibility. Likely produced by experiments/qk_decomposition.py; exact run config not recorded in repo."
+      "notes": "generator/config unknown"
     },
     {
       "experiment": "revision_phase2",

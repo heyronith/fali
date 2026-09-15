@@ -71,3 +71,49 @@ manuscript/neural_networks/*.log
 manuscript/neural_networks/*.out
 manuscript/neural_networks/*.synctex.gz
 manuscript/neural_networks/COMPILE_LOG.txt
+
+# Additional review / packaging clutter
+fali_manuscript_integration.zip
+fali_manuscript_integration/
+fali_submission_finalization_package.zip
+manuscript/machine_learning.zip
+manuscript/Untitled
+
+# Local TeX / template extracts (keep tools/elsevier-template/)
+tools/texlive-local/
+tools/tectonic.tar.gz
+tools/tectonic-home/
+tools/tectonic-cache/
+tools/tectonic-bundles/
+tools/pydeps/
+tools/springer-template/
+tools/install-tinytex.sh
+
+# Gauge / EF large cell tensors (local; indexed in RAW_DATA_INDEX / SHA256SUMS)
+results/extended_fali/gauge_sensitivity/**/cell_raw.csv.gz
+results/extended_fali/gauge_sensitivity/**/cell_raw.csv
+results/extended_fali/gauge_sensitivity/**/score_gauge_deltas.pt
+results/extended_fali/gauge_sensitivity/smoke_ef6/**/cell_raw.csv
+
+# Historical archive local raw copies (optional; originals under results/raw/)
+archive/historical_fali/raw/
+
+# Supplement LaTeX temps
+manuscript/neural_networks/supplement/*.aux
+manuscript/neural_networks/supplement/*.bbl
+manuscript/neural_networks/supplement/*.blg
+manuscript/neural_networks/supplement/*.fdb_latexmk
+manuscript/neural_networks/supplement/*.fls
+manuscript/neural_networks/supplement/*.log
+manuscript/neural_networks/supplement/*.out
+manuscript/neural_networks/supplement/*.spl
+manuscript/neural_networks/supplement/*.synctex.gz
+
+# Archive ML LaTeX temps
+manuscript/archive/machine_learning/*.aux
+manuscript/archive/machine_learning/*.bbl
+manuscript/archive/machine_learning/*.blg
+manuscript/archive/machine_learning/*.fdb_latexmk
+manuscript/archive/machine_learning/*.fls
+manuscript/archive/machine_learning/*.log
+manuscript/archive/machine_learning/*.out

@@ -65,7 +65,14 @@ from extended_fali_induction import (
     tensor_sha256,
     validate_induction_metadata,
 )
-from extended_fali_interventions import CellTable, enumerate_extended_fali_cells, masked_softmax, score_pattern_z_pipeline
+from extended_fali_interventions import (
+    CellTable,
+    canonicalize_score_row,
+    enumerate_extended_fali_cells,
+    masked_softmax,
+    reconstruct_z_from_scores_values,
+    score_pattern_z_pipeline,
+)
 from historical_integrity_audit import audit_ef5_historical_integrity
 from revision_factorial import make_full_z_injection_hook, merge_hook_lists
 from revision_interventions import build_zero_ablation_hooks
@@ -95,6 +102,9 @@ class EF6RunConfig:
     compress_cells: bool = True
     run_smoke: bool = False
     selection_lock_path: Optional[Path] = None
+    score_gauge: str = "native"  # "native" | "row_mean"
+    save_score_artifacts: bool = False
+    gauge_preregistration_sha: Optional[str] = None
 
 
 def pkg_ver(name: str) -> Optional[str]:
@@ -449,6 +459,9 @@ def run_extended_fali_confirmation(
     primary: Head,
     candidate: Head,
     seed: int,
+    score_gauge: str = "native",
+    save_score_artifacts: bool = False,
+    score_artifact_path: Optional[Path] = None,
 ) -> Tuple[List[Dict], List[Dict], Dict]:
     partition = dataset.partition(device)
     part_diag = partition_diagnostics(partition)
@@ -473,6 +486,55 @@ def run_extended_fali_confirmation(
     max_endpoint = 0.0
     max_owen = 0.0
     max_quotient = 0.0
+    max_gauge_pat = 0.0
+    max_gauge_z = 0.0
+
+    scores_a_native = scores_a
+    scores_b_native = scores_b
+    if score_gauge != "native":
+        scores_a = canonicalize_score_row(scores_a_native, partition.valid_mask, mode=score_gauge)
+        scores_b = canonicalize_score_row(scores_b_native, partition.valid_mask, mode=score_gauge)
+        p_nat_a = masked_softmax(
+            scores_a_native.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+        )
+        p_nat_b = masked_softmax(
+            scores_b_native.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+        )
+        p_g_a = masked_softmax(
+            scores_a.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+        )
+        p_g_b = masked_softmax(
+            scores_b.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+        )
+        max_gauge_pat = max(
+            float((p_nat_a - p_g_a).abs().max().item()),
+            float((p_nat_b - p_g_b).abs().max().item()),
+        )
+        z_nat_a = reconstruct_z_from_scores_values(p_nat_a, v_a)
+        z_nat_b = reconstruct_z_from_scores_values(p_nat_b, v_b)
+        z_g_a = reconstruct_z_from_scores_values(p_g_a, v_a)
+        z_g_b = reconstruct_z_from_scores_values(p_g_b, v_b)
+        max_gauge_z = max(
+            max_z_error_on_prompt(z_nat_a, z_g_a, dataset.query_pos),
+            max_z_error_on_prompt(z_nat_b, z_g_b, dataset.query_pos),
+        )
+        if save_score_artifacts and score_artifact_path is not None:
+            torch.save(
+                {
+                    "head_name": head_name(c_layer, c_head),
+                    "scores_a_native": scores_a_native.detach().cpu(),
+                    "scores_b_native": scores_b_native.detach().cpu(),
+                    "scores_a_gauge": scores_a.detach().cpu(),
+                    "scores_b_gauge": scores_b.detach().cpu(),
+                    "valid_mask": partition.valid_mask.detach().cpu(),
+                    "target_mask": partition.target_mask.detach().cpu(),
+                    "competing_mask": partition.competing_mask.detach().cpu(),
+                    "other_mask": partition.other_query_mask.detach().cpu(),
+                    "query_pos": dataset.query_pos.detach().cpu(),
+                    "target_key": dataset.target_key.detach().cpu(),
+                },
+                score_artifact_path,
+            )
 
     err_pa, mask_pa = validate_score_pattern(scores_a, pat_a, partition)
     err_pb, mask_pb = validate_score_pattern(scores_b, pat_b, partition)
@@ -506,7 +568,14 @@ def run_extended_fali_confirmation(
 
     for _, state in enumerate_extended_fali_cells():
         _, _, z_hybrid = score_pattern_z_pipeline(
-            scores_a, scores_b, v_a, v_b, partition, state
+            scores_a,
+            scores_b,
+            v_a,
+            v_b,
+            partition,
+            state,
+            scores_a_native=scores_a_native if score_gauge != "native" else None,
+            scores_b_native=scores_b_native if score_gauge != "native" else None,
         )
         hooks_inj = build_ef6_factorial_hooks(
             candidate,
@@ -543,6 +612,7 @@ def run_extended_fali_confirmation(
                     "metric_injected": float(metric_inj[i].item()),
                     "metric_zero": float(base[i].item()),
                     "U": u_val,
+                    "score_gauge": score_gauge,
                 }
             )
 
@@ -587,6 +657,7 @@ def run_extended_fali_confirmation(
                 "clean_target_attn": float(pat_a[i, fq, tk].item()),
                 "damaged_target_attn": float(pat_b[i, fq, tk].item()),
                 "delta_target_attn": float(pat_b[i, fq, tk].item() - pat_a[i, fq, tk].item()),
+                "score_gauge": score_gauge,
             }
         )
 
@@ -596,6 +667,9 @@ def run_extended_fali_confirmation(
         "max_endpoint_error": max_endpoint,
         "max_owen_residual": max_owen,
         "max_quotient_consistency_error": max_quotient,
+        "max_gauge_endpoint_pattern_error": max_gauge_pat,
+        "max_gauge_endpoint_z_error": max_gauge_z,
+        "score_gauge": score_gauge,
         "partition": part_diag,
         "checks": {
             "score_pattern": max_score_pat <= SCORE_PATTERN_TOL,
@@ -605,6 +679,9 @@ def run_extended_fali_confirmation(
             "quotient_consistency": max_quotient <= QUOTIENT_TOL,
         },
     }
+    if score_gauge != "native":
+        validation["checks"]["gauge_endpoint_pattern"] = max_gauge_pat <= 1e-6
+        validation["checks"]["gauge_endpoint_z"] = max_gauge_z <= 1e-5
     validation["overall_pass"] = all(validation["checks"].values())
     return cell_rows, attr_rows, validation
 
@@ -796,7 +873,15 @@ def run_ef6_confirmation(cfg: EF6RunConfig) -> Dict:
         }
     ).to_csv(cfg.out_dir / "behavior_results.csv", index=False)
     cell_rows, attr_rows, val = run_extended_fali_confirmation(
-        model, dataset, cfg.device, primary, candidate, cfg.seed
+        model,
+        dataset,
+        cfg.device,
+        primary,
+        candidate,
+        cfg.seed,
+        score_gauge=cfg.score_gauge,
+        save_score_artifacts=cfg.save_score_artifacts,
+        score_artifact_path=(cfg.out_dir / "score_gauge_artifacts.pt") if cfg.save_score_artifacts else None,
     )
     write_cell_raw(cfg.out_dir, cell_rows, cfg.compress_cells)
     pd.DataFrame(attr_rows).to_csv(cfg.out_dir / "attribution_raw.csv", index=False)
@@ -809,12 +894,28 @@ def run_ef6_confirmation(cfg: EF6RunConfig) -> Dict:
     val["checks"]["row_counts"] = len(cell_rows) == expected_cells and len(attr_rows) == expected_attr
     val["overall_pass"] = all(val["checks"].values())
     (cfg.out_dir / "validation_report.json").write_text(json.dumps(val, indent=2) + "\n")
+    invariant_report = {
+        "score_gauge": cfg.score_gauge,
+        "max_gauge_endpoint_pattern_error": val.get("max_gauge_endpoint_pattern_error", 0.0),
+        "max_gauge_endpoint_z_error": val.get("max_gauge_endpoint_z_error", 0.0),
+        "max_endpoint_error": val.get("max_endpoint_error"),
+        "max_owen_residual": val.get("max_owen_residual"),
+        "max_quotient_consistency_error": val.get("max_quotient_consistency_error"),
+        "checks": val["checks"],
+        "overall_pass": val["overall_pass"],
+    }
+    (cfg.out_dir / "invariant_report.json").write_text(json.dumps(invariant_report, indent=2) + "\n")
+    gauge_sha = cfg.gauge_preregistration_sha or cfg.preregistration_sha
+    if gauge_sha:
+        (cfg.out_dir / "preregistration_sha.txt").write_text(gauge_sha + "\n")
     run_cfg = {
         "phase": "confirmation",
         "seed": cfg.seed,
         "model": MODEL_ID,
         "model_revision": revision,
         "preregistration_sha": cfg.preregistration_sha,
+        "gauge_preregistration_sha": cfg.gauge_preregistration_sha,
+        "score_gauge": cfg.score_gauge,
         "selection_lock": str(cfg.selection_lock_path),
         "primary": lock["primary"],
         "candidate": lock["candidate"],

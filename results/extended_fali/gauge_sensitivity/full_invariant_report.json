@@ -1,0 +1,23 @@
+{
+  "ef4_max_abs_gain_delta": 0.0,
+  "ef4_max_abs_Phi_SCORE_delta": 8.881784197001252e-16,
+  "ef4_max_owen_residual_rowmean": 8.881784197001252e-16,
+  "ef6_max_abs_gain_delta": 0.0,
+  "ef6_max_abs_Phi_SCORE_delta": 3.202299536653186e-15,
+  "ef6_max_owen_residual_rowmean": 4.440892098500626e-16,
+  "preregistration_sha_recorded": true,
+  "cross_setting_fine_contrast": "PRESERVED",
+  "ef4_max_quotient_bridge_err": 6.661338147750939e-16,
+  "ef4_max_owen_efficiency_err": 8.881784197001252e-16,
+  "ef6_max_quotient_bridge_err": 2.220446049250313e-16,
+  "ef6_max_owen_efficiency_err": 6.661338147750939e-16,
+  "native_attribution_sha256": {
+    "ef4_seed_42": "6a5afba1700f0c23206e3dafe2dd3962f886641defa918d776572acbca084fb4",
+    "ef4_seed_1": "9a975847d59f9ac3d952b4216d6e5241794f083f383f568c463ed3712e66c5c0",
+    "ef4_seed_8": "b47b643a713df6305328d99a93429cf1269b9b160746e87886bdb8b12b69050f",
+    "ef4_seed_22": "02020454c0ce6667f457095ae8c3237140461d4bdff32ecbae07931efd88a365",
+    "ef6_seed_1": "0bd09fd775971e1066e21e4b1200aad67d31a3fbc71e776e4c9dcb028d61fbfe",
+    "ef6_seed_8": "d3f28b260729344bc724aff7ea418be37d2d9be434b621315ce1c1978743c4b0",
+    "ef6_seed_22": "da43ddeed08541ce9a7f78558a6f95fa73270bd68af371ede038d19cf3905f33"
+  }
+}

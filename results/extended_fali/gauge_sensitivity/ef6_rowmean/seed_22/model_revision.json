@@ -1,0 +1,7 @@
+{
+  "repo_id": "EleutherAI/pythia-160m",
+  "resolved_revision_sha": "50f5173d932e8e61f858120bcb800b97af589f46",
+  "transformer_lens_version": "3.2.1",
+  "transformers_version": "4.57.6",
+  "torch_version": "2.12.0"
+}

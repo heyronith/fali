@@ -1,0 +1,43 @@
+{
+  "results": {
+    "native": {
+      "overall_pass": true,
+      "max_gauge_endpoint_pattern_error": 0.0,
+      "max_gauge_endpoint_z_error": 0.0,
+      "max_endpoint_error": 3.725290298461914e-09,
+      "max_owen_residual": 4.440892098500626e-16,
+      "checks": {
+        "score_pattern": true,
+        "z_reconstruction": true,
+        "endpoints": true,
+        "owen_residual": true,
+        "quotient_consistency": true
+      }
+    },
+    "row_mean": {
+      "overall_pass": true,
+      "max_gauge_endpoint_pattern_error": 1.1920928955078125e-07,
+      "max_gauge_endpoint_z_error": 1.9371509552001953e-07,
+      "max_endpoint_error": 3.725290298461914e-09,
+      "max_owen_residual": 4.440892098500626e-16,
+      "checks": {
+        "score_pattern": true,
+        "z_reconstruction": true,
+        "endpoints": true,
+        "owen_residual": true,
+        "quotient_consistency": true,
+        "gauge_endpoint_pattern": true,
+        "gauge_endpoint_z": true
+      }
+    }
+  },
+  "endpoint_max_abs_U00000": 0.0,
+  "endpoint_max_abs_U11111": 0.0,
+  "endpoint_max_abs_gain": 0.0,
+  "endpoint_max_abs_intact": 0.0,
+  "coarse_score_max_abs": 0.0,
+  "max_abs_phi_T_delta": 0.0008391804165309999,
+  "endpoint_ok": true,
+  "coarse_score_ok": true,
+  "intact_ok": true
+}

@@ -1,0 +1,52 @@
+{
+  "max_score_pattern_error": 1.1920928955078125e-07,
+  "max_z_reconstruction_error": 1.9371509552001953e-07,
+  "max_endpoint_error": 3.725290298461914e-09,
+  "max_owen_residual": 4.440892098500626e-16,
+  "max_quotient_consistency_error": 5.551115123125783e-17,
+  "max_gauge_endpoint_pattern_error": 1.1920928955078125e-07,
+  "max_gauge_endpoint_z_error": 1.9371509552001953e-07,
+  "score_gauge": "row_mean",
+  "partition": {
+    "coverage_error_per_example": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "overlap_count_per_example": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "target_count_per_example": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "checks": {
+    "score_pattern": true,
+    "z_reconstruction": true,
+    "endpoints": true,
+    "owen_residual": true,
+    "quotient_consistency": true,
+    "gauge_endpoint_pattern": true,
+    "gauge_endpoint_z": true
+  },
+  "overall_pass": true
+}

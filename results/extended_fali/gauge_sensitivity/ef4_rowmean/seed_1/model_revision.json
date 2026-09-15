@@ -1,0 +1,6 @@
+{
+  "repo_id": "gpt2",
+  "note": "HookedTransformer.from_pretrained('gpt2') default revision as used by EF-4",
+  "transformer_lens_target": "3.2.1",
+  "torch_target": "2.6.0+cu124"
+}

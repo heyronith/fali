@@ -1,0 +1,18 @@
+{
+  "phase": "EF-4-gauge",
+  "num_samples": 900,
+  "seed": 22,
+  "model": "gpt2-small",
+  "dtype": "float32",
+  "dataset_kind": "canonical",
+  "head_names": [
+    "L10H2",
+    "L10H10"
+  ],
+  "preregistration_sha": "e60f81acfff8fc9dd4f924ebb1c087ec89734c05",
+  "score_gauge": "row_mean",
+  "skip_historical_bridge": true,
+  "save_score_artifacts": true,
+  "duration_sec": 77.04516267776489,
+  "timestamp_utc": "2026-09-15T16:29:06.451573+00:00"
+}

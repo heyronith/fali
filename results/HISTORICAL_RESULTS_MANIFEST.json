@@ -1,11 +1,16 @@
 {
   "meta": {
-    "generated_at_utc": "2026-08-29T03:11:34.391424+00:00",
+    "generated_at_utc": "2026-09-15T18:12:17.044747+00:00",
     "large_raw_threshold_bytes": 2097152,
-    "n_indexed_large_raw_files": 57,
-    "n_manifest_files": 725
+    "n_indexed_large_raw_files": 61,
+    "n_manifest_files": 838
   },
   "files": [
+    {
+      "relative_path": "results/CURRENT_PAPER_RESULTS_MANIFEST.json",
+      "size_bytes": 29787,
+      "sha256": "9f2017aa8b679b280c6ac931102c67ab773026cfbc7f3dcce5d72eb31e72a4cc"
+    },
     {
       "relative_path": "results/TEST_BASELINE_ENVIRONMENT.json",
       "size_bytes": 329,
@@ -20,6 +25,11 @@
       "relative_path": "results/TEST_BASELINE_REPORT.txt",
       "size_bytes": 4736,
       "sha256": "36fcaa9a09a3e7dec987cc741fb729916a17cefa03743b7eda6e2fd916815688"
+    },
+    {
+      "relative_path": "results/TEST_CLEANUP_BASELINE.txt",
+      "size_bytes": 68,
+      "sha256": "3e5367b18fd9abed82f9c256e0522b2d9ac190cc337d1330e60b98a4fad9f4e6"
     },
     {
       "relative_path": "results/extended_fali/ef1_synthetic/validation_report.json",
@@ -78,8 +88,8 @@
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/analysis_correction_report.json",
-      "size_bytes": 30798,
-      "sha256": "a6d475092c642b98639ad7d6862f9becb8d4115f00aefcabdff71ad5f73d6bab"
+      "size_bytes": 31737,
+      "sha256": "d242eec0c58c78b26778040a3ea1a760ad6df89b8dea2398db5dc45c583fbc4a"
     },
     {
       "relative_path": "results/extended_fali/ef3_two_template/aggregate/attribution_merged_raw.csv",
@@ -1063,8 +1073,8 @@
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/aggregate/hypothesis_results.json",
-      "size_bytes": 3073,
-      "sha256": "3862bc17a2446c6494bdc81f6a92e35e22336a325079d94ed5ccf38f421ee417"
+      "size_bytes": 3072,
+      "sha256": "a19abbd4cddad93167f5a50954b119444f924139467d216227773d39dba6dd7c"
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/aggregate/offset_means.csv",
@@ -1073,8 +1083,8 @@
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/aggregate/scientific_summary.md",
-      "size_bytes": 329,
-      "sha256": "0fa2dcc17b94c17ba43104924dcc0d42a64ab5c3b59cf9014c6871592686d386"
+      "size_bytes": 482,
+      "sha256": "17f7cd8afe498486ad35d068d5d59487edfff41ddac5f6debb018321c9ea0ad7"
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/aggregate/seed_means.csv",
@@ -1100,11 +1110,6 @@
       "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_1/behavior_results.csv",
       "size_bytes": 17866,
       "sha256": "eb86f0953c3b8f5f1ebddb8044af42f78147bf0ad3170c27d7beff7663a2339c"
-    },
-    {
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_1/cell_raw.csv.gz",
-      "size_bytes": 389440,
-      "sha256": "1e002ef9cbe090a8ccc3b23dc18b6c59cb6dbb02fe9a98dbda204f4ae59af7f9"
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_1/dataset_metadata.csv",
@@ -1142,11 +1147,6 @@
       "sha256": "5537580e7eb650f0082e53addcf3e9e064e3c5d7709de039d37bddfc978f1b72"
     },
     {
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_22/cell_raw.csv.gz",
-      "size_bytes": 391071,
-      "sha256": "03d34b5f9f1e2fc7e77572d1dfb5e705c8d0bbc4baff5965fa4e9357c7e07c1b"
-    },
-    {
       "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_22/dataset_metadata.csv",
       "size_bytes": 389185,
       "sha256": "7cda44276ffe85eb81d159ff36c95b1eed20d3729c41879cc230b5bb6ebaa937"
@@ -1180,11 +1180,6 @@
       "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_8/behavior_results.csv",
       "size_bytes": 17890,
       "sha256": "c8609ea43e15d018fa52b8d22462555751171a5225c417ac29d5b12ce29a4566"
-    },
-    {
-      "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_8/cell_raw.csv.gz",
-      "size_bytes": 389723,
-      "sha256": "1ebdd446cc08460477dec16d2f64866f431069151f5859a4f8423848d5301730"
     },
     {
       "relative_path": "results/extended_fali/ef6_pythia_induction/confirmation/seed_8/dataset_metadata.csv",
@@ -1295,6 +1290,576 @@
       "relative_path": "results/extended_fali/ef6_pythia_induction/smoke/validation_report.json",
       "size_bytes": 815,
       "sha256": "b93ae8b0df644001a8bc8db130f102816682f8c1c2925f0c2941b278478e638d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/GAUGE_SENSITIVITY_REPORT.md",
+      "size_bytes": 3516,
+      "sha256": "30c13c97bbd5d276873a63f7d3ef0fc6babd2fbf1df9dd1aba692aa23752db4c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/SHA256SUMS.txt",
+      "size_bytes": 11873,
+      "sha256": "a590a9a8895af9ad1c2f03eb943c90f26def000f6fc20957e71f7e4e3da11e6a"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/attribution_raw.csv",
+      "size_bytes": 732926,
+      "sha256": "b3675742a2157f42547097a9f48ceda1e152b901d065d3861d0a7ede705a1db9"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/cell_raw.csv.gz",
+      "size_bytes": 1609963,
+      "sha256": "b3fb0b1332ecb8d897a3ce2d11958bbd61aa53606301266c616a61a41cd44caa"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/dataset_alignment_report.md",
+      "size_bytes": 219,
+      "sha256": "1f25ad265dbd20add440d1dcf6e9012362f1535575a50cf31a36a852087782e1"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/dataset_metadata.csv",
+      "size_bytes": 127626,
+      "sha256": "88fdc16cf292c705d3877974cc111daa147bba3afd6838090cc45f5548d5bf79"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/execution_manifest.json",
+      "size_bytes": 1511,
+      "sha256": "11b5e33e9dffe2efacdade639e1b40d603d2568ef8724765ce928a6e49d25c11"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/invariant_report.json",
+      "size_bytes": 662,
+      "sha256": "63fef4cbbf31ec653b4074c7cdd702cc422ef6e57bbf5b607a8c91ab5364a623"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/model_revision.json",
+      "size_bytes": 183,
+      "sha256": "7689ea2047ae27e04bc6ce754151dcf0421b81ce7123efb1a35163bede623852"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/run_config.json",
+      "size_bytes": 445,
+      "sha256": "482ba340378d38682d6a8447136295321103b403ffea3b631e038572a411f22e"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/score_gauge_artifacts.pt",
+      "size_bytes": 15910826,
+      "sha256": "11f5c26e75921b258aade46b1fa7c1ae767c31154705c0d1bb30f84c2f7964f6"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/validation_report.json",
+      "size_bytes": 52242,
+      "sha256": "f4ed4906ee0fd76a6143395a7fff38e620786a43314c37656781d85fa770be9e"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/attribution_raw.csv",
+      "size_bytes": 733785,
+      "sha256": "ced0b89223b84e8cd41075638e420ee83ddbd0e0e71f9193dbc553d8a30eab2d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/cell_raw.csv.gz",
+      "size_bytes": 1615292,
+      "sha256": "90503faca87d59ea105ced4faf0b53483c0b8b00c927d62750dd2b3d0da0d473"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/dataset_alignment_report.md",
+      "size_bytes": 220,
+      "sha256": "6e6920b8ee557a10f250d5eb94d6d686330155d3d03ef2ae122682c2375a99d6"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/dataset_metadata.csv",
+      "size_bytes": 128586,
+      "sha256": "68a5627c9c7585f2ec6139bb480d820548d35510ef6d98866e7def73644aa84f"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/execution_manifest.json",
+      "size_bytes": 1512,
+      "sha256": "01b06fe04f10b5e99d520d38c76ec9327174ae810a10c75003de7101147a82b5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/invariant_report.json",
+      "size_bytes": 662,
+      "sha256": "fbf84d38f4c4d58b52142aba392ee91377b4af108ad4e4a8896eb68a09eb765e"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/model_revision.json",
+      "size_bytes": 183,
+      "sha256": "7689ea2047ae27e04bc6ce754151dcf0421b81ce7123efb1a35163bede623852"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/run_config.json",
+      "size_bytes": 447,
+      "sha256": "29379c5609ebc41303010f1ce2804fec64896a01833fd8183e9e7b658a26b365"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/score_gauge_artifacts.pt",
+      "size_bytes": 15910826,
+      "sha256": "aa84a342f5cdbea72d130b650be2f5c18fbb60ecbc3ef5d52c153f304d570d3b"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/validation_report.json",
+      "size_bytes": 52246,
+      "sha256": "9b7a6558168321d58532280ab506a16c48d4dd9f32c23a3213014143c42b4693"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/attribution_raw.csv",
+      "size_bytes": 732769,
+      "sha256": "c226c5f92b5af8f45919a6e78e0f7c16ab7e4b93fbcfdc60c0930a9e6d84f79c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/cell_raw.csv.gz",
+      "size_bytes": 1615018,
+      "sha256": "6fe528e4e975de6552f7e0cc90a9e1a095a64f45bcec8d12b9fb6a091b342c1a"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/dataset_alignment_report.md",
+      "size_bytes": 220,
+      "sha256": "d6a7ea5e2cb65b844a350cfdc1e0fd5493698149a072bd0b2a391a9d95ae7de3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/dataset_metadata.csv",
+      "size_bytes": 128891,
+      "sha256": "57d6133cb32f81a351c3ac80d12dd7efb94a6453b746aaa875abfeac9ec86bc8"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/execution_manifest.json",
+      "size_bytes": 1512,
+      "sha256": "e92e77f928a0a80df9eff27d4750adf6ab49934ed9e0f1f849013f90c17a151f"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/invariant_report.json",
+      "size_bytes": 664,
+      "sha256": "e5067549180337c156c09ccf588811df680d79be32b3e708deb11c72c61e5487"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/model_revision.json",
+      "size_bytes": 183,
+      "sha256": "7689ea2047ae27e04bc6ce754151dcf0421b81ce7123efb1a35163bede623852"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/run_config.json",
+      "size_bytes": 446,
+      "sha256": "ae5b86cb5698a7633d40db673fa0ed193ed7fdb74a3523de745a09fb0b359e56"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/score_gauge_artifacts.pt",
+      "size_bytes": 15910826,
+      "sha256": "7043f5149e4c00d9757932c4d3e9fd107aa6b9ec5bcd6092661fc15ab857c66f"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/validation_report.json",
+      "size_bytes": 52250,
+      "sha256": "74196a2dcadf78308c1d4c8ca345b31e8354cf778fc03f39ad1255e13e609d59"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/attribution_raw.csv",
+      "size_bytes": 731721,
+      "sha256": "c735db7bd732f4e0c5ed19f508f6a06317d3df26dba8347b7695445a25d0e3f7"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/cell_raw.csv.gz",
+      "size_bytes": 1607895,
+      "sha256": "624c5b51c4240e058fc7236cc318147d682cc0b1481f1021109875bc8719e80a"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/dataset_alignment_report.md",
+      "size_bytes": 219,
+      "sha256": "162fd8db3348594f16e31ca8aa7e555990252b988896600fd7c978656e318d9e"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/dataset_metadata.csv",
+      "size_bytes": 127923,
+      "sha256": "8cefe88a4c08c48dab096283f7ec37ffb1da55433e3ac80f60cc007a62169530"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/environment.json",
+      "size_bytes": 336,
+      "sha256": "864f4529af3853957817ba17f2a98da03dd19ff1201fefa60dfa1486c02dc6c5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/execution_manifest.json",
+      "size_bytes": 1511,
+      "sha256": "7a52c77645f9e90cc9deed78b44d246a2f255184d48403aada0367a0519f242e"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/invariant_report.json",
+      "size_bytes": 665,
+      "sha256": "950474ebe93d33aee049056d27d586624987caa762e72e5d7912f10b89d93b3d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/model_revision.json",
+      "size_bytes": 183,
+      "sha256": "7689ea2047ae27e04bc6ce754151dcf0421b81ce7123efb1a35163bede623852"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/run_config.json",
+      "size_bytes": 446,
+      "sha256": "1f343318b4994f43422f4ff04edfb9900f35781217ea6c2b90935976048aa82f"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/score_gauge_artifacts.pt",
+      "size_bytes": 15910826,
+      "sha256": "57e73abed6f2d879393758c17668cff96e1ee6e94238aa67d69dc12a84d9b9c0"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/validation_report.json",
+      "size_bytes": 52248,
+      "sha256": "14e2b271506d99afaa11faf2fa9fd673389aba348a75f540ac33b1ca08d4ae4c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/attribution_raw.csv",
+      "size_bytes": 125567,
+      "sha256": "b7ea2e7da67d8e1edb60b9aad8c3becb51805531807eb04639480eeda52cd3ed"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/behavior_results.csv",
+      "size_bytes": 17866,
+      "sha256": "eb86f0953c3b8f5f1ebddb8044af42f78147bf0ad3170c27d7beff7663a2339c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/cell_raw.csv.gz",
+      "size_bytes": 398660,
+      "sha256": "b7203b0afa3e0b0411aba15c99d31de752b69c97dde5bcf8559199aa3802d5a4"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/dataset_metadata.csv",
+      "size_bytes": 388801,
+      "sha256": "997adcf1fbdedcd8afab19bca167d4b4d64000ea045407ab93cf89ca25330971"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/dataset_tensors_manifest.json",
+      "size_bytes": 141,
+      "sha256": "9da733cb5d8992ebb8010541ca5aded34b880111c702439bf69bd75208a66aa6"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/environment.json",
+      "size_bytes": 357,
+      "sha256": "8f3d1a020b7bf43ebff50b63f8be23b977d3da97e8f9bfb04a575dcf7c85f9f3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/execution_manifest.json",
+      "size_bytes": 1605,
+      "sha256": "df636410a86cdf07777577e752e4c764a72782ead26fe9047a5b73abfaddec01"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/invariant_report.json",
+      "size_bytes": 572,
+      "sha256": "c0f98ebc0b24bbfde404fda11107254217244992bb0619e571ea5b8da6c14879"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/model_revision.json",
+      "size_bytes": 217,
+      "sha256": "b078700ffdac0fca734fb6c45760f90e423bfef1fd47d950a621ed1e74a11781"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/run_config.json",
+      "size_bytes": 579,
+      "sha256": "4192a8705f38df86c9c6aa1c532c90496f424ba4209e08e8a815b9cc2ce07769"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/score_gauge_artifacts.pt",
+      "size_bytes": 24962364,
+      "sha256": "6d4675758b7f6e631ff8d80cc154414aaf9a82b85cd927c0aa88038976d44af2"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/validation_report.json",
+      "size_bytes": 11310,
+      "sha256": "25976949d53907dab89acd34aea7a4c3ab41abe7b5b06b2fff9fde7113d798d7"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/attribution_raw.csv",
+      "size_bytes": 125909,
+      "sha256": "c0bfb2bf3c78c1d20bc74e1d82c0ac90f7537512aa81d8a44d09dc05e6c9c627"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/behavior_results.csv",
+      "size_bytes": 18232,
+      "sha256": "5537580e7eb650f0082e53addcf3e9e064e3c5d7709de039d37bddfc978f1b72"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/cell_raw.csv.gz",
+      "size_bytes": 399083,
+      "sha256": "941d007c745041357eae7d72ef200cffed10409bcb632255cd034b1790fd004d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/dataset_metadata.csv",
+      "size_bytes": 389185,
+      "sha256": "7cda44276ffe85eb81d159ff36c95b1eed20d3729c41879cc230b5bb6ebaa937"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/dataset_tensors_manifest.json",
+      "size_bytes": 141,
+      "sha256": "1603091ea65c21e189dcf42a244f17b2b43c416b65c323c3909e601737161ef4"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/environment.json",
+      "size_bytes": 357,
+      "sha256": "8f3d1a020b7bf43ebff50b63f8be23b977d3da97e8f9bfb04a575dcf7c85f9f3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/execution_manifest.json",
+      "size_bytes": 1606,
+      "sha256": "c5837b17b2f8fe13936bf11bb0f1503c2d204214c549141e925c188cbe0cd720"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/invariant_report.json",
+      "size_bytes": 571,
+      "sha256": "07aab571402b195f8f87d5560d16df1289c1d7d097baf741bb7ddeb346de492b"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/model_revision.json",
+      "size_bytes": 217,
+      "sha256": "b078700ffdac0fca734fb6c45760f90e423bfef1fd47d950a621ed1e74a11781"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/run_config.json",
+      "size_bytes": 580,
+      "sha256": "fb5591a2f1e7ca45c9905e7520b0e7960ca46a583b8775246be62785e043aa6d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/score_gauge_artifacts.pt",
+      "size_bytes": 24962364,
+      "sha256": "a913d3106ef62fed877cf2a1cd89f4352ccb4f42c01934e7eeb54ec333f473e2"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/validation_report.json",
+      "size_bytes": 11308,
+      "sha256": "306e483c250c04e49477da264e07020e92d485b52a595160c2cfb0f137bc8e6c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/attribution_raw.csv",
+      "size_bytes": 126017,
+      "sha256": "d1f9e0f7594cc5d86dfe1235aef295d54b9590f6a519aa6275578d772faff929"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/behavior_results.csv",
+      "size_bytes": 17890,
+      "sha256": "c8609ea43e15d018fa52b8d22462555751171a5225c417ac29d5b12ce29a4566"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/cell_raw.csv.gz",
+      "size_bytes": 399122,
+      "sha256": "61aa0e678bdff1c02f568919c163ac9cd22234b401a31be2fdb273bbc9440f95"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/dataset_metadata.csv",
+      "size_bytes": 388801,
+      "sha256": "f72a7ec8576ab64a4253c43b8fd13b41f3168135e1687146c06e13096d530a5c"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/dataset_tensors_manifest.json",
+      "size_bytes": 141,
+      "sha256": "10981bbe011f429616e705e806625dadac7ae519ecf36d29a3deca7275130ce0"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/environment.json",
+      "size_bytes": 357,
+      "sha256": "8f3d1a020b7bf43ebff50b63f8be23b977d3da97e8f9bfb04a575dcf7c85f9f3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/execution_manifest.json",
+      "size_bytes": 1605,
+      "sha256": "5b1e0ab8c2bcac63f7ad366a9e15f3b0eb79a1e53e59f55d3af1085e202e5863"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/invariant_report.json",
+      "size_bytes": 573,
+      "sha256": "3121bf1b75f2f1db5da18389b028715beca2de42c1615a31348bc4faecd42b33"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/model_revision.json",
+      "size_bytes": 217,
+      "sha256": "b078700ffdac0fca734fb6c45760f90e423bfef1fd47d950a621ed1e74a11781"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/run_config.json",
+      "size_bytes": 579,
+      "sha256": "4177f088b0cb9cf807bf36f0bbd7736d6edd276e57bc3e116cb4497b4342984a"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/score_gauge_artifacts.pt",
+      "size_bytes": 24962364,
+      "sha256": "3f036201d433694c41df6584b854a13d3d36d8baf86edcd21355b68b25b3735b"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/validation_report.json",
+      "size_bytes": 11312,
+      "sha256": "758c2d494f22c1f446c87e321ff11b0ee2714000da86e3836ec8ae4d993f78a2"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/full_invariant_report.json",
+      "size_bytes": 1249,
+      "sha256": "76eda1e85d0517f6bf6d885c5abff6daf1abee70b0b63625ff96fc08aa5e6974"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_exact_means.csv",
+      "size_bytes": 5938,
+      "sha256": "d927a50da31b9eb32cf4051cd616886e61dee4b628ae03b8bbf6545eeaa86f87"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_paired_differences.csv",
+      "size_bytes": 2393,
+      "sha256": "76be11b242629475c7ad342624bfbda361fe64afc1503f80f59e432d0bccafc5"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_summary.json",
+      "size_bytes": 16500,
+      "sha256": "67f89e6c585c81b69ab4e1f185df97aae4c3da6b023e16338766b13fc8da5284"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/native_pre_run_hashes.json",
+      "size_bytes": 1298,
+      "sha256": "f0e225782290dbbe9f2b20705f6414b9c7bda2cd6f1e4468403aaaed6bef9862"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/attribution_raw.csv",
+      "size_bytes": 2869,
+      "sha256": "7cd7b1450b2cc7aaf971b741a99cc9b9b1ce290424a1cc9fa6a196477ed5933d"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/cell_raw.csv",
+      "size_bytes": 23985,
+      "sha256": "ef8224c4539a77bcf11dba723bf35e772ff275e5e0fedd41d15b2a3e751c750a"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/dataset_metadata.csv",
+      "size_bytes": 8161,
+      "sha256": "3f52010929dd540b13a5c99dc1199e189d8f627be9040dc4990c3a8b54e95a17"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/dataset_tensors_manifest.json",
+      "size_bytes": 139,
+      "sha256": "9043722aacc10f6a08dd84308f11be052e1a3f4539ff0746a54204c8646bda55"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/environment.json",
+      "size_bytes": 357,
+      "sha256": "8f3d1a020b7bf43ebff50b63f8be23b977d3da97e8f9bfb04a575dcf7c85f9f3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/invariant_report.json",
+      "size_bytes": 876,
+      "sha256": "89e8636ebeeea7a0e967dd72e30d40aded4da0985948bfd484cdcf17a4fd9605"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/run_config.json",
+      "size_bytes": 226,
+      "sha256": "e51fc4be32ca39f4984921dca98777726a319b2d3a21e5fd817a7231ab0af936"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/native/validation_report.json",
+      "size_bytes": 876,
+      "sha256": "89e8636ebeeea7a0e967dd72e30d40aded4da0985948bfd484cdcf17a4fd9605"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/attribution_raw.csv",
+      "size_bytes": 2879,
+      "sha256": "7bac9af9780bfff835da49d946774981b6046747abb470404bb3bf23b4112831"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/cell_raw.csv",
+      "size_bytes": 24522,
+      "sha256": "329a7ebfae2458c2012900aceeae37d932f6d7407c4da1d9ae60be3415781faa"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/dataset_metadata.csv",
+      "size_bytes": 8161,
+      "sha256": "3f52010929dd540b13a5c99dc1199e189d8f627be9040dc4990c3a8b54e95a17"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/dataset_tensors_manifest.json",
+      "size_bytes": 139,
+      "sha256": "9043722aacc10f6a08dd84308f11be052e1a3f4539ff0746a54204c8646bda55"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/environment.json",
+      "size_bytes": 357,
+      "sha256": "8f3d1a020b7bf43ebff50b63f8be23b977d3da97e8f9bfb04a575dcf7c85f9f3"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/invariant_report.json",
+      "size_bytes": 1020,
+      "sha256": "cf6d7eab54eea016738f84cd8badc284c38074e66c53eb0d62bea90db2d9f3d6"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/preregistration_sha.txt",
+      "size_bytes": 41,
+      "sha256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/run_config.json",
+      "size_bytes": 228,
+      "sha256": "3109ca909deb5b359237cedd4b0de1bd65693e754b6646de80004aeef60e10a1"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/score_gauge_artifacts.pt",
+      "size_bytes": 523644,
+      "sha256": "d64567ca91d5d687ae81a058af58a7e1b2f4a7e78bb5c270b2be70ea3ea56b82"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/row_mean/validation_report.json",
+      "size_bytes": 1020,
+      "sha256": "cf6d7eab54eea016738f84cd8badc284c38074e66c53eb0d62bea90db2d9f3d6"
+    },
+    {
+      "relative_path": "results/extended_fali/gauge_sensitivity/smoke_ef6/smoke_summary.json",
+      "size_bytes": 1272,
+      "sha256": "7dac150c73e6dcbc22c73c1e1b2a383781d19c8334d59aa339ffb28912dffb88"
     },
     {
       "relative_path": "results/raw/ablation_controls_raw.csv",

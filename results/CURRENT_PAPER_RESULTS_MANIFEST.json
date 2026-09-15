@@ -1,0 +1,778 @@
+{
+  "created_utc": "2026-09-15T17:48:25.151558+00:00",
+  "paper": "Factorized Attention-Level Intervention",
+  "manuscript": "manuscript/neural_networks/",
+  "file_count": 110,
+  "files": [
+    {
+      "path": "manuscript/neural_networks/figures/Fig1.png",
+      "SHA256": "d0afa87daec9b2b806715bcbaa56d54ef9dc94e8b796c0711865ecdbe87485d9",
+      "size": 112134,
+      "experiment": "schematic",
+      "paper_section": "Method"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig1_provenance.json",
+      "SHA256": "73365c40b4ba305eda4f2c1d62a61bf99451dd8e72759e879ed64c23b618829d",
+      "size": 786,
+      "experiment": "schematic",
+      "paper_section": "Method"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig2.png",
+      "SHA256": "620f8fa215522e256f0acee31e8e092665f351182c82c4a3bd1afe381161480c",
+      "size": 210119,
+      "experiment": "schematic",
+      "paper_section": "Method"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig2_provenance.json",
+      "SHA256": "083fe2f26198877aa67176c40bf8d215c92bb0d190b0f1c8a65ffbb452d5ea9c",
+      "size": 1179,
+      "experiment": "schematic",
+      "paper_section": "Method"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig3.png",
+      "SHA256": "8c8234dfc12141c6dd1dc020fba5a0d12d707c0195865ff2230fd36155bbd78b",
+      "size": 361006,
+      "experiment": "EF-1",
+      "paper_section": "Method Validation"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig3_provenance.json",
+      "SHA256": "4728184bddf8180b488d56f8856571bf3e3f770b859b2e80848d02f2ffa05bf4",
+      "size": 2332,
+      "experiment": "EF-1",
+      "paper_section": "Method Validation"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig4.png",
+      "SHA256": "5a76197c6b58bdd96f361c5594802b64690f0b25e90bbbc4228a5f4f770f7c5b",
+      "size": 99523,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig4_provenance.json",
+      "SHA256": "bd75b74bd98209dd1021b28dc6d2f4ace80d876c84aa4f75bd9a174551bc2072",
+      "size": 3410,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig4a.png",
+      "SHA256": "583a50dcd61cf4f0719b31858a4599f2d1910ae1105e37fb53664ce488a1c4d2",
+      "size": 133344,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig4bc.png",
+      "SHA256": "6c19caaabba30984b7cbad05cc282c46e4e10ec026fbdbff0b658ce46ae0f241",
+      "size": 394129,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig5.png",
+      "SHA256": "8e3f54c56429b4b5eb7b2dae16a1699090dc613035908ffac416d97bd416633f",
+      "size": 551824,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "manuscript/neural_networks/figures/Fig5_provenance.json",
+      "SHA256": "26df2c56716a43d55a4ce7092b65b604838570806f2389287ff0932245ddb2d0",
+      "size": 2835,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "preregistration/gauge_sensitivity_rowmean.md",
+      "SHA256": "f9d0ce1e45cb4a19be54f630efb66e6df4ad1fbef78611aed0a47d971974d42e",
+      "size": 4062,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    },
+    {
+      "path": "results/extended_fali/ef1_synthetic/validation_report.json",
+      "SHA256": "73b81986c995c3c5dbbc85fd0707a68076587aca3c2bc6330bbbaf4e598f798f",
+      "size": 8146,
+      "experiment": "EF-1",
+      "paper_section": "Method Validation"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/analysis_config.json",
+      "SHA256": "194ce1c1b5875a2333e7a4291c0bbd483445e95644d332b0d003bf9737879db2",
+      "size": 474,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/attribution_merged_raw.csv",
+      "SHA256": "64a7d9aa8a485c13e33e1ad3f51711734edfaaebc5f6a2f0917537add3337b70",
+      "size": 4455551,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/exact_means.csv",
+      "SHA256": "91ab9376d36747a1cdbbc3ab8e9531a8be219dc40823c784f7cb1e976e88bbc8",
+      "size": 1254,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/fine_score_gate.json",
+      "SHA256": "2cdc6ddc49dda7c749419337a162fd8fa162f125f496d45bc659af78039959a1",
+      "size": 99,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/hierarchical_bootstrap_ci.csv",
+      "SHA256": "cfb8db3c2edae1563f0b59673be3aac561c55d9c16d7cd516c93611539449487",
+      "size": 6074,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/hypothesis_results.json",
+      "SHA256": "b3c2803419267f4eef6bdd32a3ec9b2955d1459184031fd66a53773dbcf7da7a",
+      "size": 4855,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/leave_one_template_out.csv",
+      "SHA256": "d2c1819b73fb16ee671d85f49ec312b4bfaaa755b235ec694489d5797f9cfb41",
+      "size": 2446,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/scientific_summary.md",
+      "SHA256": "42344f1194e4880f5848ee9d55d9916967aab0b8eb71af45b6153dfa869126da",
+      "size": 689,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/seed_means.csv",
+      "SHA256": "6b97a1f13e7fcd0c118044b41850b3727341b7bd7678c1e0a861cbffc82e5613",
+      "size": 5970,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/stratum_means.csv",
+      "SHA256": "64e60e5835979484f02d24823a0c5df6e73da112d2c92c4a0eb2d3b71f70c3c2",
+      "size": 61096,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/strict_nonoverlap28_results.csv",
+      "SHA256": "1784f6092b44c02f73f6c826684d8b94062f8607f7a3e7093101249f7a97ce1a",
+      "size": 528,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/template_cluster_means.csv",
+      "SHA256": "f2f024c4e4e3cf3fe911387ed5be63fe92b33ead1f0e1e8667c88540318b9e8b",
+      "size": 36323,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef4_canonical/aggregate/validation_summary.json",
+      "SHA256": "9705c405ed67d867642ca712b6fa95d13277b25fe57eb81c885fcaceeddb75a1",
+      "size": 2040,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/ablation_gate.json",
+      "SHA256": "7038b0e28164169351d5b11795fb06d649b3927a1efcf55f15b548e1f3f7d25c",
+      "size": 364,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/analysis_config.json",
+      "SHA256": "29d76dbf4ffdb7f4263fd666a637187c7acec34a3fb8622faf16623af571e9fe",
+      "size": 327,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/channel_robustness.json",
+      "SHA256": "29e610a1a637ba1e8b0bafa3851773320540882aab67e7dd23e20663d66d42c6",
+      "size": 8030,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/damage_strength.csv",
+      "SHA256": "6ea4e9c3afb80182a4445670b97ee4b67689005042ac6804d1dabf65bc488028",
+      "size": 578070,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/effect_size_comparison.csv",
+      "SHA256": "ed2c24e4473633407e385ce6bb73e8ba0174457cf6e108fb909da0f3bc651df5",
+      "size": 1979,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/exact_means.csv",
+      "SHA256": "c89e39e3a7650a0f74bbe7b1880073983fa4e0d62b2fd9e5050b7c048cd83eb1",
+      "size": 3025,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/hierarchical_bootstrap_ci.csv",
+      "SHA256": "71ca0f30319afe7fdfce8b2314df12f39fa969c5525e3caab46103075dd7612f",
+      "size": 5504,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/leave_one_template_out.csv",
+      "SHA256": "a880e46a843f066d57f02b95e08ada16f7adc6e8f1f2d48cb5a91e77d2d6b40e",
+      "size": 6699,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/scheme_status.json",
+      "SHA256": "2b02a049410b54deb025c2060c5497ab55f81c684e4348ee83fe78e32c5509fb",
+      "size": 63,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/scientific_summary.md",
+      "SHA256": "77691ee78328ecb42d07358f5d526675be26782d2264dccc913834338091a53d",
+      "size": 180,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/seed_means.csv",
+      "SHA256": "573916bef0b4d270decf46c91584a0e97cbfb79667afadbe6eb9ea656fce982b",
+      "size": 12587,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/stratum_means.csv",
+      "SHA256": "e33d9bc1209da2a80c3ef481825d83ce70dc42b5c3a9af9f403612b2296c3ae9",
+      "size": 126177,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/strict_nonoverlap28_results.csv",
+      "SHA256": "94f732fe6958a33fc0e44e24838afb6006846b1d2e7c26999cc478e66562611c",
+      "size": 491,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_ablation_robustness/aggregate/validation_summary.json",
+      "SHA256": "b20283f52a4c3f0e6c4afeae5024c1b59f154e92f841c5135410475ce1c05c5c",
+      "size": 2401,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/cross_run_endpoint_check.json",
+      "SHA256": "f3ac5c82fd9ead7b630200d821be548b035179bf3316d54e49face2f49fba02f",
+      "size": 171,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/damage_by_pattern.csv",
+      "SHA256": "464b6235965f8c1ca2a28638c6478df52e117fa1fc91be12af5fb55b13ff1876",
+      "size": 1274,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/damage_by_template.csv",
+      "SHA256": "38ecd6038ab71b1ac927c48f0e111ba0fde829aa2e56fdd7208899df2417147a",
+      "size": 8592,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/endpoint_reconstruction.csv",
+      "SHA256": "1989ba4cb0dcb445f6ded349645d1f6aa397edaa721b653c715848b3d3d61335",
+      "size": 1816186,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/fine_channels_by_pattern.csv",
+      "SHA256": "f0805e94291a8040a5d5b18eecd1c8206d76006f5f0b397346bf82e412879aac",
+      "size": 1330,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/historical_integrity_audit.json",
+      "SHA256": "df9046cae9ad46a5b72ae259a52650bd688111609910a4e5defe1ea8c25eeab6",
+      "size": 13065,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/informative_label_clarification.md",
+      "SHA256": "a16de81b53858b6ec63d81bada70db1fbad1542d1edfc9a532b6e87dfcceeca0",
+      "size": 751,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/scientific_interpretation.md",
+      "SHA256": "453ddd9c35fa1cb8faddd8821b47898ed4e835ad69f8b5f4ac5180d55c3cdce6",
+      "size": 982,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef5_reference_diagnosis/zero_reference_diagnosis.json",
+      "SHA256": "fd18f9dd342b1c01e5c5e94e76b760d4f1fed3e4c8d0dd365966999d699c6eec",
+      "size": 2039,
+      "experiment": "EF-5",
+      "paper_section": "Ablation"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/analysis_config.json",
+      "SHA256": "e4bae04bb29af893f79a1b434444385f651227b61c37df07e3b9413591f3380c",
+      "size": 205,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/attribution_merged_raw.csv",
+      "SHA256": "133fb7a27f5a920d775a398383bd926cd13f4e57afda99b4df68dc46934baeac",
+      "size": 345122,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/behavior_results.csv",
+      "SHA256": "56b13baa406c0c0c8c9114fcbcf6668cfde7fe219920c2e8438066dfc6c10ea1",
+      "size": 53122,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/bootstrap_ci.csv",
+      "SHA256": "f001f1fdf7c14c99c01694c9fccb42782b5a2f4122aa30c3ce75cc102c4b61bd",
+      "size": 679,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/ef6_gate.json",
+      "SHA256": "f6475c3b35e581b03def6f8cceeae26ac0a1759443ebb9d455cb00ad38726b35",
+      "size": 165,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/exact_means.csv",
+      "SHA256": "341f786a959b3556b448ae6c43cc0628d22a3323e8ceef5b5493f3b562b5c971",
+      "size": 684,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/historical_integrity.json",
+      "SHA256": "df9046cae9ad46a5b72ae259a52650bd688111609910a4e5defe1ea8c25eeab6",
+      "size": 13065,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/hypothesis_results.json",
+      "SHA256": "a19abbd4cddad93167f5a50954b119444f924139467d216227773d39dba6dd7c",
+      "size": 3072,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/offset_means.csv",
+      "SHA256": "fbdb6319b2dd23914bbf1cc35f9041cdfbb2b83b83b1bb59e47d60b6cc1f35ad",
+      "size": 941,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/scientific_summary.md",
+      "SHA256": "17f7cd8afe498486ad35d068d5d59487edfff41ddac5f6debb018321c9ea0ad7",
+      "size": 482,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/seed_means.csv",
+      "SHA256": "820660caa68bb32b98cf6db1505577d5cd12f5bcbb0e3eafba97167ffe594af5",
+      "size": 916,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/selection_lock.json",
+      "SHA256": "e5c13215250a00d499e3b697e2e567e12bbc1d87fe0de73f4f47f42e999cc70c",
+      "size": 521,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/ef6_pythia_induction/aggregate/validation_summary.json",
+      "SHA256": "1d405d3ae8d08787e69e7396fb76a4dc0b9cc0ee510c148428e30edfda274368",
+      "size": 27,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/GAUGE_SENSITIVITY_REPORT.md",
+      "SHA256": "30c13c97bbd5d276873a63f7d3ef0fc6babd2fbf1df9dd1aba692aa23752db4c",
+      "size": 3516,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/SHA256SUMS.txt",
+      "SHA256": "a590a9a8895af9ad1c2f03eb943c90f26def000f6fc20957e71f7e4e3da11e6a",
+      "size": 11873,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/attribution_raw.csv",
+      "SHA256": "b3675742a2157f42547097a9f48ceda1e152b901d065d3861d0a7ede705a1db9",
+      "size": 732926,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/execution_manifest.json",
+      "SHA256": "11b5e33e9dffe2efacdade639e1b40d603d2568ef8724765ce928a6e49d25c11",
+      "size": 1511,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/invariant_report.json",
+      "SHA256": "63fef4cbbf31ec653b4074c7cdd702cc422ef6e57bbf5b607a8c91ab5364a623",
+      "size": 662,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/run_config.json",
+      "SHA256": "482ba340378d38682d6a8447136295321103b403ffea3b631e038572a411f22e",
+      "size": 445,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_1/validation_report.json",
+      "SHA256": "f4ed4906ee0fd76a6143395a7fff38e620786a43314c37656781d85fa770be9e",
+      "size": 52242,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/attribution_raw.csv",
+      "SHA256": "ced0b89223b84e8cd41075638e420ee83ddbd0e0e71f9193dbc553d8a30eab2d",
+      "size": 733785,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/execution_manifest.json",
+      "SHA256": "01b06fe04f10b5e99d520d38c76ec9327174ae810a10c75003de7101147a82b5",
+      "size": 1512,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/invariant_report.json",
+      "SHA256": "fbf84d38f4c4d58b52142aba392ee91377b4af108ad4e4a8896eb68a09eb765e",
+      "size": 662,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/run_config.json",
+      "SHA256": "29379c5609ebc41303010f1ce2804fec64896a01833fd8183e9e7b658a26b365",
+      "size": 447,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_22/validation_report.json",
+      "SHA256": "9b7a6558168321d58532280ab506a16c48d4dd9f32c23a3213014143c42b4693",
+      "size": 52246,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/attribution_raw.csv",
+      "SHA256": "c226c5f92b5af8f45919a6e78e0f7c16ab7e4b93fbcfdc60c0930a9e6d84f79c",
+      "size": 732769,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/execution_manifest.json",
+      "SHA256": "e92e77f928a0a80df9eff27d4750adf6ab49934ed9e0f1f849013f90c17a151f",
+      "size": 1512,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/invariant_report.json",
+      "SHA256": "e5067549180337c156c09ccf588811df680d79be32b3e708deb11c72c61e5487",
+      "size": 664,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/run_config.json",
+      "SHA256": "ae5b86cb5698a7633d40db673fa0ed193ed7fdb74a3523de745a09fb0b359e56",
+      "size": 446,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_42/validation_report.json",
+      "SHA256": "74196a2dcadf78308c1d4c8ca345b31e8354cf778fc03f39ad1255e13e609d59",
+      "size": 52250,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/attribution_raw.csv",
+      "SHA256": "c735db7bd732f4e0c5ed19f508f6a06317d3df26dba8347b7695445a25d0e3f7",
+      "size": 731721,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/execution_manifest.json",
+      "SHA256": "7a52c77645f9e90cc9deed78b44d246a2f255184d48403aada0367a0519f242e",
+      "size": 1511,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/invariant_report.json",
+      "SHA256": "950474ebe93d33aee049056d27d586624987caa762e72e5d7912f10b89d93b3d",
+      "size": 665,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/run_config.json",
+      "SHA256": "1f343318b4994f43422f4ff04edfb9900f35781217ea6c2b90935976048aa82f",
+      "size": 446,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef4_rowmean/seed_8/validation_report.json",
+      "SHA256": "14e2b271506d99afaa11faf2fa9fd673389aba348a75f540ac33b1ca08d4ae4c",
+      "size": 52248,
+      "experiment": "EF-4",
+      "paper_section": "GPT-2"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/attribution_raw.csv",
+      "SHA256": "b7ea2e7da67d8e1edb60b9aad8c3becb51805531807eb04639480eeda52cd3ed",
+      "size": 125567,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/execution_manifest.json",
+      "SHA256": "df636410a86cdf07777577e752e4c764a72782ead26fe9047a5b73abfaddec01",
+      "size": 1605,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/invariant_report.json",
+      "SHA256": "c0f98ebc0b24bbfde404fda11107254217244992bb0619e571ea5b8da6c14879",
+      "size": 572,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/run_config.json",
+      "SHA256": "4192a8705f38df86c9c6aa1c532c90496f424ba4209e08e8a815b9cc2ce07769",
+      "size": 579,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_1/validation_report.json",
+      "SHA256": "25976949d53907dab89acd34aea7a4c3ab41abe7b5b06b2fff9fde7113d798d7",
+      "size": 11310,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/attribution_raw.csv",
+      "SHA256": "c0bfb2bf3c78c1d20bc74e1d82c0ac90f7537512aa81d8a44d09dc05e6c9c627",
+      "size": 125909,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/execution_manifest.json",
+      "SHA256": "c5837b17b2f8fe13936bf11bb0f1503c2d204214c549141e925c188cbe0cd720",
+      "size": 1606,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/invariant_report.json",
+      "SHA256": "07aab571402b195f8f87d5560d16df1289c1d7d097baf741bb7ddeb346de492b",
+      "size": 571,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/run_config.json",
+      "SHA256": "fb5591a2f1e7ca45c9905e7520b0e7960ca46a583b8775246be62785e043aa6d",
+      "size": 580,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_22/validation_report.json",
+      "SHA256": "306e483c250c04e49477da264e07020e92d485b52a595160c2cfb0f137bc8e6c",
+      "size": 11308,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/attribution_raw.csv",
+      "SHA256": "d1f9e0f7594cc5d86dfe1235aef295d54b9590f6a519aa6275578d772faff929",
+      "size": 126017,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/execution_manifest.json",
+      "SHA256": "5b1e0ab8c2bcac63f7ad366a9e15f3b0eb79a1e53e59f55d3af1085e202e5863",
+      "size": 1605,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/invariant_report.json",
+      "SHA256": "3121bf1b75f2f1db5da18389b028715beca2de42c1615a31348bc4faecd42b33",
+      "size": 573,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/preregistration_sha.txt",
+      "SHA256": "3a7b7bc1e649f4320b9ef037b44227a04630f1b6a302553b850ed9d7472ccf96",
+      "size": 41,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/run_config.json",
+      "SHA256": "4177f088b0cb9cf807bf36f0bbd7736d6edd276e57bc3e116cb4497b4342984a",
+      "size": 579,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/ef6_rowmean/seed_8/validation_report.json",
+      "SHA256": "758c2d494f22c1f446c87e321ff11b0ee2714000da86e3836ec8ae4d993f78a2",
+      "size": 11312,
+      "experiment": "EF-6",
+      "paper_section": "Pythia"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_exact_means.csv",
+      "SHA256": "d927a50da31b9eb32cf4051cd616886e61dee4b628ae03b8bbf6545eeaa86f87",
+      "size": 5938,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_paired_differences.csv",
+      "SHA256": "76be11b242629475c7ad342624bfbda361fe64afc1503f80f59e432d0bccafc5",
+      "size": 2393,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    },
+    {
+      "path": "results/extended_fali/gauge_sensitivity/gauge_sensitivity_summary.json",
+      "SHA256": "67f89e6c585c81b69ab4e1f185df97aae4c3da6b023e16338766b13fc8da5284",
+      "size": 16500,
+      "experiment": "gauge_sensitivity",
+      "paper_section": "Ablation/Gauge"
+    }
+  ]
+}

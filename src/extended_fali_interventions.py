@@ -175,6 +175,58 @@ def validate_score_partition(partition: ScorePartition) -> None:
             raise ValueError(f"example {b}: T must have exactly one coordinate")
 
 
+def canonicalize_score_row(
+    scores: torch.Tensor,
+    valid_mask: torch.Tensor,
+    mode: str = "row_mean",
+) -> torch.Tensor:
+    """
+    Canonicalize attention-score rows within a softmax-equivalence class.
+
+    scores: [batch, query, key]
+    valid_mask: [batch, query, key] or broadcastable [query, key]
+
+    mode="native": return scores unchanged (clone not required; returns same tensor).
+    mode="row_mean": for each (batch, query) row, subtract the mean over valid keys only.
+      Invalid/masked positions do not enter the mean and retain their original values.
+
+    Mean subtraction is computed in float64 for numerical stability, then cast back.
+    """
+    if mode == "native":
+        return scores
+    if mode != "row_mean":
+        raise ValueError(f"unsupported score gauge mode: {mode!r}")
+    if scores.ndim != 3:
+        raise ValueError(f"expected scores [B,Q,K], got {scores.shape}")
+    if valid_mask.ndim == 2:
+        valid_mask = valid_mask.unsqueeze(0).expand(scores.shape[0], -1, -1)
+    if valid_mask.shape != scores.shape:
+        raise ValueError("valid_mask must match scores shape [B,Q,K] (or [Q,K])")
+    if valid_mask.dtype != torch.bool:
+        valid_mask = valid_mask.bool()
+
+    n_valid = valid_mask.sum(dim=-1)  # [B, Q]
+    if int((n_valid == 0).all().item()) == 1:
+        raise ValueError("canonicalize_score_row: no valid keys in any row")
+    # Per-example: at least one valid key must exist somewhere.
+    per_example = n_valid.sum(dim=-1)  # [B]
+    if bool((per_example == 0).any().item()):
+        raise ValueError("canonicalize_score_row: example with zero valid keys")
+
+    # Float64 mean over valid keys; rows with zero valid keys leave scores unchanged.
+    scores64 = scores.double()
+    filled = scores64.masked_fill(~valid_mask, 0.0)
+    n = n_valid.clamp(min=1).unsqueeze(-1).to(dtype=torch.float64)
+    mu = filled.sum(dim=-1, keepdim=True) / n
+    centered = scores64 - mu
+    out64 = torch.where(valid_mask, centered, scores64)
+    no_valid = (n_valid == 0).unsqueeze(-1)
+    out64 = torch.where(no_valid, scores64, out64)
+    if not torch.isfinite(out64[valid_mask]).all():
+        raise ValueError("canonicalize_score_row produced non-finite valid scores")
+    return out64.to(dtype=scores.dtype)
+
+
 def build_hybrid_scores(
     scores_a: torch.Tensor,
     scores_b: torch.Tensor,
@@ -328,10 +380,36 @@ def score_pattern_z_pipeline(
     values_b: torch.Tensor,
     partition: ScorePartition,
     state: FactorState,
+    *,
+    softmax_dtype: torch.dtype | None = None,
+    scores_a_native: torch.Tensor | None = None,
+    scores_b_native: torch.Tensor | None = None,
 ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-    """Hybrid scores → pattern → z for one cell."""
-    hybrid_scores = build_hybrid_scores(scores_a, scores_b, partition, state)
-    pattern = masked_softmax(hybrid_scores, partition.valid_mask)
-    values = select_values(values_a, values_b, state[3])
+    """Hybrid scores → pattern → z for one cell.
+
+    When scores_*_native are provided and T=R=O (pure endpoint score membership),
+    softmax uses the native endpoint scores. That is softmax-equivalent to the
+    row-mean gauge on pure-endpoint cells but matches the native FP32 path exactly,
+    which is required for endpoint utility invariance under gauge sensitivity.
+
+    Mixed T/R/O cells always use the (possibly gauged) hybrid scores.
+    """
+    t, r, o, v_bit, _c = state
+    use_native_pure = (
+        scores_a_native is not None
+        and scores_b_native is not None
+        and t == r == o
+    )
+    if use_native_pure:
+        src = scores_a_native if t == 0 else scores_b_native
+        hybrid_scores = src.masked_fill(~partition.valid_mask, float("-inf"))
+    else:
+        hybrid_scores = build_hybrid_scores(scores_a, scores_b, partition, state)
+    if softmax_dtype is not None and softmax_dtype != hybrid_scores.dtype:
+        pattern = masked_softmax(hybrid_scores.to(dtype=softmax_dtype), partition.valid_mask)
+        pattern = pattern.to(dtype=scores_a.dtype)
+    else:
+        pattern = masked_softmax(hybrid_scores, partition.valid_mask)
+    values = select_values(values_a, values_b, v_bit)
     z = reconstruct_z_from_scores_values(pattern, values)
     return hybrid_scores, pattern, z

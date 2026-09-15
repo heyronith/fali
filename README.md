@@ -1,99 +1,71 @@
-# FALI — Functional Attention Circuit Revision Research
+# FALI — Factorized Attention-Level Intervention
 
-Canonical private research repository for the **Frozen Attention Logit Intervention (FALI)** project and its revision pipeline (Phases 1–4). This README describes the **current audited baseline** before any Extended/Causal FALI implementation.
+Canonical research repository for the **current** Factorized FALI paper submitted toward *Neural Networks* (Elsevier).
 
----
+**Active manuscript:** [`manuscript/neural_networks/`](manuscript/neural_networks/)
 
-## Project status
-
-| Item | State |
-|------|-------|
-| **Baseline tag (historical snapshot)** | `pre-extended-fali-baseline` — unchanged |
-| **Audited baseline tag** | `pre-extended-fali-audited` — documentation + reproducibility fixes |
-| **Active branch** | `revision/fali-validity` |
-| **Extended / Causal FALI** | Candidate future direction only — **not implemented** |
-
-The original TMLR manuscript thesis (compensation as a general, query-driven algorithmic recruitment story) **failed** as a cross-head explanation under revision Phases 2–4. See [RESEARCH_STATE.md](RESEARCH_STATE.md).
+**Cleanup baseline branch:** `maintenance/current-fali-cleanup`  
+**Safety tag:** `pre-current-fali-cleanup`
 
 ---
 
-## Historical FALI (original project)
+## Current science (Factorized FALI)
 
-**FALI** = **Frozen Attention Logit Intervention** — a pre-softmax target-vs-nontarget counterfactual intervention introduced in the desk-rejected TMLR submission (`archive/manuscripts/tmlr_rejected_main.tex`, also `paper.tex` at repo root).
+FALI = **Factorized Attention-Level Intervention**: an output-grounded counterfactual game that decomposes the cross-state change in a selected attention head’s causal usefulness into \(T/R/O/V/C\) with standard Owen attribution.
 
-A later **path-stable FALI analysis** (Phase 2) uses a two-player Shapley decomposition of target attention probability into target-score vs aggregate competing-score contributions. That decomposition is mathematically valid **descriptively** but **did not** reliably predict functional backup recruitment across heads (Phase 2B/3B **PIVOT** verdict).
+Empirical anchors:
 
----
+| Result | Location |
+|--------|----------|
+| Method validation (EF-1R) | `results/extended_fali/ef1_synthetic/` |
+| GPT-2 canonical fine scores (EF-4) | `results/extended_fali/ef4_canonical/` |
+| Ablation robustness / EF-5 FAIL gate | `results/extended_fali/ef5_ablation_robustness/` |
+| Pythia transfer / EF-6 FAIL | `results/extended_fali/ef6_pythia_induction/` |
+| Gauge sensitivity (signs preserved) | `results/extended_fali/gauge_sensitivity/` |
 
-## Revision Phases 1–4 (summary)
+See [`CURRENT_EXPERIMENTS.md`](CURRENT_EXPERIMENTS.md) and [`results/CURRENT_PAPER_RESULTS_MANIFEST.json`](results/CURRENT_PAPER_RESULTS_MANIFEST.json).
 
-| Phase | Focus | Verdict |
-|-------|-------|---------|
-| **1** | Corrected primary knockout & functional metrics | Four-seed full runs; corrected taxonomy |
-| **2** | Causal score interventions + descriptive FALI validation | **PIVOT** — do not treat FALI as general causal explanation |
-| **3** | P×V×C factorial Shapley decomposition | **PARTIAL** (2-template IOI) |
-| **4** | Canonical 30-strata templates + broad validation | **BROAD-TEMPLATE PARTIAL** (Phase 4C bootstrap fix; no status changes) |
-
-Detailed registry: [EXPERIMENT_REGISTRY.md](EXPERIMENT_REGISTRY.md)
-
----
-
-## Current research direction (not implemented)
-
-**Extended / Causal FALI** — structured causal interventions over attention-score computation, value content, and surrounding-network context. This remains a **candidate framework** with no formal definition, proof, or success claims in this repository.
+Central empirical framing: **conditional recruitment generalizes; the preregistered fine mechanism does not** (GPT-2 \(T>0,R<0\); Pythia \(T<0,R>0\)).
 
 ---
 
-## Key documentation
+## Historical material
 
-- [RESEARCH_STATE.md](RESEARCH_STATE.md) — factual snapshot through Phase 4C
-- [EXPERIMENT_REGISTRY.md](EXPERIMENT_REGISTRY.md) — scripts, seeds, outputs, verdicts
-- [docs/CURRENT_DEFINITIONS.md](docs/CURRENT_DEFINITIONS.md) — frozen endpoint & factorial notation
-- [docs/LEGACY_README_PRE_REVISION.md](docs/LEGACY_README_PRE_REVISION.md) — original pre-revision README (historical claims)
-- [archive/manuscripts/](archive/manuscripts/) — desk-rejected TMLR source (historical)
+Frozen Attention Logit Intervention (old FALI name) is **provenance only**:
 
-**Historical manuscripts:** Root `paper.tex` and `archive/manuscripts/tmlr_rejected_main.tex` are preserved verbatim. Their scientific interpretation was subsequently challenged by revision experiments.
+- [`archive/historical_fali/`](archive/historical_fali/)
+- [`archive/manuscripts/tmlr_rejected_*`](archive/manuscripts/)
+
+Do not treat Frozen-era scripts/results as current evidence.
 
 ---
 
-## Repository layout
+## Layout
 
-```
-src/                  Revision + original IOI / intervention library
-experiments/          Original 12-step pipeline + revision phase scripts
-modal_phase*.py       Modal GPU runners (not required for aggregation-only work)
-tests/                Unit tests for revision pipeline + manifest tooling
-results/              Summaries, aggregates, manifests (large raw mostly gitignored)
-figures/              Publication figures
-tools/                Manifest builder, environment capture
-archive/manuscripts/  Historical TMLR submission sources
-docs/                 Current definitions + legacy README
+```text
+src/                 # Factorized FALI library
+experiments/         # Current-paper experiment drivers
+tests/
+results/             # Current evidence (+ indexed local raw)
+manuscript/
+  neural_networks/   # Active Elsevier manuscript
+  archive/           # Archived Factorized Springer source
+tools/
+  elsevier-template/ # Pristine journal template
+archive/
+  historical_fali/   # Minimal Frozen / TMLR provenance
+docs/                # Specs / preregistration plans
+preregistration/
 ```
 
 ---
 
-## Tests
+## Reproduce
 
 ```bash
 python -m pytest tests/ -q
+# manuscript (requires TeX)
+cd manuscript/neural_networks && latexmk -pdf -interaction=nonstopmode main.tex
 ```
 
-Baseline environment record: `results/TEST_BASELINE_ENVIRONMENT.json`  
-Pip freeze: `results/TEST_BASELINE_PIP_FREEZE.txt`
-
----
-
-## Reproducibility manifests
-
-```bash
-python tools/build_results_manifests.py          # rebuild index + manifest
-python tools/build_results_manifests.py --validate
-```
-
-Raw audit branch (private canonical repo only): `audit/raw-baseline` — minimum critical raw CSVs for independent verification.
-
----
-
-## Legacy public mirror
-
-The earlier public repository [`heyronith/attention-repairs-itself`](https://github.com/heyronith/attention-repairs-itself) is preserved as remote `legacy-public`. Canonical development uses [`heyronith/fali`](https://github.com/heyronith/fali) (private).
+Large cell-level tensors are gitignored and indexed in [`results/RAW_DATA_INDEX.json`](results/RAW_DATA_INDEX.json).

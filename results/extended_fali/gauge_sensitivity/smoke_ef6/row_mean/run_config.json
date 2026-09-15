@@ -1,0 +1,7 @@
+{
+  "phase": "gauge_smoke",
+  "score_gauge": "row_mean",
+  "model": "EleutherAI/pythia-160m",
+  "model_revision": "50f5173d932e8e61f858120bcb800b97af589f46",
+  "preregistration_sha": "e60f81acfff8fc9dd4f924ebb1c087ec89734c05"
+}

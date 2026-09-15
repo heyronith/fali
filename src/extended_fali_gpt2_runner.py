@@ -45,6 +45,7 @@ from extended_fali_gpt2 import (
     extract_head_cache,
     historical_quotient_cells,
     max_valid_coord_error,
+    max_z_error_on_prompt,
     owen_diagnostics,
     owen_from_cell_table,
     partition_diagnostics,
@@ -56,7 +57,14 @@ from extended_fali_gpt2 import (
     validate_z_reconstruction,
     verify_historical_hash_integrity,
 )
-from extended_fali_interventions import CellTable, enumerate_extended_fali_cells, masked_softmax, score_pattern_z_pipeline
+from extended_fali_interventions import (
+    CellTable,
+    canonicalize_score_row,
+    enumerate_extended_fali_cells,
+    masked_softmax,
+    reconstruct_z_from_scores_values,
+    score_pattern_z_pipeline,
+)
 from revision_config import PRIMARY_NAME_MOVERS, all_phase1_candidates, head_name_from_pair, role_for_head
 from revision_standard_ioi import StandardIOIDataset
 from revision_factorial import build_factorial_fwd_hooks
@@ -72,7 +80,7 @@ class RunConfig:
     seed: int
     out_dir: Path
     reference_meta: Path
-    historical_factorial: Path
+    historical_factorial: Optional[Path]
     required_hash_paths: Sequence[str]
     device: str
     run_smoke_extras: bool = False
@@ -81,6 +89,9 @@ class RunConfig:
     num_per_stratum: int = 30
     head_names: Optional[Sequence[str]] = None
     preregistration_sha: Optional[str] = None
+    score_gauge: str = "native"  # "native" | "row_mean"
+    save_score_artifacts: bool = False
+    skip_historical_bridge: bool = False
 
 
 def resolve_device(requested: Optional[str]) -> str:
@@ -200,7 +211,9 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
             with torch.no_grad():
                 _, cache_B = model.run_with_cache(tokens, names_filter=names_filter)
 
-        hist_df = pd.read_csv(cfg.historical_factorial)
+        hist_df = None
+        if not cfg.skip_historical_bridge:
+            hist_df = pd.read_csv(cfg.historical_factorial)
         cell_rows: List[Dict] = []
         attr_rows: List[Dict] = []
         bridge_rows: List[Dict] = []
@@ -212,6 +225,9 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
         max_quotient_err = 0.0
         max_hist_h = 0.0
         max_hist_phi = 0.0
+        max_gauge_pat_err = 0.0
+        max_gauge_z_err = 0.0
+        score_artifact_buf: List[Dict] = []
         l9_score_v_max: Dict[str, float] = {}
         l9_owen_max: Dict[str, float] = {}
         post_end_err = 0.0
@@ -223,6 +239,55 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
 
             scores_a, pat_a, v_a, z_a = extract_head_cache(cache_A, layer, head)
             scores_b, pat_b, v_b, z_b = extract_head_cache(cache_B, layer, head)
+
+            scores_a_native = scores_a
+            scores_b_native = scores_b
+            if cfg.score_gauge != "native":
+                scores_a = canonicalize_score_row(scores_a_native, partition.valid_mask, mode=cfg.score_gauge)
+                scores_b = canonicalize_score_row(scores_b_native, partition.valid_mask, mode=cfg.score_gauge)
+                # Endpoint softmax / z must match native (gauge invariance of endpoints).
+                p_nat_a = masked_softmax(
+                    scores_a_native.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+                )
+                p_nat_b = masked_softmax(
+                    scores_b_native.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+                )
+                p_g_a = masked_softmax(
+                    scores_a.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+                )
+                p_g_b = masked_softmax(
+                    scores_b.masked_fill(~partition.valid_mask, float("-inf")), partition.valid_mask
+                )
+                max_gauge_pat_err = max(
+                    max_gauge_pat_err,
+                    max_valid_coord_error(p_nat_a, p_g_a, partition.valid_mask),
+                    max_valid_coord_error(p_nat_b, p_g_b, partition.valid_mask),
+                )
+                z_nat_a = reconstruct_z_from_scores_values(p_nat_a, v_a)
+                z_nat_b = reconstruct_z_from_scores_values(p_nat_b, v_b)
+                z_g_a = reconstruct_z_from_scores_values(p_g_a, v_a)
+                z_g_b = reconstruct_z_from_scores_values(p_g_b, v_b)
+                max_gauge_z_err = max(
+                    max_gauge_z_err,
+                    max_z_error_on_prompt(z_nat_a, z_g_a, dataset.end),
+                    max_z_error_on_prompt(z_nat_b, z_g_b, dataset.end),
+                )
+                if cfg.save_score_artifacts:
+                    score_artifact_buf.append(
+                        {
+                            "head_name": hname,
+                            "scores_a_native": scores_a_native.detach().cpu(),
+                            "scores_b_native": scores_b_native.detach().cpu(),
+                            "scores_a_gauge": scores_a.detach().cpu(),
+                            "scores_b_gauge": scores_b.detach().cpu(),
+                            "valid_mask": partition.valid_mask.detach().cpu(),
+                            "target_mask": partition.target_mask.detach().cpu(),
+                            "competing_mask": partition.competing_mask.detach().cpu(),
+                            "other_mask": partition.other_query_mask.detach().cpu(),
+                            "final_query": dataset.end.detach().cpu(),
+                            "target_key": dataset.IO.detach().cpu(),
+                        }
+                    )
 
             err_pa, mask_pa = validate_score_pattern(scores_a, pat_a, partition)
             err_pb, mask_pb = validate_score_pattern(scores_b, pat_b, partition)
@@ -259,7 +324,14 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
 
             for _, state in enumerate_extended_fali_cells():
                 _, _, z_hybrid = score_pattern_z_pipeline(
-                    scores_a, scores_b, v_a, v_b, partition, state
+                    scores_a,
+                    scores_b,
+                    v_a,
+                    v_b,
+                    partition,
+                    state,
+                    scores_a_native=scores_a_native if cfg.score_gauge != "native" else None,
+                    scores_b_native=scores_b_native if cfg.score_gauge != "native" else None,
                 )
                 hooks_inj = build_factorial_fwd_hooks(
                     (layer, head), context_B=bool(state[4]), z_head=z_hybrid, zero_candidate=False
@@ -341,20 +413,21 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
                 clean_attn = float(pat_a[i, fq, tk].item())
                 damaged_attn = float(pat_b[i, fq, tk].item())
 
-                hist_row = hist_df[(hist_df["example_idx"] == i) & (hist_df["head_name"] == hname)]
-                if len(hist_row) != 1:
-                    raise AssertionError(f"Missing historical row for {hname} ex {i}")
-                hist_row = hist_row.iloc[0]
-                new_h = historical_quotient_cells(table)
-                h_errs = compare_historical_cells(new_h, hist_row)
-                owen = owen_from_cell_table(table)
-                phi_errs = compare_historical_shapley(owen, hist_row)
-                max_hist_h = max(max_hist_h, max(h_errs.values()))
-                max_hist_phi = max(max_hist_phi, max(phi_errs.values()))
+                if not cfg.skip_historical_bridge:
+                    hist_row = hist_df[(hist_df["example_idx"] == i) & (hist_df["head_name"] == hname)]
+                    if len(hist_row) != 1:
+                        raise AssertionError(f"Missing historical row for {hname} ex {i}")
+                    hist_row = hist_row.iloc[0]
+                    new_h = historical_quotient_cells(table)
+                    h_errs = compare_historical_cells(new_h, hist_row)
+                    owen = owen_from_cell_table(table)
+                    phi_errs = compare_historical_shapley(owen, hist_row)
+                    max_hist_h = max(max_hist_h, max(h_errs.values()))
+                    max_hist_phi = max(max_hist_phi, max(phi_errs.values()))
 
-                bridge_rows.append(
-                    {"example_idx": i, "head_name": hname, **{f"err_{k}": v for k, v in {**h_errs, **phi_errs}.items()}}
-                )
+                    bridge_rows.append(
+                        {"example_idx": i, "head_name": hname, **{f"err_{k}": v for k, v in {**h_errs, **phi_errs}.items()}}
+                    )
 
                 attr_row = {
                     "seed": cfg.seed,
@@ -378,6 +451,7 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
                     "clean_target_attn": clean_attn,
                     "damaged_target_attn": damaged_attn,
                     "delta_target_attn": damaged_attn - clean_attn,
+                    "score_gauge": cfg.score_gauge,
                     **desc,
                 }
                 if "template_id" in meta.columns:
@@ -393,7 +467,12 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
 
         cell_path = write_cell_raw(cfg.out_dir, cell_rows, cfg.compress_cells)
         pd.DataFrame(attr_rows).to_csv(cfg.out_dir / "attribution_raw.csv", index=False)
-        pd.DataFrame(bridge_rows).to_csv(cfg.out_dir / "historical_bridge_comparison.csv", index=False)
+        if bridge_rows:
+            pd.DataFrame(bridge_rows).to_csv(cfg.out_dir / "historical_bridge_comparison.csv", index=False)
+
+        if cfg.save_score_artifacts and score_artifact_buf:
+            art_path = cfg.out_dir / "score_gauge_artifacts.pt"
+            torch.save(score_artifact_buf, art_path)
 
         expected_cells = n_heads * cfg.num_samples * N_CELLS
         expected_attr = n_heads * cfg.num_samples
@@ -407,23 +486,31 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
             "endpoints": max_endpoint_err <= ENDPOINT_TOL,
             "owen_residual": max_owen_res <= OWEN_TOL,
             "quotient_consistency": max_quotient_err <= QUOTIENT_TOL,
-            "historical_h_cells": max_hist_h <= HISTORICAL_TOL,
-            "historical_shapley": max_hist_phi <= HISTORICAL_TOL,
             "historical_hash_integrity": hash_ok,
         }
+        if not cfg.skip_historical_bridge:
+            checks["historical_h_cells"] = max_hist_h <= HISTORICAL_TOL
+            checks["historical_shapley"] = max_hist_phi <= HISTORICAL_TOL
+        if cfg.score_gauge != "native":
+            checks["gauge_endpoint_pattern"] = max_gauge_pat_err <= 1e-6
+            checks["gauge_endpoint_z"] = max_gauge_z_err <= 1e-5
         if cfg.run_smoke_extras:
             checks["post_end_causality"] = post_end_err <= POST_END_TOL
         for hname in SAME_LAYER_HEADS:
-            checks[f"l9_{hname}_score_v"] = l9_score_v_max.get(hname, 0.0) <= SAME_LAYER_SCORE_TOL
-            checks[f"l9_{hname}_owen"] = l9_owen_max.get(hname, 0.0) <= SAME_LAYER_OWEN_TOL
+            if any(hname == head_name_from_pair(c) for c in candidates):
+                checks[f"l9_{hname}_score_v"] = l9_score_v_max.get(hname, 0.0) <= SAME_LAYER_SCORE_TOL
+                checks[f"l9_{hname}_owen"] = l9_owen_max.get(hname, 0.0) <= SAME_LAYER_OWEN_TOL
 
         overall = all(checks.values())
         validation.update(
             {
                 "overall_pass": overall,
                 "checks": checks,
+                "score_gauge": cfg.score_gauge,
                 "seed": cfg.seed,
                 "num_samples": cfg.num_samples,
+                "max_gauge_endpoint_pattern_error": max_gauge_pat_err,
+                "max_gauge_endpoint_z_error": max_gauge_z_err,
                 "batch_partition": {
                     "final_queries": [int(x) for x in dataset.end.tolist()],
                     "target_keys": [int(x) for x in dataset.IO.tolist()],
@@ -469,12 +556,28 @@ def run_extended_fali_seed(cfg: RunConfig, repo_root: Path) -> Dict:
             "dataset_kind": cfg.dataset_kind,
             "head_names": list(cfg.head_names) if cfg.head_names else None,
             "preregistration_sha": cfg.preregistration_sha,
+            "score_gauge": cfg.score_gauge,
+            "skip_historical_bridge": cfg.skip_historical_bridge,
+            "save_score_artifacts": cfg.save_score_artifacts,
             "duration_sec": time.time() - t0,
             "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         }
         (cfg.out_dir / "run_config.json").write_text(json.dumps(run_config, indent=2) + "\n")
+        if cfg.preregistration_sha:
+            (cfg.out_dir / "preregistration_sha.txt").write_text(cfg.preregistration_sha + "\n")
         (cfg.out_dir / "environment.json").write_text(json.dumps(env, indent=2) + "\n")
         (cfg.out_dir / "validation_report.json").write_text(json.dumps(validation, indent=2) + "\n")
+        invariant_report = {
+            "score_gauge": cfg.score_gauge,
+            "max_gauge_endpoint_pattern_error": max_gauge_pat_err,
+            "max_gauge_endpoint_z_error": max_gauge_z_err,
+            "max_endpoint_error": max_endpoint_err,
+            "max_owen_residual": max_owen_res,
+            "max_quotient_consistency_error": max_quotient_err,
+            "checks": checks,
+            "overall_pass": overall,
+        }
+        (cfg.out_dir / "invariant_report.json").write_text(json.dumps(invariant_report, indent=2) + "\n")
         print(json.dumps({"seed": cfg.seed, "overall_pass": overall}, indent=2), flush=True)
         return validation
 
