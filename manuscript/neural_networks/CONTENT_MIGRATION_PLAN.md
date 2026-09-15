@@ -47,3 +47,7 @@ Frozen Attention Logit Intervention sources (`paper.tex`, `archive/manuscripts/t
 - `paper.tex`
 - `archive/manuscripts/tmlr_rejected_main.tex`
 - `submission_tmlr/main.tex`
+
+## Status
+
+Migration plan frozen for research-lead review. Prose migration not started.
