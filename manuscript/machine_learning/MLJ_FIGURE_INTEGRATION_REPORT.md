@@ -29,3 +29,12 @@ Research-lead figures copied from `FALI_MLJ_Transition_Package.zip` without redr
 
 Combined Fig4 used (Elsevier Fig4a/Fig4bc split removed).
 Captions from `MLJ_FIGURE_CAPTIONS.tex`. LaTeX sizing only.
+
+## Fig1/Fig2 revision fix (2026-09-19)
+
+Replaced `figures/Fig{1,2}.{pdf,eps,svg,png}` with research-lead package `FALI_MLJ_Fig1_Fig2_Revision_Package.zip` (no redraw).
+
+Verified main PDF embeds 5 figures:
+- Fig1 p.6, Fig2 p.8, Fig3 p.10, Fig4 p.19, Fig5 p.20
+
+CIS author-confirmation placeholder replaced with explicit no-additional-overlap statement beyond Frozen Attention preprint.

@@ -52,4 +52,4 @@ The present submission differs substantively in the scientific question, estiman
 
 Accordingly, the earlier preprint is best viewed as a historical, nested special case and motivation for the present research program, not as the same method or evidence base.
 
-**Author confirmation before submission:** if any additional conference, workshop, journal, or archival version overlaps with this manuscript beyond the cited public preprint, it must be listed here with an exact overlap statement.
+No additional conference, workshop, journal, or archival version overlaps with this manuscript beyond the cited public Frozen Attention Logit Intervention preprint.
