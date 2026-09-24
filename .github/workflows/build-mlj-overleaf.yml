@@ -1,0 +1,80 @@
+name: Build MLJ Overleaf Package
+
+on:
+  push:
+    branches:
+      - manuscript/mlj-overleaf-ready
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-overleaf-package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build flat Overleaf source package
+        run: |
+          python manuscript/machine_learning/build_overleaf_package.py \
+            --out-dir manuscript/machine_learning/_overleaf_artifacts
+          unzip -l manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready.zip
+
+      - name: Compile main manuscript
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Compile supplementary information
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: ESM_1_Supplementary_Information.tex
+          working_directory: manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Compile MLJ Contribution Information Sheet
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: FALI_MLJ_Contribution_Information_Sheet.tex
+          working_directory: manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready
+          args: -pdf -file-line-error -halt-on-error -interaction=nonstopmode
+
+      - name: Validate compiled outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          D=manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready
+          test -s "$D/main.pdf"
+          test -s "$D/ESM_1_Supplementary_Information.pdf"
+          test -s "$D/FALI_MLJ_Contribution_Information_Sheet.pdf"
+          if grep -R -E 'LaTeX Warning: (Reference|Citation).*undefined|There were undefined references' "$D"/*.log; then
+            echo 'Undefined reference/citation warning detected' >&2
+            exit 1
+          fi
+          echo "Main pages: $(pdfinfo "$D/main.pdf" | awk '/^Pages:/ {print $2}' || true)"
+          echo "SI pages: $(pdfinfo "$D/ESM_1_Supplementary_Information.pdf" | awk '/^Pages:/ {print $2}' || true)"
+          echo "CIS pages: $(pdfinfo "$D/FALI_MLJ_Contribution_Information_Sheet.pdf" | awk '/^Pages:/ {print $2}' || true)"
+
+      - name: Upload package and compiled QA PDFs
+        uses: actions/upload-artifact@v4
+        with:
+          name: FALI_MLJ_Overleaf_Ready
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready.zip
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/main.pdf
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/ESM_1_Supplementary_Information.pdf
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/FALI_MLJ_Contribution_Information_Sheet.pdf
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/MLJ_REQUIREMENTS_AUDIT.md
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/SOURCE_PROVENANCE.txt
+            manuscript/machine_learning/_overleaf_artifacts/FALI_Machine_Learning_Overleaf_Ready/SHA256SUMS.txt
