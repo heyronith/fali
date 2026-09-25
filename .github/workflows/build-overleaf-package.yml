@@ -10,5 +10,56 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: echo workflow-ok
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Construct flat package
+        run: python tools/build_mlj_overleaf.py
+
+      - name: Install TeX
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-science texlive-bibtex-extra latexmk poppler-utils zip
+
+      - name: Compile and audit
+        run: |
+          set -e
+          cd dist/FALI_Machine_Learning_Overleaf_Ready
+          latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error ESM_1_Supplementary_Information.tex
+          latexmk -pdf -interaction=nonstopmode -halt-on-error FALI_MLJ_Contribution_Information_Sheet.tex
+          test "$(pdfinfo FALI_MLJ_Contribution_Information_Sheet.pdf | awk '/^Pages:/ {print $2}')" -le 2
+          ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' main.log
+          ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' ESM_1_Supplementary_Information.log
+          ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' FALI_MLJ_Contribution_Information_Sheet.log
+          grep -q 'Online Resource 1' main.tex
+          grep -q 'Journal:} Machine Learning' ESM_1_Supplementary_Information.tex
+          for n in 1 2 3 4 5; do test -s "Fig${n}.pdf"; test -s "Fig${n}.eps"; done
+          printf 'MAIN_PAGES=' > BUILD_AUDIT.txt
+          pdfinfo main.pdf | awk '/^Pages:/ {print $2}' >> BUILD_AUDIT.txt
+          printf 'SI_PAGES=' >> BUILD_AUDIT.txt
+          pdfinfo ESM_1_Supplementary_Information.pdf | awk '/^Pages:/ {print $2}' >> BUILD_AUDIT.txt
+          printf 'CIS_PAGES=' >> BUILD_AUDIT.txt
+          pdfinfo FALI_MLJ_Contribution_Information_Sheet.pdf | awk '/^Pages:/ {print $2}' >> BUILD_AUDIT.txt
+          echo 'UNRESOLVED_REFS_CITES=0' >> BUILD_AUDIT.txt
+          printf 'MAIN_OVERFULL=' >> BUILD_AUDIT.txt
+          grep -c 'Overfull' main.log >> BUILD_AUDIT.txt || true
+          echo 'FIGURES_PRESENT=5' >> BUILD_AUDIT.txt
+
+      - name: Make Overleaf ZIP
+        run: |
+          set -e
+          cd dist/FALI_Machine_Learning_Overleaf_Ready
+          rm -f *.aux *.bbl *.blg *.fdb_latexmk *.fls *.log *.out *.toc *.synctex.gz
+          rm -f main.pdf ESM_1_Supplementary_Information.pdf FALI_MLJ_Contribution_Information_Sheet.pdf
+          zip -9 -q ../FALI_Machine_Learning_Overleaf_Ready.zip *
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: FALI_Machine_Learning_Overleaf_Ready
+          path: |
+            dist/FALI_Machine_Learning_Overleaf_Ready.zip
+            dist/FALI_Machine_Learning_Overleaf_Ready/BUILD_AUDIT.txt
+          if-no-files-found: error
+          retention-days: 7
