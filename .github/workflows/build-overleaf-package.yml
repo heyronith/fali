@@ -32,6 +32,9 @@ jobs:
           ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' main.log
           ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' ESM_1_Supplementary_Information.log
           ! grep -E 'LaTeX Warning:.*undefined|Citation .* undefined|Reference .* undefined' FALI_MLJ_Contribution_Information_Sheet.log
+          ! grep -E 'Overfull \\[hv]box' FALI_MLJ_Contribution_Information_Sheet.log
+          pdftotext FALI_MLJ_Contribution_Information_Sheet.pdf - | grep -q 'L10H10'
+          pdftotext FALI_MLJ_Contribution_Information_Sheet.pdf - | grep -q '0.471'
           grep -q 'Online Resource 1' main.tex
           grep -q 'Journal:} Machine Learning' ESM_1_Supplementary_Information.tex
           for n in 1 2 3 4 5; do test -s "Fig${n}.pdf"; test -s "Fig${n}.eps"; done
@@ -44,6 +47,8 @@ jobs:
           echo 'UNRESOLVED_REFS_CITES=0' >> BUILD_AUDIT.txt
           printf 'MAIN_OVERFULL=' >> BUILD_AUDIT.txt
           grep -c 'Overfull' main.log >> BUILD_AUDIT.txt || true
+          echo 'CIS_COMPLETE_EVIDENCE=PASS' >> BUILD_AUDIT.txt
+          echo 'CIS_OVERFULL=0' >> BUILD_AUDIT.txt
           echo 'FIGURES_PRESENT=5' >> BUILD_AUDIT.txt
 
       - name: Make Overleaf ZIP
@@ -54,12 +59,20 @@ jobs:
           rm -f main.pdf ESM_1_Supplementary_Information.pdf FALI_MLJ_Contribution_Information_Sheet.pdf
           zip -9 -q ../FALI_Machine_Learning_Overleaf_Ready.zip *
 
-      - name: Upload artifact
+      - name: Upload packaged artifact
         uses: actions/upload-artifact@v4
         with:
           name: FALI_Machine_Learning_Overleaf_Ready
           path: |
             dist/FALI_Machine_Learning_Overleaf_Ready.zip
             dist/FALI_Machine_Learning_Overleaf_Ready/BUILD_AUDIT.txt
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload flat Overleaf project
+        uses: actions/upload-artifact@v4
+        with:
+          name: FALI_Machine_Learning_Overleaf_UPLOAD_THIS_ZIP
+          path: dist/FALI_Machine_Learning_Overleaf_Ready/*
           if-no-files-found: error
           retention-days: 7
