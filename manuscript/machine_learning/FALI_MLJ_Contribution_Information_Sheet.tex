@@ -1,13 +1,13 @@
 %% MLJ Contribution Information Sheet (standalone, 1--2 pages)
 %% Source: research-lead MLJ_CONTRIBUTION_INFORMATION_SHEET.md
 \documentclass[10pt]{article}
-\usepackage[margin=0.75in]{geometry}\usepackage{setspace}\setstretch{0.95}
+\usepackage[margin=0.70in]{geometry}\usepackage{setspace}\setstretch{0.92}
 \usepackage{amsmath,amssymb}
 \usepackage{times}
 \usepackage{hyperref}
 \pagestyle{plain}
 \begin{document}
-\setlength{\parskip}{0.35em}
+\setlength{\parskip}{0.25em}
 \setlength{\parindent}{0pt}
 
 \begin{center}
@@ -32,7 +32,7 @@ The evidence has three layers.
 
 \textbf{Controlled validation.} In deterministic synthetic attention systems, each single manipulated factor is recovered in the intended FALI channel, with the largest attribution discrepancy $1.11\times10^{-16}$. A pure $T\times C$ interaction with total utility change approximately 2 receives the analytically expected approximately 1/1 Owen split between $T$ and $C$. In a randomly initialized two-layer TransformerLens model, independent ordinary forward passes give intact candidate effect 0.455046, conditional effect -0.085684, and conditional gain -0.540729; the corresponding FALI endpoint cells reproduce these quantities at recorded precision. Score-to-pattern reconstruction, pattern/value-to-output reconstruction, masking and batch-specific partitions, intervention isolation, live Q/V leakage checks, and the fine-to-coarse quotient identity are also verified. These experiments validate the intervention semantics rather than claiming that the mixed counterfactual states are unique natural model pathways.
 
-\textbf{GPT-2 Small on indirect object identification.} The canonical confirmation uses 15 low-level templates crossed with BABA/ABBA structure (30 strata), 30 prompts per stratum per seed, and four seeds (42, 1, 8, 22), for 3,600 prompts. After ablation of the canonical primary Name Movers L9H6, L9H9, and L10H0, L10H2 satisfies positive functional recruitment: conditional effect 0.382 (95% CI [0.341, 0.424]) and conditional gain 0.298 ([0.263, 0.335]). Its fine FALI decomposition is target-positive and rival-negative: $\phi_T=0.783$ ([0.722, 0.838]) and $\phi_R=-0.341$ ([-0.372, -0.311]). In contrast, L10H10 increases target attention by 0.310 ([0.285, 0.335]) yet has negative conditional gain -0.263 ([-0.302, -0.225]) and negative conditional effect -0.079 ([-0.111, -0.046]). L10H10 nevertheless also shows $\phi_T>0$ and $\phi_R<0$; its positive SCORE contribution is outweighed by a large negative context contribution ($\phi_C=-0.471$). Thus neither a target-attention increase nor the sign of one fine score channel is sufficient to define recruitment. The canonical fine-score directions hold in every seed and all 30 strata, and remain in the preregistered template-0-excluded sensitivity.
+\textbf{GPT-2 Small IOI.} The canonical confirmation uses 15 low-level templates crossed with BABA/ABBA structure (30 strata), 30 prompts per stratum per seed, and four seeds (42, 1, 8, 22), for 3,600 prompts. After ablation of the canonical primary Name Movers L9H6, L9H9, and L10H0, L10H2 satisfies positive functional recruitment: conditional effect 0.382 (95\% CI [0.341, 0.424]) and conditional gain 0.298 ([0.263, 0.335]). Its fine FALI decomposition is target-positive and rival-negative: $\phi_T=0.783$ ([0.722, 0.838]) and $\phi_R=-0.341$ ([-0.372, -0.311]). In contrast, L10H10 increases target attention by 0.310 ([0.285, 0.335]) yet has negative conditional gain -0.263 ([-0.302, -0.225]) and negative conditional effect -0.079 ([-0.111, -0.046]). L10H10 nevertheless also shows $\phi_T>0$ and $\phi_R<0$; its positive SCORE contribution is outweighed by a large negative context contribution ($\phi_C=-0.471$). Thus neither a target-attention increase nor the sign of one fine score channel is sufficient to define recruitment. The canonical fine-score directions hold in every seed and all 30 strata, and remain in the preregistered template-0-excluded sensitivity.
 
 The tested matched-mean and matched-resample alternatives preserve the four frozen GPT-2 fine-channel directions, but the overall preregistered ablation-robustness experiment fails its zero-reference validity criterion. We report that negative result explicitly rather than treating the experiment as an overall robustness success.
 
